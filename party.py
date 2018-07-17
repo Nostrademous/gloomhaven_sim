@@ -55,7 +55,7 @@ class Party():
 
         for k,v in enumerate(self.party_json['Members']):
             heroData = self.party_json['Members'][v]
-            self.members.append(ch.createCharacter(heroData['Name'], heroData['Type'], heroData['Owner']))
+            self.members.append(ch.createCharacter(heroData['name'], heroData['type'], heroData['owner']))
 
 
 if __name__ == "__main__":

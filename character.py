@@ -4,7 +4,6 @@
         # Stage 1 implementation tracking
         Name: (string literal)
         Player: (string literal of player owning this hero)
-        
         Type: Brute, Cragheart, Tinkerer, Scoundrel, Spellweaver, Mindthief
         Level: 1 to 9 (default 1)
         Current Health: (default 0)
@@ -42,19 +41,26 @@ import json
 valid_types = ['Brute', 'Cragheart', 'Tinkerer', 'Scoundrel', 'Spellweaver', 'Mindthief']
 
 class Character():
-    def __init__(self, name, type, owner='<UNKNOWN>'):
+    def __init__(self, name, type, owner='<UNKNOWN>', level=1, xp=0):
         assert type in valid_types
         
         self.data = {}
-        self.data['Name'] = name
-        self.data['Type'] = type
-        self.data['Owner'] = owner
+        self.data['name'] = name
+        self.data['type'] = type
+        self.data['owner'] = owner
+        self.data['level'] = level
+        self.data['xp'] = xp
         
     def getName(self):
-        return self.data['Name']
+        return self.data['name']
 
     def getType(self):
-        return self.data['Type']
+        return self.data['type']
+
+    def getAttr(self, attrName):
+        if attrName in self.data.keys():
+            return self.data[attrName]
+        raise KeyError
 
     def getJson(self):
         return self.data
