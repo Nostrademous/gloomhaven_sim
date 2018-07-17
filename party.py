@@ -1,8 +1,28 @@
 '''
+    A Gloomhaven Party has the following attributes:
+        # Stage 1 implementation
+        Name: (name of party)
+        Members: (list class characters.py)
+        
+        # Stage 2 implementation
+        Prosperity: (float literal - default 1.0)
+        
+        # Stage 3 implementation
+        ScenariosCompleted: (list integer literals)
+        ScenariosAvailable: (list integer literals)
+        
+        # Stage 4 implementation
+        GlobalAchievements: list(strings)
+        PartyAchievements: list(stings)
+        
+        # Stage 5 implementation
+        TreasuresLooted: list(integer literals)
+        CityQuestsDone: list(integer literals)
+        RoadQuestsDone: list(integer literals)
 '''
 
 import json
-import character as hero
+import character as ch
 
 def printParty(partyObj):
     print(json.dumps(partyObj.getJson(), indent=4, sort_keys=True))
@@ -11,14 +31,14 @@ class Party():
     def __init__(self, name):
         self.party_json = {}
         self.party_json['PartyName'] = name
-        self.characters = list()
+        self.members = list()
 
-    def addCharacter(self, name):
-        self.characters.append(hero.Character(name))
+    def addMember(self, characterObj):
+        self.members.append(characterObj)
 
-        self.party_json['Characters'] = {}
-        for k,v in enumerate(self.characters):
-            self.party_json['Characters'][v.getName()] = v.getJson()
+        self.party_json['Members'] = {}
+        for k,v in enumerate(self.members):
+            self.party_json['Members'][v.getType()] = v.getJson()
 
     def getJson(self):
         return self.party_json
@@ -33,14 +53,22 @@ class Party():
         with open('%s_party.json' % name) as infile:
             self.party_json = json.load(infile)
 
-        for k,v in enumerate(self.party_json['Characters']):
-            self.characters.append(hero.Character(v))
+        for k,v in enumerate(self.party_json['Members']):
+            heroData = self.party_json['Members'][v]
+            self.members.append(ch.createCharacter(heroData['Name'], heroData['Type'], heroData['Owner']))
+
 
 if __name__ == "__main__":
-    party = Party('Test')
-    party.addCharacter('John')
+    party = Party('TheBrotherhood')
+    hero1 = ch.createCharacter('Clockwerk', 'Tinkerer', 'Andrzej')
+    
+    party.addMember(hero1)
     party.saveParty()
-    party.addCharacter('Beth')
+
+    hero2 = ch.createCharacter('Evan', 'Spellweaver', 'Evan Teran')
+    party.addMember(hero2)
+    
     printParty(party)
-    party.loadParty('Test')
+
+    party.loadParty('TheBrotherhood')
     printParty(party)
