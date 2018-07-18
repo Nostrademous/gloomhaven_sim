@@ -37,6 +37,7 @@
 '''
 
 import json
+import global_vars as gv
 
 valid_types = ['Brute', 'Cragheart', 'Tinkerer', 'Scoundrel', 'Spellweaver', 'Mindthief']
 
@@ -50,16 +51,21 @@ class Character():
         self.data['owner'] = owner
         self.data['level'] = level
         self.data['xp'] = xp
+
+        if gv.heroDataJson:
+            self.data['curr_health'] = gv.heroDataJson[type.capitalize()]['Health'][str(level)]
+            self.data['max_health'] = self.data['curr_health']
+            self.data['deck_size'] = gv.heroDataJson[type.capitalize()]['DeckSize']
         
     def getName(self):
         return self.data['name']
 
     def getType(self):
-        return self.data['type']
+        return self.data['type'].lower()
 
     def getAttr(self, attrName):
-        if attrName in self.data.keys():
-            return self.data[attrName]
+        if attrName.lower() in self.data.keys():
+            return self.data[attrName.lower()].lower()
         raise KeyError
 
     def getJson(self):
