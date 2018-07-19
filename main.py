@@ -5,6 +5,9 @@ import global_vars as gv
 import party
 from utils import listFiles, printJson
 
+def createMember():
+    raw_input("What is your Hero's Name? ")
+
 def createParty():
     while True:
         print('What would you like to do?')
@@ -34,11 +37,23 @@ def createParty():
                     assert p_name + "_party.json" not in listFiles('.')
 
                     obj_party = party.Party(p_name)
+                    
+                    while True:
+                        print("Let's create our Party Members now.")
+                        try:
+                            m_cnt = raw_input("How many Heroes would you like to add? ")
+                            m_cnt = int(m_cnt)
+                            for cnt in range(1, m_cnt+1):
+                                print(cnt)
+                        except Exception as err:
+                            print("[Exception] :: %s" % err)
+                            pass
+                        break
                     printJson(obj_party)
                 except AssertionError:
                     print("That Party Name already exists!!! Start again...")
                     pass
-
+                
         else:
             print('Invalid selection')
 

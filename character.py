@@ -39,12 +39,8 @@
 import json
 import global_vars as gv
 
-valid_types = ['Brute', 'Cragheart', 'Tinkerer', 'Scoundrel', 'Spellweaver', 'Mindthief']
-
 class Character():
     def __init__(self, name, type, owner='<UNKNOWN>', level=1, xp=0, gold=30, quest=0, checkmarks=0):
-        assert type in valid_types
-        
         self.data = {}
         self.data['name'] = name
         self.data['type'] = type
