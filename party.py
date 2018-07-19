@@ -25,6 +25,7 @@
 import json
 import global_vars as gv
 import character as ch
+from utils import printJson
 
 heroDataJson = {}
 
@@ -32,8 +33,6 @@ def loadHeroData(dataFile='hero_data.json'):
     with open(dataFile, 'r') as infile:
         gv.heroDataJson = json.load(infile)
 
-def printParty(partyObj):
-    print(json.dumps(partyObj.getJson(), indent=4, sort_keys=True))
 
 class Party():
     def __init__(self, name):
@@ -97,8 +96,8 @@ class Party():
                 heroData = self.party_json['Members'][v]
                 self.members.append(ch.createCharacter(heroData['name'], heroData['type'], heroData['owner']))
 
-gv.init() # call only once
 if __name__ == "__main__":
+    gv.init() # call only once
     loadHeroData()
 
     party = Party('TheBrotherhood')
@@ -110,7 +109,7 @@ if __name__ == "__main__":
 
     hero2 = ch.createCharacter('Evan', 'Spellweaver', 'Evan Teran')
     party.addMember(hero2)
-    printParty(party)
+    printJson(party)
 
     party.loadParty('TheBrotherhood')
-    printParty(party)
+    printJson(party)

@@ -3,6 +3,7 @@
 
 import global_vars as gv
 import party
+from utils import listFiles, printJson
 
 def createParty():
     while True:
@@ -27,6 +28,17 @@ def createParty():
                     party.loadHeroData(dataFile=p_name+'_party.json')
                 except Exception as err:
                     print("[Load Existing Party Exception] :: %s" % (err))
+            elif selection == 1:
+                p_name = raw_input("Select a Party name: ")
+                try:
+                    assert p_name + "_party.json" not in listFiles('.')
+
+                    obj_party = party.Party(p_name)
+                    printJson(obj_party)
+                except AssertionError:
+                    print("That Party Name already exists!!! Start again...")
+                    pass
+
         else:
             print('Invalid selection')
 

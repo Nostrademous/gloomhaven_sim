@@ -42,7 +42,7 @@ import global_vars as gv
 valid_types = ['Brute', 'Cragheart', 'Tinkerer', 'Scoundrel', 'Spellweaver', 'Mindthief']
 
 class Character():
-    def __init__(self, name, type, owner='<UNKNOWN>', level=1, xp=0):
+    def __init__(self, name, type, owner='<UNKNOWN>', level=1, xp=0, gold=30, quest=0, checkmarks=0):
         assert type in valid_types
         
         self.data = {}
@@ -51,11 +51,17 @@ class Character():
         self.data['owner'] = owner
         self.data['level'] = level
         self.data['xp'] = xp
+        self.data['gold'] = gold
+        self.data['quest'] = quest # for tracking retirement conditions
+        self.data['checkmarks'] = checkmarks
 
         if gv.heroDataJson:
             self.data['curr_health'] = gv.heroDataJson[type.capitalize()]['Health'][str(level)]
             self.data['max_health'] = self.data['curr_health']
             self.data['deck_size'] = gv.heroDataJson[type.capitalize()]['DeckSize']
+
+        self.data['retired'] = False
+        self.data['exhausted'] = False
         
     def getName(self):
         return self.data['name']
@@ -68,10 +74,16 @@ class Character():
             return self.data[attrName.lower()].lower()
         raise KeyError
 
+    def setAttr(self, attrName, attrValue):
+        if attrName.lower() in self.data.keys():
+            self.data[attrName.lower()] = attrValue
+        else:
+            raise KeyError
+
     def getJson(self):
         return self.data
 
 
-def createCharacter(name, type, ownerName):
-    hero = Character(name, type, ownerName)
+def createCharacter(name, strType, ownerName):
+    hero = Character(name, strType, ownerName)
     return hero
