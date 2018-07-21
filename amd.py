@@ -74,11 +74,19 @@ class AttackModifierDeck():
     def addCurse(self):
         print('Adding Curse')
         if self.isPlayer:
-            curse = pickRandom(_player_curse_deck)
-            _player_curse_deck.remove(curse)
+            if len(_player_curse_deck) > 0:
+                curse = pickRandom(_player_curse_deck)
+                _player_curse_deck.remove(curse)
+            else:
+                print('No more Player Curses Available, ignoring...')
+                return
         else:
-            curse = pickRandom(_monster_curse_deck)
-            _monster_curse_deck.remove(curse)
+            if len(_monster_curse_deck) > 0:
+                curse = pickRandom(_monster_curse_deck)
+                _monster_curse_deck.remove(curse)
+            else:
+                print('No more Monster Curses Available, ignoring...')
+                return
         self._deck.append(curse)
         self.play_deck.append(curse)
 
@@ -92,10 +100,13 @@ class AttackModifierDeck():
 
     def addBlessing(self):
         print('Adding Blessing')
-        bless = pickRandom(_bless_deck)
-        _bless_deck.remove(bless)
-        self._deck.append(bless)
-        self.play_deck.append(bless)
+        if len(_bless_deck) > 0:
+            bless = pickRandom(_bless_deck)
+            _bless_deck.remove(bless)
+            self._deck.append(bless)
+            self.play_deck.append(bless)
+        else:
+            print('No more blessings available, ignoring...')
 
     def removeBlessing(self, bless):
         #print('Removing Blessing')
