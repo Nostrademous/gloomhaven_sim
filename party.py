@@ -41,6 +41,24 @@ class Party():
         self.members = list()
         self.valid_types = list(['brute', 'scoundrel', 'cragheart', 'tinkerer', 'spellweaver', 'mindthief'])
         self.retired_types = list()
+        self.party_json['CompletedCityQuests'] = list()
+        self.party_json['CompletedRoadQuests'] = list()
+
+    def addRoadQuest(self, value):
+        try:
+            assert value not in self.party_json['CompletedRoadQuests']
+            self.party_json['CompletedRoadQuests'].append(value)
+        except AssertionError as err:
+            print('[addRoadQuest :: AssertionError] %s' % (err))
+            raise
+
+    def addCityQuest(self, value):
+        try:
+            assert value not in self.party_json['CompletedCityQuests']
+            self.party_json['CompletedCityQuests'].append(value)
+        except AssertionError as err:
+            print('[addCityQuest :: AssertionError] %s' % (err))
+            raise
 
     def addValidType(self, extraType):
         extraType = extraType.lower()
@@ -101,6 +119,10 @@ if __name__ == "__main__":
     loadHeroData()
 
     party = Party('TheBrotherhood')
+    party.addCityQuest(4)
+    party.addCityQuest(18)
+    party.addRoadQuest(7)
+    party.addRoadQuest(25)
     #party.retireType('tinkerer')
 
     hero1 = ch.createCharacter('Clockwerk', 'Tinkerer', 'Andrzej')
