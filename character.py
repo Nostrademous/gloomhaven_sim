@@ -38,6 +38,7 @@
 
 import json
 import global_vars as gv
+from effects import *
 
 class Character():
     def __init__(self, name, type, owner='<UNKNOWN>', level=1, xp=0, gold=30, quest=0, checkmarks=0):
@@ -58,7 +59,37 @@ class Character():
 
         self.data['retired'] = False
         self.data['exhausted'] = False
-        
+
+        self.effects = initEffects()
+
+    def isExhausted(self):
+        return self.data['exhausted']
+
+    def heal(self, value):
+        if self.underEffect('Wound'):
+            setEffect(self.effects, 'Wound', False)
+            # do no return as heal continues
+
+        if self.underEffect('Poison'):
+            setEffect(self.effects, 'Poison', False)
+            # if curing poison heal has no other effect
+            # if wounded & poisoned both are removed but 
+            # no health is gain, hence the order
+            return
+
+        self.data['curr_health'] = min(self.data['max_health'], self.data['curr_health']+value)
+
+    # take damage assumes the decison to take damage was made by the player
+    # in lieu of remove cards from their hand or discard pile
+    # Also, additional damage from any Effects should be included
+    def takeDamage(self, amount, effList=[]):
+        assert (self.data['curr_health'] - amount) >= 1
+        try:
+            self.data['curr_health'] = self.data['curr_health'] - amount
+        except AssertionError as err:
+            print('[takeDamage :: AssertionError] : %s' % err)
+            raise
+
     def getName(self):
         return self.data['name']
 
@@ -69,6 +100,9 @@ class Character():
         if attrName.lower() in self.data.keys():
             return self.data[attrName.lower()].lower()
         raise KeyError
+
+    def underEffect(self, effectName):
+        return self.effects[effectName.lower()]
 
     def setAttr(self, attrName, attrValue):
         if attrName.lower() in self.data.keys():
