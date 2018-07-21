@@ -83,7 +83,7 @@ class AttackModifierDeck():
         self.play_deck.append(curse)
 
     def removeCurse(self, curse):
-        print('Removing Curse')
+        #print('Removing Curse')
         self._deck.remove(curse)
         if self.isPlayer:
             _player_curse_deck.append(curse)
@@ -98,7 +98,7 @@ class AttackModifierDeck():
         self.play_deck.append(bless)
 
     def removeBlessing(self, bless):
-        print('Removing Blessing')
+        #print('Removing Blessing')
         self._deck.remove(bless)
         _bless_deck.append(bless)
 
@@ -139,3 +139,5 @@ if __name__ == "__main__":
         deck.pickCard()
     deck.endTurn()
     print(deck)
+    #print(_player_curse_deck)
+    #print(_bless_deck)
