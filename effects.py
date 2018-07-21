@@ -1,7 +1,7 @@
 '''
 '''
 
-_effects = ['Disarm', 'Immobolize', 'Muddle', 'Poison', 'Stun', 'Wound']
+_effects = ['Disarm', 'Immobolize', 'Invisibility', 'Muddle', 'Poison', 'Strengthen', 'Stun', 'Wound']
 
 def initEffects():
     ret = {}
