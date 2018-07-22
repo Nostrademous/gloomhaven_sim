@@ -41,13 +41,32 @@ class Scenario():
             print("[consumeElement :: AssertionError] %s" % err)
             raise
 
+    def startScenarion(self):
+        '''All setup for scenario.'''
+        print("[startScenario] Scenario: %d -- Implement Me" % (self.id))
+
+    def endScenario(self, success=False):
+        '''All end scenario work.'''
+        print("[endScenario] Scenario: %d -- Implement Me" % (self.id))
+
+    def prepareTurn(self):
+        '''All preparation of turn work.'''
+        print("[Scenario %d] Prepare Turn :: Round: %d" % (self.id, self.round))
+
+    def executeTurn(self):
+        '''All turn execution work.'''
+        print("[Scenario %d] Execute Turn :: Round: %d" % (self.id, self.round))
+
     def endTurn(self):
-        print('[Scenario %d] End Turn' % (self.id))
+        print("[Scenario %d] End Turn :: Round: %d" % (self.id, self.round))
         # update elements
         for k in self.elements.keys():
             if self.elements[k] > INERT:
                 self.elements[k] -= 1
         #printJson(self.elements)
+
+        # increment round counter
+        self.round += 1
 
 if __name__ == "__main__":
     scen = Scenario(0)
