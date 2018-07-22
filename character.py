@@ -41,6 +41,8 @@ import global_vars as gv
 from effects import *
 
 class Character():
+    _valid_actions = ['play_cards', 'long_rest']
+
     def __init__(self, name, type, owner='<UNKNOWN>', level=1, xp=0, gold=30, quest=0, checkmarks=0):
         self.data = {}
         self.data['name'] = name
@@ -61,6 +63,14 @@ class Character():
         self.data['exhausted'] = False
 
         self.effects = initEffects()
+
+    def selectAction(self):
+        self.round_action = pickRandom(_valid_actions)
+
+    def endTurn(self):
+        # remove one-round long effects
+        for eff in _one_turn_effects:
+            self.effects[eff.lower()] = False
 
     def isExhausted(self):
         return self.data['exhausted']

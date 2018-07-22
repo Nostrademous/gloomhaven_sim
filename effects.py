@@ -1,11 +1,12 @@
 '''
 '''
 
-_effects = ['Disarm', 'Immobolize', 'Invisibility', 'Muddle', 'Poison', 'Strengthen', 'Stun', 'Wound']
+_all_effects = ['Disarm', 'Immobilize', 'Invisibility', 'Muddle', 'Poison', 'Strengthen', 'Stun', 'Wound']
+_one_turn_effects = ['Disarm', 'Immobilize', 'Invisibility', 'Muddle', 'Strengthen', 'Stun']
 
 def initEffects():
     ret = {}
-    for eff in _effects:
+    for eff in _all_effects:
         ret[eff.lower()] = False
     return ret
 
