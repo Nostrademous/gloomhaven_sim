@@ -1,4 +1,32 @@
 {
+    "31": {
+        "Name": "Harmless Contraption",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 74,
+        "Top": {
+            "Summon": {
+                "Name": "Summon Decoy",
+                "Health": 6,
+                "Move": 2,
+                "Attack": 0,
+                "Range": 0
+            },
+            "Lasts": "Infinite",
+            "Lost": 1,
+            "XP": 2
+        },
+        "Bottom": {
+            "1": {
+                "Heal": 2,
+                "EnhanceSlots": 1
+            },
+            "2": {
+                "Range": 3,
+                "EnhanceSlots": 1
+            }
+        }
+    },
     "37": {
         "Name": "Reinvigorating Elixir",
         "Level": 1,
@@ -17,7 +45,7 @@
         "Bottom": {
             "1": {
                 "Special": "One adjacent ally may Recovery all their discard cards."
-            }
+            },
             "Lost": 1,
             "XP": 2
         }

@@ -23,16 +23,10 @@
 '''
 
 import json
-import global_vars as gv
 import character as ch
 from utils import printJson
 
 heroDataJson = {}
-
-def loadHeroData(dataFile='hero_data.json'):
-    with open(dataFile, 'r') as infile:
-        gv.heroDataJson = json.load(infile)
-
 
 class Party():
     def __init__(self, name):
@@ -115,8 +109,8 @@ class Party():
                 self.members.append(ch.createCharacter(heroData['name'], heroData['type'], heroData['owner']))
 
 if __name__ == "__main__":
+    import global_vars as gv
     gv.init() # call only once
-    loadHeroData()
 
     party = Party('TheBrotherhood')
     party.addCityQuest(4)
