@@ -1,0 +1,25 @@
+{
+    "37": {
+        "Name": "Reinvigorating Elixir",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 37,
+        "Top": {
+            "1": {
+                "Heal": 3,
+                "EnhanceSlots": 1
+            },
+            "2": {
+                "Range": 3,
+                "EnhanceSlots": 1
+            }
+        },
+        "Bottom": {
+            "1": {
+                "Special": "One adjacent ally may Recovery all their discard cards."
+            }
+            "Lost": 1,
+            "XP": 2
+        }
+    }
+}
