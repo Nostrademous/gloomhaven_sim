@@ -16,6 +16,12 @@ def printJson(jsonData):
     else:
         print(json.dumps(jsonData.getJson(), indent=4, sort_keys=True))
 
+def strJson(jsonData):
+    if isinstance(jsonData, dict):
+        return json.dumps(jsonData, indent=4, sort_keys=True)
+    else:
+        return json.dumps(jsonData.getJson(), indent=4, sort_keys=True)
+
 def pickRandom(listChoices):
     # to make it really random use the cryptographically safe
     # random initialization each time
