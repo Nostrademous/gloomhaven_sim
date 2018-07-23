@@ -102,6 +102,9 @@ class Character():
             print('[takeDamage :: AssertionError] : %s' % err)
             raise
 
+    def numPotionsAllowed(self):
+        return int(0.5 + self.getLevel() / 2.)
+
     def getName(self):
         return self.data['name']
 

@@ -24,20 +24,32 @@ def slotStr(slotID):
         raise Exception('Unknown slotID Name: %s' % slotID)
 
 class Item():
-    def __init__(self, id, name, slot):
+    def __init__(self, id, name, slot, maxUses=1):
         try:
             assert slot in _item_slots.keys()
-
-            self.id     = id
-            self.name   = name
-            self.slot   = slot
+            self.id         = id
+            self.name       = name
+            self.slot       = slot
+            self.used       = False
+            self.useCount   = 0
+            self.maxUses    = maxUses
         except AssertionError as err:
             print("[Item __init__ :: AssertionError] %s" % (err))
             raise
 
+    def use(self):
+        self.useCount += 1
+        if self.useCount >= self.maxUses:
+            self.used = True
+
+    def reset(self):
+        self.used = False
+        self.useCount = 0
+
     def __repr__(self):
         ret  = "[Item %d] %s\n" % (self.id, self.name)
-        ret += "Slot: %s" % (slotStr(self.slot))
+        ret += "Slot: %s\n" % (slotStr(self.slot))
+        ret += "%d uses before tapped\n" % self.maxUses
         return ret
 
 if __name__ == "__main__":
