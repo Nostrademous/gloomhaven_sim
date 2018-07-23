@@ -38,6 +38,12 @@ class Party():
         self.party_json['CompletedCityQuests'] = list()
         self.party_json['CompletedRoadQuests'] = list()
 
+    def calcAvgLevel(self):
+        avgLevel = 0
+        for hero in self.members:
+            avgLevel += hero.getLevel()
+        return int(avgLevel/len(self.members))
+        
     def addRoadQuest(self, value):
         try:
             assert value not in self.party_json['CompletedRoadQuests']
@@ -119,13 +125,15 @@ if __name__ == "__main__":
     party.addRoadQuest(25)
     #party.retireType('tinkerer')
 
-    hero1 = ch.createCharacter('Clockwerk', 'Tinkerer', 'Andrzej')
+    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=2)
     party.addMember(hero1)
     party.saveParty()
 
-    hero2 = ch.createCharacter('Evan', 'Spellweaver', 'Evan Teran')
+    hero2 = ch.Character('Evan', 'Spellweaver', 'Evan Teran')
     party.addMember(hero2)
     printJson(party)
 
+    print("Avg Level: ", party.calcAvgLevel())
+    
     party.loadParty('TheBrotherhood')
     printJson(party)

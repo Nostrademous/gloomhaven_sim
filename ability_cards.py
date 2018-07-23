@@ -30,7 +30,7 @@ class AbilityCard():
 if __name__ == "__main__":
     import global_vars as gv
     gv.init()
-    
+
     for ability in gv.abilityDataJson.keys():
         ab = gv.abilityDataJson[ability]
         card = AbilityCard(int(ability), ab['Name'], ab['Level'], ab['Initiative'])

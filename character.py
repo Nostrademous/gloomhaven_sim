@@ -1,6 +1,7 @@
 '''
     Gloomhaven Characters have the following attributes:
-    
+
+        # DONE
         # Stage 1 implementation tracking
         Name: (string literal)
         Player: (string literal of player owning this hero)
@@ -12,27 +13,28 @@
         Gold: (default 0)
         Quest: (integer literal)
         Checkmarks: (default 0, integer literal) # 3 checkmarks == 1 perk
-        
+
+        # DONE
         # Stage 2 implementation tracking
         IsRetired: (default False)
         IsExhausted: (default False)
-        
+
         # Stage 3 implementation tracking
         Effects: list() #immobilized, poisoned, wounded, etc.
         Spawns: list(class units.py)
-        
+
         # Stage 4 implementation tracking
         Items: list(class items.py)
         AMD (Attack Modifier Deck): class(attack_mod_deck.py)
-        
+
         # Stage 5 implementation tracking
         AbilityCards: list(class abilityCards.py)
         Perks: list(class perks.py)
-        
+
         # Stage 6 implementation tracking
         Location: (class location.py) - Scenario # + hex-grid
         Scenario Mission: (class scenario_mission.py)
-        
+
         # FUTURE TODO - maybe more stuff needed
 '''
 
@@ -83,7 +85,7 @@ class Character():
         if self.underEffect('Poison'):
             setEffect(self.effects, 'Poison', False)
             # if curing poison heal has no other effect
-            # if wounded & poisoned both are removed but 
+            # if wounded & poisoned both are removed but
             # no health is gain, hence the order
             return
 
@@ -106,6 +108,9 @@ class Character():
     def getType(self):
         return self.data['type'].lower()
 
+    def getLevel(self):
+        return self.data['level']
+
     def getAttr(self, attrName):
         if attrName.lower() in self.data.keys():
             return self.data[attrName.lower()].lower()
@@ -124,6 +129,6 @@ class Character():
         return self.data
 
 
-def createCharacter(name, strType, ownerName):
-    hero = Character(name, strType, ownerName)
+def createCharacter(name, strType, ownerName, level=1):
+    hero = Character(name, strType, ownerName, level=level)
     return hero

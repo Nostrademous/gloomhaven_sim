@@ -13,6 +13,7 @@ class Scenario():
         self.party = list()
         self.round = 0
         self._reset_elements()
+        self.diff_level = 0
 
     def _reset_elements(self):
         self.elements = {
@@ -23,6 +24,9 @@ class Scenario():
             "ice": INERT,
             "light": INERT
         }
+
+    def setDifficultyLevel(self, value):
+        self.diff_level = value
 
     def invokeElement(self, name):
         try:
