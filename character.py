@@ -117,6 +117,15 @@ class Character(Unit):
     def numPotionsAllowed(self):
         return int(0.5 + self.getLevel() / 2.)
 
+    def canLevel(self):
+        if self.level == 9:
+            return False
+
+        inc = [45 + (5*(i-1)) for i in range(1,9)]
+        if self.xp >= sum(inc[:self.level]):
+            return True
+        return False
+
     def getName(self):
         return self.name
 
