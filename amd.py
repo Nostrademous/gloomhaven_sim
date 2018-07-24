@@ -4,14 +4,26 @@
 from utils import pickRandom
 
 class AttackModifierCard():
-    def __init__(self, name, adjValue=0, crit=False, miss=False, reshuffle=False, curse=False, bless=False):
-        self.name = name
-        self.adjValue = adjValue
-        self.crit = crit
-        self.miss = miss
-        self.reshuffle = reshuffle
-        self.curse = curse
-        self.bless = bless
+    def __init__(self, name, adjValue=0, crit=False, miss=False, reshuffle=False,
+                 curse=False, bless=False, rolling=False, effect=None, invokeElement=None,
+                 heal=False, healAmount=0, addTarget=False):
+        self.name       = name
+        self.adjValue   = adjValue
+        self.crit       = crit
+        self.miss       = miss
+        self.reshuffle  = reshuffle
+        self.curse      = curse
+        self.bless      = bless
+        self.rolling    = rolling
+        # element invocation cards
+        self.invoke     = invokeElement
+        # effect cards
+        self.effect     = effect
+        # heal cards
+        self.heal       = heal
+        self.healAmount = healAmount
+        # extra target cards
+        self.addTarget  = addTarget
 
     def isCrit(self):
         return self.crit
@@ -25,11 +37,23 @@ class AttackModifierCard():
     def isBlessing(self):
         return self.bless
 
+    def isRolling(self):
+        return self.rolling
+
     def isReshuffle(self):
         return self.reshuffle
 
     def __repr__(self):
-        return '%s' % self.name
+        ret  = '%s' % self.name
+        if self.invoke:
+            ret += ' invoke %s' % (self.invoke.upper())
+        if self.effect:
+            ret += ' %s' % (self.effect.upper())
+        if self.heal:
+            ret += ' Heal %d' % (self.healAmount)
+        if self.addTarget:
+            ret += ' Add Target'
+        return ret
 
 amc_0   = AttackModifierCard('+0', 0)
 amc_m1  = AttackModifierCard('-1', -1)
@@ -41,6 +65,15 @@ amc_ms  = AttackModifierCard('0', 0, miss=True, reshuffle=True)
 
 amc_curse = AttackModifierCard('curse', 0, miss=True, curse=True)
 amc_bless = AttackModifierCard('bless', 0, crit=True, bless=True)
+
+# below are perk-specific cards that can be added via perks
+amc_p3 = AttackModifierCard('+3', 3)
+amc_p1h2 = AttackModifierCard('+1', 1, heal=True, healAmount=2)
+amc_rollfire = AttackModifierCard('', rolling=True, invokeElement='fire')
+amc_rollmuddle = AttackModifierCard('', rolling=True, effect='muddle')
+amc_0at = AttackModifierCard('+0', addTarget=True)
+amc_p1wound = AttackModifierCard('+1', effect='wound')
+amc_p1immobilize = AttackModifierCard('+1', effect='immobilize')
 
 _start_deck = list([
     amc_0, amc_0, amc_0, amc_0, amc_0, amc_0, # 6 +0 cards
@@ -113,7 +146,7 @@ class AttackModifierDeck():
         self._deck.remove(bless)
         _bless_deck.append(bless)
 
-    def pickCard(self):
+    def pickCard(self, ret_draw=[]):
         card = pickRandom(self.play_deck)
         if card.isCurse():
             self.removeCurse(card)
@@ -121,8 +154,13 @@ class AttackModifierDeck():
             self.removeBlessing(card)
         if card.isReshuffle():
             self.reshuffle = True
-        print(card)
         self.play_deck.remove(card)
+        print(card)
+        ret_draw.append(card)
+
+        if card.isRolling():
+            self.pickCard(ret_draw)
+        return ret_draw
 
     def endTurn(self):
         print('End of turn')
