@@ -182,6 +182,7 @@ if __name__ == "__main__":
     hero4.addItem('Boots of Striding')
     hero4.addItem('Minor Stamina Potion')
     hero4.addPerk()
+    party.addMember(hero4)
 
     hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=2, quest=526, gold=33, xp=59, checkmarks=2)
     hero5.addItem('Leather Armor')
@@ -189,10 +190,11 @@ if __name__ == "__main__":
     hero5.addItem('Heater Shield')
     hero5.addItem('Minor Stamina Potion')
     hero5.addPerk()
+    party.addMember(hero5)
 
     printJson(party)
 
-    print("Avg Level: ", party.calcAvgLevel())
+    #print("Avg Level: ", party.calcAvgLevel())
     party.saveParty()
     
     party.loadParty('TheBrotherhood')

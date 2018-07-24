@@ -50,6 +50,11 @@ tinkerer_perk_9     = Perk(PERK_TYPE_ADD, 1, amd.amc_p1h2)
 tinkerer_perk_10    = Perk(PERK_TYPE_ADD, 1, amd.amc_0at)
 tinkerer_perk_11    = Perk(PERK_TYPE_IGNORE)
 
+brute_perk_deck = list([])
+cragheart_perk_deck = list([])
+mindthief_perk_deck = list([])
+scoundrel_perk_deck = list([])
+spellweaver_perk_deck = list([])
 tinkerer_perk_deck = list([
     tinkerer_perk_1, tinkerer_perk_1,
     tinkerer_perk_2,
@@ -63,6 +68,23 @@ tinkerer_perk_deck = list([
     tinkerer_perk_10,
     tinkerer_perk_11
 ])
+
+def getPerkSelections(class_type):
+    class_type = class_type.lower()
+    if class_type == "brute":
+        return brute_perk_deck
+    elif class_type == "cragheart":
+        return cragheart_perk_deck
+    elif class_type == "mindthief":
+        return mindthief_perk_deck
+    elif class_type == "scoundrel":
+        return scoundrel_perk_deck
+    elif class_type == "spellweaver":
+        return spellweaver_perk_deck
+    elif class_type == "tinkerer":
+        return tinkerer_perk_deck
+    else:
+        raise Exception("[getPerkSelection]", "UNKNOWN CLASS TYPE")
 
 if __name__ == "__main__":
     for perk in tinkerer_perk_deck:

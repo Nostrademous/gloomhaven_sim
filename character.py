@@ -43,6 +43,8 @@ import global_vars as gv
 from effects import *
 from unit import Unit
 
+import perks
+
 class Character(Unit):
     _valid_actions = ['play_cards', 'long_rest']
 
@@ -70,6 +72,8 @@ class Character(Unit):
         self.effects = initEffects()
 
         self.items = list()
+        
+        self.perks = perks.getPerkSelections(self.type)
 
     def selectAction(self):
         self.round_action = pickRandom(_valid_actions)
