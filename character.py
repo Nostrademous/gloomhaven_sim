@@ -41,63 +41,71 @@
 import json
 import global_vars as gv
 from effects import *
+from unit import Unit
 
-class Character():
+class Character(Unit):
     _valid_actions = ['play_cards', 'long_rest']
 
     def __init__(self, name, type, owner='<UNKNOWN>', level=1, xp=0, gold=30, quest=0, checkmarks=0):
-        self.data = {}
-        self.data['name'] = name
-        self.data['type'] = type
-        self.data['owner'] = owner
-        self.data['level'] = level
-        self.data['xp'] = xp
-        self.data['gold'] = gold
-        self.data['quest'] = quest # for tracking retirement conditions
-        self.data['checkmarks'] = checkmarks
+        print('Name: %s' % name)
+        super().__init__(name, 0)
+        self.type           = type
+        self.owner          = owner
+        self.level          = level
+        self.xp             = xp
+        self.gold           = gold
+        self.quest          = quest # for tracking retirement conditions
+        self.checkmarks     = checkmarks
+        self.perk_count     = 0
+        self.perks_from_chk = 0
 
         if gv.heroDataJson:
-            self.data['curr_health'] = gv.heroDataJson[type.capitalize()]['Health'][str(level)]
-            self.data['max_health'] = self.data['curr_health']
-            self.data['deck_size'] = gv.heroDataJson[type.capitalize()]['DeckSize']
+            self.curr_hp    = int(gv.heroDataJson[type.capitalize()]['Health'][str(level)])
+            self.max_hp     = int(self.curr_hp)
+            self.deck_size  = int(gv.heroDataJson[type.capitalize()]['DeckSize'])
 
-        self.data['retired'] = False
-        self.data['exhausted'] = False
+        self.retired        = False
+        self.exhausted      = False
 
         self.effects = initEffects()
+
+        self.items = list()
 
     def selectAction(self):
         self.round_action = pickRandom(_valid_actions)
 
     def endTurn(self):
-        # remove one-round long effects
-        for eff in _one_turn_effects:
-            self.effects[eff.lower()] = False
+        # call base class to remove one-round effects
+        super().endTurn()
 
     def isExhausted(self):
-        return self.data['exhausted']
+        return self.exhausted
 
-    def heal(self, value):
-        if self.underEffect('Wound'):
-            setEffect(self.effects, 'Wound', False)
-            # do no return as heal continues
+    def addCheckmark(self, cnt=1):
+        self.checkmarks += cnt
+        if self.checkmarks >= 3:
+            extra_perks = int(self.checkmarks/3)
+            # max extra perks from checkmarks is 6 per char sheet
+            if self.perks_from_chk < 6:
+                # I believe below is safe as I don't see a way to 
+                # get more than 3 checkmarks in a single scenario
+                self.perks_from_chk += extra_perks
+                self.addPerk(extra_perks)
+                self.checkmarks = self.checkmarks % 3
 
-        if self.underEffect('Poison'):
-            setEffect(self.effects, 'Poison', False)
-            # if curing poison heal has no other effect
-            # if wounded & poisoned both are removed but
-            # no health is gain, hence the order
-            return
+    def loseCheckmark(self, cnt=1):
+        self.checkmarks = max(0, self.checkmarks-cnt)
 
-        self.data['curr_health'] = min(self.data['max_health'], self.data['curr_health']+value)
-
+    def addPerk(self, cnt=1):
+        self.perk_count += cnt
+    
     # take damage assumes the decison to take damage was made by the player
     # in lieu of remove cards from their hand or discard pile
     # Also, additional damage from any Effects should be included
     def takeDamage(self, amount, effList=[]):
-        assert (self.data['curr_health'] - amount) >= 1
+        assert (self.curr_hp - amount) >= 1
         try:
-            self.data['curr_health'] = self.data['curr_health'] - amount
+            self.curr_hp = self.curr_hp - amount
         except AssertionError as err:
             print('[takeDamage :: AssertionError] : %s' % err)
             raise
@@ -106,32 +114,35 @@ class Character():
         return int(0.5 + self.getLevel() / 2.)
 
     def getName(self):
-        return self.data['name']
+        return self.name
 
     def getType(self):
-        return self.data['type'].lower()
+        return self.type.lower()
 
     def getLevel(self):
-        return self.data['level']
+        return self.level
 
-    def getAttr(self, attrName):
-        if attrName.lower() in self.data.keys():
-            return self.data[attrName.lower()].lower()
-        raise KeyError
-
-    def underEffect(self, effectName):
-        return self.effects[effectName.lower()]
-
-    def setAttr(self, attrName, attrValue):
-        if attrName.lower() in self.data.keys():
-            self.data[attrName.lower()] = attrValue
-        else:
-            raise KeyError
+    def addItem(self, itemName):
+        self.items.append(itemName)
 
     def getJson(self):
-        return self.data
+        jsonData = {}
+        jsonData['name'] = self.name
+        jsonData['type'] = self.type
+        jsonData['owner'] = self.owner
+        jsonData['level'] = self.level
+        jsonData['xp'] = self.xp
+        jsonData['gold'] = self.gold
+        jsonData['quest'] = self.quest
+        jsonData['checkmarks'] = self.checkmarks
+        jsonData['perk_cnt'] = self.perk_count
 
+        if gv.heroDataJson:
+            jsonData['curr_hp'] = self.curr_hp
+            jsonData['max_hp'] = self.max_hp
+            jsonData['deck_size'] = self.deck_size
 
-def createCharacter(name, strType, ownerName, level=1):
-    hero = Character(name, strType, ownerName, level=level)
-    return hero
+        jsonData['retired'] = self.retired
+        jsonData['items'] = self.items
+        return jsonData
+

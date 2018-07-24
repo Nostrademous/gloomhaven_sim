@@ -37,12 +37,32 @@ class Party():
         self.retired_types = list()
         self.party_json['CompletedCityQuests'] = list()
         self.party_json['CompletedRoadQuests'] = list()
+        self.party_json['ScenariosCompleted'] = list()
+        self.party_json['ScenariosAvailable'] = list()
+        self.party_json['TreasuresLooted'] = list()
+        self.party_json['GlobalAchievements'] = list()
+        self.party_json['PartyAchievements'] = list()
+        self.party_json['GloomhavenProsperity'] = { 'Level': 1, 'Checkmarks': 0 }
 
     def calcAvgLevel(self):
         avgLevel = 0
         for hero in self.members:
             avgLevel += hero.getLevel()
         return int(avgLevel/len(self.members))
+
+    def addScenarioCompleted(self, value):
+        self.party_json['ScenariosCompleted'].append(value)
+        
+    def addScenarioAvailable(self, value):
+        self.party_json['ScenariosAvailable'].append(value)
+        
+    def addTreasureLooted(self, value):
+        assert value not in self.party_json['TreasuresLooted']
+        try:
+            self.party_json['TreasuresLooted'].append(value)
+        except AssertionError as err:
+            print("[addTreasureLooted :: AssertionError] %s" % (err))
+            raise
         
     def addRoadQuest(self, value):
         try:
@@ -80,21 +100,27 @@ class Party():
 
     def addMember(self, heroObj):
         try:
-            assert heroObj.getAttr('type') in self.valid_types
+            assert heroObj.getType() in self.valid_types
 
             self.members.append(heroObj)
             self.party_json['Members'] = {}
             for k,v in enumerate(self.members):
                 self.party_json['Members'][v.getType()] = v.getJson()
             
-            self.removeValidType(heroObj.getAttr('type'))
+            self.removeValidType(heroObj.getType())
             print("Added '%s - %s' to the party!" % (heroObj.getName(), heroObj.getType()))
         except:
             print("[addMember - Assertion Failed]")
-            print("\tAttempted adding '%s'" % (heroObj.getAttr('type')))
+            print("\tAttempted adding '%s'" % (heroObj.getType()))
             print('\tValidTypes: %s' % str(party.valid_types))
             print('\tRetiredTypes: %s' % str(party.retired_types))
             pass
+
+    def addProsperityCheckmark(self):
+        self.party_json['GloomhavenProsperity']['Checkmarks'] += 1
+        if self.party_json['GloomhavenProsperity']['Checkmarks'] == 4:
+            self.party_json['GloomhavenProsperity']['Level'] += 1
+            self.party_json['GloomhavenProsperity']['Checkmarks'] += 1
 
     def getJson(self):
         return self.party_json
@@ -112,7 +138,7 @@ class Party():
         if 'Members' in self.party_json.keys():
             for k,v in enumerate(self.party_json['Members']):
                 heroData = self.party_json['Members'][v]
-                self.members.append(ch.createCharacter(heroData['name'], heroData['type'], heroData['owner']))
+                self.members.append(ch.Character(heroData['name'], heroData['type'], heroData['owner']))
 
 if __name__ == "__main__":
     import global_vars as gv
@@ -123,17 +149,51 @@ if __name__ == "__main__":
     party.addCityQuest(18)
     party.addRoadQuest(7)
     party.addRoadQuest(25)
+    party.addScenarioCompleted(1)
+    party.addScenarioCompleted(2)
+    party.addScenarioCompleted(3)
+    party.addScenarioAvailable(4)
+    party.addScenarioAvailable(8)
+    party.addScenarioAvailable(9)
+    party.addScenarioAvailable(68)
+    party.addProsperityCheckmark()
+    party.addProsperityCheckmark()
     #party.retireType('tinkerer')
 
-    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=2)
+    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=2, xp=70, gold=49, quest=528, checkmarks=3)
+    hero1.addItem('Eagle-Eye Goggles')
+    hero1.addPerk()
+    hero1.addPerk()
     party.addMember(hero1)
-    party.saveParty()
 
-    hero2 = ch.Character('Evan', 'Spellweaver', 'Evan Teran')
+    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', 'Danny', level=1, quest=512, gold=20, xp=31, checkmarks=0)
+    hero2.addItem('Boots of Striding')
+    hero2.addItem('Minor Healing Potion')
+    hero2.addItem('Leather Armor')
     party.addMember(hero2)
+
+    hero3 = ch.Character('Evan', 'Spellweaver', 'Evan Teran', level=1, quest=533, gold=59, xp=44, checkmarks=1)
+    hero3.addItem('Cloak of Invisibility')
+    hero3.addItem('Minor Power Potion')
+    party.addMember(hero3)
+
+    hero4 = ch.Character('Bloodfist Stoneborn', 'Cragheart', 'Matt', level=2, quest=531, gold=29, xp=46, checkmarks=1)
+    hero4.addItem('Hide Armor')
+    hero4.addItem('Boots of Striding')
+    hero4.addItem('Minor Stamina Potion')
+    hero4.addPerk()
+
+    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=2, quest=526, gold=33, xp=59, checkmarks=2)
+    hero5.addItem('Leather Armor')
+    hero5.addItem('Poison Dagger')
+    hero5.addItem('Heater Shield')
+    hero5.addItem('Minor Stamina Potion')
+    hero5.addPerk()
+
     printJson(party)
 
     print("Avg Level: ", party.calcAvgLevel())
+    party.saveParty()
     
     party.loadParty('TheBrotherhood')
     printJson(party)

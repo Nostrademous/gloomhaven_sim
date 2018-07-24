@@ -1,23 +1,55 @@
 '''
+    Base Class for all player and non-player characters
+    Inherited by npc.py (for enemies and spawns)
+    Inherited by character.py (for heroes)
 '''
 
+from effects import *
+
 class Unit():
-    def __init__(self, id, name, elite=False, spawn=False):
-        self.id     = id
-        self.name   = name
-        self.elite  = elite
-        self.spawn  = spawn
+    def __init__(self, name, id=0):
+        self.name       = name
+        self.id         = id
+        self.max_hp     = 0
+        self.curr_hp    = 0
+        self.amd        = None
+        self.abilities  = None
+        self.effects    = initEffects()
+    
+    def heal(self, value):
+        if self.underEffect('Wound'):
+            setEffect(self.effects, 'Wound', False)
+            # do no return as heal continues
 
-    def isElite(self):
-        return self.elite
+        if self.underEffect('Poison'):
+            setEffect(self.effects, 'Poison', False)
+            # if curing poison heal has no other effect
+            # if wounded & poisoned both are removed but
+            # no health is gain, hence the order
+            return
+        self.curr_hp = min(self.max_hp, self.curr_hp+value)
+    
+    def takeDamage(self, amount, effList=[]):
+        raise Exception("[BASE UNIT CLASS] :: Implement in parent")
+    
+    def selectAction(self):
+        raise Exception("[BASE UNIT CLASS] :: Implement in parent")
+    
+    def endTurn(self):
+        # remove one-round long effects
+        for eff in _one_turn_effects:
+            self.effects[eff.lower()] = False
+    
+    def underEffect(self, effectName):
+        return self.effects[effectName.lower()]
 
-    def isSpawn(self):
-        return self.spawn
+    def getName(self):
+        return self.name
         
     def __repr__(self):
         str  = "[Unit: %d] %s\n" % (self.id, self.name)
         return str
 
 if __name__ == "__main__":
-    un = Unit(0, "Skeleton Archer")
+    un = Unit("Skeleton Archer", 0)
     print(un)
