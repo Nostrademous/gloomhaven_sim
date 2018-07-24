@@ -72,7 +72,7 @@ class Character(Unit):
         self.effects = initEffects()
 
         self.items = list()
-        
+
         self.perks = perks.getPerkSelections(self.type)
 
     def selectAction(self):
@@ -91,7 +91,7 @@ class Character(Unit):
             extra_perks = int(self.checkmarks/3)
             # max extra perks from checkmarks is 6 per char sheet
             if self.perks_from_chk < 6:
-                # I believe below is safe as I don't see a way to 
+                # I believe below is safe as I don't see a way to
                 # get more than 3 checkmarks in a single scenario
                 self.perks_from_chk += extra_perks
                 self.addPerk(extra_perks)
@@ -102,7 +102,7 @@ class Character(Unit):
 
     def addPerk(self, cnt=1):
         self.perk_count += cnt
-    
+
     # take damage assumes the decison to take damage was made by the player
     # in lieu of remove cards from their hand or discard pile
     # Also, additional damage from any Effects should be included

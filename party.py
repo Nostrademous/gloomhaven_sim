@@ -4,18 +4,18 @@
         Name: (name of party)
         Members: (list class characters.py)
         ValidHeroTypes: (list string literals)
-        
+
         # Stage 2 implementation
         Prosperity: (float literal - default 1.0)
-        
+
         # Stage 3 implementation
         ScenariosCompleted: (list integer literals)
         ScenariosAvailable: (list integer literals)
-        
+
         # Stage 4 implementation
         GlobalAchievements: list(strings)
         PartyAchievements: list(stings)
-        
+
         # Stage 5 implementation
         TreasuresLooted: list(integer literals)
         CityQuestsDone: list(integer literals)
@@ -52,10 +52,10 @@ class Party():
 
     def addScenarioCompleted(self, value):
         self.party_json['ScenariosCompleted'].append(value)
-        
+
     def addScenarioAvailable(self, value):
         self.party_json['ScenariosAvailable'].append(value)
-        
+
     def addTreasureLooted(self, value):
         assert value not in self.party_json['TreasuresLooted']
         try:
@@ -63,7 +63,7 @@ class Party():
         except AssertionError as err:
             print("[addTreasureLooted :: AssertionError] %s" % (err))
             raise
-        
+
     def addRoadQuest(self, value):
         try:
             assert value not in self.party_json['CompletedRoadQuests']
@@ -106,7 +106,7 @@ class Party():
             self.party_json['Members'] = {}
             for k,v in enumerate(self.members):
                 self.party_json['Members'][v.getType()] = v.getJson()
-            
+
             self.removeValidType(heroObj.getType())
             print("Added '%s - %s' to the party!" % (heroObj.getName(), heroObj.getType()))
         except:
@@ -131,7 +131,7 @@ class Party():
 
     def loadParty(self, name):
         self.__init__(name)
-        
+
         with open('%s_party.json' % name) as infile:
             self.party_json = json.load(infile)
 
@@ -196,6 +196,6 @@ if __name__ == "__main__":
 
     #print("Avg Level: ", party.calcAvgLevel())
     party.saveParty()
-    
+
     party.loadParty('TheBrotherhood')
     printJson(party)
