@@ -5,8 +5,8 @@ from utils import pickRandom
 
 class AttackModifierCard():
     def __init__(self, name, adjValue=0, crit=False, miss=False, reshuffle=False,
-                 curse=False, bless=False, rolling=False, effect=None, invokeElement=None,
-                 heal=False, healAmount=0, addTarget=False):
+                 curse=False, bless=False, rolling=False, effect=None, effectValue=0,
+                 invokeElement=None, heal=False, healAmount=0, addTarget=False):
         self.name       = name
         self.adjValue   = adjValue
         self.crit       = crit
@@ -19,6 +19,7 @@ class AttackModifierCard():
         self.invoke     = invokeElement
         # effect cards
         self.effect     = effect
+        self.effectValue= effectValue
         # heal cards
         self.heal       = heal
         self.healAmount = healAmount
@@ -44,11 +45,20 @@ class AttackModifierCard():
         return self.reshuffle
 
     def __repr__(self):
-        ret  = '%s' % self.name
+        ret = ''
+        if self.rolling:
+            if self.name != '':
+                ret += 'rolling %s' % self.name
+            else:
+                ret += 'rolling'
+        else:
+            ret += '%s' % self.name
         if self.invoke:
             ret += ' invoke %s' % (self.invoke.upper())
         if self.effect:
             ret += ' %s' % (self.effect.upper())
+            if self.effectValue > 0:
+                ret += '_%d' % (self.effectValue)
         if self.heal:
             ret += ' Heal %d' % (self.healAmount)
         if self.addTarget:
@@ -67,13 +77,18 @@ amc_curse = AttackModifierCard('curse', 0, miss=True, curse=True)
 amc_bless = AttackModifierCard('bless', 0, crit=True, bless=True)
 
 # below are perk-specific cards that can be added via perks
-amc_p3 = AttackModifierCard('+3', 3)
-amc_p1h2 = AttackModifierCard('+1', 1, heal=True, healAmount=2)
-amc_rollfire = AttackModifierCard('', rolling=True, invokeElement='fire')
-amc_rollmuddle = AttackModifierCard('', rolling=True, effect='muddle')
-amc_0at = AttackModifierCard('+0', addTarget=True)
-amc_p1wound = AttackModifierCard('+1', effect='wound')
-amc_p1immobilize = AttackModifierCard('+1', effect='immobilize')
+amc_p3              = AttackModifierCard('+3', 3)
+amc_p1h2            = AttackModifierCard('+1', 1, heal=True, healAmount=2)
+amc_roll_fire       = AttackModifierCard('', rolling=True, invokeElement='fire')
+amc_roll_invis      = AttackModifierCard('', rolling=True, effect='invisible')
+amc_roll_muddle     = AttackModifierCard('', rolling=True, effect='muddle')
+amc_roll_pierce_3   = AttackModifierCard('', rolling=True, effect='pierce', effectValue=3)
+amc_roll_poison     = AttackModifierCard('', rolling=True, effect='poison')
+amc_roll_stun       = AttackModifierCard('', rolling=True, effect='stun')
+amc_0at             = AttackModifierCard('+0', addTarget=True)
+amc_p1wound         = AttackModifierCard('+1', effect='wound')
+amc_p1immobilize    = AttackModifierCard('+1', effect='immobilize')
+amc_roll_p1         = AttackModifierCard('+1', rolling=True)
 
 _start_deck = list([
     amc_0, amc_0, amc_0, amc_0, amc_0, amc_0, # 6 +0 cards

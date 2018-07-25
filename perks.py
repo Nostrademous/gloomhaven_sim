@@ -3,16 +3,18 @@
 
 import amd
 
-PERK_TYPE_REMOVE    = 1
-PERK_TYPE_ADD       = 2
-PERK_TYPE_REPLACE   = 3
-PERK_TYPE_IGNORE    = 4
+PERK_TYPE_REMOVE        = 1
+PERK_TYPE_ADD           = 2
+PERK_TYPE_REPLACE       = 3
+PERK_TYPE_IGNORE_SCEN   = 4
+PERK_TYPE_IGNORE_ITEM   = 5
 
 _perk_type = {
     "1": "Remove",
     "2": "Add",
     "3": "Replace",
-    "4": "Ignore negative scenario effects"
+    "4": "Ignore negative scenario effects",
+    "5": "Ignore negative item effects"
 }
 
 class Perk():
@@ -29,8 +31,6 @@ class Perk():
         if self.numCards > 0:
             ret += " %d" % (self.numCards)
         if self.cardType1:
-            if self.cardType1.isRolling():
-                ret += " rolling"
             ret += " %s" % (self.cardType1)
         if self.cardType2:
             ret += " with %d %s" % (self.numCards, self.cardType2)
@@ -38,35 +38,106 @@ class Perk():
             ret += " cards"
         return ret
 
-tinkerer_perk_1     = Perk(PERK_TYPE_REMOVE, 2, amd.amc_m1)
-tinkerer_perk_2     = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m2, amd.amc_0)
-tinkerer_perk_3     = Perk(PERK_TYPE_ADD, 2, amd.amc_p1)
-tinkerer_perk_4     = Perk(PERK_TYPE_ADD, 1, amd.amc_p3)
-tinkerer_perk_5     = Perk(PERK_TYPE_ADD, 2, amd.amc_rollfire)
-tinkerer_perk_6     = Perk(PERK_TYPE_ADD, 3, amd.amc_rollmuddle)
+# used by multiple classes
+ignore_scen_perk        = Perk(PERK_TYPE_IGNORE_SCEN)
+ignore_item_perk        = Perk(PERK_TYPE_IGNORE_ITEM)
+
+remove_2_minus_1        = Perk(PERK_TYPE_REMOVE, 2, amd.amc_m1)
+remove_4_0              = Perk(PERK_TYPE_REMOVE, 4, amd.amc_0)
+
+replace_minus_2_with_0      = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m2, amd.amc_0)
+replace_minus_1_with_plus_1 = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m1, amd.amc_p1)
+replace_0_with_plus_2       = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p2)
+
+add_2_plus_1            = Perk(PERK_TYPE_ADD, 2, amd.amc_p1)
+add_2_roll_plus_1       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_p1)
+add_1_plus_3            = Perk(PERK_TYPE_ADD, 1, amd.amc_p3)
+
+add_1_roll_invis        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_invis)
+add_1_roll_stun         = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_stun)
+add_2_roll_muddle       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_muddle)
+add_3_roll_muddle       = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_muddle)
+add_2_roll_poison       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_poison)
+add_1_plus_1_immobilize = Perk(PERK_TYPE_ADD, 1, amd.amc_p1immobilize)
+add_2_roll_pierce3      = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_pierce_3)
+
+add_2_roll_fire         = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_fire)
+
+# class specific perks
 tinkerer_perk_7     = Perk(PERK_TYPE_ADD, 1, amd.amc_p1wound)
-tinkerer_perk_8     = Perk(PERK_TYPE_ADD, 1, amd.amc_p1immobilize)
 tinkerer_perk_9     = Perk(PERK_TYPE_ADD, 1, amd.amc_p1h2)
 tinkerer_perk_10    = Perk(PERK_TYPE_ADD, 1, amd.amc_0at)
-tinkerer_perk_11    = Perk(PERK_TYPE_IGNORE)
 
-brute_perk_deck = list([])
-cragheart_perk_deck = list([])
-mindthief_perk_deck = list([])
-scoundrel_perk_deck = list([])
-spellweaver_perk_deck = list([])
+brute_perk_deck = list([
+    remove_2_minus_1,
+    replace_minus_1_with_plus_1,
+    add_2_plus_1, add_2_plus_1,
+    add_1_plus_3,
+    #5,
+    #6,
+    add_1_roll_stun, add_1_roll_stun,
+    #8,
+    #9,
+    #10,
+    ignore_scen_perk
+])
+
+cragheart_perk_deck = list([
+    remove_4_0,
+    replace_minus_1_with_plus_1, replace_minus_1_with_plus_1, replace_minus_1_with_plus_1,
+    #3,
+    add_1_plus_1_immobilize, add_1_plus_1_immobilize,
+    #5,
+    #6,
+    #7,
+    #8,
+    ignore_item_perk,
+    ignore_scen_perk
+])
+
+mindthief_perk_deck = list([
+    ignore_scen_perk
+])
+
+scoundrel_perk_deck = list([
+    remove_2_minus_1, remove_2_minus_1,
+    remove_4_0,
+    replace_minus_2_with_0,
+    replace_minus_1_with_plus_1,
+    replace_0_with_plus_2, replace_0_with_plus_2,
+    add_2_roll_plus_1, add_2_roll_plus_1,
+    add_2_roll_pierce3,
+    add_2_roll_poison, add_2_roll_poison,
+    add_2_roll_muddle,
+    add_1_roll_invis,
+    ignore_scen_perk
+])
+
+spellweaver_perk_deck = list([
+    #1,
+    #2,
+    #3,
+    #4,
+    #5,
+    #6,
+    #7,
+    #8,
+    #9,
+    ignore_scen_perk
+])
+
 tinkerer_perk_deck = list([
-    tinkerer_perk_1, tinkerer_perk_1,
-    tinkerer_perk_2,
-    tinkerer_perk_3,
-    tinkerer_perk_4,
-    tinkerer_perk_5,
-    tinkerer_perk_6,
+    remove_2_minus_1, remove_2_minus_1,
+    replace_minus_2_with_0,
+    add_2_plus_1,
+    add_1_plus_3,
+    add_2_roll_fire,
+    add_3_roll_muddle,
     tinkerer_perk_7, tinkerer_perk_7,
-    tinkerer_perk_8, tinkerer_perk_8,
+    add_1_plus_1_immobilize, add_1_plus_1_immobilize,
     tinkerer_perk_9, tinkerer_perk_9,
     tinkerer_perk_10,
-    tinkerer_perk_11
+    ignore_scen_perk
 ])
 
 def getPerkSelections(class_type):
@@ -88,4 +159,7 @@ def getPerkSelections(class_type):
 
 if __name__ == "__main__":
     for perk in tinkerer_perk_deck:
+        print(perk)
+        
+    for perk in scoundrel_perk_deck:
         print(perk)
