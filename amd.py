@@ -53,6 +53,10 @@ class AttackModifierCard():
                 ret += 'rolling'
         else:
             ret += '%s' % self.name
+        if self.bless:
+            ret += ' BLESS'
+        if self.curse:
+            ret += ' CURSE'
         if self.invoke:
             ret += ' invoke %s' % (self.invoke.upper())
         if self.effect:
@@ -79,16 +83,24 @@ amc_bless = AttackModifierCard('bless', 0, crit=True, bless=True)
 # below are perk-specific cards that can be added via perks
 amc_p3              = AttackModifierCard('+3', 3)
 amc_p1h2            = AttackModifierCard('+1', 1, heal=True, healAmount=2)
+amc_roll_air        = AttackModifierCard('', rolling=True, invokeElement='air')
+amc_roll_dark       = AttackModifierCard('', rolling=True, invokeElement='dark')
+amc_roll_earth      = AttackModifierCard('', rolling=True, invokeElement='earth')
 amc_roll_fire       = AttackModifierCard('', rolling=True, invokeElement='fire')
+amc_roll_light      = AttackModifierCard('', rolling=True, invokeElement='light')
 amc_roll_invis      = AttackModifierCard('', rolling=True, effect='invisible')
 amc_roll_muddle     = AttackModifierCard('', rolling=True, effect='muddle')
 amc_roll_pierce_3   = AttackModifierCard('', rolling=True, effect='pierce', effectValue=3)
 amc_roll_poison     = AttackModifierCard('', rolling=True, effect='poison')
 amc_roll_stun       = AttackModifierCard('', rolling=True, effect='stun')
 amc_0at             = AttackModifierCard('+0', addTarget=True)
-amc_p1wound         = AttackModifierCard('+1', effect='wound')
-amc_p1immobilize    = AttackModifierCard('+1', effect='immobilize')
+amc_p1_wound        = AttackModifierCard('+1', effect='wound')
+amc_p1_immobilize   = AttackModifierCard('+1', effect='immobilize')
 amc_roll_p1         = AttackModifierCard('+1', rolling=True)
+amc_plus_2_fire     = AttackModifierCard('+2', invokeElement='fire')
+amc_plus_2_ice      = AttackModifierCard('+2', invokeElement='ice')
+amc_plus_1_curse    = AttackModifierCard('+1', curse=True)
+amc_0_stun          = AttackModifierCard('+0', effect='stun')
 
 _start_deck = list([
     amc_0, amc_0, amc_0, amc_0, amc_0, amc_0, # 6 +0 cards

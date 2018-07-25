@@ -53,18 +53,29 @@ add_2_plus_1            = Perk(PERK_TYPE_ADD, 2, amd.amc_p1)
 add_2_roll_plus_1       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_p1)
 add_1_plus_3            = Perk(PERK_TYPE_ADD, 1, amd.amc_p3)
 
+add_1_0_stun            = Perk(PERK_TYPE_ADD, 1, amd.amc_0_stun)
 add_1_roll_invis        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_invis)
 add_1_roll_stun         = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_stun)
 add_2_roll_muddle       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_muddle)
 add_3_roll_muddle       = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_muddle)
 add_2_roll_poison       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_poison)
-add_1_plus_1_immobilize = Perk(PERK_TYPE_ADD, 1, amd.amc_p1immobilize)
+add_1_plus_1_immobilize = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_immobilize)
+add_1_plus_1_wound      = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_wound)
 add_2_roll_pierce3      = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_pierce_3)
 
+# elemental based
+add_1_roll_air          = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_air)
+add_1_roll_dark         = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_dark)
+add_1_roll_earth        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_earth)
 add_2_roll_fire         = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_fire)
+add_1_roll_light        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_light)
+
+add_1_plus_1_curse      = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_1_curse)
+
+add_1_plus_2_fire       = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_fire)
+add_1_plus_2_ice        = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_ice)
 
 # class specific perks
-tinkerer_perk_7     = Perk(PERK_TYPE_ADD, 1, amd.amc_p1wound)
 tinkerer_perk_9     = Perk(PERK_TYPE_ADD, 1, amd.amc_p1h2)
 tinkerer_perk_10    = Perk(PERK_TYPE_ADD, 1, amd.amc_0at)
 
@@ -114,16 +125,17 @@ scoundrel_perk_deck = list([
 ])
 
 spellweaver_perk_deck = list([
-    #1,
-    #2,
-    #3,
-    #4,
-    #5,
-    #6,
-    #7,
-    #8,
-    #9,
-    ignore_scen_perk
+    remove_4_0,
+    replace_minus_1_with_plus_1, replace_minus_1_with_plus_1,
+    add_2_plus_1, add_2_plus_1,
+    add_1_0_stun,
+    add_1_plus_1_wound,
+    add_1_plus_1_immobilize,
+    add_1_plus_1_curse,
+    add_1_plus_2_fire, add_1_plus_2_fire,
+    add_1_plus_2_ice, add_1_plus_2_ice,
+    [add_1_roll_earth, add_1_roll_air],
+    [add_1_roll_light, add_1_roll_dark]
 ])
 
 tinkerer_perk_deck = list([
@@ -133,7 +145,7 @@ tinkerer_perk_deck = list([
     add_1_plus_3,
     add_2_roll_fire,
     add_3_roll_muddle,
-    tinkerer_perk_7, tinkerer_perk_7,
+    add_1_plus_1_wound, add_1_plus_1_wound,
     add_1_plus_1_immobilize, add_1_plus_1_immobilize,
     tinkerer_perk_9, tinkerer_perk_9,
     tinkerer_perk_10,
@@ -160,6 +172,11 @@ def getPerkSelections(class_type):
 if __name__ == "__main__":
     for perk in tinkerer_perk_deck:
         print(perk)
-        
+
+    print('\nScoundrel')
     for perk in scoundrel_perk_deck:
+        print(perk)
+
+    print('\nSpellweaver')
+    for perk in spellweaver_perk_deck:
         print(perk)
