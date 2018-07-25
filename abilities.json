@@ -5,7 +5,9 @@
         "Class": "Tinkerer",
         "Initiative": 74,
         "Top": {
-            "Summon": {
+            "ActionCount": 1,
+            "ActionType": ["Summon"],
+            "SummonData": {
                 "Name": "Summon Decoy",
                 "Health": 6,
                 "Move": 2,
@@ -17,12 +19,14 @@
             "XP": 2
         },
         "Bottom": {
-            "1": {
-                "Heal": 2,
+            "ActionCount": 1,
+            "ActionType": ["RangedHeal"],
+            "Heal": {
+                "Value": 2,
                 "EnhanceSlots": 1
             },
-            "2": {
-                "Range": 3,
+            "Range": {
+                "Value": 3,
                 "EnhanceSlots": 1
             }
         }
@@ -33,18 +37,23 @@
         "Class": "Tinkerer",
         "Initiative": 37,
         "Top": {
-            "1": {
-                "Heal": 3,
+            "ActionCount": 1,
+            "ActionType": ["RangedHeal]",
+            "Heal": {
+                "Value": 3,
                 "EnhanceSlots": 1
             },
-            "2": {
-                "Range": 3,
+            "Range": {
+                "Value": 3,
                 "EnhanceSlots": 1
             }
         },
         "Bottom": {
-            "1": {
-                "Special": "One adjacent ally may Recovery all their discard cards."
+            "ActionCount": 1,
+            "ActionType": i"Special"],
+            "Special": {
+                "UniqueID": "T37",
+                "Text": "One adjacent ally may Recovery all their discard cards."
             },
             "Lost": 1,
             "XP": 2

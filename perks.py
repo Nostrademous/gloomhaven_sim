@@ -26,6 +26,9 @@ class Perk():
         self.cardType1  = cardType1
         self.cardType2  = cardType2
 
+    def getJson(self):
+        return str(self)
+
     def __repr__(self):
         ret  = '%s' % (_perk_type[str(self.perkType)])
         if self.numCards > 0:

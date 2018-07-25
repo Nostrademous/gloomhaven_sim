@@ -50,6 +50,12 @@ class Party():
             avgLevel += hero.getLevel()
         return int(avgLevel/len(self.members))
 
+    def addGlobalAchievement(self, text):
+        self.party_json['GlobalAchievements'].append(text)
+
+    def addPartyAchievement(self, text):
+        self.party_json['PartyAchievements'].append(text)
+
     def addScenarioCompleted(self, value):
         self.party_json['ScenariosCompleted'].append(value)
 
@@ -127,7 +133,7 @@ class Party():
 
     def saveParty(self):
         with open('%s_party.json' % self.party_json['PartyName'], 'w') as outfile:
-            json.dump(self.party_json, outfile)
+            json.dump(self.party_json, outfile, indent=4)
 
     def loadParty(self, name):
         self.__init__(name)
@@ -145,6 +151,9 @@ if __name__ == "__main__":
     gv.init() # call only once
 
     party = Party('TheBrotherhood')
+    party.addGlobalAchievement('City Rule: Militaristic')
+    party.addPartyAchievement('First Steps')
+    party.addPartyAchievement("Jekserah's Plans")
     party.addCityQuest(4)
     party.addCityQuest(18)
     party.addRoadQuest(7)
@@ -159,6 +168,9 @@ if __name__ == "__main__":
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
     #party.retireType('tinkerer')
+    party.addTreasureLooted(7)
+    party.addTreasureLooted(67)
+    party.addTreasureLooted(65)
 
     hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=2, xp=70, gold=49, quest=528, checkmarks=3)
     hero1.addItem('Eagle-Eye Goggles')

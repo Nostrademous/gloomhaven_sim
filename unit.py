@@ -12,7 +12,6 @@ class Unit():
         self.id         = id
         self.max_hp     = 0
         self.curr_hp    = 0
-        self.amd        = None
         self.abilities  = None
         self.effects    = initEffects()
     

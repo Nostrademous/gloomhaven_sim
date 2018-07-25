@@ -40,10 +40,12 @@
 
 import json
 import global_vars as gv
+from utils import *
 from effects import *
 from unit import Unit
 
 import perks
+import amd
 
 class Character(Unit):
     _valid_actions = ['play_cards', 'long_rest']
@@ -58,8 +60,9 @@ class Character(Unit):
         self.gold           = gold
         self.quest          = quest # for tracking retirement conditions
         self.checkmarks     = checkmarks
-        self.perk_count     = 0
         self.perks_from_chk = 0
+        self.available_perks= perks.getPerkSelections(self.type)
+        self.selected_perks = list()
 
         if gv.heroDataJson:
             self.curr_hp    = int(gv.heroDataJson[type.capitalize()]['Health'][str(level)])
@@ -69,11 +72,9 @@ class Character(Unit):
         self.retired        = False
         self.exhausted      = False
 
-        self.effects = initEffects()
-
-        self.items = list()
-
-        self.perks = perks.getPerkSelections(self.type)
+        self.effects        = initEffects()
+        self.items          = list()
+        self.amd            = amd.AttackModifierDeck(isPlayer=True)
 
     def selectAction(self):
         self.round_action = pickRandom(_valid_actions)
@@ -84,6 +85,9 @@ class Character(Unit):
 
     def isExhausted(self):
         return self.exhausted
+
+    def getPerkCount(self):
+        return self.perks_from_chk + self.level - 1
 
     def addCheckmark(self, cnt=1):
         self.checkmarks += cnt
@@ -101,7 +105,10 @@ class Character(Unit):
         self.checkmarks = max(0, self.checkmarks-cnt)
 
     def addPerk(self, cnt=1):
-        self.perk_count += cnt
+        rand_perk = pickRandom(self.available_perks)
+        print('Perk Selected: %s' % (rand_perk))
+        self.available_perks.remove(rand_perk)
+        self.selected_perks.append(rand_perk)
 
     # take damage assumes the decison to take damage was made by the player
     # in lieu of remove cards from their hand or discard pile
@@ -148,7 +155,6 @@ class Character(Unit):
         jsonData['gold'] = self.gold
         jsonData['quest'] = self.quest
         jsonData['checkmarks'] = self.checkmarks
-        jsonData['perk_cnt'] = self.perk_count
 
         if gv.heroDataJson:
             jsonData['curr_hp'] = self.curr_hp
@@ -157,5 +163,6 @@ class Character(Unit):
 
         jsonData['retired'] = self.retired
         jsonData['items'] = self.items
+        #jsonData['perks'] = [str(p) for p in self.selected_perks]
         return jsonData
 
