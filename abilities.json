@@ -20,7 +20,7 @@
         },
         "Bottom": {
             "ActionCount": 1,
-            "ActionType": ["RangedHeal"],
+            "ActionType": ["Ranged_Heal"],
             "Heal": {
                 "Value": 2,
                 "EnhanceSlots": 1
@@ -38,7 +38,7 @@
         "Initiative": 37,
         "Top": {
             "ActionCount": 1,
-            "ActionType": ["RangedHeal]",
+            "ActionType": ["Ranged_Heal"],
             "Heal": {
                 "Value": 3,
                 "EnhanceSlots": 1
@@ -50,10 +50,61 @@
         },
         "Bottom": {
             "ActionCount": 1,
-            "ActionType": i"Special"],
+            "ActionType": ["Special"],
             "Special": {
-                "UniqueID": "T37",
+                "UniqueID": "TINKERER_37_BOT",
                 "Text": "One adjacent ally may Recovery all their discard cards."
+            },
+            "Lost": 1,
+            "XP": 2
+        }
+    },
+    "59": {
+        "Name": "Lethal Injection",
+        "Level": 9,
+        "Class": "Tinkerer",
+        "Initiative": 85,
+        "Top": {
+            "ActionCount": 1,
+            "ActionType": ["Special"],
+            "Special": {
+                "UniqueID": "TINKERER_59_TOP",
+                "Text": "Kill one adjacent normal or elite enemy."
+            },
+            "Lost": 1,
+            "XP": 2
+        },
+        "Bottom": {
+            "ActionCount": 2,
+            "ActionType": ["Move_AdjEffect"],
+            "Move": {
+                "Value": 4,
+                "EnhanceSlots": 1
+            },
+            "AdjEffect": {
+                "Value": "Poison"
+            }
+        }
+    },
+    "60": {
+        "Name": "Chimeric Formula",
+        "Level": 9,
+        "Class": "Tinkerer",
+        "Initiative": 43,
+        "Top": {
+            "ActionCount": 1,
+            "ActionType": ["Special"],
+            "Special": {
+                "UniqueID": "TINKERER_60_TOP",
+                "Text": "One adjacent ally may Recover up to two of their lost cards, then lose two cards."
+            }
+        },
+        "Bottom": {
+            "ActionCount": 1,
+            "ActionType": ["Special"],
+            "Special": {
+                "UniqueID": "TINKERER_60_BOT",
+                "Text": "One ally within Range_3 may Recover one lost card belonging to an ally adjacent to them."
             },
             "Lost": 1,
             "XP": 2
