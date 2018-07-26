@@ -1,7 +1,8 @@
 '''
 '''
 
-from utils import strJson
+from utils import strJson, pickRandom
+import global_vars as gv
 
 _ability_types = {
     "Move_AdjEffect": ["Move", "AdjEffect"],
@@ -46,13 +47,43 @@ def loadAllHeroCards(heroType, level):
                 card_list.append(card)
     return card_list
 
-class AbilityCardDeck():
+class HeroAbilityCardDeck():
     def __init__(self, heroType, level=9):
         self._all_cards = loadAllHeroCards(heroType, level)
         self.selected_cards = list()
         self.active_cards   = list()
         self.lost_cards     = list()
         self.discard_cards  = list()
+        self.in_hand_cards  = list()
+
+    def selectCardsFromFullDeck(self, maxNum):
+        # TODO - randomf for now, but ultimately user/AI selected
+        selection_deck = list(self._all_cards)
+        for i in range(maxNum):
+            card = pickRandom(selection_deck)
+            selection_deck.remove(card)
+            self.selected_cards.append(card)
+            if len(selection_deck) == 0:
+                print("[selectCardsFromFullDeck] :: Not enough cards")
+                break
+
+    def getNumRemainingCards(self):
+        return len(self.selected_cards)
+
+    def pickRandomDiscardedCardForLoss(self):
+        return pickRandom(self.discard_cards)
+
+    # specific to short-rest recover of random loss card
+    def keepLossCardPickNewRandomDiscard(self, lossCard):
+        self.dicard_cards.remove(lossCard)
+        self.selected_cards.append(lossCard)
+        return self.pickRandomDiscardedForLoss()
+
+    def recoverDiscardedCards(self, lossCard=None):
+        if lossCard is not None:
+            self.dicard_cards.remove(lossCard)
+            self.lost_cards.append(lossCard)
+        self.selected_cards.extend(self.discard_cards)
 
     def useCardTop(self, card):
         print("IMPLEMENT")
@@ -73,6 +104,17 @@ class AbilityCardDeck():
             self.lost_cards.append(card)
         else:
             self.discard_cards.append(card)
+
+    def __repr__(self):
+        ret = ''
+        for c in self.selected_cards:
+            ret += str(c)
+        return ret
+
+
+class MonsterAbilityCardDeck():
+    def __init__(self, monsterType):
+        self.card_pool  = list()
 
 if __name__ == "__main__":
     import global_vars as gv

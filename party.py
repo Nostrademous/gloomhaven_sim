@@ -178,6 +178,9 @@ if __name__ == "__main__":
     hero1.addPerk()
     party.addMember(hero1)
 
+    hero1.scenarioPreparation()
+    print(hero1.ability_deck)
+
     hero2 = ch.Character('Ruby Sweety Pie', 'Brute', 'Danny', level=1, quest=512, gold=20, xp=31, checkmarks=0)
     hero2.addItem('Boots of Striding')
     hero2.addItem('Minor Healing Potion')
@@ -205,6 +208,7 @@ if __name__ == "__main__":
     party.addMember(hero5)
 
     printJson(party)
+    print('\n\n\n')
 
     #print("Avg Level: ", party.calcAvgLevel())
     party.saveParty()

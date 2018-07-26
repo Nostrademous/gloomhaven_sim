@@ -5,6 +5,7 @@
 '''
 
 from effects import *
+from ability_cards import HeroAbilityCardDeck, MonsterAbilityCardDeck
 
 class Unit():
     def __init__(self, name, id=0):
@@ -12,8 +13,12 @@ class Unit():
         self.id         = id
         self.max_hp     = 0
         self.curr_hp    = 0
-        self.abilities  = None
+        self.ability_deck  = None
         self.effects    = initEffects()
+
+    def setAbilityCardDeck(self, deck):
+        assert isinstance(deck, HeroAbilityCardDeck) or isinstance(deck, MonsterAbilityCardDeck)
+        self.ability_deck = deck
     
     def heal(self, value):
         if self.underEffect('Wound'):

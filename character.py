@@ -43,6 +43,7 @@ import global_vars as gv
 from utils import *
 from effects import *
 from unit import Unit
+from ability_cards import HeroAbilityCardDeck
 
 import perks
 import amd
@@ -76,6 +77,10 @@ class Character(Unit):
         self.items          = list()
         self.amd            = amd.AttackModifierDeck(isPlayer=True)
 
+    def scenarioPreparation(self):
+        self.setAbilityCardDeck(HeroAbilityCardDeck(self.type, self.level))
+        self.ability_deck.selectCardsFromFullDeck(self.deck_size)
+        
     def selectAction(self):
         self.round_action = pickRandom(_valid_actions)
 
