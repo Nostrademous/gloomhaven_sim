@@ -4,9 +4,9 @@
 from utils import strJson, pickRandom
 import global_vars as gv
 
-_ability_types = {
+_action_types = {
     "Move_AdjEffect": ["Move", "AdjEffect"],
-    "Ranged_Heal": ["Heal", "Range"],
+    "RangedHeal": ["Heal", "Range"],
     "Summon": ["SummonData"],
     "Special": ["UniqueID", "Text"]
 }

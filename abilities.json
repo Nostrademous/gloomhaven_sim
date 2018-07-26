@@ -5,29 +5,31 @@
         "Class": "Tinkerer",
         "Initiative": 74,
         "Top": {
-            "ActionCount": 1,
-            "ActionType": ["Summon"],
-            "SummonData": {
-                "Name": "Summon Decoy",
-                "Health": 6,
-                "Move": 2,
-                "Attack": 0,
-                "Range": 0
+            "Actions": {
+                "1": {
+                    "Type": "SummonData",
+                    "Name": "Summon Decoy",
+                    "Health": 6,
+                    "HealthEnhanceSlots": 1,
+                    "Move": 2,
+                    "MoveEhanceSlots": 1,
+                    "Attack": 0,
+                    "Range": 0
+                }
             },
             "Lasts": "Infinite",
             "Lost": 1,
             "XP": 2
         },
         "Bottom": {
-            "ActionCount": 1,
-            "ActionType": ["Ranged_Heal"],
-            "Heal": {
-                "Value": 2,
-                "EnhanceSlots": 1
-            },
-            "Range": {
-                "Value": 3,
-                "EnhanceSlots": 1
+            "Actions": {
+                "1": {
+                    "Type": "RangedHeal",
+                    "HealValue": 2,
+                    "RangeValue": 3,
+                    "HealEnhanceSlots": 1,
+                    "RangeEnhanceSlots": 1
+                }
             }
         }
     },
@@ -37,26 +39,136 @@
         "Class": "Tinkerer",
         "Initiative": 37,
         "Top": {
-            "ActionCount": 1,
-            "ActionType": ["Ranged_Heal"],
-            "Heal": {
-                "Value": 3,
-                "EnhanceSlots": 1
-            },
-            "Range": {
-                "Value": 3,
-                "EnhanceSlots": 1
+            "Actions": {
+                "1": {
+                    "Type": "RangedHeal",
+                    "HealValue": 3,
+                    "RangeValue": 3,
+                    "HealEnhanceSlots": 1,
+                    "RangeEnhanceSlots": 1
+                }
             }
         },
         "Bottom": {
-            "ActionCount": 1,
-            "ActionType": ["Special"],
-            "Special": {
-                "UniqueID": "TINKERER_37_BOT",
-                "Text": "One adjacent ally may Recovery all their discard cards."
+            "Actions": {
+                "1": {
+                    "Type": "Special",
+                    "UniqueID": "TINKERER_37_BOT",
+                    "Text": "One adjacent ally may Recovery all their discard cards."
+                }
             },
             "Lost": 1,
             "XP": 2
+        }
+    },
+    "56": {
+        "Name": "Curative Aerosol",
+        "Level": 7,
+        "Class": "Tinkerer",
+        "Initiative": 21,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "Value": 2
+                },
+                "2": {
+                    "Type": "RangedHeal",
+                    "HealValue": 2,
+                    "RangeValue": 1,
+                    "HealEnhanceSlots": 1
+                },
+                "3": {
+                    "Type": "Move",
+                    "Value": 2
+                },
+                "4": {
+                    "Type": "RangedHeal",
+                    "HealValue": 2,
+                    "RangeValue": 1,
+                    "HealEnhanceSlots": 1
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "Value": 8,
+                    "Jump": 1,
+                    "EnhanceSlots": 1
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        }
+    },
+    "57": {
+        "Name": "Jet Propulsion",
+        "Level": 8,
+        "Class": "Tinkerer",
+        "Initiative": 38,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "AllSummonBuff",
+                    "Range": 3,
+                    "BuffType": "Move",
+                    "BuffValue": 2,
+                    "BuffControl": "PlayerRules"
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "Value": 8,
+                    "Jump": 1,
+                    "EnhanceSlots": 1
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        }
+    },
+    "58": {
+        "Name": "Harsh Stimulants",
+        "Level": 8,
+        "Class": "Tinkerer",
+        "Initiative": 27,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "Value": 9,
+                    "EnhanceSlots": 2
+                },
+                "2": {
+                    "Type": "SelfSufferDamage",
+                    "Value": 2,
+                    "Optional": 0
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "AdjBuff",
+                    "BuffType": "Attack",
+                    "BuffValue": 2
+                },
+                "2": {
+                    "Type": "AdjSufferDamage",
+                    "Value": 2,
+                    "Optional": 0
+                }
+            },
+            "Lasts": "Round"
         }
     },
     "59": {
@@ -65,24 +177,27 @@
         "Class": "Tinkerer",
         "Initiative": 85,
         "Top": {
-            "ActionCount": 1,
-            "ActionType": ["Special"],
-            "Special": {
-                "UniqueID": "TINKERER_59_TOP",
-                "Text": "Kill one adjacent normal or elite enemy."
+            "Actions": {
+                "1": {
+                    "Type": "Special",
+                    "UniqueID": "TINKERER_59_TOP",
+                    "Text": "Kill one adjacent normal or elite enemy."
+                }
             },
             "Lost": 1,
             "XP": 2
         },
         "Bottom": {
-            "ActionCount": 2,
-            "ActionType": ["Move_AdjEffect"],
-            "Move": {
-                "Value": 4,
-                "EnhanceSlots": 1
-            },
-            "AdjEffect": {
-                "Value": "Poison"
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "Value": 4,
+                    "EnhanceSlots": 1
+                },
+                "2": {
+                    "Type": "AdjEffectAll",
+                    "Value": "Poison"
+                }
             }
         }
     },
@@ -92,19 +207,21 @@
         "Class": "Tinkerer",
         "Initiative": 43,
         "Top": {
-            "ActionCount": 1,
-            "ActionType": ["Special"],
-            "Special": {
-                "UniqueID": "TINKERER_60_TOP",
-                "Text": "One adjacent ally may Recover up to two of their lost cards, then lose two cards."
+            "Actions": {
+                "1": {
+                    "Type": "Special",
+                    "UniqueID": "TINKERER_60_TOP",
+                    "Text": "One adjacent ally may Recover up to two of their lost cards, then lose two cards."
+                }
             }
         },
         "Bottom": {
-            "ActionCount": 1,
-            "ActionType": ["Special"],
-            "Special": {
-                "UniqueID": "TINKERER_60_BOT",
-                "Text": "One ally within Range_3 may Recover one lost card belonging to an ally adjacent to them."
+            "Actions": {
+                "1": {
+                    "Type": "Special",
+                    "UniqueID": "TINKERER_60_BOT",
+                    "Text": "One ally within Range_3 may Recover one lost card belonging to an ally adjacent to them."
+                }
             },
             "Lost": 1,
             "XP": 2
