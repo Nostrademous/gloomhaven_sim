@@ -28,6 +28,12 @@ class Scenario():
     def setDifficultyLevel(self, value):
         self.diff_level = value
 
+    def calcTrapDamage(self):
+        # this is the default damage amount of the trap
+        # specific monster/player/scenario rules can hard-specify
+        # the amount instead
+        return 2 + self.diff_level
+
     def invokeElement(self, name):
         try:
             assert name.lower() in self.elements.keys()

@@ -57,7 +57,7 @@ class HeroAbilityCardDeck():
         self.in_hand_cards  = list()
 
     def selectCardsFromFullDeck(self, maxNum):
-        # TODO - randomf for now, but ultimately user/AI selected
+        # TODO - random for now, but ultimately user/AI selected
         selection_deck = list(self._all_cards)
         for i in range(maxNum):
             card = pickRandom(selection_deck)
@@ -86,7 +86,6 @@ class HeroAbilityCardDeck():
         self.selected_cards.extend(self.discard_cards)
 
     def useCardTop(self, card):
-        print("IMPLEMENT")
         self.selected_cards.remove(card)
         if card.top.has_key('Lasts'):
             self.active_cards.append(card)
@@ -94,9 +93,9 @@ class HeroAbilityCardDeck():
             self.lost_cards.append(card)
         else:
             self.discard_cards.append(card)
+        return card.top
 
     def useCardBot(self, card):
-        print("IMPLEMENT")
         self.selected_cards.remove(card)
         if card.bottom.has_key('Lasts'):
             self.active_cards.append(card)
@@ -104,6 +103,7 @@ class HeroAbilityCardDeck():
             self.lost_cards.append(card)
         else:
             self.discard_cards.append(card)
+        return card.bottom
 
     def __repr__(self):
         ret = ''
