@@ -8,13 +8,15 @@ PERK_TYPE_ADD           = 2
 PERK_TYPE_REPLACE       = 3
 PERK_TYPE_IGNORE_SCEN   = 4
 PERK_TYPE_IGNORE_ITEM   = 5
+PERK_TYPE_IGNORE_SCEN_P1= 6
 
 _perk_type = {
     "1": "Remove",
     "2": "Add",
     "3": "Replace",
     "4": "Ignore negative scenario effects",
-    "5": "Ignore negative item effects"
+    "5": "Ignore negative item effects",
+    "6": "Ignore negative scenario effects and add +1"
 }
 
 class Perk():
@@ -44,6 +46,7 @@ class Perk():
 # used by multiple classes
 ignore_scen_perk        = Perk(PERK_TYPE_IGNORE_SCEN)
 ignore_item_perk        = Perk(PERK_TYPE_IGNORE_ITEM)
+ignore_scen_perk_plus_1 = Perk(PERK_TYPE_IGNORE_SCEN_P1)
 
 remove_2_minus_1        = Perk(PERK_TYPE_REMOVE, 2, amd.amc_m1)
 remove_4_0              = Perk(PERK_TYPE_REMOVE, 4, amd.amc_0)
@@ -93,7 +96,7 @@ brute_perk_deck = list([
     #8,
     #9,
     #10,
-    ignore_scen_perk
+    ignore_scen_perk_plus_1
 ])
 
 cragheart_perk_deck = list([

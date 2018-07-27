@@ -61,6 +61,33 @@
             "XP": 2
         }
     },
+    "44": {
+        "Name": "Potent Potables",
+        "Level": 0,
+        "Class": "Tinkerer",
+        "Initiative": 46,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "IncreasedNextHeals",
+                    "IncreasedHealValue": 2,
+                    "Heals": 4,
+                    "XP": [0, 1, 0, 1]
+                }
+            },
+            "Lasts": "Infinite",
+            "Lost": 1
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "Value": 3,
+                    "EnhanceSlots": 1
+                }
+            }
+        }
+    },
     "56": {
         "Name": "Curative Aerosol",
         "Level": 7,
