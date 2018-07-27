@@ -8,16 +8,20 @@ from effects import *
 from ability_cards import HeroAbilityCardDeck, MonsterAbilityCardDeck
 
 class Unit():
-    def __init__(self, name, id=0):
+    def __init__(self, name, id=0, max_hp=0):
         self.name       = name
         self.id         = id
-        self.max_hp     = 0
-        self.curr_hp    = 0
+        self.max_hp     = max_hp
+        self.curr_hp    = max_hp
         self.ability_deck  = None
         self.effects    = initEffects()
         
         self.location   = None
 
+    def setHealth(self, value):
+        self.max_hp = value
+        self.curr_hp = value
+    
     def setAbilityCardDeck(self, deck):
         assert isinstance(deck, HeroAbilityCardDeck) or isinstance(deck, MonsterAbilityCardDeck)
         self.ability_deck = deck
