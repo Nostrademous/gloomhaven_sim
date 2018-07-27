@@ -12,3 +12,6 @@ def initEffects():
 
 def setEffect(effList, key, value):
     effList[key.lower()] = value
+
+def hasEffect(effList, key):
+    return effList[key.lower()]

@@ -1,0 +1,169 @@
+{
+    "Bandit Guard": {
+        "Id": 0,
+        "MaxCount": 0,
+        "DeckType": "Bandit Guard",
+        "Stats": {
+            "0": {
+                "Normal": {
+                    "Health": 5,
+                    "Movement": 2,
+                    "Attack": 2,
+                    "Range": 0,
+                    "Buffs": [],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 9,
+                    "Movement": 2,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": [],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "1": {
+                "Normal": {
+                    "Health": 6,
+                    "Movement": 3,
+                    "Attack": 2,
+                    "Range": 0,
+                    "Buffs": [],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 9,
+                    "Movement": 2,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": ["Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "2": {
+                "Normal": {
+                    "Health": 6,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": [],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 10,
+                    "Movement": 2,
+                    "Attack": 4,
+                    "Range": 0,
+                    "Buffs": ["Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "3": {
+                "Normal": {
+                    "Health": 9,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": [],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 10,
+                    "Movement": 3,
+                    "Attack": 4,
+                    "Range": 0,
+                    "Buffs": ["Shield_2"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "4": {
+                "Normal": {
+                    "Health": 10,
+                    "Movement": 4,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": [],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 11,
+                    "Movement": 3,
+                    "Attack": 4,
+                    "Range": 0,
+                    "Buffs": ["Shield_2"],
+                    "Effects": ["Muddle"],
+                    "Immunities": []
+                }
+            },
+            "5": {
+                "Normal": {
+                    "Health": 11,
+                    "Movement": 4,
+                    "Attack": 4,
+                    "Range": 0,
+                    "Buffs": [],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 12,
+                    "Movement": 3,
+                    "Attack": 5,
+                    "Range": 0,
+                    "Buffs": ["Shield_2"],
+                    "Effects": ["Muddle"],
+                    "Immunities": []
+                }
+            },
+            "6": {
+                "Normal": {
+                    "Health": 14,
+                    "Movement": 4,
+                    "Attack": 4,
+                    "Range": 0,
+                    "Buffs": [],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 14,
+                    "Movement": 3,
+                    "Attack": 5,
+                    "Range": 0,
+                    "Buffs": ["Shield_2"],
+                    "Effects": ["Muddle"],
+                    "Immunities": []
+                }
+            },
+            "7": {
+                "Normal": {
+                    "Health": 16,
+                    "Movement": 5,
+                    "Attack": 4,
+                    "Range": 0,
+                    "Buffs": [],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 14,
+                    "Movement": 3,
+                    "Attack": 5,
+                    "Range": 0,
+                    "Buffs": ["Shield_3"],
+                    "Effects": ["Muddle"],
+                    "Immunities": []
+                }
+            }
+        }
+    }
+}

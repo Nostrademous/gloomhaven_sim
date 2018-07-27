@@ -15,6 +15,8 @@ class Unit():
         self.curr_hp    = 0
         self.ability_deck  = None
         self.effects    = initEffects()
+        
+        self.location   = None
 
     def setAbilityCardDeck(self, deck):
         assert isinstance(deck, HeroAbilityCardDeck) or isinstance(deck, MonsterAbilityCardDeck)
@@ -51,7 +53,7 @@ class Unit():
         return self.name
         
     def __repr__(self):
-        str  = "[Unit: %d] %s\n" % (self.id, self.name)
+        str  = "[%s]\n" % (self.name)
         return str
 
 if __name__ == "__main__":

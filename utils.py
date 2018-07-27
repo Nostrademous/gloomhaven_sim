@@ -10,6 +10,13 @@ from os.path import isfile, join
 def listFiles(mypath):
     return [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
+def listFilesExtension(mypath, extension):
+    files = list()
+    for file in listdir(mypath):
+        if file.endswith(extension):
+            files.append(join(mypath, file))
+    return files
+
 def printJson(jsonData):
     if isinstance(jsonData, dict):
         print(json.dumps(jsonData, indent=4, sort_keys=True))

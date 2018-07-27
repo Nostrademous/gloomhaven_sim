@@ -1,0 +1,169 @@
+{
+    "Living Spirit": {
+        "Id": 0,
+        "MaxCount": 0,
+        "DeckType": "Living Spirit",
+        "Stats": {
+            "0": {
+                "Normal": {
+                    "Health": 2,
+                    "Movement": 2,
+                    "Attack": 2,
+                    "Range": 2,
+                    "Buffs": ["Shield_1", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 3,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 3,
+                    "Buffs": ["Shield_2", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "1": {
+                "Normal": {
+                    "Health": 2,
+                    "Movement": 2,
+                    "Attack": 2,
+                    "Range": 2,
+                    "Buffs": ["Shield_2", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 3,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 3,
+                    "Buffs": ["Shield_3", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "2": {
+                "Normal": {
+                    "Health": 2,
+                    "Movement": 3,
+                    "Attack": 2,
+                    "Range": 3,
+                    "Buffs": ["Shield_2", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 3,
+                    "Movement": 4,
+                    "Attack": 3,
+                    "Range": 4,
+                    "Buffs": ["Shield_3", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "3": {
+                "Normal": {
+                    "Health": 3,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 3,
+                    "Buffs": ["Shield_2", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 4,
+                    "Movement": 4,
+                    "Attack": 4,
+                    "Range": 4,
+                    "Buffs": ["Shield_3", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "4": {
+                "Normal": {
+                    "Health": 3,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 3,
+                    "Buffs": ["Shield_3", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 4,
+                    "Movement": 4,
+                    "Attack": 4,
+                    "Range": 4,
+                    "Buffs": ["Shield_4", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "5": {
+                "Normal": {
+                    "Health": 4,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 4,
+                    "Buffs": ["Shield_3", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 6,
+                    "Movement": 4,
+                    "Attack": 4,
+                    "Range": 4,
+                    "Buffs": ["Shield_4", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "6": {
+                "Normal": {
+                    "Health": 4,
+                    "Movement": 3,
+                    "Attack": 4,
+                    "Range": 4,
+                    "Buffs": ["Shield_3", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 7,
+                    "Movement": 4,
+                    "Attack": 5,
+                    "Range": 5,
+                    "Buffs": ["Shield_4", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "7": {
+                "Normal": {
+                    "Health": 6,
+                    "Movement": 3,
+                    "Attack": 4,
+                    "Range": 4,
+                    "Buffs": ["Shield_3", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 9,
+                    "Movement": 4,
+                    "Attack": 5,
+                    "Range": 5,
+                    "Buffs": ["Shield_4", "Flying"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            }
+        }
+    }
+}
