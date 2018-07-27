@@ -1,0 +1,81 @@
+{
+    "Living Spirit": {
+        "Id": 0,
+        "MaxCount": 0,
+        "Type": "Living Spirit",
+        "Stats": {
+            "0": {
+                "Normal": {
+                    "Health": 2,
+                    "Movement": 2,
+                    "Attack": 2,
+                    "Range": 2,
+                    "Effects": ["Shield_1", "Flying"],
+                    "EffectImmunity": []
+                },
+                "Elite": {
+                    "Health": 3,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 3,
+                    "Effects": ["Shield_1", "Flying"],
+                    "EffectImmunity": []
+                }
+            },
+            "1": {
+                "Normal": {
+                    "Health": 2,
+                    "Movement": 2,
+                    "Attack": 2,
+                    "Range": 2,
+                    "Effects": ["Shield_2", "Flying"],
+                    "EffectImmunity": []
+                },
+                "Elite": {
+                    "Health": 3,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 3,
+                    "Effects": ["Shield_3", "Flying"],
+                    "EffectImmunity": []
+                }
+            },
+            "2": {
+                "Normal": {
+                    "Health": 2,
+                    "Movement": 3,
+                    "Attack": 2,
+                    "Range": 3,
+                    "Effects": ["Shield_2", "Flying"],
+                    "EffectImmunity": []
+                },
+                "Elite": {
+                    "Health": 3,
+                    "Movement": 4,
+                    "Attack": 3,
+                    "Range": 4,
+                    "Effects": ["Shield_3", "Flying"],
+                    "EffectImmunity": []
+                }
+            },
+            "3": {
+                "Normal": {
+                    "Health": 2,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 3,
+                    "Effects": ["Shield_2", "Flying"],
+                    "EffectImmunity": []
+                },
+                "Elite": {
+                    "Health": 3,
+                    "Movement": 4,
+                    "Attack": 4,
+                    "Range": 4,
+                    "Effects": ["Shield_3", "Flying"],
+                    "EffectImmunity": []
+                }
+            }
+        }
+    }
+}
