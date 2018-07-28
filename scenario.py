@@ -9,11 +9,12 @@ WANING = 1
 STRONG = 2
 
 class Scenario():
-    def __init__(self, num):
+    def __init__(self, num, name="", level=0):
+        self.scenName   = name
         self.scenID     = num
         self.party      = list()
         self.round      = 0
-        self.diff_level = 0
+        self.diff_level = level
         self.complete   = False
 
         # initialize elemental board to INERT
@@ -33,6 +34,7 @@ class Scenario():
         self.diff_level = value
 
     def addPlayer(self, player):
+        print("[scenario :: addPlayer] :: Adding: %s" % (player.getName()))
         try:
             assert isinstance(player, hero.Character)
             self.party.append(player)
@@ -67,6 +69,10 @@ class Scenario():
         '''All setup for scenario.'''
         print("[startScenario] Scenario: %d -- Implement Me" % (self.scenID))
 
+        # setup each players ability cards for use in scenario
+        for hero in self.party:
+            hero.scenarioPreparation()
+
     def endScenario(self, success=False):
         '''All end scenario work.'''
         print("[endScenario] Scenario: %d -- Implement Me" % (self.scenID))
@@ -92,6 +98,11 @@ class Scenario():
 
         if self.round >= 9:
             self.complete = True
+
+    def __repr__(self):
+        ret  = "Name: %s\n" % self.scenName
+        ret += "Difficulty: %d\n" % self.diff_level
+        return ret
 
 if __name__ == "__main__":
     scen = Scenario(1)

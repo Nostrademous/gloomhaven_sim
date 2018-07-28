@@ -12,10 +12,11 @@ _scenarios = {
     }
 }
 
-def loadScenario(scenarioID):
+def loadScenario(scenarioID, level=1):
     if isinstance(scenarioID, str):
         scenarioID = _scenarios[scenarioID]["Id"]
-    scen = scenario.Scenario(scenarioID)
+    scen = scenario.Scenario(scenarioID, level=level)
+    print("Loaded Scenario:\n%s" % scen)
     return scen
 
 def loadPartyIntoScenario(scenario, party):
@@ -37,9 +38,6 @@ def runScenario(scenario):
 if __name__ == "__main__":
     import global_vars as gv
     gv.init()
-
-    # load the scenario
-    scen = loadScenario("Black Barrows")
 
     # create our heroes
     hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=2, xp=70, gold=49, quest=528, checkmarks=3)
@@ -68,6 +66,9 @@ if __name__ == "__main__":
     ourParty.addMember(hero3)
     ourParty.addMember(hero4)
     ourParty.addMember(hero5)
+
+    # load the scenario
+    scen = loadScenario("Black Barrows", level=ourParty.calcAvgLevel())
 
     # load party into scenario
     loadPartyIntoScenario(scen, ourParty)

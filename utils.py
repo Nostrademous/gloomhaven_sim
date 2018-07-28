@@ -30,6 +30,8 @@ def strJson(jsonData):
         return json.dumps(jsonData.getJson(), indent=4, sort_keys=True)
 
 def pickRandom(listChoices):
+    if len(listChoices) == 0: return None
+
     # to make it really random use the cryptographically safe
     # random initialization each time
     secure_random = random.SystemRandom()

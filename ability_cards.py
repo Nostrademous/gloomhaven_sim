@@ -61,11 +61,12 @@ class HeroAbilityCardDeck():
         selection_deck = list(self._all_cards)
         for i in range(maxNum):
             card = pickRandom(selection_deck)
-            selection_deck.remove(card)
-            self.selected_cards.append(card)
-            if len(selection_deck) == 0:
-                print("[selectCardsFromFullDeck] :: Not enough cards")
-                break
+            if card:
+                selection_deck.remove(card)
+                self.selected_cards.append(card)
+                if len(selection_deck) == 0:
+                    print("[selectCardsFromFullDeck] :: Not enough cards")
+                    break
 
     def getNumRemainingCards(self):
         return len(self.selected_cards)
