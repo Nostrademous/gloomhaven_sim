@@ -26,8 +26,6 @@ import json
 import character as ch
 from utils import printJson
 
-heroDataJson = {}
-
 class Party():
     def __init__(self, name):
         self.party_json = {}
