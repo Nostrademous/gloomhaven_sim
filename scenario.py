@@ -2,6 +2,7 @@
 '''
 
 from utils import printJson
+import character as hero
 
 INERT  = 0
 WANING = 1
@@ -29,6 +30,14 @@ class Scenario():
 
     def setDifficultyLevel(self, value):
         self.diff_level = value
+
+    def addPlayer(self, player):
+        try:
+            assert isinstance(player, hero.Character)
+            self.party.append(player)
+        except AssertionError as err:
+            print("[addPlayer :: AssertionError]: %s" % err)
+            raise
 
     def calcTrapDamage(self):
         # this is the default damage amount of the trap
