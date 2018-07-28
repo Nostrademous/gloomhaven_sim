@@ -10,8 +10,11 @@ def initEffects():
         ret[eff.lower()] = False
     return ret
 
-def setEffect(effList, key, value):
-    effList[key.lower()] = value
+def setEffect(effList, key, value=True):
+    effList[key.lower()] = True
 
 def hasEffect(effList, key):
     return effList[key.lower()]
+
+def removeEffect(effList, key):
+    effList[key.lower()] = False

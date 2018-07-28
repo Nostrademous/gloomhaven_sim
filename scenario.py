@@ -12,8 +12,10 @@ class Scenario():
         self.id = num
         self.party = list()
         self.round = 0
-        self._reset_elements()
         self.diff_level = 0
+
+        # initialize elemental board to INERT
+        self._reset_elements()
 
     def _reset_elements(self):
         self.elements = {
@@ -79,7 +81,7 @@ class Scenario():
         self.round += 1
 
 if __name__ == "__main__":
-    scen = Scenario(0)
+    scen = Scenario(1)
     scen.endTurn()
 
     scen.invokeElement('air')

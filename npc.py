@@ -17,6 +17,12 @@ class NPC(Unit):
         self.immunities = list()
         self.causes     = list()
 
+    def setHealth(self, value, numPlayers=1):
+        if self.isBoss():
+            super().setHealth(value * numPlayers)
+        else:
+            super().setHealth(vale)
+
     def takeDamage(self, amount, effList=[]):
         self.curr_hp = max(self.curr_hp - amount, 0)
         if self.curr_hp > 0:
