@@ -1,6 +1,8 @@
 '''
 '''
 
+from multiprocessing import Process
+
 from utils import printJson
 import character as hero
 
@@ -80,6 +82,19 @@ class Scenario():
     def prepareTurn(self):
         '''All preparation of turn work.'''
         print("[Scenario %d] Prepare Turn :: Round: %d" % (self.scenID, self.round))
+
+        # parallelize hero ability selection
+        parallel_funcs = list()
+        for hero in self.party:
+            parallel_funcs.append(Process(target=hero.selectAction()))
+
+        # start them
+        for p in parallel_funcs:
+            p.start()
+
+        # join them
+        for p in parallel_funcs:
+            p.join()
 
     def executeTurn(self):
         '''All turn execution work.'''

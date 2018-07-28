@@ -80,9 +80,15 @@ class Character(Unit):
     def scenarioPreparation(self):
         self.setAbilityCardDeck(HeroAbilityCardDeck(self.type, self.level))
         self.ability_deck.selectCardsFromFullDeck(self.deck_size)
-        
+
+        # adjust attack modifier deck for perks
+        self.adjustAMD()
+
+    def adjustAMD(self):
+        print("[%s][adjustAMD] for perks... - IMPLEMENT" % (self.getName()))
+
     def selectAction(self):
-        self.round_action = pickRandom(_valid_actions)
+        self.round_action = pickRandom(self._valid_actions)
 
     def endTurn(self):
         # call base class to remove one-round effects
