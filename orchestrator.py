@@ -14,7 +14,7 @@ _scenarios = {
 
 def loadScenario(scenarioID):
     if isinstance(scenarioID, str):
-        scenarioID = _scenarios[scenarioID]
+        scenarioID = _scenarios[scenarioID]["Id"]
     scen = scenario.Scenario(scenarioID)
     return scen
 
@@ -23,9 +23,16 @@ def loadPartyIntoScenario(scenario, party):
     for hero in party.members:
         scenario.addPlayer(hero)
 
-def runScenario():
+def runScenario(scenario):
     print("[runScenarion] - IMPLEMENT")
+    # start the scenario
+    scenario.startScenario()
 
+    # start the round while loop
+    while not scenario.complete:
+        scenario.prepareTurn()
+        scenario.executeTurn()
+        scenario.endTurn()
 
 if __name__ == "__main__":
     import global_vars as gv
@@ -53,7 +60,7 @@ if __name__ == "__main__":
     hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=2, quest=526, gold=33, xp=59, checkmarks=2)
     hero5.addItem('Leather Armor')
     hero5.addItem('Minor Stamina Potion')
-    
+
     # create our party
     ourParty = party.Party("TheBrotherhood")
     ourParty.addMember(hero1)
@@ -64,3 +71,9 @@ if __name__ == "__main__":
 
     # load party into scenario
     loadPartyIntoScenario(scen, ourParty)
+
+    # run scenario
+    runScenario(scen)
+
+    # end scenario
+    scen.endScenario(success=True)

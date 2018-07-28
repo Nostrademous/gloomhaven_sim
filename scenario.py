@@ -10,10 +10,11 @@ STRONG = 2
 
 class Scenario():
     def __init__(self, num):
-        self.id = num
-        self.party = list()
-        self.round = 0
+        self.scenID     = num
+        self.party      = list()
+        self.round      = 0
         self.diff_level = 0
+        self.complete   = False
 
         # initialize elemental board to INERT
         self._reset_elements()
@@ -62,24 +63,24 @@ class Scenario():
             print("[consumeElement :: AssertionError] %s" % err)
             raise
 
-    def startScenarion(self):
+    def startScenario(self):
         '''All setup for scenario.'''
-        print("[startScenario] Scenario: %d -- Implement Me" % (self.id))
+        print("[startScenario] Scenario: %d -- Implement Me" % (self.scenID))
 
     def endScenario(self, success=False):
         '''All end scenario work.'''
-        print("[endScenario] Scenario: %d -- Implement Me" % (self.id))
+        print("[endScenario] Scenario: %d -- Implement Me" % (self.scenID))
 
     def prepareTurn(self):
         '''All preparation of turn work.'''
-        print("[Scenario %d] Prepare Turn :: Round: %d" % (self.id, self.round))
+        print("[Scenario %d] Prepare Turn :: Round: %d" % (self.scenID, self.round))
 
     def executeTurn(self):
         '''All turn execution work.'''
-        print("[Scenario %d] Execute Turn :: Round: %d" % (self.id, self.round))
+        print("[Scenario %d] Execute Turn :: Round: %d" % (self.scenID, self.round))
 
     def endTurn(self):
-        print("[Scenario %d] End Turn :: Round: %d" % (self.id, self.round))
+        print("[Scenario %d] End Turn :: Round: %d" % (self.scenID, self.round))
         # update elements
         for k in self.elements.keys():
             if self.elements[k] > INERT:
@@ -88,6 +89,9 @@ class Scenario():
 
         # increment round counter
         self.round += 1
+
+        if self.round >= 9:
+            self.complete = True
 
 if __name__ == "__main__":
     scen = Scenario(1)
