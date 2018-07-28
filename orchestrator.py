@@ -15,12 +15,16 @@ _scenarios = {
 def loadScenario(scenarioID):
     if isinstance(scenarioID, str):
         scenarioID = _scenarios[scenarioID]
-    return scenario.Scenario(scenarioID)
+    scen = scenario.Scenario(scenarioID)
+    return scen
 
 def loadPartyIntoScenario(scenario, party):
     print("[loadPartyIntoScenario] - IMPLEMENT")
     for hero in party.members:
         scenario.addPlayer(hero)
+
+def runScenario():
+    print("[runScenarion] - IMPLEMENT")
 
 
 if __name__ == "__main__":
