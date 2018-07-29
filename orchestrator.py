@@ -13,10 +13,17 @@ _scenarios = {
 }
 
 def loadScenario(scenarioID, level=1):
+    scenName = ''
     if isinstance(scenarioID, str):
+        scenName = scenarioID
         scenarioID = _scenarios[scenarioID]["Id"]
-    scen = scenario.Scenario(scenarioID, level=level)
-    print("Loaded Scenario:\n%s" % scen)
+    elif isinstance(scenarioID, int):
+        for s in _scenarios:
+            if _scenarios[s]["Id"] == scenarioID:
+                scenName = scen
+                break
+    scen = scenario.Scenario(scenarioID, name=scenName, level=level)
+    print("<Loaded Scenario>\n%s" % scen)
     return scen
 
 def loadPartyIntoScenario(scenario, party):

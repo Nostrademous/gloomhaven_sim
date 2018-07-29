@@ -76,6 +76,7 @@ class Character(Unit):
         self.effects        = initEffects()
         self.items          = list()
         self.amd            = amd.AttackModifierDeck(isPlayer=True)
+        self.long_rest      = False
 
     def scenarioPreparation(self):
         self.setAbilityCardDeck(HeroAbilityCardDeck(self.type, self.level))
@@ -85,14 +86,27 @@ class Character(Unit):
         self.adjustAMD()
 
     def adjustAMD(self):
+        """ Adjustment are sometimes required for the following:
+            * Items (some items add -1 cards and others)
+            * Perks
+            * Scenario Specific (some add curses, etc)
+        """
         print("[%s][adjustAMD] for perks... - IMPLEMENT" % (self.getName()))
 
     def selectAction(self):
         self.round_action = pickRandom(self._valid_actions)
+        if self.round_action == 'play_cards':
+            print("[%s][selectAction] implement ability card selection !!!" % (self.getName()))
+        else:
+            self.long_rest = True
 
     def endTurn(self):
         # call base class to remove one-round effects
         super().endTurn()
+
+        if self.long_rest:
+            self.heal(2)
+            self.long_rest = False
 
     def isExhausted(self):
         return self.exhausted
