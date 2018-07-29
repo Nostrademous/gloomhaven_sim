@@ -26,6 +26,9 @@ class AbilityCard():
     def addBottom(self, dictBottom):
         self.bottom = dictBottom
 
+    def getInitiative(self):
+        return self.initiative
+
     def __repr__(self):
         ret  = "[%d] %s\nLevel: %d\nInitiative: %d\n" % (self.id, self.name, self.level, self.initiative)
         ret += "Top:\n%s\n" % (strJson(self.top))
@@ -67,6 +70,19 @@ class HeroAbilityCardDeck():
                 if len(selection_deck) == 0:
                     print("[selectCardsFromFullDeck] :: Not enough cards")
                     break
+
+    def selectRoundCards(self):
+        self.in_hand_cards = list()
+        # TODO - random for now, but ultimately user/AI selected
+        for i in range(2):
+            card = pickRandom(self.selected_cards)
+            if card:
+                self.selected_cards.remove(card)
+                self.in_hand_cards.append(card)
+
+        # Pick Top Card for Initiative
+        # TODO - random for now, but ultimately user/AI selected
+        return  pickRandom([0,1])
 
     def getNumRemainingCards(self):
         return len(self.selected_cards)

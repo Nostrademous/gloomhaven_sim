@@ -77,6 +77,7 @@ class Character(Unit):
         self.items          = list()
         self.amd            = amd.AttackModifierDeck(isPlayer=True)
         self.long_rest      = False
+        self.round_init     = 99
 
     def scenarioPreparation(self):
         self.setAbilityCardDeck(HeroAbilityCardDeck(self.type, self.level))
@@ -94,9 +95,24 @@ class Character(Unit):
         print("[%s][adjustAMD] for perks... - IMPLEMENT" % (self.getName()))
 
     def selectAction(self):
-        self.round_action = pickRandom(self._valid_actions)
+        if self.isExhausted(): return
+
+        if self.ability_deck.getNumRemainingCards() < 2:
+            self.round_action = "long_rest"
+        else:
+            self.round_action = pickRandom(self._valid_actions)
+
         if self.round_action == 'play_cards':
-            print("[%s][selectAction] implement ability card selection !!!" % (self.getName()))
+            topCard = self.ability_deck.selectRoundCards()
+            play_cards = self.ability_deck.in_hand_cards
+            self.round_init = play_cards[topCard].getInitiative()
+            print("[%s] Initiative: %d" % (self.getName(), self.round_init))
+            if topCard == 0:
+                print(play_cards[0])
+                print(play_cards[1])
+            else:
+                print(play_cards[1])
+                print(play_cards[0])
         else:
             self.long_rest = True
 
@@ -107,6 +123,9 @@ class Character(Unit):
         if self.long_rest:
             self.heal(2)
             self.long_rest = False
+            if len(self.ability_deck) > 0:
+                lossCard = self.ability_deck.pickRandomDiscardedCardForLoss()
+                self.ability_deck.recoverDiscardedCards(lossCard)
 
     def isExhausted(self):
         return self.exhausted
