@@ -100,6 +100,12 @@ class Scenario():
         '''All turn execution work.'''
         print("[Scenario %d] Execute Turn :: Round: %d" % (self.scenID, self.round))
 
+        # sort all player and npc actions in initiative order
+
+        # execute each unit's actions (including spawns)
+
+            # end turn for each unit
+
     def endTurn(self):
         print("[Scenario %d] End Turn :: Round: %d" % (self.scenID, self.round))
         # update elements
@@ -108,9 +114,12 @@ class Scenario():
                 self.elements[k] -= 1
         #printJson(self.elements)
 
+        # check scenario completion condition
+        # TODO
+
         # increment round counter
         self.round += 1
-
+        # dummy catch to exist while loop for now
         if self.round >= 9:
             self.complete = True
 

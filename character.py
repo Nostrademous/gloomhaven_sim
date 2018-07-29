@@ -115,6 +115,7 @@ class Character(Unit):
                 print(play_cards[0])
         else:
             self.long_rest = True
+            self.round_init = 99
 
     def endTurn(self):
         # call base class to remove one-round effects
