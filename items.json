@@ -1,5 +1,18 @@
 {
     "1": {
+        "Name": "Boots of Striding",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "Legs",
+        "Buff": {
+            "Type": "Movement",
+            "Count": 1,
+            "Buff": "+2",
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 1
+    },
+    "3": {
         "Name": "Hide Armor",
         "MaxCount": 2,
         "Cost": 10,
@@ -13,6 +26,7 @@
             "Count": 2,
             "Buff": "Shield_1",
             "Trigger": "AttackDamage"
-        }
+        },
+        "ProsperityLevel": 1
     }
 }

@@ -2,7 +2,7 @@
 '''
 
 _item_slots = list([
-    "HEAD", "BODY", "HAND", "HANDS", "FEET", "POTION"
+    "HEAD", "BODY", "HAND", "HANDS", "LEGS", "SMALL ITEM"
 ])
 
 class Item():
