@@ -1,7 +1,20 @@
 {
     "1": {
-        "Name": "",
+        "Name": "Hide Armor",
         "MaxCount": 2,
-        "Cost": 10000
+        "Cost": 10,
+        "Slot": "Body",
+        "AMDEffect": {
+            "1": {
+                "Value": -1,
+                "Count": 2
+            }
+        },
+        "Buff": {
+            "Type": "NextFew",
+            "Count": 2,
+            "Buff": "Shield_1",
+            "Trigger": "AttackDamage"
+        }
     }
 }

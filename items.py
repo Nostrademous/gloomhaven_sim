@@ -1,35 +1,18 @@
 '''
 '''
 
-SLOT_HEAD   = "1"
-SLOT_BODY   = "2"
-SLOT_HAND   = "3"
-SLOT_HANDS  = "4"
-SLOT_FEET   = "5"
-SLOT_POTION = "6"
-
-_item_slots = {
-    SLOT_HEAD: "HEAD",
-    SLOT_BODY: "BODY",
-    SLOT_HAND: "HAND",
-    SLOT_HANDS: "HANDS",
-    SLOT_FEET: "FEET",
-    SLOT_POTION: "POTION"
-}
-
-def slotStr(slotID):
-    if str(slotID) in _item_slots.keys():
-        return _item_slots[str(slotID)]
-    else:
-        raise Exception('Unknown slotID Name: %s' % slotID)
+_item_slots = list([
+    "HEAD", "BODY", "HAND", "HANDS", "FEET", "POTION"
+])
 
 class Item():
-    def __init__(self, id, name, slot, cost=0, maxUses=1):
+    def __init__(self, id, name, slot, maxCnt, cost=0, maxUses=1):
         try:
-            assert slot in _item_slots.keys()
+            assert slot in _item_slots
             self.id         = id
             self.name       = name
             self.slot       = slot
+            self.maxCount   = maxCnt
             self.used       = False
             self.useCount   = 0
             self.maxUses    = maxUses
@@ -37,6 +20,7 @@ class Item():
             self.cost       = cost
         except AssertionError as err:
             print("[Item __init__ :: AssertionError] %s" % (err))
+            print("SLOT: %s" % (slot))
             raise
 
     def setDesc(self, text):
@@ -59,10 +43,18 @@ class Item():
 
     def __repr__(self):
         ret  = "[Item %d] %s\n" % (self.id, self.name)
-        ret += "Slot: %s\n" % (slotStr(self.slot))
+        ret += "Slot: %s\n" % (self.slot)
+        ret += "Max Available: %d\n" % (self.maxCount)
+        ret += "Cost: %d gold\n" % (self.cost)
         ret += "%d uses before tapped\n" % self.maxUses
         return ret
 
 if __name__ == "__main__":
-    item = Item(0, 'Potion', SLOT_POTION)
-    print(item)
+    import global_vars as gv
+    gv.init()
+    
+    for item in gv.itemDataJson:
+        itemData = gv.itemDataJson[item]
+        item_obj = Item(int(item), itemData['Name'], itemData['Slot'].upper(), itemData['MaxCount'],
+                        cost=itemData['Cost'], maxUses=itemData['Buff']['Count'])
+        print(item_obj)
