@@ -20,6 +20,7 @@ class Item():
             self.cost       = cost
             self.amdEffect  = None
             self.buff       = None
+            self.consumed   = False
         except AssertionError as err:
             print("[Item __init__ :: AssertionError] %s" % (err))
             print("SLOT: %s" % (slot))
@@ -46,6 +47,9 @@ class Item():
     def setBuff(self, buff):
         self.buff = buff
 
+    def setConsumable(self, value):
+        self.consumed = value
+
     def setAMDEffect(self, effect):
         self.amdEffect = effect
 
@@ -60,10 +64,16 @@ class Item():
         ret += "Cost: %d gold\n" % (self.cost)
         if self.buff:
             ret += "Provides following buff:\n"
-            ret += "    Buff: %s\n" % (self.buff["Buff"])
+            if self.buff["Type"] == "Debuff":
+                ret += "    Debuff Enemy: %s\n" % (self.buff["Debuff"])
+            else:
+                ret += "    Buff: %s\n" % (self.buff["Buff"])
             if "Trigger" in self.buff:
                 ret += "    Trigger: %s\n" % (self.buff["Trigger"])
-        ret += "%d uses before tapped\n" % self.maxUses
+        if self.consumed:
+            ret += "%d uses before consumed\n" % self.maxUses
+        else:
+            ret += "%d uses before tapped\n" % self.maxUses
         if self.affectsAMD():
             ret += "Affects Attack Modifier Deck\n"
             ret += "    Add %d %d cards\n" % (self.amdEffect['Count'], self.amdEffect['Value'])
@@ -72,7 +82,7 @@ class Item():
 if __name__ == "__main__":
     import global_vars as gv
     gv.init()
-    
+
     for item in gv.itemDataJson:
         itemData = gv.itemDataJson[item]
         item_obj = Item(int(item), itemData['Name'], itemData['Slot'].upper(), itemData['MaxCount'],
@@ -81,4 +91,6 @@ if __name__ == "__main__":
             item_obj.setAMDEffect(itemData["AMDEffect"])
         if "Buff" in itemData:
             item_obj.setBuff(itemData["Buff"])
+        if "Consumed" in itemData:
+            item_obj.setConsumable(itemData["Consumed"])
         print(item_obj)
