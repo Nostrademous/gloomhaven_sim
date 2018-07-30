@@ -18,6 +18,8 @@ class Item():
             self.maxUses    = maxUses
             self.desc       = ""
             self.cost       = cost
+            self.amdEffect  = None
+            self.buff       = None
         except AssertionError as err:
             print("[Item __init__ :: AssertionError] %s" % (err))
             print("SLOT: %s" % (slot))
@@ -41,12 +43,30 @@ class Item():
     def sellCost(self):
         return int(self.cost/2.)
 
+    def setBuff(self, buff):
+        self.buff = buff
+
+    def setAMDEffect(self, effect):
+        self.amdEffect = effect
+
+    def affectsAMD(self):
+        if self.amdEffect: return True
+        return False
+
     def __repr__(self):
         ret  = "[Item %d] %s\n" % (self.id, self.name)
         ret += "Slot: %s\n" % (self.slot)
         ret += "Max Available: %d\n" % (self.maxCount)
         ret += "Cost: %d gold\n" % (self.cost)
+        if self.buff:
+            ret += "Provides following buff:\n"
+            ret += "    Buff: %s\n" % (self.buff["Buff"])
+            if "Trigger" in self.buff:
+                ret += "    Trigger: %s\n" % (self.buff["Trigger"])
         ret += "%d uses before tapped\n" % self.maxUses
+        if self.affectsAMD():
+            ret += "Affects Attack Modifier Deck\n"
+            ret += "    Add %d %d cards\n" % (self.amdEffect['Count'], self.amdEffect['Value'])
         return ret
 
 if __name__ == "__main__":
@@ -57,4 +77,8 @@ if __name__ == "__main__":
         itemData = gv.itemDataJson[item]
         item_obj = Item(int(item), itemData['Name'], itemData['Slot'].upper(), itemData['MaxCount'],
                         cost=itemData['Cost'], maxUses=itemData['Buff']['Count'])
+        if "AMDEffect" in itemData:
+            item_obj.setAMDEffect(itemData["AMDEffect"])
+        if "Buff" in itemData:
+            item_obj.setBuff(itemData["Buff"])
         print(item_obj)

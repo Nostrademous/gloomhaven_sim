@@ -5,10 +5,8 @@
         "Cost": 10,
         "Slot": "Body",
         "AMDEffect": {
-            "1": {
-                "Value": -1,
-                "Count": 2
-            }
+            "Value": -1,
+            "Count": 2
         },
         "Buff": {
             "Type": "NextFew",
