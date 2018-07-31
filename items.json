@@ -12,6 +12,19 @@
         },
         "ProsperityLevel": 1
     },
+    "2": {
+        "Name": "Winged Shoes",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "Legs",
+        "Buff": {
+            "Type": "MovementEffect",
+            "Count": 1,
+            "Buff": "Jump",
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 1
+    },
     "3": {
         "Name": "Hide Armor",
         "MaxCount": 2,
@@ -27,6 +40,33 @@
             "Buff": "Shield_1",
             "Trigger": "AttackDamage"
         },
+        "ProsperityLevel": 1
+    },
+    "4": {
+        "Name": "Leather Armor",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "Debuff",
+            "Count": 1,
+            "Debuff": "Disadvantage",
+            "Trigger": "Attack"
+        },
+        "ProsperityLevel": 1
+    },
+    "5": {
+        "Name": "Cloak of Invisibility",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "RoundEffect",
+            "Count": 1,
+            "Buff": "Invisible",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
         "ProsperityLevel": 1
     }
 }
