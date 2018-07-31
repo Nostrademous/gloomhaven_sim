@@ -2,13 +2,13 @@
 '''
 
 _item_slots = list([
-    "HEAD", "BODY", "HAND", "HANDS", "LEGS", "SMALL ITEM"
+    "HEAD", "BODY", "ONE_HAND", "TWO_HANDS", "LEGS", "SMALL_ITEM"
 ])
 
 class Item():
     def __init__(self, id, name, slot, maxCnt, cost=0, maxUses=1):
         try:
-            assert slot in _item_slots
+            assert slot.upper() in _item_slots
             self.id         = id
             self.name       = name
             self.slot       = slot
@@ -57,6 +57,14 @@ class Item():
         if self.amdEffect: return True
         return False
 
+    def getBuffType(self):
+        return self.buff['Type']
+
+    def grantsSummon(self):
+        if self.getBuffType().upper() == "SUMMON":
+            return True
+        return False
+
     def __repr__(self):
         ret  = "[Item %d] %s\n" % (self.id, self.name)
         ret += "Slot: %s\n" % (self.slot)
@@ -67,7 +75,11 @@ class Item():
             if self.buff["Type"] == "Debuff":
                 ret += "    Debuff Enemy: %s\n" % (self.buff["Debuff"])
             else:
-                ret += "    Buff: %s\n" % (self.buff["Buff"])
+                if self.grantsSummon():
+                    ret += "    Summon: %s {HP: %d, Move: %d, Att: %d, Rng: %d}\n" % (self.buff["Name"],
+                            self.buff["Health"], self.buff["Move"], self.buff["Attack"], self.buff["Range"])
+                else:
+                    ret += "    Buff: %s\n" % (self.buff["Buff"])
             if "Trigger" in self.buff:
                 ret += "    Trigger: %s\n" % (self.buff["Trigger"])
         if self.consumed:

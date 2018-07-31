@@ -68,5 +68,145 @@
         },
         "Consumed": 1,
         "ProsperityLevel": 1
+    },
+    "6": {
+        "Name": "Eagle-Eye Goggles",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "Head",
+        "Buff": {
+            "Type": "AttackBuff",
+            "Count": 1,
+            "Buff": "Advantage",
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 1
+    },
+    "7": {
+        "Name": "Iron Helmet",
+        "MaxCount": 2,
+        "Cost": 10,
+        "Slot": "Head",
+        "Buff": {
+            "Type": "Debuff",
+            "Count": -1,
+            "Debuff": "Replace2Xwith0",
+            "Trigger": "Attack"
+        },
+        "ProsperityLevel": 1
+    },
+    "8": {
+        "Name": "Heater Shield",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "DefenseBuff",
+            "Count": 1,
+            "Buff": "Shield_1",
+            "Trigger": "Attack"
+        },
+        "ProsperityLevel": 1
+    },
+    "9": {
+        "Name": "Piercing Bow",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "RangedAttackBuff",
+            "Count": 1,
+            "Buff": "Ignore_Shields",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 1
+    },
+    "10": {
+        "Name": "War Hammer",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "MeleeAttackBuff",
+            "Count": 1,
+            "Buff": "Add_Stun",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 1
+    },
+    "11": {
+        "Name": "Poison Dagger",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "MeleeAttackBuff",
+            "Count": 1,
+            "Buff": "Add_Poison",
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 1
+    },
+    "12": {
+        "Name": "Minor Healing Potion",
+        "MaxCount": 4,
+        "Cost": 10,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "Heal",
+            "Count": 1,
+            "Buff": "3",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 1
+    },
+    "13": {
+        "Name": "Minor Stamina Potion",
+        "MaxCount": 4,
+        "Cost": 10,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "RecoverCards",
+            "Count": 1,
+            "Buff": "Discards_2",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 1
+    },
+    "14": {
+        "Name": "Minor Power Potion",
+        "MaxCount": 4,
+        "Cost": 10,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "AttackBuff",
+            "Count": 1,
+            "Buff": "Attack_1",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 1
+    },
+    "123": {
+        "Name": "Ring of Skulls",
+        "MaxCount": 2,
+        "Cost": 50,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "Summon",
+            "Name": "Summon Skeleton",
+            "Health": 3,
+            "Move": 2,
+            "Attack": 2,
+            "Range": 0,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 1
     }
 }
