@@ -33,9 +33,10 @@ class Party():
         self.members = list()
         self.valid_types = list(['brute', 'scoundrel', 'cragheart', 'tinkerer', 'spellweaver', 'mindthief'])
         self.retired_types = list()
-        self.party_json['UnlockedCityQuests'] = list()
-        self.party_json['CompletedCityQuests'] = list()
-        self.party_json['CompletedRoadQuests'] = list()
+        self.party_json['UnlockedCityEvents'] = list()
+        self.party_json['CompletedCityEvents'] = list()
+        self.party_json['UnlockedRoadEvents'] = list()
+        self.party_json['CompletedRoadEvents'] = list()
         self.party_json['ScenariosCompleted'] = list()
         self.party_json['ScenariosAvailable'] = list()
         self.party_json['TreasuresLooted'] = list()
@@ -73,29 +74,57 @@ class Party():
             print("[addTreasureLooted :: AssertionError] %s" % (err))
             raise
 
-    def completeRoadQuest(self, value):
+    def completeRoadEvent(self, value):
         try:
-            assert value not in self.party_json['CompletedRoadQuests']
-            self.party_json['CompletedRoadQuests'].append(value)
+            assert value not in self.party_json['CompletedRoadEvents']
+            self.party_json['CompletedRoadEvents'].append(value)
         except AssertionError as err:
-            print('[completeRoadQuest :: AssertionError] %s' % (err))
+            print('[completeRoadEvent:: AssertionError] %s' % (err))
             raise
 
-    def completeCityQuest(self, value):
+    def completeCityEvent(self, value):
         try:
-            assert value not in self.party_json['CompletedCityQuests']
-            self.party_json['CompletedCityQuests'].append(value)
+            assert value not in self.party_json['CompletedCityEvents']
+            self.party_json['CompletedCityEvents'].append(value)
         except AssertionError as err:
-            print('[completeCityQuest :: AssertionError] %s' % (err))
+            print('[completeCityEvent:: AssertionError] %s' % (err))
             raise
 
-    def unlockCityQuest(self, value):
+    def unlockCityEvent(self, value):
         try:
-            assert value not in self.party_json['UnlockedCityQuests']
-            self.party_json['UnlockedCityQuests'].append(value)
+            assert value not in self.party_json['UnlockedCityEvents']
+            self.party_json['UnlockedCityEvents'].append(value)
         except AssertionError as err:
-            print('[unlockCityQuest :: AssertionError] %s' % (err))
+            print('[unlockCityEvent :: AssertionError] %s' % (err))
             raise
+
+    def unlockRoadEvent(self, value):
+        try:
+            assert value not in self.party_json['UnlockedRoadEvents']
+            self.party_json['UnlockedRoadEvents'].append(value)
+        except AssertionError as err:
+            print('[unlockRoadEvent :: AssertionError] %s' % (err))
+            raise
+
+    def drawRandomCityEvent(self, maxID=30):
+        pool = [i for i in range(1,maxID)]
+        for unlocked in self.party_json['UnlockedCityEvents']:
+            pool.append(unlocked)
+        for done in self.party_json['CompletedCityEvents']:
+            pool.remove(done)
+        drawn = pickRandom(pool)
+        self.completeCityEvent(drawn)
+        return drawn
+
+    def drawRandomRoadEvent(self, maxID=30):
+        pool = [i for i in range(1,maxID)]
+        for unlocked in self.party_json['UnlockedRoadEvents']:
+            pool.append(unlocked)
+        for done in self.party_json['CompletedRoadEvents']:
+            pool.remove(done)
+        drawn = pickRandom(pool)
+        self.completeRoadEvent(drawn)
+        return drawn
 
     def addValidType(self, extraType):
         extraType = extraType.lower()
@@ -166,15 +195,15 @@ if __name__ == "__main__":
     party.addPartyAchievement('First Steps')
     party.addPartyAchievement("Jekserah's Plans")
     
-    party.completeCityQuest(4)
-    party.completeCityQuest(18)
-    party.completeCityQuest(15)
+    party.completeCityEvent(4)
+    party.completeCityEvent(18)
+    party.completeCityEvent(15)
 
-    party.unlockCityQuest(73)
+    party.unlockCityEvent(73)
 
-    party.completeRoadQuest(7)
-    party.completeRoadQuest(25)
-    party.completeRoadQuest(11)
+    party.completeRoadEvent(7)
+    party.completeRoadEvent(11)
+    party.completeRoadEvent(25)
 
     party.addScenarioCompleted(1)
     party.addScenarioCompleted(2)
