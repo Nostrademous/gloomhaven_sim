@@ -48,6 +48,9 @@ class GloomhavenRoom():
         ret  = "Room: %s\n" % (self.name)
         return ret
 
+    def getName(self):
+        return self.name
+
     def getTile(self, row, col):
         for tile in self.tiles:
             if tile.row_id == row and tile.col_id == col:
