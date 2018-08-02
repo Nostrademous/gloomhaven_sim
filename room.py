@@ -19,6 +19,13 @@ class GloomhavenTile():
 
         self.doorType = DOOR_TYPE_NONE
 
+        # tile extra layers
+        self.hasObstacle    = None
+        self.hasTrap        = None
+        self.hasHazard      = None
+        self.hasTreasure    = None
+        self.hasCoin        = None
+
     def __repr__(self):
         ret = "{%d,%d}" % (self.row_id, self.col_id)
         return ret
@@ -35,6 +42,9 @@ class GloomhavenTile():
 
     def isDoorOpen(self):
         return self.doorType in [DOOR_TYPE_OPEN, DOOR_TYPE_PRESSURE_OPEN]
+
+    def addObstacle(self, obstacle):
+        self.hasObstacle = obstacle
 
     def findNeighborEdgeId(self, tile, orient):
         row_diff = tile.row_id - self.row_id
@@ -53,7 +63,22 @@ class GloomhavenTile():
             elif col_diff > 0 and row_diff < 0:
                 return 5
             else:
-                raise Exception("findNeighborEdgeId", "{%d,%d}" % (row_diff, col_diff))
+                raise Exception("POINTY :: findNeighborEdgeId", "{%d,%d}" % (row_diff, col_diff))
+        elif orient == ORIENT_FLAT:
+            if row_diff < 0 and col_diff == 0:
+                return 5
+            elif row_diff < 0 and col_diff < 0:
+                return 4
+            elif row_diff < 0 and col_diff > 0:
+                return 0
+            elif row_diff > 0 and col_diff == 0:
+                return 2
+            elif row_diff > 0 and col_diff > 0:
+                return 1
+            elif row_diff > 0 and col_diff < 0:
+                return 3
+            else:
+                raise Exception("FLAT :: findNeighborEdgeId", "{%d,%d}" % (row_diff, col_diff))
 
     def addNeighbor(self, sideID, tile, bidir=True):
         self.neighbors[sideID] = tile
@@ -69,10 +94,26 @@ class GloomhavenTile():
         ret += "]\n"
         print(ret)
 
+class Object():
+    def __init__(self, name, tiles=[]):
+        self.name       = name
+        self.tiles      = tiles
+        self.destroyed  = False
+
+    def __repr__(self):
+        ret  = "[Object]: %s\n" % (self.name)
+        ret += "[Tile(s)]: %s\n" % (self.tiles)
+        return ret
+
+    def getTiles(self):
+        return self.tiles
+
+    def destroy(self):
+        self.destroyed = True
+
 ORIENT_FLAT   = 1 # in hexagon flat edges are North & South
 ORIENT_POINTY = 2 # in hexagon flat edges are West & East
 class GloomhavenRoom():
-
     def __init__(self, name, orientation=ORIENT_FLAT, max_rows=1, max_cols=1, tilePattern=[]):
         self.name           = name
         self.orient         = orientation
@@ -101,6 +142,14 @@ class GloomhavenRoom():
             if tile.row_id == row and tile.col_id == col:
                 return tile
         return None
+
+    def addObstacle(self, obstacle):
+        for loc in obstacle.getTiles():
+            tile = self.getTile(loc[0], loc[1])
+            if tile:
+                tile.addObstacle(obstacle)
+            else:
+                raise Exception("[GloomhavenRoom]", "No Tile at Coord {%d,%d}" % (loc[0], loc[1]))
 
     def printRoom(self):
         print("ROOM: %s [%d x %d]" % (self.name.upper(), self.max_r, self.max_c))
