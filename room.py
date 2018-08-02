@@ -1,11 +1,44 @@
 """
 """
 
+# DOOR TYPES
 DOOR_TYPE_NONE              = 0
 DOOR_TYPE_CLOSED            = 1
 DOOR_TYPE_OPEN              = 2
 DOOR_TYPE_PRESSURE_CLOSED   = 3
 DOOR_TYPE_PRESSURE_OPEN     = 4
+
+# OBJECT TYPES
+OBJ_OBSTACLE    = 0
+OBJ_TRAP        = 1
+OBJ_HAZARD      = 2
+OBJ_TREASURE    = 3
+
+_obj_type_names = {
+    "0": "Obstacle",
+    "1": "Trap",
+    "2": "Hazard",
+    "3": "Treasure"
+}
+
+class GloomhavenObject():
+    def __init__(self, name, obj_type, tiles=[]):
+        self.name       = name
+        self.type       = obj_type
+        self.tiles      = tiles
+        self.destroyed  = False
+
+    def __repr__(self):
+        ret  = "[Object]: %s, [Type]: %s\n" % (self.name, _obj_type_names[str(self.type)])
+        ret += "[Tile(s)]: %s\n" % (self.tiles)
+        return ret
+
+    def getTiles(self):
+        return self.tiles
+
+    def destroy(self):
+        self.destroyed = True
+
 
 class GloomhavenTile():
     def __init__(self, uuID, sides=6):
@@ -20,11 +53,11 @@ class GloomhavenTile():
         self.doorType = DOOR_TYPE_NONE
 
         # tile extra layers
-        self.hasObstacle    = None
-        self.hasTrap        = None
-        self.hasHazard      = None
-        self.hasTreasure    = None
-        self.hasCoin        = None
+        self.obstacle  = None
+        self.trap      = None
+        self.hazard    = None
+        self.treasure  = None
+        self.coins     = 0
 
     def __repr__(self):
         ret = "{%d,%d}" % (self.row_id, self.col_id)
@@ -44,7 +77,19 @@ class GloomhavenTile():
         return self.doorType in [DOOR_TYPE_OPEN, DOOR_TYPE_PRESSURE_OPEN]
 
     def addObstacle(self, obstacle):
-        self.hasObstacle = obstacle
+        self.obstacle = obstacle
+
+    def addTrap(self, trap):
+        self.trap = trap
+
+    def addHazard(self, hazard):
+        self.hazard = hazard
+
+    def addTreasure(self, treasure):
+        self.treasure = treasure
+
+    def addCoin(self, amn=1):
+        self.coins += amn
 
     def findNeighborEdgeId(self, tile, orient):
         row_diff = tile.row_id - self.row_id
@@ -94,22 +139,6 @@ class GloomhavenTile():
         ret += "]\n"
         print(ret)
 
-class Object():
-    def __init__(self, name, tiles=[]):
-        self.name       = name
-        self.tiles      = tiles
-        self.destroyed  = False
-
-    def __repr__(self):
-        ret  = "[Object]: %s\n" % (self.name)
-        ret += "[Tile(s)]: %s\n" % (self.tiles)
-        return ret
-
-    def getTiles(self):
-        return self.tiles
-
-    def destroy(self):
-        self.destroyed = True
 
 ORIENT_FLAT   = 1 # in hexagon flat edges are North & South
 ORIENT_POINTY = 2 # in hexagon flat edges are West & East

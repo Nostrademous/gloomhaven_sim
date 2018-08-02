@@ -61,7 +61,8 @@ if __name__ == "__main__":
     room.G1b.printRoom()
 
     # create objects
-    table_1 = room.Object("Table", [(1,1),(1,3)])
-    table_2 = room.Object("Table", [(1,7),(1,9)])
+    table_1 = room.GloomhavenObject("Table", room.OBJ_OBSTACLE,[(1,1),(1,3)])
+    table_2 = room.GloomhavenObject("Table", room.OBJ_OBSTACLE,[(1,7),(1,9)])
     room.I1b.addObstacle(table_1)
     room.I1b.addObstacle(table_2)
+    print(table_1)
