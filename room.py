@@ -13,12 +13,14 @@ OBJ_OBSTACLE    = 0
 OBJ_TRAP        = 1
 OBJ_HAZARD      = 2
 OBJ_TREASURE    = 3
+OBJ_COIN        = 4
 
 _obj_type_names = {
     "0": "Obstacle",
     "1": "Trap",
     "2": "Hazard",
-    "3": "Treasure"
+    "3": "Treasure",
+    "4": "Coin"
 }
 
 class GloomhavenObject():
@@ -35,6 +37,9 @@ class GloomhavenObject():
 
     def getTiles(self):
         return self.tiles
+
+    def getType(self):
+        return self.type
 
     def destroy(self):
         self.destroyed = True
@@ -88,8 +93,20 @@ class GloomhavenTile():
     def addTreasure(self, treasure):
         self.treasure = treasure
 
-    def addCoin(self, amn=1):
-        self.coins += amn
+    def addCoin(self, amount=1):
+        self.coins += amount
+
+    def getCoins(self):
+        return self.coins
+
+    def getTrap(self):
+        return self.trap
+
+    def getHazard(self):
+        return self.hazard
+
+    def getTreasure(self):
+        return self.hazard
 
     def findNeighborEdgeId(self, tile, orient):
         row_diff = tile.row_id - self.row_id
@@ -172,11 +189,28 @@ class GloomhavenRoom():
                 return tile
         return None
 
-    def addObstacle(self, obstacle):
-        for loc in obstacle.getTiles():
+    def updateCoordinates(self, row_off, col_off, start_tile):
+        print("Implement")
+        for tile in self.tiles:
+            tile.setRoomCoordinates(tile.row_id + row_off, tile.col_id  + col_off)
+
+    def addObject(self, object):
+        for loc in object.getTiles():
             tile = self.getTile(loc[0], loc[1])
             if tile:
-                tile.addObstacle(obstacle)
+                if object.getType() == OBJ_OBSTACLE:
+                    tile.addObstacle(object)
+                elif object.getType() == OBJ_TREASURE:
+                    tile.addTreasure(object)
+                elif object.getType() == OBJ_TRAP:
+                    tile.addTrap(object)
+                elif object.getType() == OBJ_HAZARD:
+                    tile.addHazard(object)
+                elif object.getType() == OBJ_COIN:
+                    for loc in object.getTiles():
+                        tile = self.getTile(loc[0], loc[1])
+                        if tile:
+                            tile.addCoin(1)
             else:
                 raise Exception("[GloomhavenRoom]", "No Tile at Coord {%d,%d}" % (loc[0], loc[1]))
 

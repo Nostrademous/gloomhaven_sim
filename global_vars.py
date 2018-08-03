@@ -3,16 +3,19 @@
 
 import json
 from utils import listFilesExtension
+from collections import namedtuple
+
+Location = namedtuple('Location', ['room', 'row', 'col'])
 
 def init():
     global abilityDataJson
     global heroDataJson
     global itemDataJson
-    
+
     abilityDataJson = loadAbilityData()
     heroDataJson = loadHeroData()
     itemDataJson = loadItemData()
-    
+
     loadMonsterData()
 
 def loadHeroData(dataFile='hero_data.json'):
@@ -29,8 +32,11 @@ def loadItemData(dataFile='items.json'):
 
 def loadMonsterData(dirPath='monster_data'):
     global monsterDataJson
+
     monsterDataJson = {}
     files = listFilesExtension(dirPath, ".json")
     for file in files:
         with open(file, 'r') as infile:
             monsterDataJson = { **monsterDataJson, **json.load(infile) }
+
+init()

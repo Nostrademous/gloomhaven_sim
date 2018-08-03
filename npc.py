@@ -2,10 +2,27 @@
 '''
 
 from unit import Unit
+import global_vars as gv
+
+def createEnemy(name, numNormal=0, numElite=0):
+    eliteList = list()
+    normalList = list()
+
+    mob = gv.monsterDataJson[name]
+
+    slot_id = 1
+    for cnt in range(numElite):
+        eliteList.append(NPC(name, mob["DeckType"], slot_id, elite=True))
+        slot_id += 1
+    for cnt in range(numNormal):
+        eliteList.append(NPC(name, mob["DeckType"], slot_id))
+        slot_id += 1
+    return normalList, eliteList
 
 class NPC(Unit):
-    def __init__(self, name, decktype, id=0, difficulty=0, elite=False, spawn=False, boss=False):
-        super().__init__(name, id)
+    def __init__(self, name, decktype, slot_id=1, difficulty=0, elite=False, spawn=False, boss=False):
+        super().__init__(name)
+        self.slot_id    = slot_id
         self.decktype   = decktype
         self.difficulty = difficulty
         self.elite      = elite
@@ -90,10 +107,15 @@ class NPC(Unit):
             ret += "Causes Effects: %s\n" % (self.causes)
         return ret
 
-if __name__ == "__main__":
-    import global_vars as gv
-    gv.init()
+def InitializeUnits():
+    # UNIT LIST
+    bg = gv.monsterDataJson["Bandit Guard"]
+    bandit_guard        = NPC("Bandit Guard", bg["DeckType"])
+    bandit_guard_elite  = NPC("Bandit Guard", bg["DeckType"], elite=True)
+    bandit_archer   = NPC("Bandit Archer")
+    living_bones    = NPC("Living Bones")
 
+if __name__ == "__main__":
     for monName in gv.monsterDataJson.keys():
         monster = gv.monsterDataJson[monName]
 

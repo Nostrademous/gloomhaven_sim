@@ -8,24 +8,29 @@ from effects import *
 from ability_cards import HeroAbilityCardDeck, MonsterAbilityCardDeck
 
 class Unit():
-    def __init__(self, name, id=0, max_hp=0):
-        self.name       = name
-        self.id         = id
-        self.max_hp     = max_hp
-        self.curr_hp    = max_hp
-        self.ability_deck  = None
-        self.effects    = initEffects()
-        
-        self.location   = None
+    def __init__(self, name, max_hp=0):
+        self.name           = name
+        self.max_hp         = max_hp
+        self.curr_hp        = max_hp
+        self.ability_deck   = None
+        self.effects        = initEffects()
+
+        self.location       = None
+
+    def setLocation(self, room_name, row, col):
+        self.location = Location(room_name, row, col)
+
+    def getLocation(self):
+        return self.location
 
     def setHealth(self, value):
         self.max_hp = value
         self.curr_hp = value
-    
+
     def setAbilityCardDeck(self, deck):
         assert isinstance(deck, HeroAbilityCardDeck) or isinstance(deck, MonsterAbilityCardDeck)
         self.ability_deck = deck
-    
+
     def heal(self, value):
         if self.underEffect('Wound'):
             setEffect(self.effects, 'Wound', False)
@@ -38,28 +43,28 @@ class Unit():
             # no health is gain, hence the order
             return
         self.curr_hp = min(self.max_hp, self.curr_hp+value)
-    
+
     def takeDamage(self, amount, effList=[]):
         raise Exception("[BASE UNIT CLASS] :: Implement in parent")
-    
+
     def selectAction(self):
         raise Exception("[BASE UNIT CLASS] :: Implement in parent")
-    
+
     def endTurn(self):
         # remove one-round long effects
         for eff in _one_turn_effects:
             self.effects[eff.lower()] = False
-    
+
     def underEffect(self, effectName):
         return self.effects[effectName.lower()]
 
     def getName(self):
         return self.name
-        
+
     def __repr__(self):
         str  = "[%s]\n" % (self.name)
         return str
 
 if __name__ == "__main__":
-    un = Unit("Skeleton Archer", 0)
+    un = Unit("Skeleton Archer")
     print(un)
