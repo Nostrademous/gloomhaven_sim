@@ -1,6 +1,8 @@
 """
 """
 
+import global_vars as gv
+
 # DOOR TYPES
 DOOR_TYPE_NONE              = 0
 DOOR_TYPE_CLOSED            = 1
@@ -64,6 +66,9 @@ class GloomhavenTile():
         self.treasure  = None
         self.coins     = 0
 
+        # for path-finding and field of vision
+        self.map_loc   = None
+
     def __repr__(self):
         ret = "{%d,%d}" % (self.row_id, self.col_id)
         return ret
@@ -71,6 +76,13 @@ class GloomhavenTile():
     def setRoomCoordinates(self, row, col):
         self.row_id = row
         self.col_id = col
+
+    def setMapLocation(self, loc, roomRots):
+        print("[%s] {%d,%d} updating map location to {%d,%d}" % (self.unique_id, self.row_id, self.col_id, loc.row, loc.col))
+        self.map_loc = loc
+
+    def getMapLocation(self):
+        return self.map_loc
 
     def setDoorType(self, doorType):
         self.doorType = doorType
@@ -148,6 +160,9 @@ class GloomhavenTile():
         if bidir:
             tile.neighbors[(int(self.num_sides/2) + sideID) % self.num_sides] = self
 
+    def getNeighbor(self, sideID):
+        return self.neighbors[sideID]
+
     def printTile(self):
         ret = str(self)
         ret += " :: ["
@@ -158,7 +173,9 @@ class GloomhavenTile():
 
 
 ORIENT_FLAT   = 1 # in hexagon flat edges are North & South
+FLAT_EDGES    = [(-1, 1), (1,1), (2,0), (1,-1), (-1,-1), (-2,0)]
 ORIENT_POINTY = 2 # in hexagon flat edges are West & East
+POINTY_EDGES  = [(0,2), (1,1), (1,-1), (0,-2), (-1,-1), (-1, 1)]
 class GloomhavenRoom():
     def __init__(self, name, orientation=ORIENT_FLAT, max_rows=1, max_cols=1, tilePattern=[]):
         self.name           = name

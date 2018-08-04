@@ -19,36 +19,78 @@ class Map():
             ret += "%s " % (room)
         return ret
 
+    def getRoomByName(self, name):
+        if name in self.rooms:
+            return self.rooms[name]
+        return None
+
     def addRooms(self, rList):
         assert len(self.rooms) == 0
         for room in rList:
             self.rooms[room.getName()] = room
 
-    def connectRooms(self, r1, r1_row, r1_col, r2, connTile=None, connType=room.DOOR_TYPE_CLOSED):
-        if connTile == None:
-            print("Connection Room Creation")
-            connTile = room.GloomhavenTile(r1.getName()+'_'+r2.getName()+':%d,%d' % (r1_row, r1_col))
-            connTile.setDoorType(connType)
+    def connectRooms(self, r1, r1_conn, r2, r2_conn, row, col, connType=room.DOOR_TYPE_CLOSED):
+        print("Connection Room Creation")
+        connTile = room.GloomhavenTile(r1.getName()+'_'+r2.getName()+':%d,%d' % (row, col))
+        connTile.setDoorType(connType)
+
         # assert we are connecting two rooms of same orientation
         assert r1.getOrientation() == r2.getOrientation()
-        if r1.getOrientation() == room.ORIENT_FLAT:
-            print("CHECK FLAT CONNECTION")
-            poss_neighbors = [(-2,0), (-1,1), (-1,-1), (1,1), (1,-1), (2,0)]
-            for poss_conn in poss_neighbors:
-                poss_row = r1_row + poss_conn[0]
-                poss_col = r1_col + poss_conn[1]
-                candidate = r1.getTile(poss_row, poss_col)
-                if candidate != None:
-                    candidate.addNeighbor(candidate.findNeighborEdgeId(connTile, r1.getOrientation()), connTile)
-        elif r1.getOrientation() == room.ORIENT_POINTY:
-            poss_neighbors = [(0,-2), (-1,1), (-1,-1), (1,1), (1,-1), (0,2)]
-            for poss_conn in poss_neighbors:
-                poss_row = r1_row + poss_conn[0]
-                poss_col = r1_col + poss_conn[1]
-                candidate = r1.getTile(poss_row, poss_col)
-                if candidate != None:
-                    candidate.addNeighbor(candidate.findNeighborEdgeId(connTile, r1.getOrientation()), connTile)
+        # assert we have all 6 edges for each room's connection array
+        assert len(r1_conn) == 6 and len(r2_conn) == 6
+
+        # make our room 1 edges
+        for side, coords in enumerate(r1_conn):
+            if coords:
+                connTile.addNeighbor(side, r1.getTile(coords[0], coords[1]))
+
+        # make our room 2 edges
+        for side, coords in enumerate(r2_conn):
+            if coords:
+                connTile.addNeighbor(side, r2.getTile(coords[0], coords[1]))
+
         return connTile
+
+    def mapCoordinates(self, start_room, r, c, roomRotations):
+        start_room = self.getRoomByName(start_room)
+        if start_room:
+            curr_tile = start_room.getTile(0,0)
+            curr_orientation = start_room.getOrientation()
+            assert curr_tile is not None
+
+            r = 0
+            c = 0
+            self.setMapCoordinates(curr_tile, r, c, curr_orientation, roomRotations)
+        else:
+            raise Exception("mapCoordinates Exception","'%s' room not found" % start_room)
+
+    def setMapCoordinates(self, curr_tile, r, c, orientation, roomRots):
+        while curr_tile:
+            curr_tile.setMapLocation(gv.Location(r,c), roomRots)
+            rotate = False
+            roomName = curr_tile.unique_id.split(':')[0]
+            if roomName in roomRots and (curr_tile.row_id, curr_tile.col_id):
+                rotate = True
+            if orientation == room.ORIENT_POINTY:
+                for side_num in range(6):
+                    neigh = curr_tile.getNeighbor(side_num)
+                    if neigh and neigh.getMapLocation() == None:
+                        offset = room.POINTY_EDGES[side_num]
+                        if rotate:
+                            offset = gv.rotateLocationLeft(offset, roomRots[roomName])
+                        self.setMapCoordinates(neigh, r+offset[0], c+offset[1], orientation, roomRots)
+            elif orientation == room.ORIENT_FLAT:
+                for side_num in range(6):
+                    neigh = curr_tile.getNeighbor(side_num)
+                    if neigh and neigh.getMapLocation() == None:
+                        offset = room.FLAT_EDGES[side_num]
+                        if rotate:
+                            offset = gv.rotateLocationLeft(offset, roomRots[roomName])
+                        self.setMapCoordinates(neigh, r+offset[0], c+offset[1], orientaiton, roomRots)
+            else:
+                raise Exception("setMapCoordinates", "unknown orientation: %d" % orientation)
+                curr_tile = None
+            curr_tile = None
 
 
 # PathFinding
@@ -63,13 +105,14 @@ if __name__ == "__main__":
     print(m)
 
     # connect rooms
-    cTile = m.connectRooms(room.L1a, 3, -1, room.G1b)
-    m.connectRooms(room.G1b, 1, -1, room.L1a, connTile=cTile)
-    cTile.printTile()
+    cTile = m.connectRooms(room.L1a, [(3,1), (4,0), None, None, None, (2,0)],
+                           room.G1b, [None, None, (0,0), (1,1), (2,0), None],
+                           row=3, col=-1)
+    #cTile.printTile()
 
-    cTile = m.connectRooms(room.G1b, -1, 7, room.I1b)
-    m.connectRooms(room.I1b, -1, 5, room.G1b, connTile=cTile)
-    room.G1b.printRoom()
+    cTile = m.connectRooms(room.G1b, [None, (0,8), (0,6), None, None, None],
+                           room.I1b, [None, (0,6), (0,4), None, None, None],
+                           row=-1, col=7)
 
     # create objects
     table_1 = room.GloomhavenObject("Table", room.OBJ_OBSTACLE, [(1,1),(1,3)])
@@ -88,6 +131,9 @@ if __name__ == "__main__":
     coin = room.GloomhavenObject("Coin", room.OBJ_COIN, [(2,0), (3,1), (4,0), (2,10), (3,9)])
     room.I1b.addObject(coin)
     print(table_1)
+
+    # set map coordinates for all tiles
+    m.mapCoordinates('L1a', 0, 0, {'G1b':3, 'I1b':0})
 
     # NPCs
     bg = gv.monsterDataJson["Bandit Guard"]

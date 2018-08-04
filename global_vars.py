@@ -5,7 +5,13 @@ import json
 from utils import listFilesExtension
 from collections import namedtuple
 
-Location = namedtuple('Location', ['room', 'row', 'col'])
+Location = namedtuple('Location', ['row', 'col'])
+def rotateLocationLeft(loc, num_times=1):
+    """Given a hex coordinate (x, y) return the coordinate of hex when rotated 60° around the origin.
+    """
+    for i in range(num_times):
+        loc = Location((loc[0] - 3 * loc[1]) >> 1, (loc[0] + loc[1]) >> 1)
+    return loc
 
 def init():
     global abilityDataJson
