@@ -65,6 +65,7 @@ if __name__ == "__main__":
     # connect rooms
     cTile = m.connectRooms(room.L1a, 3, -1, room.G1b)
     m.connectRooms(room.G1b, 1, -1, room.L1a, connTile=cTile)
+    cTile.printTile()
 
     cTile = m.connectRooms(room.G1b, -1, 7, room.I1b)
     m.connectRooms(room.I1b, -1, 5, room.G1b, connTile=cTile)

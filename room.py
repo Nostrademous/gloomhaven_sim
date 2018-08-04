@@ -189,11 +189,6 @@ class GloomhavenRoom():
                 return tile
         return None
 
-    def updateCoordinates(self, row_off, col_off, start_tile):
-        print("Implement")
-        for tile in self.tiles:
-            tile.setRoomCoordinates(tile.row_id + row_off, tile.col_id  + col_off)
-
     def addObject(self, object):
         for loc in object.getTiles():
             tile = self.getTile(loc[0], loc[1])
