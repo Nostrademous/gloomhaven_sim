@@ -63,7 +63,7 @@ class Map():
             self.setMapCoordinates(curr_tile, r, c, curr_orientation, roomRotations)
         else:
             raise Exception("mapCoordinates Exception","'%s' room not found" % start_room)
-
+            
     def setMapCoordinates(self, curr_tile, r, c, orientation, roomRots):
         while curr_tile:
             curr_tile.setMapLocation(gv.Location(r,c), roomRots)
@@ -92,8 +92,55 @@ class Map():
                 curr_tile = None
             curr_tile = None
 
+    def getTileByMapCoordinates(self, loc):
+        for room in self.rooms:
+            searchTile = self.getRoomByName(room).getTileByMapCoodinates(loc)
+            if searchTile:
+                return searchTile
+        return None
 
 # PathFinding
+import collections
+class Queue:
+    def __init__(self):
+        self.elements = collections.deque()
+    
+    def empty(self):
+        return len(self.elements) == 0
+    
+    def put(self, x):
+        self.elements.append(x)
+    
+    def get(self):
+        return self.elements.popleft()
+        
+        
+def breadth_first_search(graph, start, goal):
+    # assert our locations exist
+    assert graph.getTileByMapCoordinates(start)
+    assert graph.getTileByMapCoordinates(goal)
+    
+    frontier = Queue()
+    
+    start_tile = graph.getTileByMapCoordinates(start)
+    goal_tile = graph.getTileByMapCoordinates(goal)
+    frontier.put(start_tile)
+    came_from = {}
+    came_from[start_tile] = None
+    
+    while not frontier.empty():
+        current_tile = frontier.get()
+        
+        if current_tile == goal_tile:
+            break
+        
+        for next in current_tile.getMapNeighbors():
+            next = graph.getTileByMapCoordinates(next)
+            if next and next not in came_from:
+                frontier.put(next)
+                came_from[next] = current_tile
+    
+    return came_from
 
 
 if __name__ == "__main__":
@@ -146,3 +193,5 @@ if __name__ == "__main__":
 
     #lb = gv.monsterDataJson["Living Bones"]
     #living_bones        = npc.NPC("Living Bones", lb["DeckType"])
+    
+    parents = breadth_first_search(m, (2, 8), (10, -4))

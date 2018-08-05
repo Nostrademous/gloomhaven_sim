@@ -162,6 +162,12 @@ class GloomhavenTile():
 
     def getNeighbor(self, sideID):
         return self.neighbors[sideID]
+        
+    def getMapNeighbors(self):
+        ret = list()
+        for i in range(6):
+            ret.append(self.getNeighbor(i).getMapLocation())
+        return ret
 
     def printTile(self):
         ret = str(self)
@@ -230,6 +236,13 @@ class GloomhavenRoom():
         print("ROOM: %s [%d x %d]" % (self.name.upper(), self.max_r, self.max_c))
         for tile in self.tiles:
             tile.printTile()
+            
+    def getTileByMapCoodinates(self, loc):
+        for tile in self.tiles:
+            tile_loc = tile.getMapLocation()
+            if tile_loc == loc:
+                return tile_loc
+        return None
 
     def getFillPatternValue(self, r, c):
         if r < 0 or c < 0: return 0
