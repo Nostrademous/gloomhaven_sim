@@ -2,6 +2,8 @@
 """
 
 import global_vars as gv
+from npc import NPC
+from character import Character
 
 # DOOR TYPES
 DOOR_TYPE_NONE              = 0
@@ -69,6 +71,9 @@ class GloomhavenTile():
         # for path-finding and field of vision
         self.map_loc   = None
 
+        # for recoring presence of a unit
+        self.unit      = None
+
     def __repr__(self):
         ret = "{%d,%d}" % (self.row_id, self.col_id)
         return ret
@@ -84,6 +89,13 @@ class GloomhavenTile():
     def getMapLocation(self):
         return self.map_loc
 
+    def isPassable(self, hasJump=False, hasFlying=False, isPlayer=True):
+        if self.hasEnemy(isPlayer):
+            return False
+        if self.getObstacle() and (not hasJump or not hasFlying):
+            return False
+        return True
+
     def setDoorType(self, doorType):
         self.doorType = doorType
 
@@ -92,6 +104,13 @@ class GloomhavenTile():
 
     def isDoorOpen(self):
         return self.doorType in [DOOR_TYPE_OPEN, DOOR_TYPE_PRESSURE_OPEN]
+
+    def hasEnemy(self, requestorIsPlayer=True):
+        if not self.unit:
+            return False
+        if requestorIsPlayer and isinstance(self.unit, Character):
+            return False
+        return True
 
     def addObstacle(self, obstacle):
         self.obstacle = obstacle
@@ -110,6 +129,9 @@ class GloomhavenTile():
 
     def getCoins(self):
         return self.coins
+
+    def getObstacle(self):
+        return self.obstacle
 
     def getTrap(self):
         return self.trap
@@ -162,7 +184,7 @@ class GloomhavenTile():
 
     def getNeighbor(self, sideID):
         return self.neighbors[sideID]
-        
+
     def getMapNeighbors(self):
         ret = list()
         for i in range(6):
@@ -238,7 +260,7 @@ class GloomhavenRoom():
         print("ROOM: %s [%d x %d]" % (self.name.upper(), self.max_r, self.max_c))
         for tile in self.tiles:
             tile.printTile()
-            
+
     def getTileByMapCoordinates(self, loc):
         for tile in self.tiles:
             tile_loc = tile.getMapLocation()

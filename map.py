@@ -64,7 +64,7 @@ class Map():
             self.setMapCoordinates(curr_tile, r, c, curr_orientation, roomRotations)
         else:
             raise Exception("mapCoordinates Exception","'%s' room not found" % start_room)
-            
+
     def setMapCoordinates(self, curr_tile, r, c, orientation, roomRots):
         while curr_tile:
             curr_tile.setMapLocation(gv.Location(r,c), roomRots)
@@ -109,46 +109,46 @@ import collections
 class Queue:
     def __init__(self):
         self.elements = collections.deque()
-    
+
     def empty(self):
         return len(self.elements) == 0
-    
+
     def put(self, x):
         self.elements.append(x)
-    
+
     def get(self):
         return self.elements.popleft()
-        
-        
+
+
 def breadth_first_search(graph, start, goal):
     # assert our locations exist
     assert graph.getTileByMapCoordinates(start)
     assert graph.getTileByMapCoordinates(goal)
-    
+
     frontier = Queue()
-    
+
     start_tile = graph.getTileByMapCoordinates(start)
     goal_tile = graph.getTileByMapCoordinates(goal)
     frontier.put(start_tile)
     came_from = {}
     came_from[start] = None
-    
+
     while not frontier.empty():
         current_tile = frontier.get()
-        
+
         if current_tile == goal_tile:
             break
-        
+
         for next in current_tile.getMapNeighbors():
             next_tile = graph.getTileByMapCoordinates(next)
-            if next_tile and next not in came_from:
+            if next_tile and next not in came_from and next_tile.isPassable():
                 frontier.put(next_tile)
                 came_from[next] = current_tile.getMapLocation()
-    
+
     #return came_from
-    current = goal 
+    current = goal
     path = []
-    while current != start: 
+    while current != start:
        path.append(current)
        current = came_from[current]
     path.append(start) # optional
@@ -179,7 +179,7 @@ if __name__ == "__main__":
     table_2 = room.GloomhavenObject("Table", room.OBJ_OBSTACLE, [(1,7),(1,9)])
     room.I1b.addObject(table_1)
     room.I1b.addObject(table_2)
-
+    
     # create traps
     trap_1 = room.GloomhavenObject("Damage_Trap", room.OBJ_TRAP, [(0,6),(0,8)])
 
@@ -206,6 +206,6 @@ if __name__ == "__main__":
 
     #lb = gv.monsterDataJson["Living Bones"]
     #living_bones        = npc.NPC("Living Bones", lb["DeckType"])
-    
+
     parents = breadth_first_search(m, gv.Location(2, 8), gv.Location(10, -4))
     print(parents)
