@@ -10,7 +10,7 @@ class Map():
         self.scen_name       = name
         self.scen_number     = num
         self.rooms           = dict()
-        self.room_connectors = dict()
+        self.room_connectors = list()
 
     def __repr__(self):
         ret  = "Name: %s\n" % (self.scen_name)
@@ -49,6 +49,7 @@ class Map():
             if coords:
                 connTile.addNeighbor(side, r2.getTile(coords[0], coords[1]))
 
+        self.room_connectors.append(connTile)
         return connTile
 
     def mapCoordinates(self, start_room, r, c, roomRotations):
@@ -94,9 +95,13 @@ class Map():
 
     def getTileByMapCoordinates(self, loc):
         for room in self.rooms:
-            searchTile = self.getRoomByName(room).getTileByMapCoodinates(loc)
+            searchTile = self.getRoomByName(room).getTileByMapCoordinates(loc)
             if searchTile:
                 return searchTile
+        for tile in self.room_connectors:
+            if tile.getMapLocation() == loc:
+                return tile
+
         return None
 
 # PathFinding
@@ -126,7 +131,7 @@ def breadth_first_search(graph, start, goal):
     goal_tile = graph.getTileByMapCoordinates(goal)
     frontier.put(start_tile)
     came_from = {}
-    came_from[start_tile] = None
+    came_from[start] = None
     
     while not frontier.empty():
         current_tile = frontier.get()
@@ -135,12 +140,20 @@ def breadth_first_search(graph, start, goal):
             break
         
         for next in current_tile.getMapNeighbors():
-            next = graph.getTileByMapCoordinates(next)
-            if next and next not in came_from:
-                frontier.put(next)
-                came_from[next] = current_tile
+            next_tile = graph.getTileByMapCoordinates(next)
+            if next_tile and next not in came_from:
+                frontier.put(next_tile)
+                came_from[next] = current_tile.getMapLocation()
     
-    return came_from
+    #return came_from
+    current = goal 
+    path = []
+    while current != start: 
+       path.append(current)
+       current = came_from[current]
+    path.append(start) # optional
+    path.reverse() # optional
+    return path
 
 
 if __name__ == "__main__":
@@ -194,4 +207,5 @@ if __name__ == "__main__":
     #lb = gv.monsterDataJson["Living Bones"]
     #living_bones        = npc.NPC("Living Bones", lb["DeckType"])
     
-    parents = breadth_first_search(m, (2, 8), (10, -4))
+    parents = breadth_first_search(m, gv.Location(2, 8), gv.Location(10, -4))
+    print(parents)

@@ -166,7 +166,9 @@ class GloomhavenTile():
     def getMapNeighbors(self):
         ret = list()
         for i in range(6):
-            ret.append(self.getNeighbor(i).getMapLocation())
+            tile = self.getNeighbor(i)
+            if tile:
+                ret.append(tile.getMapLocation())
         return ret
 
     def printTile(self):
@@ -237,11 +239,11 @@ class GloomhavenRoom():
         for tile in self.tiles:
             tile.printTile()
             
-    def getTileByMapCoodinates(self, loc):
+    def getTileByMapCoordinates(self, loc):
         for tile in self.tiles:
             tile_loc = tile.getMapLocation()
             if tile_loc == loc:
-                return tile_loc
+                return tile
         return None
 
     def getFillPatternValue(self, r, c):
