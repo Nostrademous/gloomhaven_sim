@@ -13,6 +13,18 @@ def rotateLocationLeft(loc, num_times=1):
         loc = Location((loc[0] - 3 * loc[1]) >> 1, (loc[0] + loc[1]) >> 1)
     return loc
 
+def calculateTrapDamage(scenarioLevel):
+    return scenarioLevel + 2
+
+def calculateHazardDamage(scenarioLevel):
+    return int(self.calculateTrapDamage(scenarioLevel)/2)
+
+def calculateMonsterLevel(scenarioLevel):
+    return scenarioLevel
+
+def calculateBonusExperience(scenarioLevel):
+    return (scenarioLevel * 2) + 4
+
 def init():
     global abilityDataJson
     global heroDataJson

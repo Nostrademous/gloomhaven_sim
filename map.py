@@ -6,9 +6,10 @@ import room
 import npc
 
 class Map():
-    def __init__(self, name, num):
+    def __init__(self, name, num, scenDiff):
         self.scen_name       = name
         self.scen_number     = num
+        self.difficulty      = scenDiff
         self.rooms           = dict()
         self.room_connectors = list()
 
@@ -105,33 +106,41 @@ class Map():
         return None
 
 # PathFinding
-import collections
-class Queue:
+import heapq
+class PriorityQueue:
     def __init__(self):
-        self.elements = collections.deque()
+        self.elements = []
 
     def empty(self):
         return len(self.elements) == 0
 
-    def put(self, x):
-        self.elements.append(x)
+    def put(self, item, priority):
+        heapq.heappush(self.elements, (priority, item))
 
     def get(self):
-        return self.elements.popleft()
+        return heapq.heappop(self.elements)[1]
 
 
-def breadth_first_search(graph, start, goal):
+def heuristic(a, b):
+    (x1, y1) = a
+    (x2, y2) = b
+    return abs(x1 - x2) + abs(y1 - y2)
+
+
+def a_star_search(graph, start, goal, hasJump=False, hasFlying=False):
     # assert our locations exist
     assert graph.getTileByMapCoordinates(start)
     assert graph.getTileByMapCoordinates(goal)
 
-    frontier = Queue()
+    frontier = PriorityQueue()
 
     start_tile = graph.getTileByMapCoordinates(start)
     goal_tile = graph.getTileByMapCoordinates(goal)
-    frontier.put(start_tile)
+    frontier.put(start_tile, 0)
     came_from = {}
+    cost_so_far = {}
     came_from[start] = None
+    cost_so_far[start] = 0
 
     while not frontier.empty():
         current_tile = frontier.get()
@@ -139,11 +148,16 @@ def breadth_first_search(graph, start, goal):
         if current_tile == goal_tile:
             break
 
+        current = current_tile.getMapLocation()
         for next in current_tile.getMapNeighbors():
             next_tile = graph.getTileByMapCoordinates(next)
-            if next_tile and next not in came_from and next_tile.isPassable():
-                frontier.put(next_tile)
-                came_from[next] = current_tile.getMapLocation()
+            if next_tile and next_tile.isPassable():
+                new_cost = cost_so_far[current] + next_tile.costToEnter(graph.difficulty, hasJump, hasFlying)
+                if next not in cost_so_far or new_cost < cost_so_far[next]:
+                    cost_so_far[next] = new_cost
+                    priority = new_cost + heuristic(goal, next)
+                    frontier.put(next_tile, priority)
+                    came_from[next] = current
 
     #return came_from
     current = goal
@@ -153,12 +167,12 @@ def breadth_first_search(graph, start, goal):
        current = came_from[current]
     path.append(start) # optional
     path.reverse() # optional
-    return path
+    return path, cost_so_far[goal]
 
 
 if __name__ == "__main__":
     # create map
-    m = Map("Black Barrow", 1)
+    m = Map("Black Barrow", 1, scenDiff=1)
 
     # add rooms
     m.addRooms([room.G1b, room.I1b, room.L1a])
@@ -181,15 +195,22 @@ if __name__ == "__main__":
     room.I1b.addObject(table_2)
     
     # create traps
-    trap_1 = room.GloomhavenObject("Damage_Trap", room.OBJ_TRAP, [(0,6),(0,8)])
+    trap_1 = room.GloomhavenObject("Damage_Trap", room.OBJ_TRAP, [(0,6)])
+    trap_2 = room.GloomhavenObject("Damage_Trap", room.OBJ_TRAP, [(0,8)])
+    room.G1b.addObject(trap_1)
+    room.G1b.addObject(trap_2)
 
     # create treasures
     treasure = room.GloomhavenObject("Treasure_07", room.OBJ_TREASURE,[(4,10)])
     room.I1b.addObject(treasure)
 
     # create coins
-    coin = room.GloomhavenObject("Coin", room.OBJ_COIN, [(2,0), (3,1), (4,0), (2,10), (3,9)])
-    room.I1b.addObject(coin)
+    coin1 = room.GloomhavenObject("Coin", room.OBJ_COIN, [(2,0)])
+    coin2 = room.GloomhavenObject("Coin", room.OBJ_COIN, [(3,1)])
+    coin3 = room.GloomhavenObject("Coin", room.OBJ_COIN, [(4,0)])
+    coin4 = room.GloomhavenObject("Coin", room.OBJ_COIN, [(2,10)])
+    coin5 = room.GloomhavenObject("Coin", room.OBJ_COIN, [(3,9)])
+    room.I1b.addObjects([coin1, coin2, coin3, coin4, coin5])
     print(table_1)
 
     # set map coordinates for all tiles
@@ -207,5 +228,7 @@ if __name__ == "__main__":
     #lb = gv.monsterDataJson["Living Bones"]
     #living_bones        = npc.NPC("Living Bones", lb["DeckType"])
 
-    parents = breadth_first_search(m, gv.Location(2, 8), gv.Location(10, -4))
-    print(parents)
+    parents, cost = a_star_search(m, gv.Location(2, 8), gv.Location(10, -4))
+    print("Can reach desired target in %d steps" % (len(parents)-1))
+    print("Damage taken on path: %d" % (cost - (len(parents)-1)))
+    print("Path is:\n", parents)

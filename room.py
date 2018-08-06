@@ -71,7 +71,7 @@ class GloomhavenTile():
         # for path-finding and field of vision
         self.map_loc   = None
 
-        # for recoring presence of a unit
+        # for recording presence of a unit
         self.unit      = None
 
     def __repr__(self):
@@ -95,6 +95,16 @@ class GloomhavenTile():
         if self.getObstacle() and (not hasJump or not hasFlying):
             return False
         return True
+
+    def costToEnter(self, scenDiff=1, hasJump=False, hasFlying=False):
+        if hasJump or hasFlying:
+            return 1
+        else:
+            if self.getTrap():
+                return gv.calculateTrapDamage(scenDiff) + 1
+            elif self.getHazard():
+                return gv.calculateHazardDamage(scenDiff) + 1
+        return 1
 
     def setDoorType(self, doorType):
         self.doorType = doorType
@@ -201,6 +211,9 @@ class GloomhavenTile():
         ret += "]\n"
         print(ret)
 
+    def __lt__(self, other):
+        return self.getMapLocation() < other.getMapLocation()
+
 
 ORIENT_FLAT   = 1 # in hexagon flat edges are North & South
 FLAT_EDGES    = [(-1, 1), (1,1), (2,0), (1,-1), (-1,-1), (-2,0)]
@@ -235,6 +248,10 @@ class GloomhavenRoom():
             if tile.row_id == row and tile.col_id == col:
                 return tile
         return None
+
+    def addObjects(self, objects):
+        for object in objects:
+            self.addObject(object)
 
     def addObject(self, object):
         for loc in object.getTiles():
