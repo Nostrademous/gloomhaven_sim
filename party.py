@@ -25,6 +25,7 @@
 import json
 import character as ch
 from utils import printJson
+from perks import *
 
 class Party():
     def __init__(self, name):
@@ -194,74 +195,87 @@ if __name__ == "__main__":
     party.addGlobalAchievement('City Rule: Militaristic')
     party.addPartyAchievement('First Steps')
     party.addPartyAchievement("Jekserah's Plans")
+    party.addPartyAchievement("Tremors")
     
     party.completeCityEvent(4)
-    party.completeCityEvent(18)
     party.completeCityEvent(15)
+    party.completeCityEvent(18)
+    party.completeCityEvent(73)
 
     party.unlockCityEvent(73)
 
     party.completeRoadEvent(7)
     party.completeRoadEvent(11)
+    party.completeRoadEvent(17)
     party.completeRoadEvent(25)
 
     party.addScenarioCompleted(1)
     party.addScenarioCompleted(2)
     party.addScenarioCompleted(3)
     party.addScenarioCompleted(4)
+    party.addScenarioCompleted(5)
 
-    party.addScenarioAvailable(5)
     party.addScenarioAvailable(6)
     party.addScenarioAvailable(8)
     party.addScenarioAvailable(9)
+    party.addScenarioAvailable(10)
+    party.addScenarioAvailable(14)
+    party.addScenarioAvailable(19)
     party.addScenarioAvailable(68)
+    party.addScenarioAvailable(84)
 
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
 
+    party.addTreasureLooted(4)
     party.addTreasureLooted(7)
     party.addTreasureLooted(38)
     party.addTreasureLooted(46)
     party.addTreasureLooted(65)
     party.addTreasureLooted(67)
 
-    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=2, xp=83, gold=29, quest=528, checkmarks=5)
+    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=2, xp=102, gold=38, quest=528, checkmarks=5)
     hero1.addItem('Eagle-Eye Goggles')
     hero1.addItem('Minor Power Potion')
     hero1.addItem('Winged Boots')
-    hero1.addPerk()
-    hero1.addPerk()
+    hero1.addPerk(ignore_scen_perk)
+    hero1.addPerk(remove_2_minus_1)
+    #hero1.addPerk()
     party.addMember(hero1)
 
     hero1.scenarioPreparation()
     print(hero1.ability_deck)
 
-    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', 'Danny', level=2, quest=512, gold=22, xp=46, checkmarks=1)
+    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', 'Danny', level=2, quest=512, gold=46, xp=63, checkmarks=2)
     hero2.addItem('Boots of Striding')
     hero2.addItem('Minor Healing Potion')
     hero2.addItem('Leather Armor')
     hero2.addItem('Iron Helmet')
+    hero2.addPerk(replace_minus_1_with_plus_1)
     party.addMember(hero2)
 
-    hero3 = ch.Character('Evan', 'Spellweaver', 'Evan Teran', level=2, quest=533, gold=59, xp=58, checkmarks=2)
+    hero3 = ch.Character('Evan', 'Spellweaver', 'Evan Teran', level=2, quest=533, gold=59, xp=80, checkmarks=3)
     hero3.addItem('Cloak of Invisibility')
     hero3.addItem('Minor Power Potion')
     hero3.addItem('Eagle-Eye Goggles')
+    hero3.addPerk(add_2_plus_1)
+    #hero3.addPerk()
     party.addMember(hero3)
 
-    hero4 = ch.Character('Bloodfist Stoneborn', 'Cragheart', 'Matt', level=2, quest=531, gold=21, xp=62, checkmarks=2)
+    hero4 = ch.Character('Bloodfist Stoneborn', 'Cragheart', 'Matt', level=2, quest=531, gold=24, xp=80, checkmarks=3)
     hero4.addItem('Hide Armor')
     hero4.addItem('Boots of Striding')
     hero4.addItem('Minor Stamina Potion')
-    hero4.addPerk()
+    hero4.addPerk(ignore_item_perk)
+    #hero4.addPerk()
     party.addMember(hero4)
 
-    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=2, quest=526, gold=33, xp=59, checkmarks=2)
+    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=2, quest=526, gold=48, xp=79, checkmarks=2)
     hero5.addItem('Leather Armor')
     hero5.addItem('Poison Dagger')
     hero5.addItem('Heater Shield')
     hero5.addItem('Minor Stamina Potion')
-    hero5.addPerk()
+    hero5.addPerk(ignore_scen_perk)
     party.addMember(hero5)
 
     party.makeSanctuaryDonation()

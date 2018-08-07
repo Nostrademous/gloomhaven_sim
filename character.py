@@ -149,11 +149,16 @@ class Character(Unit):
     def loseCheckmark(self, cnt=1):
         self.checkmarks = max(0, self.checkmarks-cnt)
 
-    def addPerk(self, cnt=1):
-        rand_perk = pickRandom(self.available_perks)
-        print('Perk Selected: %s' % (rand_perk))
-        self.available_perks.remove(rand_perk)
-        self.selected_perks.append(rand_perk)
+    def addPerk(self, perk=None):
+        if not perk:
+            perk = pickRandom(self.available_perks)
+        print('Perk Selected: %s' % (perk))
+        try:
+            self.available_perks.remove(perk)
+            self.selected_perks.append(perk)
+        except Exception as err:
+            print(err)
+            raise err
 
     # take damage assumes the decison to take damage was made by the player
     # in lieu of remove cards from their hand or discard pile
@@ -208,6 +213,6 @@ class Character(Unit):
 
         jsonData['retired'] = self.retired
         jsonData['items'] = self.items
-        #jsonData['perks'] = [str(p) for p in self.selected_perks]
+        jsonData['perks'] = [str(p) for p in self.selected_perks]
         return jsonData
 

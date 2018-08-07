@@ -59,9 +59,14 @@ add_2_plus_1            = Perk(PERK_TYPE_ADD, 2, amd.amc_p1)
 add_2_roll_plus_1       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_p1)
 add_1_plus_3            = Perk(PERK_TYPE_ADD, 1, amd.amc_p3)
 
+add_1_minus_2           = Perk(PERK_TYPE_ADD, 1, amd.amc_m2)
+add_2_plus_2            = Perk(PERK_TYPE_ADD, 2, amd.amc_p2)
+
 add_1_0_stun            = Perk(PERK_TYPE_ADD, 1, amd.amc_0_stun)
 add_1_roll_invis        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_invis)
 add_1_roll_stun         = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_stun)
+add_1_roll_disarm       = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_disarm)
+add_1_roll_muddle       = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_muddle)
 add_2_roll_muddle       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_muddle)
 add_3_roll_muddle       = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_muddle)
 add_2_roll_poison       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_poison)
@@ -69,45 +74,53 @@ add_1_plus_1_immobilize = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_immobilize)
 add_1_plus_1_wound      = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_wound)
 add_2_roll_pierce3      = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_pierce_3)
 
+add_3_roll_push1        = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_push1)
+add_2_roll_push2        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_push2)
+
 # elemental based
 add_1_roll_air          = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_air)
+add_2_roll_air          = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_air)
 add_1_roll_dark         = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_dark)
 add_1_roll_earth        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_earth)
+add_2_roll_earth        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_earth)
 add_2_roll_fire         = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_fire)
 add_1_roll_light        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_light)
 
 add_1_plus_1_curse      = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_1_curse)
+add_1_plus_2_muddle     = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_muddle)
 
 add_1_plus_2_fire       = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_fire)
 add_1_plus_2_ice        = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_ice)
 
 # class specific perks
 tinkerer_perk_9     = Perk(PERK_TYPE_ADD, 1, amd.amc_p1h2)
-tinkerer_perk_10    = Perk(PERK_TYPE_ADD, 1, amd.amc_0at)
+tinkerer_perk_10    = Perk(PERK_TYPE_ADD, 1, amd.amc_0_at)
+brute_rolling_at    = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_at)
+brute_p1_shield1    = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_1_shield1)
 
 brute_perk_deck = list([
     remove_2_minus_1,
     replace_minus_1_with_plus_1,
     add_2_plus_1, add_2_plus_1,
     add_1_plus_3,
-    #5,
-    #6,
+    add_3_roll_push1, add_3_roll_push1,
+    add_2_roll_pierce3,
     add_1_roll_stun, add_1_roll_stun,
-    #8,
-    #9,
-    #10,
+    [add_1_roll_disarm, add_1_roll_muddle],
+    brute_rolling_at, brute_rolling_at,
+    brute_p1_shield1,
     ignore_scen_perk_plus_1
 ])
 
 cragheart_perk_deck = list([
     remove_4_0,
     replace_minus_1_with_plus_1, replace_minus_1_with_plus_1, replace_minus_1_with_plus_1,
-    #3,
+    [add_1_minus_2, add_2_plus_2],
     add_1_plus_1_immobilize, add_1_plus_1_immobilize,
-    #5,
-    #6,
-    #7,
-    #8,
+    add_1_plus_2_muddle, add_1_plus_2_muddle,
+    add_2_roll_push2,
+    add_2_roll_earth, add_2_roll_earth,
+    add_2_roll_air,
     ignore_item_perk,
     ignore_scen_perk
 ])
@@ -176,6 +189,7 @@ def getPerkSelections(class_type):
         raise Exception("[getPerkSelection]", "UNKNOWN CLASS TYPE")
 
 if __name__ == "__main__":
+    print('\nTinkerer')
     for perk in tinkerer_perk_deck:
         print(perk)
 
@@ -185,4 +199,12 @@ if __name__ == "__main__":
 
     print('\nSpellweaver')
     for perk in spellweaver_perk_deck:
+        print(perk)
+
+    print('\nCragheart')
+    for perk in cragheart_perk_deck:
+        print(perk)
+
+    print('\nBrute')
+    for perk in brute_perk_deck:
         print(perk)
