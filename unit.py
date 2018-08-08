@@ -17,8 +17,8 @@ class Unit():
 
         self.location       = None
 
-    def setLocation(self, room_name, row, col):
-        self.location = Location(room_name, row, col)
+    def setLocation(self, row, col):
+        self.location = Location(row, col)
 
     def getLocation(self):
         return self.location

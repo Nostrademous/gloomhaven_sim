@@ -5,25 +5,6 @@ from unit import Unit
 import global_vars as gv
 from utils import pickRandom
 
-def createEnemy(name, numNormal=0, numElite=0, numBoss=0, isSpawn=False):
-    bossList = list()
-    eliteList = list()
-    normalList = list()
-
-    mob = gv.monsterDataJson[name]
-
-    slot_id = 1
-    for cnt in range(numBoss):
-        bossList.append(NPC(name, mob["DeckType"], slot_id, boss=True))
-        slot_id += 1
-    for cnt in range(numElite):
-        eliteList.append()
-        slot_id += 1
-    for cnt in range(numNormal):
-        eliteList.append(NPC(name, mob["DeckType"], slot_id, spawn=isSpawn))
-        slot_id += 1
-    return normalList, eliteList, bossList
-
 
 class NPCType():
     def __init__(self, name, monsterData, difficulty=1):
@@ -41,17 +22,34 @@ class NPCType():
         self.curr_deck      = dict(self.full_deck)
         self.curr_units     = list()
 
-    def createEnemy(self, elite=False, isSpawn=False):
+    def createEnemy(self, cellLoc=gv.Location(0,0), elite=False, isSpawn=False):
         if len(self.available_ids) > 0:
             selected_id = self.available_ids[0]
             self.available_ids.remove(selected_id)
             self.curr_units.append(NPC(self.name, self.stat_data[str(self.difficulty)], selected_id,
-                                       elite=elite, boss=self.deck_name == "Boss", spawn=isSpawn))
+                                       cellLoc, elite=elite, boss=self.deck_name == "Boss", spawn=isSpawn))
         else:
             print("Cannot Create Enemy: '%s'%" % (self.name))
 
     def reshuffleDeck(self):
         self.curr_deck = dict(self.full_deck)
+
+    def updateUnits(self):
+        dead_units = []
+        for unit in self.curr_units:
+            if unit.getHealth() == 0:
+                dead_units.append(unit)
+
+        # can't do this as part of the above iteration as 
+        # we would be modifying the list we are iterating over
+        for unit in dead_units:
+            self.destroyEnemy(unit)
+
+
+    def destroyEnemy(self, npc):
+        assert npc in self.curr_units
+        self.available_ids.append(npc.slot_id)
+        self.curr_units.remove(npc)
 
     def printUnits(self):
         for unit in self.curr_units:
@@ -59,7 +57,7 @@ class NPCType():
 
 
 class NPC(Unit):
-    def __init__(self, name, statData, slot_id=1, elite=False, spawn=False, boss=False):
+    def __init__(self, name, statData, slot_id, cellLoc, elite=False, spawn=False, boss=False):
         super().__init__(name)
         self.slot_id    = slot_id
         self.elite      = elite
@@ -70,7 +68,9 @@ class NPC(Unit):
         self.range      = 0
         self.immunities = list()
         self.causes     = list()
+        self.effects    = list()
         self.boss       = boss
+        self.location   = cellLoc
 
         if elite:
             self.stats   = statData["Elite"]
@@ -89,6 +89,9 @@ class NPC(Unit):
             super().setHealth(value * numPlayers)
         else:
             super().setHealth(value)
+
+    def getHealth(self):
+        return self.curr_hp
 
     def takeDamage(self, amount, effList=[]):
         self.curr_hp = max(self.curr_hp - amount, 0)
@@ -144,6 +147,7 @@ class NPC(Unit):
 
     def __repr__(self):
         ret  = super().__repr__()
+        ret += "Slot ID: %d\n" % (self.slot_id)
         sType = "Normal"
         if self.isElite():
             sType = "Elite"
@@ -155,11 +159,14 @@ class NPC(Unit):
             ret += "Immunities: %s\n" % (self.immunities)
         if len(self.causes) > 0:
             ret += "Causes Effects: %s\n" % (self.causes)
+        ret += "Map Location: {%d,%d}\n" % (self.location.row, self.location.col)
         return ret
 
 
 if __name__ == "__main__":
     for monName in gv.monsterDataJson.keys():
         mon_type = NPCType(monName, gv.monsterDataJson[monName])
+        mon_type.createEnemy(elite=pickRandom([True, False]))
+        mon_type.createEnemy(elite=pickRandom([True, False]))
         mon_type.createEnemy(elite=pickRandom([True, False]))
         mon_type.printUnits()
