@@ -26,35 +26,43 @@ def calculateBonusExperience(scenarioLevel):
     return (scenarioLevel * 2) + 4
 
 def init():
-    global abilityDataJson
-    global heroDataJson
-    global itemDataJson
-
-    abilityDataJson = loadAbilityData()
-    heroDataJson = loadHeroData()
-    itemDataJson = loadItemData()
-
+    loadHeroData()
+    loadAbilityData()
     loadMonsterData()
+    loadItemData()
 
 def loadHeroData(dataFile='hero_data.json'):
+    global heroDataJson
+
+    heroDataJson = {}
     with open(dataFile, 'r') as infile:
-        return json.load(infile)
+        heroDataJson = json.load(infile)
 
 def loadAbilityData(dataFile='abilities.json'):
+    global abilityDataJson
+
+    abilityDataJson = {}
     with open(dataFile, 'r') as infile:
-        return json.load(infile)
+        abilityDataJson = json.load(infile)
 
 def loadItemData(dataFile='items.json'):
-    with open(dataFile, 'r') as infile:
-        return json.load(infile)
+    global itemDataJson
 
-def loadMonsterData(dirPath='monster_data'):
+    itemDataJson = {}
+    with open(dataFile, 'r') as infile:
+        itemDataJson = json.load(infile)
+
+def loadMonsterData(dirPath='monster_data', deckFile='monster_deck.json'):
     global monsterDataJson
+    global monsterDeckDataJson
 
     monsterDataJson = {}
     files = listFilesExtension(dirPath, ".json")
     for file in files:
         with open(file, 'r') as infile:
             monsterDataJson = { **monsterDataJson, **json.load(infile) }
-
+    
+    monsterDeckDataJson = {}
+    with open(deckFile, 'r') as infile:
+        monsterDeckDataJson = json.load(infile)
 init()

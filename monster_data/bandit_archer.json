@@ -1,8 +1,7 @@
 {
     "Bandit Archer": {
-        "Id": 0,
-        "MaxCount": 0,
-        "DeckType": "Bandit Archer",
+        "Slots": 6,
+        "DeckType": "Archer",
         "Stats": {
             "0": {
                 "Normal": {

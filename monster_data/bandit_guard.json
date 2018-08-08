@@ -1,8 +1,7 @@
 {
     "Bandit Guard": {
-        "Id": 0,
-        "MaxCount": 0,
-        "DeckType": "Bandit Guard",
+        "Slots": 6,
+        "DeckType": "Guard",
         "Stats": {
             "0": {
                 "Normal": {

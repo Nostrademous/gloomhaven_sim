@@ -1,0 +1,192 @@
+{
+    "Guard": {
+        "524": {
+            "Initiative": 15,
+            "Reshuffle": 1,
+            "Actions": {
+                "SelfBuffs": ["Shield_1", "Retaliate_2"]
+            }
+        },
+        "525": {
+            "Initiative": 30,
+            "Actions": {
+                "Move": 1,
+                "Attack": -1
+            }
+        },
+        "526": {
+            "Initiative": 35,
+            "Actions": {
+                "Move": -1,
+                "Attack": 0,
+                "Range": 2
+            }
+        },
+        "527": {
+            "Initiative": 50,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0
+            }
+        },
+        "528": {
+            "Initiative": 50,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0
+            }
+        },
+        "529": {
+            "Initiative": 50,
+            "Actions": {
+                "Move": -1,
+                "Attack": 1
+            }
+        },
+        "530": {
+            "Initiative": 55,
+            "Actions": {
+                "Move": -1,
+                "Attack": 0,
+                "SelfBuffs": ["Strengthen"]
+            }
+        },
+        "531": {
+            "Initiative": 15,
+            "Reshuffle": 1,
+            "Actions": {
+                "SelfBuffs": ["Shield_1"],
+                "Attack": 0,
+                "Effect": "Poison"
+            }
+        }
+    },
+    "Archer": {
+        "532": {
+            "Initiative": 16,
+            "Actions": {
+                "Move": 1,
+                "Attack": -1
+            }
+        },
+        "533": {
+            "Initiative": 31,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0
+            }
+        },
+        "534": {
+            "Initiative": 32,
+            "Actions": {
+                "Move": 0,
+                "Attack": 1,
+                "Range": -1
+            }
+        },
+        "535": {
+            "Initiative": 44,
+            "Actions": {
+                "Move": -1,
+                "Attack": 1
+            }
+        },
+        "536": {
+            "Initiative": 56,
+            "Actions": {
+                "Attack": -1,
+                "Targets": 2
+            }
+        },
+        "537": {
+            "Initiative": 68,
+            "Reshuffle": 1,
+            "Actions": {
+                "Attack": 1,
+                "Range": 1
+            }
+        },
+        "538": {
+            "Initiative": 14,
+            "Actions": {
+                "Move": -1,
+                "Attack": -1,
+                "Summon": {
+                    "Type": "Trap",
+                    "Damage": 3,
+                    "Location": "EnemyAdj"
+                }
+            }
+        },
+        "539": {
+            "Initiative": 29,
+            "Reshuffle": 1,
+            "Actions": {
+                "Move": 0,
+                "Attack": -1,
+                "Range": 1,
+                "Effect": "Immobilize"
+            }
+        }
+    },
+    "Living Bones": {
+        "516": {
+            "Initiative": 64,
+            "Actions": {
+                "Move": -1,
+                "Attack": 1
+            }
+        },
+        "517": {
+            "Initiative": 20,
+            "Reshuffle": 1,
+            "Actions": {
+                "Move": -2,
+                "Attack": 0,
+                "SelfBuffs": ["Heal_2"]
+            }
+        },
+        "518": {
+            "Initiative": 25,
+            "Actions": {
+                "Move": 1,
+                "Attack": -1
+            }
+        },
+        "519": {
+            "Initiative": 45,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0
+            }
+        },
+        "520": {
+            "Initiative": 45,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0
+            }
+        },
+        "521": {
+            "Initiative": 81,
+            "Actions": {
+                "Attack": 2
+            }
+        },
+        "522": {
+            "Initiative": 74,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0,
+                "Special": "TargetOneEnemyWithAllAttacks"
+            }
+        },
+        "523": {
+            "Initiative": 12,
+            "Reshuffle": 1,
+            "Actions": {
+                "SelfBuffs": ["Shield_1", "Heal_2"]
+            }
+        }
+    }
+}

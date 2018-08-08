@@ -1,7 +1,6 @@
 {
     "Living Spirit": {
-        "Id": 0,
-        "MaxCount": 0,
+        "Slots": 6,
         "DeckType": "Living Spirit",
         "Stats": {
             "0": {

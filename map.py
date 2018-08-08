@@ -217,6 +217,7 @@ if __name__ == "__main__":
     m.mapCoordinates('L1a', 0, 0, {'G1b':3, 'I1b':0})
 
     # NPCs
+    '''
     bg = gv.monsterDataJson["Bandit Guard"]
     bandit_guard        = npc.NPC("Bandit Guard", bg["DeckType"])
     bandit_guard_elite  = npc.NPC("Bandit Guard", bg["DeckType"], elite=True)
@@ -227,6 +228,7 @@ if __name__ == "__main__":
 
     #lb = gv.monsterDataJson["Living Bones"]
     #living_bones        = npc.NPC("Living Bones", lb["DeckType"])
+    '''
 
     parents, cost = a_star_search(m, gv.Location(2, 8), gv.Location(10, -4))
     print("Can reach desired target in %d steps" % (len(parents)-1))
