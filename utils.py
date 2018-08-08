@@ -35,4 +35,7 @@ def pickRandom(listChoices):
     # to make it really random use the cryptographically safe
     # random initialization each time
     secure_random = random.SystemRandom()
+    
+    if isinstance(listChoices, dict):
+        return listChoices[secure_random.choice(list(listChoices))]
     return secure_random.choice(listChoices)

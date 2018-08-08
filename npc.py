@@ -5,6 +5,31 @@ from unit import Unit
 import global_vars as gv
 from utils import pickRandom
 
+class NPCAbility():
+    def __init__(self, num, jsonData):
+        #print(jsonData)
+        self.num            = num
+        self.initiative     = jsonData['Initiative']
+        self.actions        = jsonData['Actions']
+        self.reshuffle      = False
+        if 'Reshuffle' in jsonData:
+            self.reshuffle  = True
+
+    def __repr__(self):
+        ret  = '[%d]\n' % self.num
+        ret += 'Initiative: %d\n' % self.initiative
+        if self.reshuffle:
+            ret += 'RESHUFFLE AT TURN END\n'
+        ret += str(self.actions)
+        return ret
+
+def parseMonsterDeck(deck):
+    abilities = list()
+    #print(deck)
+    for num in deck:
+        #print(num)
+        abilities.append(NPCAbility(int(num), deck[num]))
+    return abilities
 
 class NPCType():
     def __init__(self, name, monsterData, difficulty=1):
@@ -15,11 +40,12 @@ class NPCType():
         self.difficulty     = difficulty
         self.available_ids  = [i for i in range(1, monsterData["Slots"]+1)]
         try:
-            self.full_deck      = gv.monsterDeckDataJson[self.deck_name]
+            self.full_deck      = list(parseMonsterDeck(gv.monsterDeckDataJson[self.deck_name]))
         except KeyError as err:
             print("Ability Deck for %s is not yet implemented!" % (self.name))
-            self.full_deck      = dict()
-        self.curr_deck      = dict(self.full_deck)
+            self.full_deck      = list()
+        self.curr_deck      = list(self.full_deck)
+        self.curr_ability   = None
         self.curr_units     = list()
 
     def createEnemy(self, cellLoc=gv.Location(0,0), elite=False, isSpawn=False):
@@ -31,8 +57,21 @@ class NPCType():
         else:
             print("Cannot Create Enemy: '%s'%" % (self.name))
 
+    def drawRoundAbility(self):
+        assert len(self.curr_deck) > 0
+        self.curr_ability = pickRandom(self.curr_deck)
+        self.curr_deck.remove(self.curr_ability)
+        print(self.curr_ability)
+
+    def endTurn(self):
+        assert self.curr_ability != None
+        if self.curr_ability.reshuffle:
+            self.reshuffleDeck()
+        self.curr_ability = None
+        print("Remain Number of Ability Cards: %d\n\n" % (len(self.curr_deck)))
+
     def reshuffleDeck(self):
-        self.curr_deck = dict(self.full_deck)
+        self.curr_deck = list(self.full_deck)
 
     def updateUnits(self):
         dead_units = []
@@ -40,11 +79,10 @@ class NPCType():
             if unit.getHealth() == 0:
                 dead_units.append(unit)
 
-        # can't do this as part of the above iteration as 
+        # can't do this as part of the above iteration as
         # we would be modifying the list we are iterating over
         for unit in dead_units:
             self.destroyEnemy(unit)
-
 
     def destroyEnemy(self, npc):
         assert npc in self.curr_units
@@ -54,6 +92,7 @@ class NPCType():
     def printUnits(self):
         for unit in self.curr_units:
             print(unit)
+
 
 
 class NPC(Unit):
@@ -170,3 +209,7 @@ if __name__ == "__main__":
         mon_type.createEnemy(elite=pickRandom([True, False]))
         mon_type.createEnemy(elite=pickRandom([True, False]))
         mon_type.printUnits()
+
+        for i in range(3):
+            mon_type.drawRoundAbility()
+            mon_type.endTurn()
