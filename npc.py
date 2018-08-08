@@ -52,8 +52,11 @@ class NPCType():
         if len(self.available_ids) > 0:
             selected_id = self.available_ids[0]
             self.available_ids.remove(selected_id)
+            if isinstance(cellLoc, tuple):
+                cellLoc = gv.Location(cellLoc[0], cellLoc[1])
             self.curr_units.append(NPC(self.name, self.stat_data[str(self.difficulty)], selected_id,
-                                       cellLoc, elite=elite, boss=self.deck_name == "Boss", spawn=isSpawn))
+                                       cellLoc, elite=elite, boss=self.deck_name == "Boss", 
+                                       spawn=isSpawn))
         else:
             print("Cannot Create Enemy: '%s'%" % (self.name))
 
@@ -205,11 +208,11 @@ class NPC(Unit):
 if __name__ == "__main__":
     for monName in gv.monsterDataJson.keys():
         mon_type = NPCType(monName, gv.monsterDataJson[monName])
-        mon_type.createEnemy(elite=pickRandom([True, False]))
-        mon_type.createEnemy(elite=pickRandom([True, False]))
+        mon_type.createEnemy(cellLoc=(1,1), elite=pickRandom([True, False]))
+        mon_type.createEnemy(gv.Location(2,2), elite=pickRandom([True, False]))
         mon_type.createEnemy(elite=pickRandom([True, False]))
         mon_type.printUnits()
 
-        for i in range(3):
+        for i in range(10):
             mon_type.drawRoundAbility()
             mon_type.endTurn()

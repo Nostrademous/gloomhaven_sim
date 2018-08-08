@@ -6,7 +6,7 @@ import party
 from utils import listFiles, printJson
 
 def createMember():
-    raw_input("What is your Hero's Name? ")
+    input("What is your Hero's Name? ")
 
 def createParty():
     while True:
@@ -14,7 +14,7 @@ def createParty():
         print('  1 - Create a new Party')
         print('  2 - Edit or Update an existing Party')
         print('  3 - Quit')
-        ret = raw_input('>: ')
+        ret = input('>: ')
 
         try:
             selection = int(ret)
@@ -26,13 +26,13 @@ def createParty():
             if selection == 3:
                 break
             elif selection == 2:
-                p_name = raw_input("What is the Party's name: ")
+                p_name = input("What is the Party's name: ")
                 try:
                     party.loadHeroData(dataFile=p_name+'_party.json')
                 except Exception as err:
                     print("[Load Existing Party Exception] :: %s" % (err))
             elif selection == 1:
-                p_name = raw_input("Select a Party name: ")
+                p_name = input("Select a Party name: ")
                 try:
                     assert p_name + "_party.json" not in listFiles('.')
 
@@ -41,7 +41,7 @@ def createParty():
                     while True:
                         print("Let's create our Party Members now.")
                         try:
-                            m_cnt = raw_input("How many Heroes would you like to add? ")
+                            m_cnt = input("How many Heroes would you like to add? ")
                             m_cnt = int(m_cnt)
                             for cnt in range(1, m_cnt+1):
                                 print(cnt)

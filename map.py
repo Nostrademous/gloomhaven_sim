@@ -170,7 +170,7 @@ def a_star_search(graph, start, goal, hasJump=False, hasFlying=False):
     return path, cost_so_far[goal]
 
 
-if __name__ == "__main__":
+def scenario_1():
     # create map
     m = Map("Black Barrow", 1, scenDiff=1)
 
@@ -217,20 +217,15 @@ if __name__ == "__main__":
     m.mapCoordinates('L1a', 0, 0, {'G1b':3, 'I1b':0})
 
     # NPCs
-    '''
-    bg = gv.monsterDataJson["Bandit Guard"]
-    bandit_guard        = npc.NPC("Bandit Guard", bg["DeckType"])
-    bandit_guard_elite  = npc.NPC("Bandit Guard", bg["DeckType"], elite=True)
-
-    ba = gv.monsterDataJson["Bandit Archer"]
-    bandit_archer       = npc.NPC("Bandit Archer", ba["DeckType"])
-    bandit_archer_elite = npc.NPC("Bandit Archer", ba["DeckType"], elite=True)
-
-    #lb = gv.monsterDataJson["Living Bones"]
-    #living_bones        = npc.NPC("Living Bones", lb["DeckType"])
-    '''
+    guards  = npc.NPCType("Bandit Guard", gv.monsterDataJson["Bandit Guard"])
+    archers = npc.NPCType("Bandit Archer", gv.monsterDataJson["Bandit Archer"])
+    #bones   = npc.NPCType("Living Bones", gv.monsterDataJson["Living Bones"])
 
     parents, cost = a_star_search(m, gv.Location(2, 8), gv.Location(10, -4))
     print("Can reach desired target in %d steps" % (len(parents)-1))
     print("Damage taken on path: %d" % (cost - (len(parents)-1)))
     print("Path is:\n", parents)
+
+
+if __name__ == "__main__":
+    scenario_1()
