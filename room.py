@@ -153,6 +153,8 @@ class GloomhavenTile():
             self.unit = unitType.createEnemy(self.getMapLocation(), elite)
             assert self.unit
             print("Adding Unit %s\n" % (str(self.unit)))
+            return self.unit
+        return None
 
     def getCoins(self):
         return self.coins
@@ -292,15 +294,19 @@ class GloomhavenRoom():
 
     def spawnNPCs(self):
         assert self.open # only spawn when room is "seen"
+        new_npcs = list()
 
         for npc in self.npc_spawn_locs:
             assert isinstance(npc, gv.SpawnUnit)
 
             spawnTile = self.getTile(npc.row, npc.col)
             if spawnTile:
-                spawnTile.addUnit(npc.unitType, npc.numPlayerList)
+                new_npc = spawnTile.addUnit(npc.unitType, npc.numPlayerList)
+                if new_npc:
+                    new_npcs.append(new_npc)
             else:
                 raise Exception("GloomhavenRoom", "addNPCs - failed to find {%d,%d}" % (npc.row, npc.col))
+        return new_npcs
 
     def addObjects(self, objects):
         for object in objects:

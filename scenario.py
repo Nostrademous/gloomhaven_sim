@@ -8,6 +8,7 @@ from utils import printJson, pickRandom
 import character as hero
 import map
 import party
+import npc
 
 INERT  = 0
 WANING = 1
@@ -34,6 +35,8 @@ class Scenario():
         # heroes from the party participating in the 
         # scenario
         self.scen_members = None
+        self.npcs         = list()
+        self.npc_types    = list()
 
     def _reset_elements(self):
         self.elements = {
@@ -60,6 +63,10 @@ class Scenario():
         self.party = myParty
         # pick the members of the part in scenario
         self.scen_members = self.pickMembers()
+
+    def addNPC(self, npc):
+        assert isinstance(npc, npc.NPC)
+        self.npcs.append(npc)
 
     def pickMembers(self, num=4):
         random_members = pickRandom(self.party.members, num)
@@ -105,7 +112,8 @@ class Scenario():
         self.scen_map.setDifficulty(self.calculateDifficulty())
 
         # spawn NPCs in starting room
-        self.scen_map.spawnStartingRoom()
+        new_npcs = self.scen_map.spawnStartingRoom()
+        self.npcs.extend(new_npcs)
 
     def endScenario(self, success=False):
         '''All end scenario work.'''
@@ -128,6 +136,15 @@ class Scenario():
         for p in parallel_funcs:
             p.join()
 
+        # now pick NPC actions
+        self.npc_types = list()
+        for npc in self.npcs:
+            if npc.getParentType() not in self.npc_types:
+                self.npc_types.append(npc.getParentType())
+
+        for npcType in self.npc_types:
+            npcType.prepareTurn()
+
     def executeTurn(self):
         '''All turn execution work.'''
         print("[Scenario %d] Execute Turn :: Round: %d" % (self.scenID, self.round))
@@ -148,6 +165,10 @@ class Scenario():
 
         # check scenario completion condition
         # TODO
+
+        # perform endTurn for each NPCType
+        for npcType in self.npc_types:
+            npcType.endTurn()
 
         # perfrom endTurn for each hero
         for hero in self.scen_members:

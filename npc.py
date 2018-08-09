@@ -65,7 +65,7 @@ class NPCType():
             if isinstance(cellLoc, tuple):
                 cellLoc = gv.Location(cellLoc[0], cellLoc[1])
             new_unit = NPC(self.name, self.stat_data[str(self.difficulty)], selected_id,
-                           cellLoc, elite=elite, boss=self.deck_name == "Boss",
+                           cellLoc, self, elite=elite, boss=self.deck_name == "Boss",
                            spawn=isSpawn)
             self.curr_units.append(new_unit)
             return new_unit
@@ -79,12 +79,22 @@ class NPCType():
         self.curr_deck.remove(self.curr_ability)
         print(self.curr_ability)
 
+    def prepareTurn(self):
+        self.drawRoundAbility()
+
+    def executeTurn(self):
+        for npc in self.curr_units:
+            npc.executeTurn()
+
     def endTurn(self):
         assert self.curr_ability != None
         if self.curr_ability.reshuffle:
             self.reshuffleDeck()
         self.curr_ability = None
         print("Remain Number of Ability Cards: %d\n\n" % (len(self.curr_deck)))
+
+        for npc in self.curr_units:
+            npc.endTurn()
 
     def reshuffleDeck(self):
         self.curr_deck = list(self.full_deck)
@@ -112,7 +122,7 @@ class NPCType():
 
 
 class NPC(Unit):
-    def __init__(self, name, statData, slot_id, cellLoc, elite=False, spawn=False, boss=False):
+    def __init__(self, name, statData, slot_id, cellLoc, parent, elite=False, spawn=False, boss=False):
         super().__init__(name)
         self.slot_id    = slot_id
         self.elite      = elite
@@ -126,6 +136,7 @@ class NPC(Unit):
         self.effects    = list()
         self.boss       = boss
         self.location   = cellLoc
+        self.parentType = parent
 
         if elite:
             self.stats   = statData["Elite"]
@@ -138,6 +149,9 @@ class NPC(Unit):
         self.setImmunities(self.stats["Immunities"])
         self.setCauses(self.stats["Effects"])
         self.setMAR(self.stats["Movement"], self.stats["Attack"], self.stats["Range"])
+
+    def getParentType(self):
+        return self.parentType
 
     def setHealth(self, value, numPlayers=1):
         if self.isBoss():
@@ -200,6 +214,12 @@ class NPC(Unit):
                 return int(buff[7:])
         return 0
 
+    def executeTurn(self):
+        print("[NPC::executeTurn] - IMPLEMENT ME")
+
+    def endTurn(self):
+        print("[NPC::endTurn] - IMPLEMENT ME")
+
     def __repr__(self):
         ret  = super().__repr__()
         ret += "Slot ID: %d\n" % (self.slot_id)
@@ -227,5 +247,6 @@ if __name__ == "__main__":
         mon_type.printUnits()
 
         for i in range(10):
-            mon_type.drawRoundAbility()
+            mon_type.prepareTurn()
+            mon_type.executeTurn()
             mon_type.endTurn()

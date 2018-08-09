@@ -49,7 +49,7 @@ class Map():
 
     def spawnStartingRoom(self):
         assert self.start_room
-        self.start_room.spawnNPCs()
+        return self.start_room.spawnNPCs()
 
     def connectRooms(self, r1, r1_conn, r2, r2_conn, row, col, connType=room.DOOR_TYPE_CLOSED):
         print("Connection Room Creation")
