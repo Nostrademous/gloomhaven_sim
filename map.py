@@ -4,17 +4,23 @@
 import global_vars as gv
 import room
 import npc
+from utils import pickRandom
 
 class Map():
-    def __init__(self, name, num, scenDiff):
+    def __init__(self, name, num, prep_callback=None):
         self.scen_name       = name
         self.scen_number     = num
-        self.difficulty      = scenDiff
+        self.prep_cb         = prep_callback
+        self.difficulty      = 0
         self.rooms           = dict()
         self.room_connectors = list()
 
         # scenario specific
         self.start_room      = None
+
+        # prep the map if we have a callback
+        if self.prep_cb:
+            self.prep_cb(self)
 
     def __repr__(self):
         ret  = "Name: %s\n" % (self.scen_name)
@@ -32,6 +38,9 @@ class Map():
         assert len(self.rooms) == 0
         for room in rList:
             self.rooms[room.getName()] = room
+
+    def setDifficulty(self, value):
+        self.difficulty = value
 
     def setStartingRoom(self, name):
         assert name in self.rooms
@@ -182,12 +191,7 @@ def a_star_search(graph, start, goal, hasJump=False, hasFlying=False):
     return path, cost_so_far[goal]
 
 
-def scenario_1(numPlayers):
-    gv.setNumPlayersInScenario(numPlayers)
-
-    # create map
-    m = Map("Black Barrow", 1, scenDiff=1)
-
+def prep_scenario_1_map(m):
     # add rooms
     m.addRooms([room.G1b, room.I1b, room.L1a])
     print(m)
@@ -256,7 +260,13 @@ def scenario_1(numPlayers):
     print("Path is:\n", parents, "\n\n")
 
     m.setStartingRoom('L1a')
-    m.spawnStartingRoom()
+    return m
+
+_map_json = {
+    "1": Map("Black Barrow", 1, prep_scenario_1_map)
+}
 
 if __name__ == "__main__":
-    scenario_1(4) # change arg to list of player objects
+    gv.setNumPlayersInScenario(pickRandom([i for i in range(2,5)]))
+    m = _map_json["1"]
+    m.spawnStartingRoom()

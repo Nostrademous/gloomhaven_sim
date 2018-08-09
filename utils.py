@@ -29,13 +29,16 @@ def strJson(jsonData):
     else:
         return json.dumps(jsonData.getJson(), indent=4, sort_keys=True)
 
-def pickRandom(listChoices):
+def pickRandom(listChoices, num=1):
     if len(listChoices) == 0: return None
 
     # to make it really random use the cryptographically safe
     # random initialization each time
     secure_random = random.SystemRandom()
     
-    if isinstance(listChoices, dict):
-        return listChoices[secure_random.choice(list(listChoices))]
-    return secure_random.choice(listChoices)
+    if num == 1:
+        if isinstance(listChoices, dict):
+            return listChoices[secure_random.choice(list(listChoices))]
+        return secure_random.choice(listChoices)
+    else:
+        return secure_random.sample(listChoices, num)

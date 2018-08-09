@@ -169,6 +169,9 @@ class Party():
             self.party_json['GloomhavenProsperity']['Level'] += 1
             self.party_json['GloomhavenProsperity']['Checkmarks'] += 1
 
+    def getPartySize(self):
+        return len(self.members)
+
     def getJson(self):
         return self.party_json
 
@@ -187,7 +190,7 @@ class Party():
                 heroData = self.party_json['Members'][v]
                 self.members.append(ch.Character(heroData['name'], heroData['type'], heroData['owner']))
 
-if __name__ == "__main__":
+def make_a_party():
     import global_vars as gv
     gv.init() # call only once
 
@@ -286,5 +289,9 @@ if __name__ == "__main__":
     #print("Avg Level: ", party.calcAvgLevel())
     party.saveParty()
 
+    return party
+
+if __name__ == "__main__":
+    party = make_a_party()
     party.loadParty('TheBrotherhood')
     printJson(party)

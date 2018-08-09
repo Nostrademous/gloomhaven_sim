@@ -114,6 +114,7 @@ class Character(Unit):
                 print(play_cards[1])
                 print(play_cards[0])
         else:
+            print("[%s] Taking Long Rest" % (self.getName()))
             self.long_rest = True
             self.round_init = 99
 
@@ -124,7 +125,7 @@ class Character(Unit):
         if self.long_rest:
             self.heal(2)
             self.long_rest = False
-            if len(self.ability_deck) > 0:
+            if self.ability_deck:
                 lossCard = self.ability_deck.pickRandomDiscardedCardForLoss()
                 self.ability_deck.recoverDiscardedCards(lossCard)
 

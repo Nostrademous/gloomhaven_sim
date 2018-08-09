@@ -53,6 +53,9 @@ class NPCType():
         self.curr_units     = list()
 
     def createEnemy(self, cellLoc=gv.Location(0,0), elite=False, isSpawn=False):
+        if isinstance(cellLoc, tuple):
+            cellLoc = gv.Location(cellLoc[0], cellLoc[1])
+
         assert isinstance(cellLoc, gv.Location)
         #print("Create Enemy Location: %s" % (str(cellLoc)))
 

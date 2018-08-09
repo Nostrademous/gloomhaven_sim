@@ -3,8 +3,11 @@
 
 from multiprocessing import Process
 
-from utils import printJson
+import global_vars as gv
+from utils import printJson, pickRandom
 import character as hero
+import map
+import party
 
 INERT  = 0
 WANING = 1
@@ -14,13 +17,23 @@ class Scenario():
     def __init__(self, num, name="", level=0):
         self.scenName   = name
         self.scenID     = num
-        self.party      = list()
+        self.party      = None
         self.round      = 0
         self.diff_level = level
         self.complete   = False
 
         # initialize elemental board to INERT
         self._reset_elements()
+
+        self.setMap()
+
+        # we previously set the self.party parameter
+        # but that does not mean that all members of
+        # the party are participating in this scenario
+        # so self.scen_members is a list of actual
+        # heroes from the party participating in the 
+        # scenario
+        self.scen_members = None
 
     def _reset_elements(self):
         self.elements = {
@@ -32,23 +45,27 @@ class Scenario():
             "light": INERT
         }
 
+    # this creates the map.Map() instance which in turn
+    # calls it's preparation callback function (if present)
+    # to prepoulate the map with all objects/units
+    def setMap(self):
+        self.scen_map = map._map_json[str(self.scenID)]
+        assert self.scen_map != None
+
     def setDifficultyLevel(self, value):
         self.diff_level = value
 
-    def addPlayer(self, player):
-        print("[scenario :: addPlayer] :: Adding: %s" % (player.getName()))
-        try:
-            assert isinstance(player, hero.Character)
-            self.party.append(player)
-        except AssertionError as err:
-            print("[addPlayer :: AssertionError]: %s" % err)
-            raise
+    def addParty(self, myParty):
+        assert isinstance(myParty, party.Party)
+        self.party = myParty
+        # pick the members of the part in scenario
+        self.scen_members = self.pickMembers()
 
-    def calcTrapDamage(self):
-        # this is the default damage amount of the trap
-        # specific monster/player/scenario rules can hard-specify
-        # the amount instead
-        return 2 + self.diff_level
+    def pickMembers(self, num=4):
+        random_members = pickRandom(self.party.members, num)
+        print("SELECTED RANDOM MEMBERS\n\n")
+        print(random_members)
+        return random_members
 
     def invokeElement(self, name):
         try:
@@ -67,13 +84,28 @@ class Scenario():
             print("[consumeElement :: AssertionError] %s" % err)
             raise
 
+    def calculateDifficulty(self, offset=0):
+        avgLevel = 0
+        for hero in self.scen_members:
+            avgLevel += hero.getLevel()
+        return int(avgLevel/len(self.scen_members)) + offset
+
     def startScenario(self):
         '''All setup for scenario.'''
         print("[startScenario] Scenario: %d -- Implement Me" % (self.scenID))
 
         # setup each players ability cards for use in scenario
-        for hero in self.party:
+        for hero in self.scen_members:
             hero.scenarioPreparation()
+
+        # set num of players participating in scenario
+        gv.setNumPlayersInScenario(len(self.scen_members))
+
+        # calculate the scenario difficulty
+        self.scen_map.setDifficulty(self.calculateDifficulty())
+
+        # spawn NPCs in starting room
+        self.scen_map.spawnStartingRoom()
 
     def endScenario(self, success=False):
         '''All end scenario work.'''
@@ -85,7 +117,7 @@ class Scenario():
 
         # parallelize hero ability selection
         parallel_funcs = list()
-        for hero in self.party:
+        for hero in self.scen_members:
             parallel_funcs.append(Process(target=hero.selectAction()))
 
         # start them
@@ -117,6 +149,10 @@ class Scenario():
         # check scenario completion condition
         # TODO
 
+        # perfrom endTurn for each hero
+        for hero in self.scen_members:
+            hero.endTurn()
+
         # increment round counter
         self.round += 1
         # dummy catch to exist while loop for now
@@ -129,14 +165,14 @@ class Scenario():
         return ret
 
 if __name__ == "__main__":
-    scen = Scenario(1)
-    scen.endTurn()
+    scen = Scenario(1, "Black Barrows")
+    scen.addParty(party.make_a_party())
+    scen.startScenario()
 
-    scen.invokeElement('air')
-    scen.invokeElement('fire')
-    printJson(scen.elements)
+    while not scen.complete:
+        scen.prepareTurn()
+        scen.executeTurn()
+        scen.endTurn()
 
-    scen.consumeElement('fire')
-    scen.endTurn()
+    scen.endScenario()
 
-    scen.endTurn()

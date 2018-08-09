@@ -18,3 +18,7 @@ def hasEffect(effList, key):
 
 def removeEffect(effList, key):
     effList[key.lower()] = False
+
+def removeOneTurnEffects(effList):
+    for eff in _one_turn_effects:
+        removeEffect(effList, eff)

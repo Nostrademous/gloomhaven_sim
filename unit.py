@@ -52,8 +52,7 @@ class Unit():
 
     def endTurn(self):
         # remove one-round long effects
-        for eff in _one_turn_effects:
-            self.effects[eff.lower()] = False
+        removeOneTurnEffects(self.effects)
 
     def underEffect(self, effectName):
         return self.effects[effectName.lower()]
