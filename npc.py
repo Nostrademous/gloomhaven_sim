@@ -5,6 +5,10 @@ from unit import Unit
 import global_vars as gv
 from utils import pickRandom
 
+NONE   = 0
+NORMAL = 1
+ELITE  = 2
+
 class NPCAbility():
     def __init__(self, num, jsonData):
         #print(jsonData)
@@ -49,16 +53,22 @@ class NPCType():
         self.curr_units     = list()
 
     def createEnemy(self, cellLoc=gv.Location(0,0), elite=False, isSpawn=False):
+        assert isinstance(cellLoc, gv.Location)
+        #print("Create Enemy Location: %s" % (str(cellLoc)))
+
         if len(self.available_ids) > 0:
             selected_id = self.available_ids[0]
             self.available_ids.remove(selected_id)
             if isinstance(cellLoc, tuple):
                 cellLoc = gv.Location(cellLoc[0], cellLoc[1])
-            self.curr_units.append(NPC(self.name, self.stat_data[str(self.difficulty)], selected_id,
-                                       cellLoc, elite=elite, boss=self.deck_name == "Boss", 
-                                       spawn=isSpawn))
+            new_unit = NPC(self.name, self.stat_data[str(self.difficulty)], selected_id,
+                           cellLoc, elite=elite, boss=self.deck_name == "Boss",
+                           spawn=isSpawn)
+            self.curr_units.append(new_unit)
+            return new_unit
         else:
-            print("Cannot Create Enemy: '%s'%" % (self.name))
+            print("Cannot Create Enemy: '%s'" % (self.name))
+        return None
 
     def drawRoundAbility(self):
         assert len(self.curr_deck) > 0

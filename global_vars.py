@@ -5,7 +5,10 @@ import json
 from utils import listFilesExtension
 from collections import namedtuple
 
+
+SpawnUnit = namedtuple('SpawnUnit', ['unitType', 'row', 'col', 'numPlayerList'])
 Location = namedtuple('Location', ['row', 'col'])
+
 def rotateLocationLeft(loc, num_times=1):
     """Given a hex coordinate (x, y) return the coordinate of hex when rotated 60° around the origin.
     """
@@ -30,6 +33,13 @@ def init():
     loadAbilityData()
     loadMonsterData()
     loadItemData()
+
+    global numPlayersInScenario
+    numPlayersInScenarion = 0
+
+def setNumPlayersInScenario(value):
+    global numPlayersInScenario
+    numPlayersInScenario = value
 
 def loadHeroData(dataFile='hero_data.json'):
     global heroDataJson
@@ -61,8 +71,9 @@ def loadMonsterData(dirPath='monster_data', deckFile='monster_deck.json'):
     for file in files:
         with open(file, 'r') as infile:
             monsterDataJson = { **monsterDataJson, **json.load(infile) }
-    
+
     monsterDeckDataJson = {}
     with open(deckFile, 'r') as infile:
         monsterDeckDataJson = json.load(infile)
+
 init()

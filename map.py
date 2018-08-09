@@ -13,6 +13,9 @@ class Map():
         self.rooms           = dict()
         self.room_connectors = list()
 
+        # scenario specific
+        self.start_room      = None
+
     def __repr__(self):
         ret  = "Name: %s\n" % (self.scen_name)
         ret += "Comprised of %d rooms:\n  " % (len(self.rooms))
@@ -29,6 +32,15 @@ class Map():
         assert len(self.rooms) == 0
         for room in rList:
             self.rooms[room.getName()] = room
+
+    def setStartingRoom(self, name):
+        assert name in self.rooms
+        self.start_room = self.getRoomByName(name)
+        self.start_room.setOpen()
+
+    def spawnStartingRoom(self):
+        assert self.start_room
+        self.start_room.spawnNPCs()
 
     def connectRooms(self, r1, r1_conn, r2, r2_conn, row, col, connType=room.DOOR_TYPE_CLOSED):
         print("Connection Room Creation")
@@ -170,7 +182,9 @@ def a_star_search(graph, start, goal, hasJump=False, hasFlying=False):
     return path, cost_so_far[goal]
 
 
-def scenario_1():
+def scenario_1(numPlayers):
+    gv.setNumPlayersInScenario(numPlayers)
+
     # create map
     m = Map("Black Barrow", 1, scenDiff=1)
 
@@ -193,7 +207,7 @@ def scenario_1():
     table_2 = room.GloomhavenObject("Table", room.OBJ_OBSTACLE, [(1,7),(1,9)])
     room.I1b.addObject(table_1)
     room.I1b.addObject(table_2)
-    
+
     # create traps
     trap_1 = room.GloomhavenObject("Damage_Trap", room.OBJ_TRAP, [(0,6)])
     trap_2 = room.GloomhavenObject("Damage_Trap", room.OBJ_TRAP, [(0,8)])
@@ -213,7 +227,12 @@ def scenario_1():
     room.I1b.addObjects([coin1, coin2, coin3, coin4, coin5])
     print(table_1)
 
-    # set map coordinates for all tiles
+    # initialize map coordinates for all tiles
+    # note: parameters are
+    #    name of first room
+    #    row to start at
+    #    col to start at
+    #    dictionary of room orientations/rotations with respect to first room (3 == up-side-down)
     m.mapCoordinates('L1a', 0, 0, {'G1b':3, 'I1b':0})
 
     # NPCs
@@ -221,11 +240,23 @@ def scenario_1():
     archers = npc.NPCType("Bandit Archer", gv.monsterDataJson["Bandit Archer"])
     #bones   = npc.NPCType("Living Bones", gv.monsterDataJson["Living Bones"])
 
+    guard_1     = gv.SpawnUnit(guards, 0, 0, [npc.NONE, npc.NORMAL, npc.NORMAL])
+    guard_2     = gv.SpawnUnit(guards, 1, 1, [npc.NONE, npc.NORMAL, npc.ELITE])
+    guard_3     = gv.SpawnUnit(guards, 2, 0, [npc.NORMAL, npc.NORMAL, npc.NORMAL])
+    guard_4     = gv.SpawnUnit(guards, 5, 1, [npc.ELITE, npc.NONE, npc.NONE])
+    guard_5     = gv.SpawnUnit(guards, 4, 0, [npc.NORMAL, npc.NORMAL, npc.NORMAL])
+    guard_6     = gv.SpawnUnit(guards, 5, 1, [npc.NONE, npc.NORMAL, npc.ELITE])
+    guard_7     = gv.SpawnUnit(guards, 6, 0, [npc.NONE, npc.NORMAL, npc.NORMAL])
+
+    room.L1a.addSpawns([guard_1, guard_2, guard_3, guard_4, guard_5, guard_6, guard_7])
+
     parents, cost = a_star_search(m, gv.Location(2, 8), gv.Location(10, -4))
     print("Can reach desired target in %d steps" % (len(parents)-1))
     print("Damage taken on path: %d" % (cost - (len(parents)-1)))
-    print("Path is:\n", parents)
+    print("Path is:\n", parents, "\n\n")
 
+    m.setStartingRoom('L1a')
+    m.spawnStartingRoom()
 
 if __name__ == "__main__":
-    scenario_1()
+    scenario_1(4) # change arg to list of player objects

@@ -2,7 +2,7 @@
 """
 
 import global_vars as gv
-from npc import NPC
+from npc import NPC, NONE, ELITE
 from character import Character
 
 # DOOR TYPES
@@ -18,13 +18,15 @@ OBJ_TRAP        = 1
 OBJ_HAZARD      = 2
 OBJ_TREASURE    = 3
 OBJ_COIN        = 4
+OBJ_DIFFICULT   = 5
 
 _obj_type_names = {
     "0": "Obstacle",
     "1": "Trap",
     "2": "Hazard",
     "3": "Treasure",
-    "4": "Coin"
+    "4": "Coin",
+    "5": "Difficult"
 }
 
 class GloomhavenObject():
@@ -67,6 +69,7 @@ class GloomhavenTile():
         self.hazard    = None
         self.treasure  = None
         self.coins     = 0
+        self.difficult = None
 
         # for path-finding and field of vision
         self.map_loc   = None
@@ -104,6 +107,8 @@ class GloomhavenTile():
                 return gv.calculateTrapDamage(scenDiff) + 1
             elif self.getHazard():
                 return gv.calculateHazardDamage(scenDiff) + 1
+            elif self.getDifficult():
+                return 2
         return 1
 
     def setDoorType(self, doorType):
@@ -137,6 +142,18 @@ class GloomhavenTile():
     def addCoin(self, amount=1):
         self.coins += amount
 
+    def addDifficult(self, diff):
+        self.difficult = diff
+
+    def addUnit(self, unitType, unitList):
+        assert gv.numPlayersInScenario >= 2 and gv.numPlayersInScenario <= 4
+
+        if unitList[gv.numPlayersInScenario - 2] > NONE:
+            elite = unitList[gv.numPlayersInScenario - 2] == ELITE
+            self.unit = unitType.createEnemy(self.getMapLocation(), elite)
+            assert self.unit
+            print("Adding Unit %s\n" % (str(self.unit)))
+
     def getCoins(self):
         return self.coins
 
@@ -148,6 +165,12 @@ class GloomhavenTile():
 
     def getHazard(self):
         return self.hazard
+
+    def getDifficult(self):
+        return self.difficult
+
+    def getUnit(self):
+        return self.unit
 
     def getTreasure(self):
         return self.hazard
@@ -231,6 +254,12 @@ class GloomhavenRoom():
         if len(self.tilePattern) > 0:
             self.fillPattern()
 
+        # members specific to rooms in a map
+        self.open           = False
+        self.npc_spawn_locs = list()
+
+        self.hero_start_locs= list()
+
     def __repr__(self):
         ret  = "Room: %s\n" % (self.name)
         return ret
@@ -241,6 +270,9 @@ class GloomhavenRoom():
     def getOrientation(self):
         return self.orient
 
+    def setOpen(self):
+        self.open = True
+
     def getTile(self, row, col):
         #print("[getTile] {%d,%d}" % (row, col))
         for tile in self.tiles:
@@ -248,6 +280,27 @@ class GloomhavenRoom():
             if tile.row_id == row and tile.col_id == col:
                 return tile
         return None
+
+    def addPlayerStartLocs(self, locs):
+        for loc in locs:
+            self.hero_start_locs.append(loc)
+
+    def addSpawns(self, npcList):
+        for npc in npcList:
+            assert isinstance(npc, gv.SpawnUnit)
+            self.npc_spawn_locs.append(npc)
+
+    def spawnNPCs(self):
+        assert self.open # only spawn when room is "seen"
+
+        for npc in self.npc_spawn_locs:
+            assert isinstance(npc, gv.SpawnUnit)
+
+            spawnTile = self.getTile(npc.row, npc.col)
+            if spawnTile:
+                spawnTile.addUnit(npc.unitType, npc.numPlayerList)
+            else:
+                raise Exception("GloomhavenRoom", "addNPCs - failed to find {%d,%d}" % (npc.row, npc.col))
 
     def addObjects(self, objects):
         for object in objects:
@@ -265,6 +318,8 @@ class GloomhavenRoom():
                     tile.addTrap(object)
                 elif object.getType() == OBJ_HAZARD:
                     tile.addHazard(object)
+                elif object.getType() == OBJ_DIFFICULT:
+                    tile.addDifficult(object)
                 elif object.getType() == OBJ_COIN:
                     for loc in object.getTiles():
                         tile = self.getTile(loc[0], loc[1])
