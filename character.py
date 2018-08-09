@@ -118,6 +118,9 @@ class Character(Unit):
             self.long_rest = True
             self.round_init = 99
 
+    def getRoundInitiative(self):
+        return self.round_init
+
     def endTurn(self):
         # call base class to remove one-round effects
         super().endTurn()

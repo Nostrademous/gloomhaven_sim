@@ -150,6 +150,13 @@ class Scenario():
         print("[Scenario %d] Execute Turn :: Round: %d" % (self.scenID, self.round))
 
         # sort all player and npc actions in initiative order
+        initiative_list = list()
+        for npcType in self.npc_types:
+            initiative_list.append((npcType.getRoundInitiative(), npcType))
+        for hero in self.scen_members:
+            initiative_list.append((hero.getRoundInitiative(), hero))
+        initiative_list = sorted(initiative_list, key=lambda x: x[0])
+        print("Initiative Order: %s" % (initiative_list))
 
         # execute each unit's actions (including spawns)
 

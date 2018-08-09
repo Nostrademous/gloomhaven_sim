@@ -19,6 +19,9 @@ class NPCAbility():
         if 'Reshuffle' in jsonData:
             self.reshuffle  = True
 
+    def getInitiative(self):
+        return self.initiative
+
     def __repr__(self):
         ret  = '[%d]\n' % self.num
         ret += 'Initiative: %d\n' % self.initiative
@@ -52,6 +55,10 @@ class NPCType():
         self.curr_ability   = None
         self.curr_units     = list()
 
+    def __repr__(self):
+        ret  = "[%s]" % self.name
+        return ret
+
     def createEnemy(self, cellLoc=gv.Location(0,0), elite=False, isSpawn=False):
         if isinstance(cellLoc, tuple):
             cellLoc = gv.Location(cellLoc[0], cellLoc[1])
@@ -78,6 +85,10 @@ class NPCType():
         self.curr_ability = pickRandom(self.curr_deck)
         self.curr_deck.remove(self.curr_ability)
         print(self.curr_ability)
+
+    def getRoundInitiative(self):
+        assert self.curr_ability != None
+        return self.curr_ability.getInitiative()
 
     def prepareTurn(self):
         self.drawRoundAbility()
