@@ -92,7 +92,7 @@ class Scenario():
 
     def startScenario(self):
         '''All setup for scenario.'''
-        print("[startScenario] Scenario: %d -- Implement Me" % (self.scenID))
+        assert len(self.scen_members) >= 2 and len(self.scen_members) <= 4
 
         # setup each players ability cards for use in scenario
         for hero in self.scen_members:
