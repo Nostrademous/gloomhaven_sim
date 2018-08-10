@@ -145,7 +145,7 @@ class Character(Unit):
             
             available_actions = itertools.product(top_actions, bot_actions)
             for i,action in enumerate(available_actions):
-                print("%d - %s" % (i=1, str(action)))
+                print("%d - %s" % (i, str(action)))
             exit(0)
 
     def endTurn(self):
