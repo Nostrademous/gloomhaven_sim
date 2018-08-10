@@ -61,7 +61,7 @@ class Unit():
         return self.name
 
     def __repr__(self):
-        str  = "[%s]\n" % (self.name)
+        str  = "[%s]" % (self.name)
         return str
 
 if __name__ == "__main__":

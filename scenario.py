@@ -1,7 +1,8 @@
 '''
 '''
 
-from multiprocessing import Process
+#from multiprocessing import Process
+import threading
 
 import global_vars as gv
 from utils import printJson, pickRandom
@@ -32,7 +33,7 @@ class Scenario():
         # but that does not mean that all members of
         # the party are participating in this scenario
         # so self.scen_members is a list of actual
-        # heroes from the party participating in the 
+        # heroes from the party participating in the
         # scenario
         self.scen_members = None
         self.npcs         = list()
@@ -125,8 +126,16 @@ class Scenario():
 
         # parallelize hero ability selection
         parallel_funcs = list()
+
+        for hero in self.scen_members:
+            t = threading.Thread(target=hero.selectAction)
+            parallel_funcs.append(t)
+
+        '''
+        # this only works correctly on Unix do to how "fork()" is implemented
         for hero in self.scen_members:
             parallel_funcs.append(Process(target=hero.selectAction()))
+        '''
 
         # start them
         for p in parallel_funcs:
@@ -159,8 +168,10 @@ class Scenario():
         print("Initiative Order: %s" % (initiative_list))
 
         # execute each unit's actions (including spawns)
-
+        for unit in initiative_list:
+            unit[1].executeTurn()
             # end turn for each unit
+            unit[1].endTurn()
 
     def endTurn(self):
         print("[Scenario %d] End Turn :: Round: %d" % (self.scenID, self.round))
@@ -173,16 +184,12 @@ class Scenario():
         # check scenario completion condition
         # TODO
 
-        # perform endTurn for each NPCType
-        for npcType in self.npc_types:
-            npcType.endTurn()
-
-        # perfrom endTurn for each hero
-        for hero in self.scen_members:
-            hero.endTurn()
+        # determine if a character wants to short-rest
+        # TODO
 
         # increment round counter
         self.round += 1
+
         # dummy catch to exist while loop for now
         if self.round >= 9:
             self.complete = True

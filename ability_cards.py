@@ -26,6 +26,16 @@ class AbilityCard():
     def addBottom(self, dictBottom):
         self.bottom = dictBottom
 
+    def getTop(self):
+        return self.top
+
+    def getBottom(self):
+        return self.bottom
+
+    # for use with DEFAULT TOP & BOTTOM actions
+    def setInitiative(self, value):
+        self.initiative = value
+
     def getInitiative(self):
         return self.initiative
 
@@ -37,6 +47,10 @@ class AbilityCard():
 
     def __str__(self):
         return self.__repr__()
+
+DEFAULT = AbilityCard(0, "Default Top", 0, 100)
+DEFAULT.addTop({"Actions": { "1": {"Type": "Attack", "Value": 2} } })
+DEFAULT.addBottom({"Actions": { "1": {"Type": "Move", "Value": 2} } })
 
 def loadAllHeroCards(heroType, level):
     card_list = list()

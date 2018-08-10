@@ -39,11 +39,12 @@
 '''
 
 import json
+import itertools
 import global_vars as gv
 from utils import *
 from effects import *
 from unit import Unit
-from ability_cards import HeroAbilityCardDeck
+from ability_cards import HeroAbilityCardDeck, DEFAULT
 
 import perks
 import amd
@@ -52,7 +53,7 @@ class Character(Unit):
     _valid_actions = ['play_cards', 'long_rest']
 
     def __init__(self, name, type, owner='<UNKNOWN>', level=1, xp=0, gold=30, quest=0, checkmarks=0):
-        print('Name: %s' % name)
+        #print('Name: %s' % name)
         super().__init__(name, 0)
         self.type           = type
         self.owner          = owner
@@ -78,6 +79,8 @@ class Character(Unit):
         self.amd            = amd.AttackModifierDeck(isPlayer=True)
         self.long_rest      = False
         self.round_init     = 99
+        
+        self.default_action = DEFAULT
 
     def scenarioPreparation(self):
         self.setAbilityCardDeck(HeroAbilityCardDeck(self.type, self.level))
@@ -113,17 +116,45 @@ class Character(Unit):
             else:
                 print(play_cards[1])
                 print(play_cards[0])
+
+            self.default_action.setInitiative(self.round_init)
         else:
             print("[%s] Taking Long Rest" % (self.getName()))
             self.long_rest = True
             self.round_init = 99
 
+    def getRoundAbilityCards(self):
+        return self.ability_deck.in_hand_cards
+
+    def getRoundAbilitySelection(self):
+        tops = list([DEFAULT.getTop()])
+        bots = list([DEFAULT.getBottom()])
+        for card in self.getRoundAbilityCards():
+            tops.append(card.getTop())
+            bots.append(card.getBottom())
+        return tops, bots
+
     def getRoundInitiative(self):
         return self.round_init
+
+    def executeTurn(self):
+        print("[character::executeTurn] - IMPLEMENT ME")
+        
+        if not self.long_rest:
+            top_actions, bot_actions = self.getRoundAbilitySelection()
+            
+            available_actions = itertools.product(top_actions, bot_actions)
+            for i,action in enumerate(available_actions):
+                print("%d - %s" % (i=1, str(action)))
+            exit(0)
 
     def endTurn(self):
         # call base class to remove one-round effects
         super().endTurn()
+
+        # reset our play-cards to nothing
+        self.play_cards = None
+        self.default_action.setInitiative(100) # just incase
 
         if self.long_rest:
             self.heal(2)
