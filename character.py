@@ -1,41 +1,10 @@
 '''
     Gloomhaven Characters have the following attributes:
-
-        # DONE
-        # Stage 1 implementation tracking
-        Name: (string literal)
-        Player: (string literal of player owning this hero)
-        Type: Brute, Cragheart, Tinkerer, Scoundrel, Spellweaver, Mindthief
-        Level: 1 to 9 (default 1)
-        Current Health: (default 0)
-        Max Health: (default 0)
-        XP: (default 0)
-        Gold: (default 0)
-        Quest: (integer literal)
-        Checkmarks: (default 0, integer literal) # 3 checkmarks == 1 perk
-
-        # DONE
-        # Stage 2 implementation tracking
-        IsRetired: (default False)
-        IsExhausted: (default False)
-
         # Stage 3 implementation tracking
-        Effects: list() #immobilized, poisoned, wounded, etc.
         Spawns: list(class units.py)
 
         # Stage 4 implementation tracking
         Items: list(class items.py)
-        AMD (Attack Modifier Deck): class(attack_mod_deck.py)
-
-        # Stage 5 implementation tracking
-        AbilityCards: list(class abilityCards.py)
-        Perks: list(class perks.py)
-
-        # Stage 6 implementation tracking
-        Location: (class location.py) - Scenario # + hex-grid
-        Scenario Mission: (class scenario_mission.py)
-
-        # FUTURE TODO - maybe more stuff needed
 '''
 
 import json
@@ -48,6 +17,50 @@ from ability_cards import HeroAbilityCardDeck, DEFAULT
 
 import perks
 import amd
+import items
+
+_item_template = {
+    "HEAD": None,     
+    "BODY": None,
+    "HANDS": [],
+    "LEGS": None,
+    "SMALL_ITEM": []
+}
+
+class CharacterItem():
+    def __init__(self):
+        self.equipped_items = dict(_item_template)
+        self.unequipped_items = list()
+
+    def equipItem(self, itemObj):
+        if itemObj.slot in ["HANDS", "SMALL_ITEM"]:
+            assert len(self.equipped_items[itemObj.slot]) == 0
+        else:
+            assert self.equipped_items[itemObj.slot] == None
+        self.equipped_items[itemObj.slot] = itemObj
+
+    def unequipItem(self, slot):
+        if slot in ["HANDS", "SMALL_ITEM"]:
+            assert len(self.equipped_items[slot]) > 0
+        else:
+            assert self.equipped_items[slot] != None
+        self.unequipped_items.append(self.equipped_items[slot])
+        self.equipped_items[slot] = None
+
+    def sellItem(self, itemName):
+        for item in self.unequipped_items:
+            if item.name == itemName:
+                self.unequipped_items.remove(item)
+                return item.sellCost()
+        # if we get here the item wasn't in our unequipped list
+        for item in self.equipped_items:
+            if self.equipped_items[item].name == itemName:
+                cost = self.equipped_items[item].sellCost()
+                self.equipped_items[item] = None
+                return cost
+        raise Exception("CharacterItem::sellItem", "'%s' not found" % (itemName))
+        return 0
+
 
 class Character(Unit):
     _valid_actions = ['play_cards', 'long_rest']
@@ -75,7 +88,8 @@ class Character(Unit):
         self.exhausted      = False
 
         self.effects        = initEffects()
-        self.items          = list()
+        self.temp_items     = list()
+        self.items          = CharacterItem()
         self.amd            = amd.AttackModifierDeck(isPlayer=True)
         self.long_rest      = False
         self.round_init     = 99
@@ -227,8 +241,23 @@ class Character(Unit):
     def getLevel(self):
         return self.level
 
+    def buyItem(self, itemName):
+        item = items.createItem(itemName)
+        if item:
+            try:
+                assert self.gold >= item.cost
+                self.items.equipItem(item)
+                self.gold -= item.cost
+            except AssertionError:
+                print("You do not have enough gold to buy %s" % (itemName))
+
+    def sellItem(self, itemName):
+        gold_value = self.items.sellItem(itemName)
+        self.gold += gold_value
+
+    # TEMPORARY PLACEHOLDER FOR TRACKING CAMPAIGN PROGRESS
     def addItem(self, itemName):
-        self.items.append(itemName)
+        self.temp_items.append(itemName)
 
     def getJson(self):
         jsonData = {}
@@ -247,7 +276,7 @@ class Character(Unit):
             jsonData['deck_size'] = self.deck_size
 
         jsonData['retired'] = self.retired
-        jsonData['items'] = self.items
+        jsonData['items'] = self.temp_items
         jsonData['perks'] = [str(p) for p in self.selected_perks]
         return jsonData
 

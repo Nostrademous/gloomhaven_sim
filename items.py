@@ -91,18 +91,24 @@ class Item():
             ret += "    Add %d %d cards\n" % (self.amdEffect['Count'], self.amdEffect['Value'])
         return ret
 
+
+def createItem(itemName):
+    itemData = gv.itemDataJson[item]
+    item_obj = Item(int(item), itemData['Name'], itemData['Slot'].upper(), itemData['MaxCount'],
+                    cost=itemData['Cost'], maxUses=itemData['Buff']['Count'])
+    if "AMDEffect" in itemData:
+        item_obj.setAMDEffect(itemData["AMDEffect"])
+    if "Buff" in itemData:
+        item_obj.setBuff(itemData["Buff"])
+    if "Consumed" in itemData:
+        item_obj.setConsumable(itemData["Consumed"])
+    return item_obj
+
+
 if __name__ == "__main__":
     import global_vars as gv
     gv.init()
 
     for item in gv.itemDataJson:
-        itemData = gv.itemDataJson[item]
-        item_obj = Item(int(item), itemData['Name'], itemData['Slot'].upper(), itemData['MaxCount'],
-                        cost=itemData['Cost'], maxUses=itemData['Buff']['Count'])
-        if "AMDEffect" in itemData:
-            item_obj.setAMDEffect(itemData["AMDEffect"])
-        if "Buff" in itemData:
-            item_obj.setBuff(itemData["Buff"])
-        if "Consumed" in itemData:
-            item_obj.setConsumable(itemData["Consumed"])
-        print(item_obj)
+        actual_item = createItem(item)
+        print(actual_item)
