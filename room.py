@@ -93,9 +93,7 @@ class GloomhavenTile():
         return self.map_loc
 
     def isPassable(self, hasJump=False, hasFlying=False, isPlayer=True):
-        if self.hasEnemy(isPlayer):
-            return False
-        if self.getObstacle() and (not hasJump or not hasFlying):
+        if (self.hasEnemy(isPlayer) or self.getObstacle()) and (not hasJump or not hasFlying):
             return False
         return True
 

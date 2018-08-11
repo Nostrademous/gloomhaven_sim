@@ -7,6 +7,7 @@
         Items: list(class items.py)
 '''
 
+import copy
 import json
 import itertools
 import global_vars as gv
@@ -29,7 +30,7 @@ _item_template = {
 
 class CharacterItem():
     def __init__(self):
-        self.equipped_items = dict(_item_template)
+        self.equipped_items = copy.deepcopy(_item_template)
         self.unequipped_items = list()
 
     def equipItem(self, itemObj):
