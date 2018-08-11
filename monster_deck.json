@@ -188,5 +188,147 @@
                 "SelfBuffs": ["Shield_1", "Heal_2"]
             }
         }
+    },
+    "Living Corpse": {
+        "564": {
+            "Initiative": 21,
+            "Actions": {
+                "Move": 1,
+                "SingleEnemyAdjacentDebuffs": ["Muddle", "Immobilize"]
+            }
+        },
+        "565": {
+            "Initiative": 47,
+            "Actions": {
+                "Move": 1,
+                "Attack": -1
+            }
+        },
+        "566": {
+            "Initiative": 66,
+            "Reshuffle": 1,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0
+            }
+        },
+        "567": {
+            "Initiative": 66,
+            "Reshuffle": 1,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0
+            }
+        },
+        "568": {
+            "Initiative": 82,
+            "Actions": {
+                "Move": -1,
+                "Attack": 1
+            }
+        },
+        "569": {
+            "Initiative": 91,
+            "Actions": {
+                "Move": 1,
+                "SelfDamage": 1
+            }
+        },
+        "570": {
+            "Initiative": 71,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0,
+                "AllEnemyAdjacentDebuffs": ["Poison"]
+            }
+        },
+        "571": {
+            "Initiative": 32,
+            "Actions": {
+                "Attack": 2,
+                "Push": 1,
+                "SelfDamage": 1
+            }
+        }
+    },
+    "Cultist": {
+        "604": {
+            "Initiative": 10,
+            "Actions": {
+                "Move": -1,
+                "Attack": -1,
+                "OnDeath": {
+                    "Attack": 2,
+                    "Target": "AllAdjacent"
+                }
+            }
+        },
+        "605": {
+            "Initiative": 10,
+            "Actions": {
+                "Move": -1,
+                "Attack": -1,
+                "OnDeath": {
+                    "Attack": 2,
+                    "Target": "AllAdjacent"
+                }
+            }
+        },
+        "606": {
+            "Initiative": 27,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0
+            }
+        },
+        "607": {
+            "Initiative": 27,
+            "Actions": {
+                "Move": 0,
+                "Attack": 0
+            }
+        },
+        "608": {
+            "Initiative": 39,
+            "Actions": {
+                "Move": -1,
+                "Attack": 0,
+                "SelfBuffs": ["Heal_1"]
+            }
+        },
+        "609": {
+            "Initiative": 63,
+            "Reshuffle": 1,
+            "Actions": {
+                "Summon": {
+                    "Type": "Unit",
+                    "UnitName": "Living Bones",
+                    "UnitType": "Normal",
+                    "Location": "EnemyAdj"
+                },
+                "SelfDamage": 2
+            }
+        },
+        "610": {
+            "Initiative": 63,
+            "Reshuffle": 1,
+            "Actions": {
+                "Summon": {
+                    "Type": "Unit",
+                    "UnitName": "Living Bones",
+                    "UnitType": "Normal",
+                    "Location": "EnemyAdj"
+                },
+                "SelfDamage": 2
+            }
+        },
+        "611": {
+            "Initiative": 31,
+            "Actions": {
+                "Move": -1,
+                "RangedHeal": 3,
+                "Range": 3
+            }
+        }
     }
 }
