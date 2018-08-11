@@ -264,8 +264,9 @@ def prep_scenario_1_map(m):
     # NPCs
     guards  = npc.NPCType("Bandit Guard", gv.monsterDataJson["Bandit Guard"])
     archers = npc.NPCType("Bandit Archer", gv.monsterDataJson["Bandit Archer"])
-    #bones   = npc.NPCType("Living Bones", gv.monsterDataJson["Living Bones"])
+    bones   = npc.NPCType("Living Bones", gv.monsterDataJson["Living Bones"])
 
+    # ROOM 1
     guard_1     = gv.SpawnUnit(guards, 0, 0, [npc.NONE, npc.NORMAL, npc.NORMAL])
     guard_2     = gv.SpawnUnit(guards, 1, 1, [npc.NONE, npc.NORMAL, npc.ELITE])
     guard_3     = gv.SpawnUnit(guards, 2, 0, [npc.NORMAL, npc.NORMAL, npc.NORMAL])
@@ -276,6 +277,28 @@ def prep_scenario_1_map(m):
 
     room.L1a.addSpawns([guard_1, guard_2, guard_3, guard_4, guard_5, guard_6, guard_7])
 
+    # ROOM 2
+    guard_8     = gv.SpawnUnit(guards, 3, -5, [npc.NONE, npc.ELITE, npc.ELITE])
+    guard_9     = gv.SpawnUnit(guards, 2, -6, [npc.NORMAL, npc.NONE, npc.NORMAL])
+    guard_10    = gv.SpawnUnit(guards, 4, -6, [npc.NORMAL, npc.NONE, npc.NORMAL])
+    
+    archer_1    = gv.SpawnUnit(archers, 3, -15, [npc.ELITE, npc.ELITE, npc.ELITE])
+    archer_2    = gv.SpawnUnit(archers, 2, -16, [npc.NONE, npc.NORMAL, npc.NORMAL])
+    archer_3    = gv.SpawnUnit(archers, 4, -16, [npc.NONE, npc.NORMAL, npc.NORMAL])
+    
+    room.G1b.addSpawns([guard_8, guard_9, guard_10, archer_1, archer_2, archer_3])
+    
+    # ROOM 3
+    archer_4    = gv.SpawnUnit(archers, 10, -6, [npc.NONE, npc.NONE, npc.NORMAL])
+    archer_5    = gv.SpawnUnit(archers, 10, -8, [npc.NORMAL, npc.NORMAL, npc.NORMAL])
+    archer_6    = gv.SpawnUnit(archers, 10, -10, [npc.NORMAL, npc.ELITE, npc.NORMAL])
+    archer_7    = gv.SpawnUnit(archers, 10, -12, [npc.NONE, npc.NONE, npc.NORMAL])
+    bones_1    = gv.SpawnUnit(bones, 6, -8, [npc.NONE, npc.NONE, npc.NORMAL])
+    bones_2    = gv.SpawnUnit(bones, 6, -10, [npc.NONE, npc.NONE, npc.NORMAL])
+    bones_3    = gv.SpawnUnit(bones, 8, -8, [npc.NORMAL, npc.ELITE, npc.NORMAL])
+    bones_4    = gv.SpawnUnit(bones, 8, -10, [npc.NORMAL, npc.NORMAL, npc.NORMAL])
+    room.I1b.addSpawns([archer_4, archer_5, archer_6, archer_7, bones_1, bones_2, bones_3, bones_4])
+    
     parents, cost = a_star_search(m, gv.Location(2, 8), gv.Location(10, -4))
     print("Can reach desired target in %d steps" % (len(parents)-1))
     print("Damage taken on path: %d" % (cost - (len(parents)-1)))

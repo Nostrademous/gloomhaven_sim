@@ -1,0 +1,168 @@
+{
+    "Living Bones": {
+        "Slots": 10,
+        "DeckType": "Living Bones",
+        "Stats": {
+            "0": {
+                "Normal": {
+                    "Health": 5,
+                    "Movement": 2,
+                    "Attack": 1,
+                    "Range": 0,
+                    "Buffs": ["Target_2"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 6,
+                    "Movement": 4,
+                    "Attack": 2,
+                    "Range": 0,
+                    "Buffs": ["Target_2"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "1": {
+                "Normal": {
+                    "Health": 5,
+                    "Movement": 3,
+                    "Attack": 1,
+                    "Range": 0,
+                    "Buffs": ["Target_2", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 6,
+                    "Movement": 4,
+                    "Attack": 2,
+                    "Range": 0,
+                    "Buffs": ["Target_3", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "2": {
+                "Normal": {
+                    "Health": 5,
+                    "Movement": 3,
+                    "Attack": 2,
+                    "Range": 0,
+                    "Buffs": ["Target_2", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 7,
+                    "Movement": 4,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": ["Target_3", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "3": {
+                "Normal": {
+                    "Health": 7,
+                    "Movement": 3,
+                    "Attack": 2,
+                    "Range": 0,
+                    "Buffs": ["Target_2", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 10,
+                    "Movement": 4,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": ["Target_3", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "4": {
+                "Normal": {
+                    "Health": 7,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": ["Target_2", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 11,
+                    "Movement": 4,
+                    "Attack": 4,
+                    "Range": 0,
+                    "Buffs": ["Target_3", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "5": {
+                "Normal": {
+                    "Health": 9,
+                    "Movement": 3,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": ["Target_2", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 11,
+                    "Movement": 4,
+                    "Attack": 4,
+                    "Range": 0,
+                    "Buffs": ["Target_3", "Shield_2"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "6": {
+                "Normal": {
+                    "Health": 10,
+                    "Movement": 4,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": ["Target_2", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 11,
+                    "Movement": 6,
+                    "Attack": 4,
+                    "Range": 0,
+                    "Buffs": ["Target_3", "Shield_2"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            },
+            "7": {
+                "Normal": {
+                    "Health": 13,
+                    "Movement": 4,
+                    "Attack": 3,
+                    "Range": 0,
+                    "Buffs": ["Target_2", "Shield_1"],
+                    "Effects": [],
+                    "Immunities": []
+                },
+                "Elite": {
+                    "Health": 14,
+                    "Movement": 6,
+                    "Attack": 4,
+                    "Range": 0,
+                    "Buffs": ["Target_3", "Shield_2"],
+                    "Effects": [],
+                    "Immunities": []
+                }
+            }
+        }
+    }
+}
