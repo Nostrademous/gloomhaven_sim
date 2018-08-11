@@ -1,6 +1,8 @@
 '''
 '''
 
+import global_vars as gv
+
 _item_slots = list([
     "HEAD", "BODY", "ONE_HAND", "TWO_HANDS", "LEGS", "SMALL_ITEM"
 ])
@@ -92,9 +94,19 @@ class Item():
         return ret
 
 
+def findItemByID(itemID):
+    return gv.itemDataJson[str(itemID)]
+
+def findItemByName(itemName):
+    for id in gv.itemDataJson:
+        if gv.itemDataJson[id]['Name'] == itemName:
+            return gv.itemDataJson[id], int(id)
+    raise Exception("Failed to find Item by Name", itemName)
+    return None, 0
+
 def createItem(itemName):
-    itemData = gv.itemDataJson[item]
-    item_obj = Item(int(item), itemData['Name'], itemData['Slot'].upper(), itemData['MaxCount'],
+    itemData, itemId = findItemByName(itemName)
+    item_obj = Item(int(itemId), itemData['Name'], itemData['Slot'].upper(), itemData['MaxCount'],
                     cost=itemData['Cost'], maxUses=itemData['Buff']['Count'])
     if "AMDEffect" in itemData:
         item_obj.setAMDEffect(itemData["AMDEffect"])

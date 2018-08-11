@@ -20,11 +20,11 @@ import amd
 import items
 
 _item_template = {
-    "HEAD": None,     
+    "HEAD": None,
     "BODY": None,
-    "HANDS": [],
+    "HANDS": list(),
     "LEGS": None,
-    "SMALL_ITEM": []
+    "SMALL_ITEM": list()
 }
 
 class CharacterItem():
@@ -33,11 +33,18 @@ class CharacterItem():
         self.unequipped_items = list()
 
     def equipItem(self, itemObj):
-        if itemObj.slot in ["HANDS", "SMALL_ITEM"]:
+        if itemObj.slot == "TWO_HANDS":
+            assert len(self.equipped_items["HANDS"]) == 0
+            self.equipped_items["HANDS"].append(itemObj)
+        elif itemObj.slot == "ONE_HAND":
+            assert len(self.equipped_items["HANDS"]) < 2
+            self.equipped_items["HANDS"].append(itemObj)
+        elif itemObj.slot == "SMALL_ITEM":
             assert len(self.equipped_items[itemObj.slot]) == 0
+            self.equipped_items["SMALL_ITEM"].append(itemObj)
         else:
             assert self.equipped_items[itemObj.slot] == None
-        self.equipped_items[itemObj.slot] = itemObj
+            self.equipped_items[itemObj.slot] = itemObj
 
     def unequipItem(self, slot):
         if slot in ["HANDS", "SMALL_ITEM"]:
@@ -60,6 +67,25 @@ class CharacterItem():
                 return cost
         raise Exception("CharacterItem::sellItem", "'%s' not found" % (itemName))
         return 0
+
+    def __repr__(self):
+        ret = ""
+        for item in self.equipped_items:
+            ret += "%s\n" % (self.equipped_items[item])
+        return ret
+
+    def getJSON(self):
+        ret  = dict()
+        for slot in _item_template:
+            if self.equipped_items[slot] == None or self.equipped_items[slot] == []:
+                ret[slot] = 'None'
+            else:
+                #ret += '%s: %s,' % (slot, self.equipped_items[slot].name)
+                if isinstance(self.equipped_items[slot], list):
+                    ret[slot] = [i.name for i in self.equipped_items[slot]]
+                else:
+                    ret[slot] = self.equipped_items[slot].name
+        return ret
 
 
 class Character(Unit):
@@ -93,7 +119,7 @@ class Character(Unit):
         self.amd            = amd.AttackModifierDeck(isPlayer=True)
         self.long_rest      = False
         self.round_init     = 99
-        
+
         self.default_action = DEFAULT
 
     def scenarioPreparation(self):
@@ -153,10 +179,10 @@ class Character(Unit):
 
     def executeTurn(self):
         print("[character::executeTurn] - IMPLEMENT ME")
-        
+
         if not self.long_rest:
             top_actions, bot_actions = self.getRoundAbilitySelection()
-            
+
             available_actions = itertools.product(top_actions, bot_actions)
             for i,action in enumerate(available_actions):
                 print("%d - %s" % (i, str(action)))
@@ -241,13 +267,14 @@ class Character(Unit):
     def getLevel(self):
         return self.level
 
-    def buyItem(self, itemName):
+    def buyItem(self, itemName, adjustGold=True):
         item = items.createItem(itemName)
         if item:
             try:
-                assert self.gold >= item.cost
+                if adjustGold:
+                    assert self.gold >= item.cost
+                    self.gold -= item.cost
                 self.items.equipItem(item)
-                self.gold -= item.cost
             except AssertionError:
                 print("You do not have enough gold to buy %s" % (itemName))
 
@@ -276,7 +303,8 @@ class Character(Unit):
             jsonData['deck_size'] = self.deck_size
 
         jsonData['retired'] = self.retired
-        jsonData['items'] = self.temp_items
+        jsonData['items'] = self.items.getJSON()
+        jsonData['item_strings'] = self.temp_items
         jsonData['perks'] = [str(p) for p in self.selected_perks]
         return jsonData
 
