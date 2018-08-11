@@ -51,9 +51,10 @@ ignore_scen_perk_plus_1 = Perk(PERK_TYPE_IGNORE_SCEN_P1)
 remove_2_minus_1        = Perk(PERK_TYPE_REMOVE, 2, amd.amc_m1)
 remove_4_0              = Perk(PERK_TYPE_REMOVE, 4, amd.amc_0)
 
-replace_minus_2_with_0      = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m2, amd.amc_0)
-replace_minus_1_with_plus_1 = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m1, amd.amc_p1)
-replace_0_with_plus_2       = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p2)
+replace_minus_2_with_0          = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m2, amd.amc_0)
+replace_minus_1_with_plus_1     = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m1, amd.amc_p1)
+replace_0_with_plus_2           = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p2)
+replace_2_plus_1_with_2_plus_2  = Perk(PERK_TYPE_REPLACE, 2, amd.amc_p1, amd.amc_p2)
 
 add_2_plus_1            = Perk(PERK_TYPE_ADD, 2, amd.amc_p1)
 add_2_roll_plus_1       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_p1)
@@ -73,9 +74,11 @@ add_2_roll_poison       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_poison)
 add_1_plus_1_immobilize = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_immobilize)
 add_1_plus_1_wound      = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_wound)
 add_2_roll_pierce3      = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_pierce_3)
+add_2_roll_immobilize   = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_immobilize)
 
 add_3_roll_push1        = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_push1)
 add_2_roll_push2        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_push2)
+add_3_roll_pull1        = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_pull1)
 
 # elemental based
 add_1_roll_air          = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_air)
@@ -126,6 +129,17 @@ cragheart_perk_deck = list([
 ])
 
 mindthief_perk_deck = list([
+    remove_2_minus_1, remove_2_minus_1,
+    remove_4_0,
+    replace_2_plus_1_with_2_plus_2,
+    replace_minus_2_with_0,
+    add_1_plus_2_ice, add_1_plus_2_ice,
+    add_2_roll_plus_1, add_2_roll_plus_1,
+    add_3_roll_pull1,
+    add_3_roll_muddle,
+    add_2_roll_immobilize,
+    add_1_roll_stun,
+    [add_1_roll_disarm, add_1_roll_muddle],
     ignore_scen_perk
 ])
 
@@ -207,4 +221,8 @@ if __name__ == "__main__":
 
     print('\nBrute')
     for perk in brute_perk_deck:
+        print(perk)
+        
+    print('\nMindthief')
+    for perk in mindthief_perk_deck:
         print(perk)
