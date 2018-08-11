@@ -52,12 +52,13 @@ class GloomhavenObject():
 
 
 class GloomhavenTile():
-    def __init__(self, uuID, sides=6):
+    def __init__(self, uuID, orientation, sides=6):
         self.unique_id  = uuID
         self.row_id, self.col_id = self.unique_id.rsplit(':')[1].split(',')
         self.row_id = int(self.row_id)
         self.col_id = int(self.col_id)
         self.num_sides  = sides
+        self.orient     = orientation
         self.neighbors  = list([None for i in range(sides)])
         #print("%s %d %s" % (self.unique_id, self.num_sides, self.neighbors))
 
@@ -80,6 +81,9 @@ class GloomhavenTile():
     def __repr__(self):
         ret = "{%d,%d}" % (self.row_id, self.col_id)
         return ret
+
+    def getOrientation(self):
+        return self.orient
 
     def setRoomCoordinates(self, row, col):
         self.row_id = row
@@ -368,7 +372,7 @@ class GloomhavenRoom():
                 indx = r*self.max_c + c
                 if self.tilePattern[indx] > 0:
                     #print("Creating Tile {%d,%d}" % (r,c))
-                    new_tile = GloomhavenTile(self.name+':%d,%d' % (r,c))
+                    new_tile = GloomhavenTile(self.name+':%d,%d' % (r,c), self.orient)
                     self.tiles.append(new_tile)
                     if self.orient == ORIENT_FLAT:
                         north_east  = self.getFillPatternValue(r-1, c+1)
@@ -420,8 +424,8 @@ L1a = GloomhavenRoom('L1a', orientation=ORIENT_POINTY, max_rows=7, max_cols=9,
 if __name__ == "__main__":
     #"""
     # Test 1
-    t11 = GloomhavenTile("M1b:1,1")
-    t12 = GloomhavenTile("M1b:2,2")
+    t11 = GloomhavenTile("M1b:1,1", ORIENT_POINTY)
+    t12 = GloomhavenTile("M1b:2,2", ORIENT_POINTY)
     t11.addNeighbor(5, t12)
     t11.printTile()
     t12.printTile()
