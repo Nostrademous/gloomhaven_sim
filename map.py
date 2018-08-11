@@ -53,7 +53,7 @@ class Map():
 
     def connectRooms(self, r1, r1_conn, r2, r2_conn, row, col, connType=room.DOOR_TYPE_CLOSED):
         print("Connection Room Creation")
-        connTile = room.GloomhavenTile(r1.getName()+'_'+r2.getName()+':%d,%d' % (row, col))
+        connTile = room.GloomhavenTile(r1.getName()+'_'+r2.getName()+':%d,%d' % (row, col), r1.getOrientation())
         connTile.setDoorType(connType)
 
         # assert we are connecting two rooms of same orientation
@@ -123,9 +123,30 @@ class Map():
         for tile in self.room_connectors:
             if tile.getMapLocation() == loc:
                 return tile
-
         return None
 
+    def getCoordinateDisc(self, origin, radius=1):
+        assert isinstance(origin, gv.Location)
+        originTile = self.getTileByMapCoordinates(origin)
+        assert originTile
+        ret = list([origin])
+        next_radius_cells = list()
+        for i in range(0, 6):
+            cTile = originTile.getNeighbor(i)
+            if cTile: 
+                next_radius_cells.append(cTile.getMapLocation())
+        for cell in next_radius_cells:
+            if cell not in ret:
+                ret.append(cell)
+        
+        if (radius-1) > 0:
+            for new_origin in next_radius_cells:
+                new_ret = self.getCoordinateDisc(new_origin, radius=radius-1)
+                for new_cell in new_ret:
+                    if new_cell not in ret:
+                        ret.append(new_cell)
+        
+        return ret
 
 # PathFinding
 import heapq
@@ -271,3 +292,8 @@ if __name__ == "__main__":
     gv.setNumPlayersInScenario(pickRandom([i for i in range(2,5)]))
     m = _map_json["1"]
     m.spawnStartingRoom()
+    
+    reachable = m.getCoordinateDisc(gv.Location(0,0), 1)
+    print(reachable)
+    reachable = m.getCoordinateDisc(gv.Location(0,0), 3)
+    print(reachable)
