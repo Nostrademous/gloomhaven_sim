@@ -1,4 +1,29 @@
 {
+    "30": {
+        "Name": "Proximity Mine",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 62,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "CreateTrap",
+                    "TrapDamage": 6,
+                    "TriggerXP": 2
+                }
+            },
+            "Lost": 1
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "Value": 4,
+                    "EnhanceSlot": 1
+                }
+            }
+        }
+    },
     "31": {
         "Name": "Harmless Contraption",
         "Level": 1,
@@ -12,7 +37,7 @@
                     "Health": 6,
                     "HealthEnhanceSlots": 1,
                     "Move": 2,
-                    "MoveEhanceSlots": 1,
+                    "MoveEnhanceSlot": 1,
                     "Attack": 0,
                     "Range": 0
                 }
@@ -31,6 +56,34 @@
                     "RangeEnhanceSlots": 1
                 }
             }
+        }
+    },
+    "33": {
+        "Name": "Hook Gun",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 72,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedAttack",
+                    "Value": 2,
+                    "Range": 3,
+                    "RangeEnhanceSlots": 1,
+                    "Pull": 2,
+                    "PullEnhanceSlot": 1
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedLoot",
+                    "RangeValue": 2
+                }
+            },
+            "XP": 1,
+            "Lost": 1
         }
     },
     "37": {
@@ -59,6 +112,64 @@
             },
             "Lost": 1,
             "XP": 2
+        }
+    },
+    "42": {
+        "Name": "Reviving Shock",
+        "Level": 0,
+        "Class": "Tinkerer",
+        "Initiative": 34,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedAttack",
+                    "Attack": 2,
+                    "AttackEnhanceSlot": 1,
+                    "Range": 3,
+                    "Targets": 2,
+                    "TargetsEnhanceSlot": 1
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedHeal",
+                    "HealValue": 5,
+                    "RangeValue": 2,
+                    "HealEnhanceSlots": 2
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        }
+    },
+    "43": {
+        "Name": "Volatile Concoction",
+        "Level": 0,
+        "Class": "Tinkerer",
+        "Initiative": 76,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "CreateTrap",
+                    "TrapDamage": 2,
+                    "TrapEffect": "Poison"
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedDiscardRecovery",
+                    "Ranged": 2,
+                    "AmountRecovered": 1,
+                    "ElementalBuff": {
+                        "Element": "Ice",
+                        "Buff": 2
+                    }
+                }
+            }
         }
     },
     "44": {
