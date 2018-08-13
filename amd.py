@@ -32,8 +32,8 @@ class AttackModifierCard():
         self.pushValue  = pushValue
         self.pullValue  = pullValue
 
-    #def _cmpkey(self):
-    #    return self.adjValue
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
 
     def isCrit(self):
         return self.crit
@@ -168,11 +168,9 @@ class AttackModifierDeck():
         self.play_deck = copy.deepcopy(self._deck)
 
     def removeCards(self, cards):
-        print("Before:\n%s" % self.play_deck)
         for card in cards:
             self._deck.remove(card)
         self.play_deck = copy.deepcopy(self._deck)
-        print("After:\n%s" % self.play_deck)
 
     def addCurse(self):
         print('Adding Curse')
@@ -232,14 +230,14 @@ class AttackModifierDeck():
             print("ROLLING")
             self.pickCard(ret_draw)
             
-        print("Size Remaining: %d :: %s :: %s" % (len(self.play_deck), card, self.play_deck))
+        #print("Size Remaining: %d :: %s :: %s" % (len(self.play_deck), card, self.play_deck))
         return ret_draw
 
     def endTurn(self):
         #print('End of turn')
         if self.reshuffle:
             self.play_deck = copy.deepcopy(self._deck)
-            print('Reshuffling Attack Modifier Deck :: %d' % (len(self.play_deck)))
+            #print('Reshuffling Attack Modifier Deck :: %d' % (len(self.play_deck)))
         self.reshuffle = False
 
     def __repr__(self):
@@ -278,24 +276,24 @@ if __name__ == "__main__":
 
     score_1 = 0
     score_2 = 0
-    test_range = 1000.
+    test_range = 100000.
 
     for i in range(int(test_range)):
         ret_1 = []
         ret_1 = d1.pickCard(ret_1)
-        #ret_1 = d1.pickCard(ret_1)
+        ret_1 = d1.pickCard(ret_1)
 
-        #ret_2 = []
-        #ret_2 = d1.pickCard(ret_2)
-        #ret_2 = d1.pickCard(ret_2)
+        ret_2 = []
+        ret_2 = d1.pickCard(ret_2)
+        ret_2 = d1.pickCard(ret_2)
 
         d1.endTurn()
-        #d2.endTurn()
+        d2.endTurn()
 
         score_1 += sum([i.calcDmg() for i in ret_1])
-        #score_2 += sum([i.calcDmg() for i in ret_2])
+        score_2 += sum([i.calcDmg() for i in ret_2])
         #print("[%d] score: %d" % (i, score))
 
 
     print("Deck 1 Final Score: %f" % (score_1/test_range))
-    #print("Deck 2 Final Score: %f" % (score_2/test_range))
+    print("Deck 2 Final Score: %f" % (score_2/test_range))
