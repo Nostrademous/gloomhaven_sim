@@ -27,6 +27,10 @@ class Scenario():
         # initialize elemental board to INERT
         self._reset_elements()
 
+        # some scenarios impose negative starting effects
+        # on heroes, this variable tracks them
+        self.negative_effects = list()
+
         self.setMap()
 
         # we previously set the self.party parameter
@@ -36,7 +40,10 @@ class Scenario():
         # heroes from the party participating in the
         # scenario
         self.scen_members = None
+
+        # set a method to track all actual npcs in the scenario
         self.npcs         = list()
+        # set a method to track all actual npc types in the scenario
         self.npc_types    = list()
 
     def _reset_elements(self):
@@ -55,6 +62,9 @@ class Scenario():
     def setMap(self):
         self.scen_map = map._map_json[str(self.scenID)]
         assert self.scen_map != None
+
+    def setNegativeScenarioEffects(self, negEffects=list()):
+        self.negative_effects = negEffects
 
     def setDifficultyLevel(self, value):
         self.diff_level = value
@@ -102,9 +112,9 @@ class Scenario():
         '''All setup for scenario.'''
         assert len(self.scen_members) >= 2 and len(self.scen_members) <= 4
 
-        # setup each players ability cards for use in scenario
+        # setup each player's ability cards and attack modifier cards for use in scenario
         for hero in self.scen_members:
-            hero.scenarioPreparation()
+            hero.scenarioPreparation(self.negative_effects)
 
         # set num of players participating in scenario
         gv.setNumPlayersInScenario(len(self.scen_members))
@@ -115,6 +125,9 @@ class Scenario():
         # spawn NPCs in starting room
         new_npcs = self.scen_map.spawnStartingRoom()
         self.npcs.extend(new_npcs)
+
+        # spawn players into starting room
+        # TODO
 
     def endScenario(self, success=False):
         '''All end scenario work.'''

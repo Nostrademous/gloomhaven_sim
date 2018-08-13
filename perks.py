@@ -43,6 +43,10 @@ class Perk():
             ret += " cards"
         return ret
 
+# we over-load the concept of a perk to account for negative scenario effects
+add_3_minus_1           = Perk(PERK_TYPE_ADD, 3, amd.amc_m1)
+add_3_curse             = Perk(PERK_TYPE_ADD, 3, amd.amc_curse)
+
 # used by multiple classes
 ignore_scen_perk        = Perk(PERK_TYPE_IGNORE_SCEN)
 ignore_item_perk        = Perk(PERK_TYPE_IGNORE_ITEM)

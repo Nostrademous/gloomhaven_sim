@@ -123,20 +123,23 @@ class Character(Unit):
 
         self.default_action = DEFAULT
 
-    def scenarioPreparation(self):
+    def scenarioPreparation(self, negativeEffects=list()):
         self.setAbilityCardDeck(HeroAbilityCardDeck(self.type, self.level))
         self.ability_deck.selectCardsFromFullDeck(self.deck_size)
 
         # adjust attack modifier deck for perks
-        self.adjustAMD()
+        self.adjustAMD(negativeEffects)
 
-    def adjustAMD(self):
+    def adjustAMD(self, negativeEffects):
         """ Adjustment are sometimes required for the following:
             * Items (some items add -1 cards and others)
             * Perks
             * Scenario Specific (some add curses, etc)
         """
         print("[%s][adjustAMD] for perks... - IMPLEMENT" % (self.getName()))
+
+        if len(negativeEffects) > 0 and not self.hasNegativeScenarioEffectImmunity():
+            print("[%s][adjustAMD for Negative Scenario Effects] - IMPLEMENT ME")
 
     def selectAction(self):
         if self.isExhausted(): return
@@ -209,6 +212,11 @@ class Character(Unit):
 
     def getPerkCount(self):
         return self.perks_from_chk + self.level - 1
+
+    def hasNegativeScenarioEffectImmunity(self):
+        if perks.ignore_scen_perk in self.selected_perks: return True
+        if perks.ignore_scen_perk_plus_1 in self.selected_perks: return True
+        return False
 
     def addCheckmark(self, cnt=1):
         self.checkmarks += cnt

@@ -1,6 +1,7 @@
 '''
 '''
 
+import copy
 from utils import pickRandom
 
 class AttackModifierCard():
@@ -149,8 +150,8 @@ _monster_curse_deck = list([
 
 class AttackModifierDeck():
     def __init__(self, isPlayer):
-        self._deck = _start_deck
-        self.play_deck = list(self._deck)
+        self._deck = copy.deepcopy(_start_deck)
+        self.play_deck = copy.deepcopy(self._deck)
         self.reshuffle = False
         self.isPlayer = isPlayer
 
@@ -216,7 +217,7 @@ class AttackModifierDeck():
         print('End of turn')
         if self.reshuffle:
             print('Reshuffling Attack Modifier Deck')
-            self.play_deck = list(self._deck)
+            self.play_deck = copy.deepcopy(self._deck)
         self.reshuffle = False
 
     def __repr__(self):
