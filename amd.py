@@ -32,6 +32,9 @@ class AttackModifierCard():
         self.pushValue  = pushValue
         self.pullValue  = pullValue
 
+    #def _cmpkey(self):
+    #    return self.adjValue
+
     def isCrit(self):
         return self.crit
 
@@ -55,6 +58,11 @@ class AttackModifierCard():
 
     def isPull(self):
         return self.pullValue > 0
+
+    def calcDmg(self, value=1):
+        if self.isMiss() or self.isCurse(): return 0
+        if self.isCrit() or self.isBlessing(): return 2 * value
+        return value + self.adjValue
 
     def __repr__(self):
         ret = ''
@@ -151,9 +159,20 @@ _monster_curse_deck = list([
 class AttackModifierDeck():
     def __init__(self, isPlayer):
         self._deck = copy.deepcopy(_start_deck)
-        self.play_deck = copy.deepcopy(self._deck)
+        self.play_deck = copy.deepcopy(_start_deck)
         self.reshuffle = False
         self.isPlayer = isPlayer
+
+    def addCards(self, cards):
+        self._deck.extend(cards)
+        self.play_deck = copy.deepcopy(self._deck)
+
+    def removeCards(self, cards):
+        print("Before:\n%s" % self.play_deck)
+        for card in cards:
+            self._deck.remove(card)
+        self.play_deck = copy.deepcopy(self._deck)
+        print("After:\n%s" % self.play_deck)
 
     def addCurse(self):
         print('Adding Curse')
@@ -175,7 +194,7 @@ class AttackModifierDeck():
         self.play_deck.append(curse)
 
     def removeCurse(self, curse):
-        #print('Removing Curse')
+        print('Removing Curse')
         self._deck.remove(curse)
         if self.isPlayer:
             _player_curse_deck.append(curse)
@@ -193,7 +212,7 @@ class AttackModifierDeck():
             print('No more blessings available, ignoring...')
 
     def removeBlessing(self, bless):
-        #print('Removing Blessing')
+        print('Removing Blessing')
         self._deck.remove(bless)
         _bless_deck.append(bless)
 
@@ -206,18 +225,21 @@ class AttackModifierDeck():
         if card.isReshuffle():
             self.reshuffle = True
         self.play_deck.remove(card)
-        print(card)
+        #print(card)
         ret_draw.append(card)
 
         if card.isRolling():
+            print("ROLLING")
             self.pickCard(ret_draw)
+            
+        print("Size Remaining: %d :: %s :: %s" % (len(self.play_deck), card, self.play_deck))
         return ret_draw
 
     def endTurn(self):
-        print('End of turn')
+        #print('End of turn')
         if self.reshuffle:
-            print('Reshuffling Attack Modifier Deck')
             self.play_deck = copy.deepcopy(self._deck)
+            print('Reshuffling Attack Modifier Deck :: %d' % (len(self.play_deck)))
         self.reshuffle = False
 
     def __repr__(self):
@@ -226,6 +248,7 @@ class AttackModifierDeck():
 if __name__ == "__main__":
     deck = AttackModifierDeck(isPlayer=True)
 
+    '''
     print(deck)
     for i in range(2):
         deck.pickCard()
@@ -241,3 +264,38 @@ if __name__ == "__main__":
     print(deck)
     #print(_player_curse_deck)
     #print(_bless_deck)
+    '''
+
+    d1 = deck
+    d2 = AttackModifierDeck(isPlayer=True)
+
+    # test 1 remove minus 2, add plus 0
+    d1.removeCards([amc_m2])
+    d1.addCards([amc_0])
+
+    # test 2 remove 2 minus 1
+    d2.removeCards([amc_m1, amc_m1])
+
+    score_1 = 0
+    score_2 = 0
+    test_range = 1000.
+
+    for i in range(int(test_range)):
+        ret_1 = []
+        ret_1 = d1.pickCard(ret_1)
+        #ret_1 = d1.pickCard(ret_1)
+
+        #ret_2 = []
+        #ret_2 = d1.pickCard(ret_2)
+        #ret_2 = d1.pickCard(ret_2)
+
+        d1.endTurn()
+        #d2.endTurn()
+
+        score_1 += sum([i.calcDmg() for i in ret_1])
+        #score_2 += sum([i.calcDmg() for i in ret_2])
+        #print("[%d] score: %d" % (i, score))
+
+
+    print("Deck 1 Final Score: %f" % (score_1/test_range))
+    #print("Deck 2 Final Score: %f" % (score_2/test_range))
