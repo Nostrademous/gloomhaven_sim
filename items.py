@@ -105,7 +105,12 @@ def findItemByName(itemName):
     return None, 0
 
 def createItem(itemName):
-    itemData, itemId = findItemByName(itemName)
+    try:
+        itemId = int(itemName)
+        itemData = findItemByID(itemId)
+    except:
+        itemData, itemId = findItemByName(itemName)
+        
     item_obj = Item(int(itemId), itemData['Name'], itemData['Slot'].upper(), itemData['MaxCount'],
                     cost=itemData['Cost'], maxUses=itemData['Buff']['Count'])
     if "AMDEffect" in itemData:
@@ -119,7 +124,7 @@ def createItem(itemName):
 
 if __name__ == "__main__":
     import global_vars as gv
-    gv.init()
+    #gv.init()
 
     for item in gv.itemDataJson:
         actual_item = createItem(item)

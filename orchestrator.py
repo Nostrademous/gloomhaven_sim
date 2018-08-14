@@ -40,7 +40,7 @@ def runScenario(scenario):
 
 if __name__ == "__main__":
     import global_vars as gv
-    gv.init()
+    #gv.init() # init is done straight on loading global_vars module
 
     ourParty = party.make_a_party()
 
