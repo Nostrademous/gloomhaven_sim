@@ -62,7 +62,7 @@ class AttackModifierCard():
     def calcDmg(self, value=1):
         if self.isMiss() or self.isCurse(): return 0
         if self.isCrit() or self.isBlessing(): return 2 * value
-        return value + self.adjValue
+        return max(value + self.adjValue, 0)
 
     def __repr__(self):
         ret = ''
@@ -275,6 +275,7 @@ if __name__ == "__main__":
     #print(_bless_deck)
     '''
 
+    from statistics import mean, variance, stdev
     d0 = deck
     d1 = AttackModifierDeck(isPlayer=True)
     d2 = AttackModifierDeck(isPlayer=True)
@@ -303,18 +304,19 @@ if __name__ == "__main__":
     # test 6 - add two rolling +1 cards
     d6.addCards([amc_roll_p1, amc_roll_p1])
 
-    # test 7 - come test 1 and test 2
+    # test 7 - come test 1 and test 2 twice and test 5
     d7.removeCards([amc_m2])
     d7.addCards([amc_0])
     d7.removeCards([amc_m1, amc_m1])
-    #d7.removeCards([amc_0, amc_0, amc_0, amc_0])
+    d7.removeCards([amc_m1, amc_m1])
+    d7.removeCards([amc_0, amc_0, amc_0, amc_0])
 
 
     test_decks = [d0, d1, d2, d3, d4, d5, d6, d7]
-    score = [0.0 for i in test_decks]
-    test_range = 10000.
+    score = [[] for i in test_decks]
+    test_range = 20000.
     num_picks_per_round = 1 # set this to large values to simulate AoE attacks
-    ab_dmg = 5 # set this to the Ability Card's base Attack Damage Value you want simulated
+    ab_dmg = 1 # set this to the Ability Card's base Attack Damage Value you want simulated
 
     for i in range(int(test_range)):
         for indx, dk in enumerate(test_decks):
@@ -322,8 +324,10 @@ if __name__ == "__main__":
             for cnt in range(num_picks_per_round):
                 ret = dk.pickCard(ret)
             dk.endTurn()
-            score[indx] += sum([i.calcDmg(ab_dmg) for i in ret])
+            score[indx].extend([i.calcDmg(ab_dmg) for i in ret])
 
 
     for indx, dk in enumerate(test_decks):
-        print("Deck %d Average Damage when doing %d dmg Attack: %f" % (indx, ab_dmg, score[indx]/test_range))
+        m = mean(score[indx])
+        v = stdev(score[indx], m)
+        print("Deck %d AvgDmg when doing %d dmg Attack: %.4f, StdDev: %.4f, Spread: %.4f to %.4f" % (indx, ab_dmg, m, v, m-v, m+v))
