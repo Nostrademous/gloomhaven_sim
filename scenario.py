@@ -23,6 +23,7 @@ class Scenario():
         self.round      = 0
         self.diff_level = level
         self.complete   = False
+        self.success    = False
 
         # initialize elemental board to INERT
         self._reset_elements()
@@ -129,9 +130,13 @@ class Scenario():
         # spawn players into starting room
         # TODO
 
-    def endScenario(self, success=False):
+    def endScenario(self):
         '''All end scenario work.'''
         print("[endScenario] Scenario: %d -- Implement Me" % (self.scenID))
+        if self.success:
+            print("Congratulations! Scenario was completed successfully!")
+        else:
+            print("You have failed the Scenario! Better luck next time...")
 
     def prepareTurn(self):
         '''All preparation of turn work.'''
@@ -196,6 +201,19 @@ class Scenario():
 
         # check scenario completion condition
         # TODO
+        # self.complete = True
+        # self.success = True
+        # return
+
+        # check scenario failure condition (all players exhausted)
+        scen_failed = True
+        for hero in self.scen_members:
+            if not hero.isExhausted():
+                scen_failed = False
+                break
+        if scen_failed:
+            self.complete = True
+            return
 
         # determine if a character wants to short-rest
         # TODO
@@ -203,7 +221,8 @@ class Scenario():
         # increment round counter
         self.round += 1
 
-        # dummy catch to exist while loop for now
+        # FIXME: eventually remove (once everything else is completed)
+        # dummy catch to exit while-loop for now
         if self.round >= 9:
             self.complete = True
 
@@ -211,6 +230,7 @@ class Scenario():
         ret  = "Name: %s\n" % self.scenName
         ret += "Difficulty: %d\n" % self.diff_level
         return ret
+
 
 if __name__ == "__main__":
     scen = Scenario(1, "Black Barrows")

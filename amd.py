@@ -216,6 +216,17 @@ class AttackModifierDeck():
 
     def pickCard(self, ret_draw=[]):
         card = pickRandom(self.play_deck)
+        
+        # in the event that we are drawing multiple cards for one attack round (i.e., AoE)
+        # it is possible that we 'exhaust' the deck before a reshuffle card is drawn
+        # in that event, we are to reshuffle immediately
+        if not card:
+            print("AMD Exhausted - reshuffling")
+            self.play_deck = copy.deepcopy(self._deck)
+            for c in ret_draw:
+                self.play_deck.remove(c)
+            card = pickRandom(self.play_deck)
+
         if card.isCurse():
             self.removeCurse(card)
         elif card.isBlessing():
@@ -227,7 +238,7 @@ class AttackModifierDeck():
         ret_draw.append(card)
 
         if card.isRolling():
-            print("ROLLING")
+            #print("ROLLING")
             self.pickCard(ret_draw)
             
         #print("Size Remaining: %d :: %s :: %s" % (len(self.play_deck), card, self.play_deck))
@@ -264,36 +275,47 @@ if __name__ == "__main__":
     #print(_bless_deck)
     '''
 
-    d1 = deck
+    d0 = deck
+    d1 = AttackModifierDeck(isPlayer=True)
     d2 = AttackModifierDeck(isPlayer=True)
+    d3 = AttackModifierDeck(isPlayer=True)
+    d4 = AttackModifierDeck(isPlayer=True)
+    d5 = AttackModifierDeck(isPlayer=True)
+    d6 = AttackModifierDeck(isPlayer=True)
 
-    # test 1 remove minus 2, add plus 0
+    # test 1 - remove one minus 2, add one plus 0
     d1.removeCards([amc_m2])
     d1.addCards([amc_0])
 
-    # test 2 remove 2 minus 1
+    # test 2 - remove two minus 1 cards
     d2.removeCards([amc_m1, amc_m1])
 
-    score_1 = 0
-    score_2 = 0
-    test_range = 100000.
+    # test 3 - add one +3 card (Tinkerer)
+    d3.addCards([amc_p3])
+
+    # test 4 - add two +1 cards
+    d4.addCards([amc_p1, amc_p1])
+
+    # test 5 - Remove for +0 cards
+    d5.removeCards([amc_0, amc_0, amc_0, amc_0])
+
+    # test 6 - add two rolling +1 cards
+    d6.addCards([amc_roll_p1, amc_roll_p1])
+
+    test_decks = [d0, d1, d2, d3, d4, d5, d6]
+    score = [0.0 for i in test_decks]
+    test_range = 10000.
+    num_picks_per_round = 1 # set this to large values to simulate AoE attacks
+    ab_dmg = 5 # set this to the Ability Card's base Attack Damage Value you want simulated
 
     for i in range(int(test_range)):
-        ret_1 = []
-        ret_1 = d1.pickCard(ret_1)
-        ret_1 = d1.pickCard(ret_1)
-
-        ret_2 = []
-        ret_2 = d1.pickCard(ret_2)
-        ret_2 = d1.pickCard(ret_2)
-
-        d1.endTurn()
-        d2.endTurn()
-
-        score_1 += sum([i.calcDmg() for i in ret_1])
-        score_2 += sum([i.calcDmg() for i in ret_2])
-        #print("[%d] score: %d" % (i, score))
+        for indx, dk in enumerate(test_decks):
+            ret = []
+            for cnt in range(num_picks_per_round):
+                ret = dk.pickCard(ret)
+            dk.endTurn()
+            score[indx] += sum([i.calcDmg(ab_dmg) for i in ret])
 
 
-    print("Deck 1 Final Score: %f" % (score_1/test_range))
-    print("Deck 2 Final Score: %f" % (score_2/test_range))
+    for indx, dk in enumerate(test_decks):
+        print("Deck %d Average Damage when doing %d dmg Attack: %f" % (indx, ab_dmg, score[indx]/test_range))

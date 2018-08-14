@@ -199,13 +199,14 @@ def make_a_party():
     party.addPartyAchievement('First Steps')
     party.addPartyAchievement("Jekserah's Plans")
     party.addPartyAchievement("Tremors")
+    party.addPartyAchievement("A Demon's Errand")
     
     party.completeCityEvent(4)
     party.completeCityEvent(15)
     party.completeCityEvent(18)
     party.completeCityEvent(73)
 
-    party.unlockCityEvent(73)
+    #party.unlockCityEvent(73)
 
     party.completeRoadEvent(7)
     party.completeRoadEvent(11)
@@ -217,13 +218,15 @@ def make_a_party():
     party.addScenarioCompleted(3)
     party.addScenarioCompleted(4)
     party.addScenarioCompleted(5)
+    party.addScenarioCompleted(10)
 
     party.addScenarioAvailable(6)
     party.addScenarioAvailable(8)
     party.addScenarioAvailable(9)
-    party.addScenarioAvailable(10)
     party.addScenarioAvailable(14)
     party.addScenarioAvailable(19)
+    party.addScenarioAvailable(21)
+    party.addScenarioAvailable(22)
     party.addScenarioAvailable(68)
     party.addScenarioAvailable(84)
 
@@ -232,12 +235,13 @@ def make_a_party():
 
     party.addTreasureLooted(4)
     party.addTreasureLooted(7)
+    party.addTreasureLooted(11) # ItemID:85 "Wand of Inferno"
     party.addTreasureLooted(38)
     party.addTreasureLooted(46)
     party.addTreasureLooted(65)
     party.addTreasureLooted(67)
 
-    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=2, xp=102, gold=38, quest=528, checkmarks=5)
+    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=2, xp=123, gold=44, quest=528, checkmarks=5)
     hero1.buyItem('Eagle-Eye Goggles', adjustGold=False)
     hero1.buyItem('Minor Power Potion', adjustGold=False)
     hero1.buyItem('Winged Shoes', adjustGold=False)
@@ -249,7 +253,7 @@ def make_a_party():
     hero1.scenarioPreparation()
     print(hero1.ability_deck)
 
-    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', 'Danny', level=2, quest=512, gold=46, xp=63, checkmarks=2)
+    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', 'Danny', level=2, quest=512, gold=55, xp=82, checkmarks=2)
     hero2.buyItem('Boots of Striding', adjustGold=False)
     hero2.buyItem('Minor Healing Potion', adjustGold=False)
     hero2.buyItem('Leather Armor', adjustGold=False)
@@ -257,23 +261,24 @@ def make_a_party():
     hero2.addPerk(replace_minus_1_with_plus_1)
     party.addMember(hero2)
 
-    hero3 = ch.Character('Evan', 'Spellweaver', 'Evan Teran', level=2, quest=533, gold=59, xp=80, checkmarks=3)
+    hero3 = ch.Character('Evan', 'Spellweaver', 'Evan Teran', level=2, quest=533, gold=59, xp=104, checkmarks=5)
     hero3.buyItem('Cloak of Invisibility', adjustGold=False)
     hero3.buyItem('Minor Power Potion', adjustGold=False)
     hero3.buyItem('Eagle-Eye Goggles', adjustGold=False)
     hero3.addPerk(add_2_plus_1)
+    hero3.addPerk(add_2_plus_1)
     #hero3.addPerk()
     party.addMember(hero3)
 
-    hero4 = ch.Character('Bloodfist Stoneborn', 'Cragheart', 'Matt', level=2, quest=531, gold=24, xp=80, checkmarks=3)
+    hero4 = ch.Character('Bloodfist Stoneborn', 'Cragheart', 'Matt', level=2, quest=531, gold=39, xp=99, checkmarks=4)
     hero4.buyItem('Hide Armor', adjustGold=False)
     hero4.buyItem('Boots of Striding', adjustGold=False)
     hero4.buyItem('Minor Stamina Potion', adjustGold=False)
     hero4.addPerk(ignore_item_perk)
-    #hero4.addPerk()
+    hero4.addPerk(replace_minus_1_with_plus_1)
     party.addMember(hero4)
 
-    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=2, quest=526, gold=48, xp=79, checkmarks=2)
+    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=2, quest=526, gold=60, xp=97, checkmarks=3)
     hero5.buyItem('Leather Armor', adjustGold=False)
     hero5.buyItem('Poison Dagger', adjustGold=False)
     hero5.buyItem('Heater Shield', adjustGold=False)
