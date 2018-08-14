@@ -75,6 +75,9 @@ class CharacterItem():
             ret += "%s\n" % (self.equipped_items[item])
         return ret
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
     def getJSON(self):
         ret  = dict()
         for slot in _item_template:
@@ -103,7 +106,7 @@ class Character(Unit):
         self.quest          = quest # for tracking retirement conditions
         self.checkmarks     = checkmarks
         self.perks_from_chk = 0
-        self.available_perks= perks.getPerkSelections(self.type)
+        self.available_perks= copy.deepcopy(perks.getPerkSelections(self.type))
         self.selected_perks = list()
 
         if gv.heroDataJson:
@@ -236,7 +239,9 @@ class Character(Unit):
     def addPerk(self, perk=None):
         if not perk:
             perk = pickRandom(self.available_perks)
-        print('Perk Selected: %s' % (perk))
+            print('Perk Randomed: %s' % (perk))
+        else:
+            print('Perk Selected: %s' % (perk))
         try:
             self.available_perks.remove(perk)
             self.selected_perks.append(perk)

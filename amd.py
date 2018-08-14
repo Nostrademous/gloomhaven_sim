@@ -282,6 +282,7 @@ if __name__ == "__main__":
     d4 = AttackModifierDeck(isPlayer=True)
     d5 = AttackModifierDeck(isPlayer=True)
     d6 = AttackModifierDeck(isPlayer=True)
+    d7 = AttackModifierDeck(isPlayer=True)
 
     # test 1 - remove one minus 2, add one plus 0
     d1.removeCards([amc_m2])
@@ -302,7 +303,14 @@ if __name__ == "__main__":
     # test 6 - add two rolling +1 cards
     d6.addCards([amc_roll_p1, amc_roll_p1])
 
-    test_decks = [d0, d1, d2, d3, d4, d5, d6]
+    # test 7 - come test 1 and test 2
+    d7.removeCards([amc_m2])
+    d7.addCards([amc_0])
+    d7.removeCards([amc_m1, amc_m1])
+    #d7.removeCards([amc_0, amc_0, amc_0, amc_0])
+
+
+    test_decks = [d0, d1, d2, d3, d4, d5, d6, d7]
     score = [0.0 for i in test_decks]
     test_range = 10000.
     num_picks_per_round = 1 # set this to large values to simulate AoE attacks

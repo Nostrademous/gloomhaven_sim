@@ -54,4 +54,4 @@ if __name__ == "__main__":
     runScenario(scen)
 
     # end scenario
-    scen.endScenario(success=True)
+    scen.endScenario()

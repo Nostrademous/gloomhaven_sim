@@ -31,6 +31,18 @@ class Perk():
     def getJson(self):
         return str(self)
 
+    def __eq__(self, other):
+        if isinstance(self, list) and isinstance(other, list):
+            for indx, _ in enumerate(self):
+                if self[indx].__dict__ != other[indx].__dict__:
+                    return False
+            return True
+
+        try:
+            return self.__dict__ == other.__dict__
+        except AttributeError:
+            return False
+
     def __repr__(self):
         ret  = '%s' % (_perk_type[str(self.perkType)])
         if self.numCards > 0:

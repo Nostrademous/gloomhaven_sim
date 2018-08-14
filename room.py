@@ -41,6 +41,9 @@ class GloomhavenObject():
         ret += "[Tile(s)]: %s\n" % (self.tiles)
         return ret
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
     def getTiles(self):
         return self.tiles
 
@@ -81,6 +84,9 @@ class GloomhavenTile():
     def __repr__(self):
         ret = "{%d,%d}" % (self.row_id, self.col_id)
         return ret
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
 
     def getOrientation(self):
         return self.orient
@@ -267,6 +273,9 @@ class GloomhavenRoom():
     def __repr__(self):
         ret  = "Room: %s\n" % (self.name)
         return ret
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
 
     def getName(self):
         return self.name
