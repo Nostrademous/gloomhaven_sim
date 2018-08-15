@@ -35,40 +35,10 @@ def pickRandom(listChoices, num=1):
     # to make it really random use the cryptographically safe
     # random initialization each time
     secure_random = random.SystemRandom()
-    
+
     if num == 1:
         if isinstance(listChoices, dict):
             return listChoices[secure_random.choice(list(listChoices))]
         return secure_random.choice(listChoices)
     else:
         return secure_random.sample(listChoices, num)
-
-'''
-    Compare Mixin, inheriting classes must define _cmpkey()
-'''
-class ComparableMixin(object):
-    def _compare(self, other, method):
-        try:
-            return method(self._cmpkey(), other._cmpkey())
-        except (AttributeError, TypeError):
-            # _cmpkey not implemented, or return different type,
-            # so I can't compare with "other".
-            return NotImplemented
-
-    def __lt__(self, other):
-        return self._compare(other, lambda s, o: s < o)
-
-    def __le__(self, other):
-        return self._compare(other, lambda s, o: s <= o)
-
-    def __eq__(self, other):
-        return self._compare(other, lambda s, o: s == o)
-
-    def __ge__(self, other):
-        return self._compare(other, lambda s, o: s >= o)
-
-    def __gt__(self, other):
-        return self._compare(other, lambda s, o: s > o)
-
-    def __ne__(self, other):
-        return self._compare(other, lambda s, o: s != o)     
