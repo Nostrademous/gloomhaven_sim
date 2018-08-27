@@ -289,7 +289,7 @@ def make_a_party():
     hero5.buyItem('Poison Dagger', adjustGold=False)
     hero5.buyItem('Heater Shield', adjustGold=False)
     hero5.buyItem('Minor Stamina Potion', adjustGold=False)
-    hero5.butItem('Ring of Skulls', adjustGold=False)
+    hero5.buyItem('Ring of Skulls', adjustGold=False)
     hero5.addPerk(ignore_scen_perk)
     hero5.addPerk(remove_2_minus_1)
     hero5.addPerk(replace_minus_2_with_0)
