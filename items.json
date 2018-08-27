@@ -191,6 +191,22 @@
         "Consumed": 1,
         "ProsperityLevel": 1
     },
+    "107": {
+        "Name": "Horned Helm",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "Head",
+        "Buff": {
+            "Type": "ConditionedAttackBuff",
+            "Condition": {
+                "Type": "Move",
+                "Value": 4
+            },
+            "Count": 1,
+            "Buff": "Attack_1",
+            "Trigger": "Condition"
+        }
+    },
     "123": {
         "Name": "Ring of Skulls",
         "MaxCount": 2,
@@ -206,7 +222,6 @@
             "Count": 1,
             "Trigger": "Player"
         },
-        "Consumed": 1,
-        "ProsperityLevel": 1
+        "Consumed": 1
     }
 }
