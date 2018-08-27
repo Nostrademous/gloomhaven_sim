@@ -284,11 +284,12 @@ def make_a_party():
     hero4.addPerk(replace_minus_1_with_plus_1)
     party.addMember(hero4)
 
-    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=3, quest=526, gold=60, xp=97, checkmarks=3)
+    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=3, quest=526, gold=9, xp=111, checkmarks=5)
     hero5.buyItem('Leather Armor', adjustGold=False)
     hero5.buyItem('Poison Dagger', adjustGold=False)
     hero5.buyItem('Heater Shield', adjustGold=False)
     hero5.buyItem('Minor Stamina Potion', adjustGold=False)
+    hero5.butItem('Ring of Skulls', adjustGold=False)
     hero5.addPerk(ignore_scen_perk)
     hero5.addPerk(remove_2_minus_1)
     hero5.addPerk(replace_minus_2_with_0)
