@@ -191,6 +191,18 @@
         "Consumed": 1,
         "ProsperityLevel": 1
     },
+    "85": {
+        "Name": "Wand of Infernos",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "CreateElement",
+            "Element": "Fire",
+            "Count": 1,
+            "Trigger": "Player"
+        }
+    },
     "107": {
         "Name": "Horned Helm",
         "MaxCount": 2,

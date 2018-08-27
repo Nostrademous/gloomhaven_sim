@@ -268,6 +268,7 @@ def make_a_party():
     hero3.buyItem('Cloak of Invisibility', adjustGold=False)
     hero3.buyItem('Minor Power Potion', adjustGold=False)
     hero3.buyItem('Eagle-Eye Goggles', adjustGold=False)
+    hero3.buyItem('Wand of Infernos', adjustGold=False)
     hero3.addPerk(add_2_plus_1)
     hero3.addPerk(add_2_plus_1)
     hero3.addPerk(add_1_plus_1_wound)
