@@ -27,6 +27,32 @@ def calculateMonsterLevel(scenarioLevel):
 
 def calculateBonusExperience(scenarioLevel):
     return (scenarioLevel * 2) + 4
+    
+def calculateShopModifier(reputation):
+    if reputation >= -2 and reputation <= 2:
+        return 0
+    elif reputation >= 3 and reputation <= 6:
+        return -1
+    elif reputation >= -6 and reputation <= -3:
+        return 1
+    elif reputation >= 7 and reputation <= 10:
+        return -2
+    elif reputation >= -10 and reputatin <= -7:
+        return 2
+    elif reputation >= 11 and reputation <= 14:
+        return -3
+    elif reputation >= -14 and reputation <= -11:
+        return 3
+    elif reputation >= 15 and reputation <= 18:
+        return -4
+    elif reputation >= -18 and reputation <= -15:
+        return 4
+    elif reputation >= 19 and reputation <= 20:
+        return -5
+    elif reputation >= -20 and reputation <= -19:
+        return 5
+    else
+        raise Exception("calculateShopModifier", "Bad Reputation '%d'" % reputation)
 
 def init():
     loadHeroData()
