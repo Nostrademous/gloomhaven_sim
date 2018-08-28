@@ -40,6 +40,7 @@ class Party():
         self.party_json['UnlockedRoadEvents'] = list()
         self.party_json['CompletedRoadEvents'] = list()
         self.party_json['ScenariosCompleted'] = list()
+        self.party_json['ScenariosBlocked'] = list()
         self.party_json['ScenariosAvailable'] = list()
         self.party_json['TreasuresLooted'] = list()
         self.party_json['GlobalAchievements'] = list()
@@ -71,6 +72,9 @@ class Party():
     def addScenarioAvailable(self, value):
         self.party_json['ScenariosAvailable'].append(value)
 
+    def addScenarioBlocked(self, value):
+        self.party_json['ScenariosBlocked'].append(value)
+        
     def addTreasureLooted(self, value):
         assert value not in self.party_json['TreasuresLooted']
         try:
@@ -235,10 +239,11 @@ def make_a_party():
     party.addScenarioCompleted(8)
     party.addScenarioCompleted(10)
     party.addScenarioCompleted(14)
+    
+    party.addScenarioBlocked(9)
 
     party.addScenarioAvailable(6)
     party.addScenarioAvailable(7)
-    party.addScenarioAvailable(9)
     party.addScenarioAvailable(13)
     party.addScenarioAvailable(14)
     party.addScenarioAvailable(19)
