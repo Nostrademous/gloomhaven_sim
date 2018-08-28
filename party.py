@@ -34,6 +34,7 @@ class Party():
         self.members = list()
         self.valid_types = list(['brute', 'scoundrel', 'cragheart', 'tinkerer', 'spellweaver', 'mindthief'])
         self.retired_types = list()
+        self.party_json['Reputation'] = 0
         self.party_json['UnlockedCityEvents'] = list()
         self.party_json['CompletedCityEvents'] = list()
         self.party_json['UnlockedRoadEvents'] = list()
@@ -45,6 +46,9 @@ class Party():
         self.party_json['PartyAchievements'] = list()
         self.party_json['GloomhavenProsperity'] = { 'Level': 1, 'Checkmarks': 0 }
         self.party_json['SanctuaryDonations'] = 0
+
+    def adjustReputation(self, amount):
+        self.party_json['Reputation'] = min(max(self.party_json['Reputation'] + amount, -20), 20)
 
     def makeSanctuaryDonation(self):
         self.party_json['SanctuaryDonations'] += 1
@@ -195,6 +199,11 @@ def make_a_party():
     gv.init() # call only once
 
     party = Party('TheBrotherhood')
+    
+    party.adjustReputation(1)
+    party.adjustReputation(-2)
+    party.adjustReputation(2)
+    
     party.addGlobalAchievement('City Rule: Militaristic')
     party.addGlobalAchievement('The Power of Enhancement')
 
