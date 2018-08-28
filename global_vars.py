@@ -25,9 +25,18 @@ def calculateHazardDamage(scenarioLevel):
 def calculateMonsterLevel(scenarioLevel):
     return scenarioLevel
 
+def calculateGoldConversion(scenarioLevel):
+    # special case max level scenario
+    if scenarioLevel == 7:
+        return 6
+
+    # normal calculation
+    adj = int(scenarioLevel / 2)
+    return adj + 2
+
 def calculateBonusExperience(scenarioLevel):
     return (scenarioLevel * 2) + 4
-    
+
 def calculateShopModifier(reputation):
     if reputation >= -2 and reputation <= 2:
         return 0
