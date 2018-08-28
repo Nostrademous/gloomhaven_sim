@@ -1,4 +1,35 @@
 {
+    "3": {
+        "Name": "Sweeping Blow",
+        "Level": 1,
+        "Class": "Brute",
+        "Initiative": 64,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "AttackValue": 2,
+                    "Modifier": "AoE",
+                    "AoEShape": [0, 1, 5],
+                    "EnhanceSlots": ["AttackValue", "AoEShape"]
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "MoveValue": 3
+                },
+                "2": {
+                    "Type": "Push",
+                    "Modifier": "AllAdjacent",
+                    "PushValue": 1,
+                    "EnhanceSlots": ["PushValue"]
+                }
+            }
+        }
+    },
     "30": {
         "Name": "Proximity Mine",
         "Level": 1,
@@ -9,7 +40,8 @@
                 "1": {
                     "Type": "CreateTrap",
                     "TrapDamage": 6,
-                    "TriggerXP": 2
+                    "TriggerXP": 2,
+                    "TrapLocation": "AdjacentEmpty"
                 }
             },
             "Lost": 1
@@ -18,8 +50,8 @@
             "Actions": {
                 "1": {
                     "Type": "Move",
-                    "Value": 4,
-                    "EnhanceSlot": 1
+                    "MoveValue": 4,
+                    "EnhanceSlots": ["MoveValue"]
                 }
             }
         }
@@ -35,9 +67,8 @@
                     "Type": "SummonData",
                     "Name": "Summon Decoy",
                     "Health": 6,
-                    "HealthEnhanceSlots": 1,
                     "Move": 2,
-                    "MoveEnhanceSlot": 1,
+                    "EnhanceSlots": ["Move", "Health"],
                     "Attack": 0,
                     "Range": 0
                 }
@@ -52,8 +83,38 @@
                     "Type": "RangedHeal",
                     "HealValue": 2,
                     "RangeValue": 3,
-                    "HealEnhanceSlots": 1,
-                    "RangeEnhanceSlots": 1
+                    "EnhanceSlots": ["HealValue", "RangeValue"]
+                }
+            }
+        }
+    },
+    "32": {
+        "Name": "Flamethrower",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 47,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "AttackValue": 3,
+                    "Effect": "Wound",
+                    "Modifier": "AoE",
+                    "AoEShape": [0, 5, 17],
+                    "EnhanceSlots": ["AttackValue", "AoEShape", "AoEShape"],
+                    "ElementalInvoke": "Fire"
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "AdjacentBuffAll",
+                    "Rounds": 1,
+                    "BuffType": "Shield",
+                    "BuffValue": 1
                 }
             }
         }
@@ -67,11 +128,11 @@
             "Actions": {
                 "1": {
                     "Type": "RangedAttack",
-                    "Value": 2,
-                    "Range": 3,
-                    "RangeEnhanceSlots": 1,
-                    "Pull": 2,
-                    "PullEnhanceSlot": 1
+                    "AttackValue": 2,
+                    "RangeValue": 3,
+                    "Modifier": "Pull",
+                    "PullValue": 2,
+                    "EnhanceSlots": ["RangeValue", "PullValue"]
                 }
             }
         },
@@ -86,6 +147,105 @@
             "Lost": 1
         }
     },
+    "34": {
+        "Name": "Ink Bomb",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 74,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedAttack",
+                    "AttackValue": 4,
+                    "RangeValue": 3,
+                    "Modifier": "AoEShape",
+                    "AoEShape": [0, 5],
+                    "EnhanceSlots": ["AttackValue"],
+                    "ElementalInvoke": "Dark"
+                }
+            },
+            "XP": "Special",
+            "SpecialXP": {
+                "XPValue": 1,
+                "Rule": "PerTarget"
+            },
+            "Lost": 1
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "MoveValue": 4,
+                    "EnhanceSlots": ["MoveValue"]
+                }
+            }
+        }
+    },
+    "35": {
+        "Name": "Net Shooter",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 19,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedAttack",
+                    "AttackValue": 3,
+                    "RangeValue": 3,
+                    "Effect": "Immobilize",
+                    "Modifier": "AoEShape",
+                    "AoEShape": [0, 5],
+                    "EnhanceSlots": ["AoEShape"]
+                }
+            },
+            "XP": "Special",
+            "SpecialXP": {
+                "XPValue": 1,
+                "Rule": "PerTarget"
+            },
+            "Lost": 1
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "AdjacentEffectOne",
+                    "Effect": "Immobilize",
+                    "EnhanceSlots": ["Effect"]
+                },
+                "2": {
+                    "Type": "Move",
+                    "MoveValue": 2,
+                    "EnhanceSlots": ["MoveValue"]
+                }
+            }
+        }
+    },
+    "36": {
+        "Name": "Stun Shot",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 20,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedAttack",
+                    "AttackValue": 1,
+                    "RangeValue": 3,
+                    "Effect": "Stun",
+                    "EnhanceSlots": ["AttackValue", "RangeValue"]
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "MoveValue": 4,
+                    "EnhanceSlots": ["MoveValue"]
+                }
+            }
+        }
+    },
     "37": {
         "Name": "Reinvigorating Elixir",
         "Level": 1,
@@ -97,17 +257,131 @@
                     "Type": "RangedHeal",
                     "HealValue": 3,
                     "RangeValue": 3,
-                    "HealEnhanceSlots": 1,
-                    "RangeEnhanceSlots": 1
+                    "EnhanceSlots": ["HealValue", "RangeValue"]
                 }
             }
         },
         "Bottom": {
             "Actions": {
                 "1": {
-                    "Type": "Special",
-                    "UniqueID": "TINKERER_37_BOT",
-                    "Text": "One adjacent ally may Recovery all their discard cards."
+                    "Type": "DiscardRecovery",
+                    "NumCards": 100,
+                    "Target": "AdjacentAlly"
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        }
+    },
+    "38": {
+        "Name": "Restorative Mist",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 17,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedHeal",
+                    "HealValue": 3,
+                    "RangeValue": 3,
+                    "EnhanceSlots": ["HealValue", "RangeValue"]
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "MoveValue": 2,
+                    "EnhanceSlots": ["MoveValue"]
+                },
+                "2": {
+                    "Type": "AdjacentHealAll",
+                    "HealValue": 1,
+                    "TargetType": "Allies"
+                }
+            }
+        }
+    },
+    "39": {
+        "Name": "Energizing Tonic",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 16,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedHeal",
+                    "HealValue": 5,
+                    "RangeValue": 2,
+                    "EnhanceSlots": ["HealValue", "HealValue"]
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "MoveValue": 6,
+                    "EnhanceSlots": ["MoveValue"]
+                }
+            },
+            "Lost": 1,
+            "XP": 1
+        }
+    },
+    "40": {
+        "Name": "Enhancement Field",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 61,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedAttack",
+                    "AttackValue": 3,
+                    "RangeValue": 3,
+                    "EnhanceSlots": ["AttackValue"]
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "AdjacentBuffAll",
+                    "Rounds": 1,
+                    "BuffType": "Attack",
+                    "BuffValue": 1
+                }
+            }
+        }
+    },
+    "41": {
+        "Name": "Toxic Bolt",
+        "Level": 1,
+        "Class": "Tinkerer",
+        "Initiative": 18,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedAttack",
+                    "AttackValue": 2,
+                    "RangeValue": 3,
+                    "Modifier": "Poison",
+                    "EnhanceSlots": ["RangeValue"],
+                    "ElementalInvoke": "Earth"
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedAttack",
+                    "AttackValue": 5,
+                    "RangeValue": 2,
+                    "EnhanceSlots": ["AttackValue", "RangeValue"]
                 }
             },
             "Lost": 1,
@@ -123,11 +397,11 @@
             "Actions": {
                 "1": {
                     "Type": "RangedAttack",
-                    "Attack": 2,
-                    "AttackEnhanceSlot": 1,
-                    "Range": 3,
-                    "Targets": 2,
-                    "TargetsEnhanceSlot": 1
+                    "AttackValue": 2,
+                    "RangeValue": 3,
+                    "Modifier": "Targets",
+                    "TargetsValue": 2,
+                    "EnhanceSlots": ["AttackValue", "TargetsValue"]
                 }
             }
         },
@@ -137,7 +411,7 @@
                     "Type": "RangedHeal",
                     "HealValue": 5,
                     "RangeValue": 2,
-                    "HealEnhanceSlots": 2
+                    "EnhanceSlots": ["HealValue", "HealValue"]
                 }
             },
             "Lost": 1,
@@ -154,7 +428,8 @@
                 "1": {
                     "Type": "CreateTrap",
                     "TrapDamage": 2,
-                    "TrapEffect": "Poison"
+                    "TrapEffect": "Poison",
+                    "TrapLocation": "AdjacentEmpty"
                 }
             }
         },
@@ -162,11 +437,11 @@
             "Actions": {
                 "1": {
                     "Type": "RangedDiscardRecovery",
-                    "Ranged": 2,
-                    "AmountRecovered": 1,
+                    "RangeValue": 2,
+                    "NumCards": 1,
                     "ElementalBuff": {
                         "Element": "Ice",
-                        "Buff": 2
+                        "NumCards": 2
                     }
                 }
             }
@@ -180,9 +455,10 @@
         "Top": {
             "Actions": {
                 "1": {
-                    "Type": "IncreasedNextHeals",
-                    "IncreasedHealValue": 2,
-                    "Heals": 4,
+                    "Type": "MultiRoundBuff",
+                    "BuffType": "Heal",
+                    "NumBuffs": 4,
+                    "BuffValue": 2,
                     "XP": [0, 1, 0, 1]
                 }
             },
@@ -193,8 +469,40 @@
             "Actions": {
                 "1": {
                     "Type": "Move",
-                    "Value": 3,
-                    "EnhanceSlots": 1
+                    "MoveValue": 3,
+                    "EnhanceSlots": ["MoveValue"]
+                }
+            }
+        }
+    },
+    "55": {
+        "Name": "Murderous Contraption",
+        "Level": 7,
+        "Class": "Tinkerer",
+        "Initiative": 94,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "SummonData",
+                    "Name": "Summon Kill Bot",
+                    "Health": 6,
+                    "Move": 3,
+                    "Attack": 3,
+                    "Range": 0,
+                    "EnhanceSlots": ["Move", "Health", "Attack"]
+                }
+            },
+            "Lasts": "Infinite",
+            "Lost": 1,
+            "XP": 2
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedAttack",
+                    "AttackValue": 4,
+                    "RangeValue": 3,
+                    "EnhanceSlots": ["AttackValue", "RangeValue"]
                 }
             }
         }
@@ -208,33 +516,35 @@
             "Actions": {
                 "1": {
                     "Type": "Move",
-                    "Value": 2
+                    "MoveValue": 2
                 },
                 "2": {
                     "Type": "RangedHeal",
                     "HealValue": 2,
                     "RangeValue": 1,
-                    "HealEnhanceSlots": 1
+                    "EnhanceSlots": ["HealValue"]
                 },
                 "3": {
                     "Type": "Move",
-                    "Value": 2
+                    "MoveValue": 2
                 },
                 "4": {
                     "Type": "RangedHeal",
                     "HealValue": 2,
                     "RangeValue": 1,
-                    "HealEnhanceSlots": 1
+                    "EnhanceSlots": ["HealValue"]
                 }
             }
         },
         "Bottom": {
             "Actions": {
                 "1": {
-                    "Type": "Move",
-                    "Value": 8,
-                    "Jump": 1,
-                    "EnhanceSlots": 1
+                    "Type": "RangedHeal",
+                    "HealValue": 4,
+                    "RangeValue": 3,
+                    "Modifier": "Targets",
+                    "TargetsValue": 2,
+                    "EnhanceSlots": ["HealValue", "TargetsValue"]
                 }
             },
             "Lost": 1,
@@ -249,8 +559,8 @@
         "Top": {
             "Actions": {
                 "1": {
-                    "Type": "AllSummonBuff",
-                    "Range": 3,
+                    "Type": "AllSummonRangeBuff",
+                    "RangeValue": 3,
                     "BuffType": "Move",
                     "BuffValue": 2,
                     "BuffControl": "PlayerRules"
@@ -263,9 +573,9 @@
             "Actions": {
                 "1": {
                     "Type": "Move",
-                    "Value": 8,
+                    "MoveValue": 8,
                     "Jump": 1,
-                    "EnhanceSlots": 1
+                    "EnhanceSlots": ["MoveValue"]
                 }
             },
             "Lost": 1,
@@ -281,8 +591,8 @@
             "Actions": {
                 "1": {
                     "Type": "Attack",
-                    "Value": 9,
-                    "EnhanceSlots": 2
+                    "AttackValue": 9,
+                    "EnhanceSlots": ["AttackValue", "AttackValue"]
                 },
                 "2": {
                     "Type": "SelfSufferDamage",
@@ -296,13 +606,15 @@
         "Bottom": {
             "Actions": {
                 "1": {
-                    "Type": "AdjBuff",
+                    "Type": "AdjacentBuffAll",
+                    "Rounds": 1,
                     "BuffType": "Attack",
                     "BuffValue": 2
                 },
                 "2": {
-                    "Type": "AdjSufferDamage",
-                    "Value": 2,
+                    "Type": "AdjacentDamageAll",
+                    "TargetType": "Allies",
+                    "DamageValue": 2,
                     "Optional": 0
                 }
             },
@@ -317,9 +629,8 @@
         "Top": {
             "Actions": {
                 "1": {
-                    "Type": "Special",
-                    "UniqueID": "TINKERER_59_TOP",
-                    "Text": "Kill one adjacent normal or elite enemy."
+                    "Type": "KillAdjacentEnemy",
+                    "MaxType": "Elite"
                 }
             },
             "Lost": 1,
@@ -329,12 +640,12 @@
             "Actions": {
                 "1": {
                     "Type": "Move",
-                    "Value": 4,
-                    "EnhanceSlots": 1
+                    "MoveValue": 4,
+                    "EnhanceSlots": ["MoveValue"]
                 },
                 "2": {
-                    "Type": "AdjEffectAll",
-                    "Value": "Poison"
+                    "Type": "AdjacentEffectAll",
+                    "Effect": "Poison"
                 }
             }
         }
