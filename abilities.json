@@ -1,4 +1,39 @@
 {
+    "1": {
+        "Name": "Trample",
+        "Level": 1,
+        "Class": "Brute",
+        "Initiative": 72,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "AttackValue": 3,
+                    "Modifier": "Pierce",
+                    "PierceValue": 2,
+                    "EnhanceSlots": ["AttackValue", "PierceValue"]
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "MoveValue": 4,
+                    "Jump": 1,
+                    "EnhanceSlots": ["MoveValue"]
+                },
+                "2": {
+                    "Type": "Attack",
+                    "AttackValue": 2,
+                    "Modifier": "TargetAllEnemiesMovedThrough",
+                    "EnhanceSlots": ["AttackValue", "AttackValue"]
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        }
+    },
     "3": {
         "Name": "Sweeping Blow",
         "Level": 1,
@@ -22,8 +57,9 @@
                     "MoveValue": 3
                 },
                 "2": {
-                    "Type": "Push",
-                    "Modifier": "AllAdjacent",
+                    "Type": "AdjacentEffectAll",
+                    "TargetType": "Enemies",
+                    "Effect": "Push",
                     "PushValue": 1,
                     "EnhanceSlots": ["PushValue"]
                 }
