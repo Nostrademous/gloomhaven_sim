@@ -269,6 +269,7 @@ def make_a_party():
     hero1.addPerk(ignore_scen_perk)
     hero1.addPerk(remove_2_minus_1)
     hero1.addPerk(add_1_plus_3)
+    hero1.addPerk(remove_2_minus_1)
     party.addMember(hero1)
     hero1.scenarioPreparation()
 

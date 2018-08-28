@@ -51,7 +51,7 @@ def calculateShopModifier(reputation):
         return -5
     elif reputation >= -20 and reputation <= -19:
         return 5
-    else
+    else:
         raise Exception("calculateShopModifier", "Bad Reputation '%d'" % reputation)
 
 def init():
