@@ -3,6 +3,7 @@
 
 #from multiprocessing import Process
 import threading
+import math
 
 import global_vars as gv
 from utils import printJson, pickRandom
@@ -107,7 +108,8 @@ class Scenario():
         avgLevel = 0
         for hero in self.scen_members:
             avgLevel += hero.getLevel()
-        return int(avgLevel/len(self.scen_members)) + offset
+        avgLevel /= len(self.scen_members)
+        return math.ceil(avgLevel/2.) + offset
 
     def startScenario(self):
         '''All setup for scenario.'''
