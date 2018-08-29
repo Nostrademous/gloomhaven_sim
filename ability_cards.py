@@ -7,7 +7,7 @@ import global_vars as gv
 _action_types = {
     "Attack": ["AttackValue"],
     "Move": ["MoveValue"],
-    "RangedAttack": ["AttackValue", "RangedValue"],
+    "RangedAttack": ["AttackValue", "RangeValue"],
     "RangedHeal": ["HealValue", "RangeValue"],
     "CreateTrap": ["TrapDamage", "TrapLocation", "TrapEffect"],
     "SummonData": ["Name", "Health", "Move", "Attack", "Range"],
@@ -28,14 +28,50 @@ _action_types = {
     "Special": ["UniqueID", "Text"]
 }
 
+
+def hasModifier(action):
+    return 'Modifier' in action
+
+def getModifier(action):
+    if hasModifier(action):
+        return action['Modifier']
+    return None
+
+def hasEffect(action):
+    return 'Effect' in action
+
+def getEffect(action):
+    if hasEffect(action):
+        return action['Effect']
+    return None
+
+def invokesElement(action):
+    if 'ElementalInvoke' in action:
+        return action['ElementalInvoke']
+    return None
+
+def consumesElement(action):
+    if 'ElementalBuff' in action:
+        return action['ElementalBuff']['Element']
+    return None
+
+def isLost(section):
+    return 'Lost' in section
+
+def grantsXP(section):
+    return 'XP' in section
+
 def interpretAction(action):
     assert action['Type'] in _action_types
+    for reqField in _action_types[action['Type']]:
+        print(action[reqField])
 
 def interpretCardSection(section):
     actions = section['Actions']
     for actionIndex in actions:
         action = actions[actionIndex]
         interpretAction(action)
+
 
 class AbilityCard():
     def __init__(self, id, name, level, initiative):

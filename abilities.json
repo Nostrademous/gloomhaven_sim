@@ -632,7 +632,7 @@
                     "Type": "RangedAttack",
                     "AttackValue": 2,
                     "RangeValue": 3,
-                    "Modifier": "Poison",
+                    "Effect": "Poison",
                     "EnhanceSlots": ["RangeValue"],
                     "ElementalInvoke": "Earth"
                 }
