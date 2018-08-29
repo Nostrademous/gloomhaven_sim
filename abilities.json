@@ -237,6 +237,35 @@
             }
         }
     },
+    "9": {
+        "Name": "Leaping Cleave",
+        "Level": 1,
+        "Class": "Brute",
+        "Initiative": 54,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "AttackValue": 3,
+                    "Modifier": "AoE",
+                    "AoEShape": [0, 1, 5],
+                    "EnhanceSlots": ["AttackValue"]
+                }
+            },
+            "XP": 1
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "MoveValue": 3,
+                    "Jump": 1,
+                    "EnhanceSlots": ["MoveValue"],
+                    "ElementalInvoke": "Air"
+                }
+            }
+        }
+    },
     "10": {
         "Name": "Spare Dagger",
         "Level": 1,
