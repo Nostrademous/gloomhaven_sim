@@ -5,11 +5,37 @@ from utils import strJson, pickRandom
 import global_vars as gv
 
 _action_types = {
-    "Move_AdjEffect": ["Move", "AdjEffect"],
-    "RangedHeal": ["Heal", "Range"],
-    "Summon": ["SummonData"],
+    "Attack": ["AttackValue"],
+    "Move": ["MoveValue"],
+    "RangedAttack": ["AttackValue", "RangedValue"],
+    "RangedHeal": ["HealValue", "RangeValue"],
+    "CreateTrap": ["TrapDamage", "TrapLocation", "TrapEffect"],
+    "SummonData": ["Name", "Health", "Move", "Attack", "Range"],
+    "RangedLoot": ["RangeValue"],
+    "AdjacentBuffAll": ["BuffType", "BuffValue", "Rounds"],
+    "AdjacentHealAll": ["HealValue", "TargetType"],
+    "AdjacentEffectOne": ["Effect"],
+    "AdjacentEffectAll": ["Effect"],
+    "AdjacentDamageAll": ["DamageValue", "TargetType"],
+    "AdjacentAllySpecial": ["Special", "Rounds"],
+    "SelfBuff": ["BuffType", "BuffValue", "Rounds"],
+    "SelfDamage": ["DamageValue"],
+    "MultiRoundBuff": ["BuffType", "BuffValue", "NumBuffs"],
+    "DiscardRecovery": ["NumCards", "Target"],
+    "RangedDiscardRecovery": ["NumCards", "RangeValue"],
+    "KillAdjacentEnemy": ["MaxType"],
+    "AllSummonRangeBuff": ["BuffType", "BuffValue", "BuffControl", "RangeValue"],
     "Special": ["UniqueID", "Text"]
 }
+
+def interpretAction(action):
+    assert action['Type'] in _action_types
+
+def interpretCardSection(section):
+    actions = section['Actions']
+    for actionIndex in actions:
+        action = actions[actionIndex]
+        interpretAction(action)
 
 class AbilityCard():
     def __init__(self, id, name, level, initiative):
@@ -154,3 +180,11 @@ if __name__ == "__main__":
     tinkerer_cards = loadAllHeroCards("tinkerer", 9)
     for tc in tinkerer_cards:
         print(tc)
+        interpretCardSection(tc.getTop())
+        interpretCardSection(tc.getBottom())
+
+    brute_cards = loadAllHeroCards("brute", 9)
+    for bc in brute_cards:
+        print(bc)
+        interpretCardSection(bc.getTop())
+        interpretCardSection(bc.getBottom())

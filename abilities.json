@@ -302,6 +302,7 @@
                 "1": {
                     "Type": "CreateTrap",
                     "TrapDamage": 6,
+                    "TrapEffect": "None",
                     "TriggerXP": 2,
                     "TrapLocation": "AdjacentEmpty"
                 }
@@ -857,8 +858,8 @@
                     "EnhanceSlots": ["AttackValue", "AttackValue"]
                 },
                 "2": {
-                    "Type": "SelfSufferDamage",
-                    "Value": 2,
+                    "Type": "SelfDamage",
+                    "DamageValue": 2,
                     "Optional": 0
                 }
             },
