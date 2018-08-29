@@ -34,6 +34,39 @@
             "XP": 2
         }
     },
+    "2": {
+        "Name": "Eye for an Eye",
+        "Level": 1,
+        "Class": "Brute",
+        "Initiative": 18,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "SelfBuff",
+                    "BuffType": "Retaliate",
+                    "BuffValue": 2,
+                    "EnhanceSlots": ["BuffValue"],
+                    "Rounds": 1
+                }
+            },
+            "XP": "Special",
+            "SpecialXP": {
+                "XPValue": 1,
+                "Rule": "PerBuffType"
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedHeal",
+                    "HealValue": 2,
+                    "RangeValue": 1,
+                    "EnhanceSlots": ["HealValue", "HealValue"],
+                    "ElementalInvoke": "Earth"
+                }
+            }
+        }
+    },
     "3": {
         "Name": "Sweeping Blow",
         "Level": 1,
@@ -62,6 +95,170 @@
                     "Effect": "Push",
                     "PushValue": 1,
                     "EnhanceSlots": ["PushValue"]
+                }
+            }
+        }
+    },
+    "4": {
+        "Name": "Provoking Roar",
+        "Level": 1,
+        "Class": "Brute",
+        "Initiative": 10,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "AttackValue": 2,
+                    "Effect": "Disarm",
+                    "EnhanceSlots": ["AttackValue"]
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "AdjacentAllySpecial",
+                    "Rounds": 1,
+                    "Special": "RedirectAttack"
+                }
+            }
+        }
+    },
+    "5": {
+        "Name": "Overwhelming Assault",
+        "Level": 1,
+        "Class": "Brute",
+        "Initiative": 61,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "AttackValue": 6,
+                    "EnhanceSlots": ["AttackValue", "AttackValue"]
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "MoveValue": 3
+                },
+                "2": {
+                    "Type": "AdjacentEffectOne",
+                    "Effect": "Push",
+                    "PushValue": 2,
+                    "EnhanceSlots": ["PushValue"]
+                }
+            }
+        }
+    },
+    "6": {
+        "Name": "Grab and Go",
+        "Level": 1,
+        "Class": "Brute",
+        "Initiative": 87,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedLoot",
+                    "RangeValue": 1
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "MoveValue": 4,
+                    "EnhanceSlots": ["MoveValue", "MoveValue"]
+                }
+            }
+        }
+    },
+    "7": {
+        "Name": "Warding Strength",
+        "Level": 1,
+        "Class": "Brute",
+        "Initiative": 32,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "AttackValue": 3,
+                    "Modifier": "Push",
+                    "PushValue": 2,
+                    "EnhanceSlots": ["AttackValue", "PushValue"]
+                }
+            }
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "MultiRoundBuff",
+                    "BuffType": "Shield",
+                    "NumBuffs": 6,
+                    "BuffValue": 1,
+                    "XP": [0, 1, 0, 1, 0, 1]
+                }
+            },
+            "Lasts": "Infinite",
+            "Lost": 1
+        }
+    },
+    "8": {
+        "Name": "Shield Bash",
+        "Level": 1,
+        "Class": "Brute",
+        "Initiative": 15,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "AttackValue": 4,
+                    "Effect": "Stun",
+                    "EnhanceSlots": ["AttackValue", "AttackValue"]
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "SelfBuff",
+                    "BuffType": "Shield",
+                    "BuffValue": 1,
+                    "EnhanceSlots": ["BuffValue", "BuffValue"],
+                    "Rounds": 1
+                }
+            }
+        }
+    },
+    "10": {
+        "Name": "Spare Dagger",
+        "Level": 1,
+        "Class": "Brute",
+        "Initiative": 27,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "RangedAttack",
+                    "AttackValue": 3,
+                    "RangeValue": 3,
+                    "EnhanceSlots": ["AttackValue"]
+                }
+            },
+            "XP": 1
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "AttackValue": 2,
+                    "EnhanceSlots": ["AttackValue"]
                 }
             }
         }
@@ -653,8 +850,7 @@
                     "DamageValue": 2,
                     "Optional": 0
                 }
-            },
-            "Lasts": "Round"
+            }
         }
     },
     "59": {
