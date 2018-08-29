@@ -199,7 +199,7 @@
                 "1": {
                     "Type": "MultiRoundBuff",
                     "BuffType": "Shield",
-                    "NumBuffs": 6,
+                    "BuffCount": 6,
                     "BuffValue": 1,
                     "XP": [0, 1, 0, 1, 0, 1]
                 }
@@ -720,7 +720,7 @@
                 "1": {
                     "Type": "MultiRoundBuff",
                     "BuffType": "Heal",
-                    "NumBuffs": 4,
+                    "BuffCount": 4,
                     "BuffValue": 2,
                     "XP": [0, 1, 0, 1]
                 }

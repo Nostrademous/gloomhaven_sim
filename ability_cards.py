@@ -20,7 +20,7 @@ _action_types = {
     "AdjacentAllySpecial": ["Special", "Rounds"],
     "SelfBuff": ["BuffType", "BuffValue", "Rounds"],
     "SelfDamage": ["DamageValue"],
-    "MultiRoundBuff": ["BuffType", "BuffValue", "NumBuffs"],
+    "MultiRoundBuff": ["BuffType", "BuffValue", "BuffCount"],
     "DiscardRecovery": ["NumCards", "Target"],
     "RangedDiscardRecovery": ["NumCards", "RangeValue"],
     "KillAdjacentEnemy": ["MaxType"],
