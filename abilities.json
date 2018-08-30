@@ -77,9 +77,8 @@
                 "1": {
                     "Type": "Attack",
                     "AttackValue": 2,
-                    "Modifier": "AoE",
-                    "AoEShape": [0, 1, 5],
-                    "EnhanceSlots": ["AttackValue", "AoEShape"]
+                    "AoEShape": [3],
+                    "EnhanceSlots": ["AttackValue", "AoEShape_1"]
                 }
             }
         },
@@ -247,8 +246,7 @@
                 "1": {
                     "Type": "Attack",
                     "AttackValue": 3,
-                    "Modifier": "AoE",
-                    "AoEShape": [0, 1, 5],
+                    "AoEShape": [3],
                     "EnhanceSlots": ["AttackValue"]
                 }
             },
@@ -288,6 +286,102 @@
                     "Type": "Attack",
                     "AttackValue": 2,
                     "EnhanceSlots": ["AttackValue"]
+                }
+            }
+        }
+    },
+    "11": {
+        "Name": "Skewer",
+        "Level": 0,
+        "Class": "Brute",
+        "Initiative": 35,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "Attack",
+                    "AttackValue": 3,
+                    "Modifier": 0,
+                    "AoEShape": [1, 1],
+                    "EnhanceSlots": ["AttackValue", "AoEShape_3"],
+                    "ElementalBuff": {
+                        "Element": "Air",
+                        "AttackValue": 4,
+                        "Modifier": "Pierce",
+                        "PierceValue": 1
+                    }
+                }
+            },
+            "XP": 1
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "Move",
+                    "MoveValue": 6,
+                    "EnhanceSlots": ["MoveValue", "MoveValue"]
+                }
+            },
+            "Lost": 1,
+            "XP": 1
+        }
+    },
+    "12": {
+        "Name": "Balanced Measure",
+        "Level": 0,
+        "Class": "Brute",
+        "Initiative": 77,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "VariableAttack",
+                    "VariableType": "MoveValue",
+                    "Scaling": 1
+                }
+            },
+            "XP": 1
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "VariableMove",
+                    "VariableType": "DamageValue",
+                    "Scaling": 1
+                }
+            }
+        }
+    },
+    "13": {
+        "Name": "Wall of Doom",
+        "Level": 0,
+        "Class": "Brute",
+        "Initiative": 20,
+        "Top": {
+            "Actions": {
+                "1": {
+                    "Type": "SelfBuff",
+                    "BuffType": "Retaliate",
+                    "BuffValue": 2,
+                    "EnhanceSlots": ["BuffValue"],
+                    "Rounds": 1
+                }, 
+                "2": {
+                    "Type": "SelfBuff",
+                    "BuffType": "Shield",
+                    "BuffValue": 2,
+                    "EnhanceSlots": ["BuffValue"],
+                    "Rounds": 1
+                }
+            },
+            "Lost": 1,
+            "XP": 2
+        },
+        "Bottom": {
+            "Actions": {
+                "1": {
+                    "Type": "SelfBuff",
+                    "BuffType": "Attack",
+                    "BuffValue": 1,
+                    "Rounds": 1
                 }
             }
         }
@@ -362,9 +456,8 @@
                     "Type": "Attack",
                     "AttackValue": 3,
                     "Effect": "Wound",
-                    "Modifier": "AoE",
-                    "AoEShape": [0, 5, 17],
-                    "EnhanceSlots": ["AttackValue", "AoEShape", "AoEShape"],
+                    "AoEShape": [2, 1],
+                    "EnhanceSlots": ["AttackValue", "AoEShape_2", "AoEShape_2"],
                     "ElementalInvoke": "Fire"
                 }
             },
@@ -421,8 +514,7 @@
                     "Type": "RangedAttack",
                     "AttackValue": 4,
                     "RangeValue": 3,
-                    "Modifier": "AoEShape",
-                    "AoEShape": [0, 5],
+                    "AoEShape": [2],
                     "EnhanceSlots": ["AttackValue"],
                     "ElementalInvoke": "Dark"
                 }
@@ -456,9 +548,8 @@
                     "AttackValue": 3,
                     "RangeValue": 3,
                     "Effect": "Immobilize",
-                    "Modifier": "AoEShape",
-                    "AoEShape": [0, 5],
-                    "EnhanceSlots": ["AoEShape"]
+                    "AoEShape": [2],
+                    "EnhanceSlots": ["AoEShape_1"]
                 }
             },
             "XP": "Special",

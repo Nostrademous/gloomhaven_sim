@@ -25,6 +25,8 @@ _action_types = {
     "RangedDiscardRecovery": ["NumCards", "RangeValue"],
     "KillAdjacentEnemy": ["MaxType"],
     "AllSummonRangeBuff": ["BuffType", "BuffValue", "BuffControl", "RangeValue"],
+    "VariableAttack": ["VariableType", "Scaling"],
+    "VariableMove": ["VariableType", "Scaling"],
     "Special": ["UniqueID", "Text"]
 }
 
@@ -33,27 +35,37 @@ def hasModifier(action):
     return 'Modifier' in action
 
 def getModifier(action):
-    if hasModifier(action):
-        return action['Modifier']
-    return None
+    return action.get('Modifier')
 
 def hasEffect(action):
     return 'Effect' in action
 
 def getEffect(action):
-    if hasEffect(action):
-        return action['Effect']
-    return None
+    return action.get('Effect')
 
 def invokesElement(action):
-    if 'ElementalInvoke' in action:
-        return action['ElementalInvoke']
-    return None
+    return action.get('ElementalInvoke')
 
 def consumesElement(action):
     if 'ElementalBuff' in action:
         return action['ElementalBuff']['Element']
     return None
+
+def isAoEAttack(action):
+    return action.get('AttackValue') and action.get('AoEShape')
+
+def maxAoETargets(action):
+    assert isAoEAttack(action)
+    cnt = sum(action.get('AoEShape'))
+    if action.get('Type') == 'RangedAttack':
+        cnt += 1
+    return cnt
+
+def isVariable(action):
+    return action.get('Type')[:8] == 'Variable'
+
+def isPlacedActive(section):
+    return section.get('Lasts') == 'Infinite'
 
 def isLost(section):
     return 'Lost' in section
@@ -62,12 +74,31 @@ def grantsXP(section):
     return 'XP' in section
 
 def interpretAction(action):
-    assert action['Type'] in _action_types
+    assert action.get('Type') in _action_types
+
+    if isVariable(action):
+        print("Variable on %s scaled 1:%d" % (action.get('VariableType'), action.get('Scaling')))
+    if isAoEAttack(action):
+        print("AoE Attack: %s, MaxTargets: %d" % (action.get('AoEShape'), maxAoETargets(action)))
+    if hasModifier(action):
+        print("Modifier: %s" % getModifier(action))
+    if hasEffect(action):
+        print("Effect: %s" % getEffect(action))
+    invokedElement = invokesElement(action)
+    if invokedElement:
+        print("Invokes '%s'" % invokedElement)
+   
     for reqField in _action_types[action['Type']]:
-        print(action[reqField])
+        print("%s: %s" % (reqField, action[reqField]))
 
 def interpretCardSection(section):
     actions = section['Actions']
+    if isLost(section):
+        print("LOST ON USE")
+    if grantsXP(section):
+        print("GRANTS XP")
+    if isPlacedActive(section):
+        print("STAYS ACTIVE")
     for actionIndex in actions:
         action = actions[actionIndex]
         interpretAction(action)
