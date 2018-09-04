@@ -191,6 +191,24 @@
         "Consumed": 1,
         "ProsperityLevel": 1
     },
+    "45": {
+        "Name": "Pendant of Dark Pacts",
+        "MaxCount": 2,
+        "Cost": 75,
+        "Slot": "Head",
+        "Buff": {
+            "Type": "RefreshItems",
+            "RefreshedItemType": "SMALL_ITEM",
+            "NumRefreshedItems": 2,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Debuff": {
+            "Type": "Curse",
+            "Count": 1
+        },
+        "Consumed": 1
+    },
     "85": {
         "Name": "Wand of Infernos",
         "MaxCount": 2,

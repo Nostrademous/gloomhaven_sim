@@ -207,10 +207,13 @@ def make_a_party():
     party.adjustReputation(1)
     party.adjustReputation(-2)
     party.adjustReputation(2)
+    party.adjustReputation(-1)
+    party.adjustReputation(-1)
 
     party.addGlobalAchievement('City Rule: Militaristic')
     party.addGlobalAchievement('The Power of Enhancement')
     party.addGlobalAchievement('The Merchant Flees')
+    party.addGlobalAchievement('The Rift Neutralized')
 
     party.addPartyAchievement('First Steps')
     party.addPartyAchievement("Jekserah's Plans")
@@ -222,13 +225,16 @@ def make_a_party():
     party.completeCityEvent(17)
     party.completeCityEvent(18)
     party.completeCityEvent(19)
+    party.completeCityEvent(27)
     party.completeCityEvent(73)
 
     #party.unlockCityEvent(73)
+    party.unlockCityEvent(78) # Scenario 21 complete
 
     party.completeRoadEvent(7)
     party.completeRoadEvent(11)
     party.completeRoadEvent(17)
+    party.completeRoadEvent(23)
     party.completeRoadEvent(25)
 
     party.addScenarioCompleted(1)
@@ -239,6 +245,7 @@ def make_a_party():
     party.addScenarioCompleted(8)
     party.addScenarioCompleted(10)
     party.addScenarioCompleted(14)
+    party.addScenarioCompleted(21)
     
     party.addScenarioBlocked(9)
 
@@ -246,7 +253,6 @@ def make_a_party():
     party.addScenarioAvailable(7)
     party.addScenarioAvailable(13)
     party.addScenarioAvailable(19)
-    party.addScenarioAvailable(21)
     party.addScenarioAvailable(22)
     party.addScenarioAvailable(63)
     party.addScenarioAvailable(66)
@@ -255,10 +261,12 @@ def make_a_party():
 
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
+    party.addProsperityCheckmark()
 
     party.addTreasureLooted(4)
     party.addTreasureLooted(7)
     party.addTreasureLooted(11) # ItemID:85 "Wand of Inferno"
+    party.addTreasureLooted(15) # ItemID:45 "Pendant of Dark Pacts"
     party.addTreasureLooted(26)
     party.addTreasureLooted(38)
     party.addTreasureLooted(46)
@@ -266,7 +274,7 @@ def make_a_party():
     party.addTreasureLooted(65)
     party.addTreasureLooted(67)
 
-    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=3, xp=146, gold=52, quest=528, checkmarks=6)
+    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=3, xp=167, gold=103, quest=528, checkmarks=7)
     hero1.buyItem('Eagle-Eye Goggles', adjustGold=False)
     hero1.buyItem('Minor Power Potion', adjustGold=False)
     hero1.buyItem('Winged Shoes', adjustGold=False)
@@ -277,7 +285,7 @@ def make_a_party():
     party.addMember(hero1)
     hero1.scenarioPreparation()
 
-    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', 'Danny', level=3, quest=512, gold=55, xp=100, checkmarks=3)
+    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', 'Danny', level=3, quest=512, gold=109, xp=122, checkmarks=5)
     hero2.buyItem('Boots of Striding', adjustGold=False)
     hero2.buyItem('Minor Healing Potion', adjustGold=False)
     hero2.buyItem('Leather Armor', adjustGold=False)
@@ -309,21 +317,26 @@ def make_a_party():
     hero4.addPerk(replace_minus_1_with_plus_1)
     party.addMember(hero4)
 
-    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=3, quest=526, gold=20, xp=128, checkmarks=6)
+    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=3, quest=526, gold=65, xp=144, checkmarks=6)
     hero5.buyItem('Leather Armor', adjustGold=False)
     hero5.buyItem('Poison Dagger', adjustGold=False)
     hero5.buyItem('Heater Shield', adjustGold=False)
     hero5.buyItem('Minor Stamina Potion', adjustGold=False)
     hero5.buyItem('Ring of Skulls', adjustGold=False)
+    hero5.buyItem('Pendant of Dark Pacts', adjustGold=False)
     hero5.addPerk(ignore_scen_perk)
     hero5.addPerk(remove_2_minus_1)
     hero5.addPerk(replace_minus_2_with_0)
+    hero5.addPerk(remove_2_minus_1)
     party.addMember(hero5)
 
-    party.makeSanctuaryDonation()
-    party.makeSanctuaryDonation()
-    party.makeSanctuaryDonation()
-    party.makeSanctuaryDonation()
+    party.makeSanctuaryDonation() # Matt
+    party.makeSanctuaryDonation() # scen 8 - (forgot)
+    party.makeSanctuaryDonation() # scen 8 - Matt
+    party.makeSanctuaryDonation() # scen 8 - Evan
+    party.makeSanctuaryDonation() # scen 21 - Kyle
+    party.makeSanctuaryDonation() # scen 21 - Andrzej
+    party.makeSanctuaryDonation() # scen 21 - Danny
 
     printJson(party)
     print('\n\n\n')

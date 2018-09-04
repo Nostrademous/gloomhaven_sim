@@ -187,6 +187,7 @@ class Character(Unit):
     def executeTurn(self):
         print("[character::executeTurn] - IMPLEMENT ME")
 
+        # if we are not long resting
         if not self.long_rest:
             top_actions, bot_actions = self.getRoundAbilitySelection()
 
