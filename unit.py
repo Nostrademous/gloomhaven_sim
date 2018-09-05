@@ -31,6 +31,9 @@ class Unit():
         assert isinstance(deck, HeroAbilityCardDeck) or isinstance(deck, MonsterAbilityCardDeck)
         self.ability_deck = deck
 
+    def doMove(self, locTarget):
+        print("[Unit::doMove] - Implement Me")
+
     def heal(self, value):
         if self.underEffect('Wound'):
             setEffect(self.effects, 'Wound', False)
