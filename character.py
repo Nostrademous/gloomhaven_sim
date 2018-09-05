@@ -214,13 +214,15 @@ class Character(Unit):
                 for actionIndx in action:
                     specific_action = action[actionIndx]
                     if specific_action.type == 'Move':
+                        maxMoveDist = specific_action.data['MoveValue']
                         locTarget = gv.Location(0,0) # TODO - pick location
                         self.doMove(locTarget)
                     elif specific_action.type == 'Attack':
                         print("Whee I melee attack!!!")
                     elif specific_action.type == 'RangedAttack':
                         print("Whee I range attack!!!")
-
+                    elif specific_action.type == 'RangedHeal':
+                        print("healbot from range")
             exit(0)
 
     def endTurn(self):

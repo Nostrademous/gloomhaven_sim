@@ -5,7 +5,7 @@ import json
 from utils import listFilesExtension
 from collections import namedtuple
 
-CardAction = namedtuple('CardAction', ['type', 'isAoE', 'hasMod', 'hasEff', 'invEle', 'isVar'])
+CardAction = namedtuple('CardAction', ['type', 'isAoE', 'hasMod', 'hasEff', 'invEle', 'isVar', 'data'])
 CardSection = namedtuple('CardSection', ['lost', 'grantsXP', 'active'])
 SpawnUnit = namedtuple('SpawnUnit', ['unitType', 'row', 'col', 'numPlayerList'])
 Location = namedtuple('Location', ['row', 'col'])

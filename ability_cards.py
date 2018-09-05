@@ -76,7 +76,7 @@ def grantsXP(section):
 def interpretAction(action):
     assert action.get('Type') in _action_types
 
-    action_info = gv.CardAction(action.get('Type'), isAoEAttack(action), hasModifier(action), hasEffect(action), invokesElement(action), isVariable(action))
+    action_info = gv.CardAction(action.get('Type'), isAoEAttack(action), hasModifier(action), hasEffect(action), invokesElement(action), isVariable(action), action)
 
     if action_info.isVar:
         print("Variable on %s scaled 1:%d" % (action.get('VariableType'), action.get('Scaling')))
