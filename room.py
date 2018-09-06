@@ -164,6 +164,9 @@ class GloomhavenTile():
             return self.unit
         return None
 
+    def hasCoin(self):
+        return self.coins > 0
+
     def getCoins(self):
         return self.coins
 
@@ -182,8 +185,11 @@ class GloomhavenTile():
     def getUnit(self):
         return self.unit
 
+    def hasTreasure(self):
+        return self.treasure != None
+
     def getTreasure(self):
-        return self.hazard
+        return self.treasure
 
     def findNeighborEdgeId(self, tile, orient):
         row_diff = tile.row_id - self.row_id

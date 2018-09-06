@@ -133,20 +133,44 @@ class Map():
         next_radius_cells = list()
         for i in range(0, 6):
             cTile = originTile.getNeighbor(i)
-            if cTile: 
+            if cTile:
                 next_radius_cells.append(cTile.getMapLocation())
         for cell in next_radius_cells:
             if cell not in ret:
                 ret.append(cell)
-        
+
         if (radius-1) > 0:
             for new_origin in next_radius_cells:
                 new_ret = self.getCoordinateDisc(new_origin, radius=radius-1)
                 for new_cell in new_ret:
                     if new_cell not in ret:
                         ret.append(new_cell)
-        
         return ret
+
+    def getReachablePOIs(self, origin, radius=1, enemies=True, doors=True, coins=True, treasure=True):
+        reachable_tiles = self.getCoordinateDisc(origin, radius)
+        pois = dict()
+        if enemies:
+            pois['Enemies'] = list()
+        if doors:
+            pois['Doors'] = list()
+        if coins:
+            pois['Coins'] = list()
+        if treasure:
+            pois['Treasure'] = list()
+
+        for loc in reachable_tiles:
+            tile = self.getTileByMapCoordinates(loc)
+            if enemies and tile.hasEnemy():
+                pois['Enemies'].append(tile)
+            if doors and tile.isDoor() and not tile.isDoorOpen():
+                pois['Doors'].append(tile)
+            if coins and tile.hasCoin():
+                pois['Coins'].append(tile)
+            if treasure and tile.hasTreasure():
+                pois['Treasure'].append(tile)
+        return pois
+
 
 # PathFinding
 import heapq
@@ -281,13 +305,13 @@ def prep_scenario_1_map(m):
     guard_8     = gv.SpawnUnit(guards, 3, -5, [npc.NONE, npc.ELITE, npc.ELITE])
     guard_9     = gv.SpawnUnit(guards, 2, -6, [npc.NORMAL, npc.NONE, npc.NORMAL])
     guard_10    = gv.SpawnUnit(guards, 4, -6, [npc.NORMAL, npc.NONE, npc.NORMAL])
-    
+
     archer_1    = gv.SpawnUnit(archers, 3, -15, [npc.ELITE, npc.ELITE, npc.ELITE])
     archer_2    = gv.SpawnUnit(archers, 2, -16, [npc.NONE, npc.NORMAL, npc.NORMAL])
     archer_3    = gv.SpawnUnit(archers, 4, -16, [npc.NONE, npc.NORMAL, npc.NORMAL])
-    
+
     room.G1b.addSpawns([guard_8, guard_9, guard_10, archer_1, archer_2, archer_3])
-    
+
     # ROOM 3
     archer_4    = gv.SpawnUnit(archers, 10, -6, [npc.NONE, npc.NONE, npc.NORMAL])
     archer_5    = gv.SpawnUnit(archers, 10, -8, [npc.NORMAL, npc.NORMAL, npc.NORMAL])
@@ -298,7 +322,7 @@ def prep_scenario_1_map(m):
     bones_3    = gv.SpawnUnit(bones, 8, -8, [npc.NORMAL, npc.ELITE, npc.NORMAL])
     bones_4    = gv.SpawnUnit(bones, 8, -10, [npc.NORMAL, npc.NORMAL, npc.NORMAL])
     room.I1b.addSpawns([archer_4, archer_5, archer_6, archer_7, bones_1, bones_2, bones_3, bones_4])
-    
+
     parents, cost = a_star_search(m, gv.Location(2, 8), gv.Location(10, -4))
     print("Can reach desired target in %d steps" % (len(parents)-1))
     print("Damage taken on path: %d" % (cost - (len(parents)-1)))
@@ -315,8 +339,9 @@ if __name__ == "__main__":
     gv.setNumPlayersInScenario(pickRandom([i for i in range(2,5)]))
     m = _map_json["1"]
     m.spawnStartingRoom()
-    
+
     reachable = m.getCoordinateDisc(gv.Location(0,0), 1)
     print(reachable)
-    reachable = m.getCoordinateDisc(gv.Location(0,0), 3)
-    print(reachable)
+    reachable = m.getReachablePOIs(gv.Location(0,0), 6)
+    for key in reachable:
+        print("%s: %s" % (key, reachable[key]))
