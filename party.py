@@ -175,7 +175,7 @@ class Party():
         self.party_json['GloomhavenProsperity']['Checkmarks'] += 1
         if self.party_json['GloomhavenProsperity']['Checkmarks'] == 4:
             self.party_json['GloomhavenProsperity']['Level'] += 1
-            self.party_json['GloomhavenProsperity']['Checkmarks'] += 1
+            self.party_json['GloomhavenProsperity']['Checkmarks'] = 0
 
     def getPartySize(self):
         return len(self.members)
@@ -226,12 +226,14 @@ def make_a_party():
     party.completeCityEvent(18)
     party.completeCityEvent(19)
     party.completeCityEvent(27)
+    party.completeCityEvent(28)
     party.completeCityEvent(73)
 
     #party.unlockCityEvent(73)
     party.unlockCityEvent(78) # Scenario 21 complete
 
     party.completeRoadEvent(7)
+    party.completeRoadEvent(9)
     party.completeRoadEvent(11)
     party.completeRoadEvent(17)
     party.completeRoadEvent(23)
@@ -262,9 +264,11 @@ def make_a_party():
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
+    party.addProsperityCheckmark() # +1 from 10 Sanctuary Donations
 
     party.addTreasureLooted(4)
     party.addTreasureLooted(7)
+    party.addTreasureLooted(10)
     party.addTreasureLooted(11) # ItemID:85 "Wand of Inferno"
     party.addTreasureLooted(15) # ItemID:45 "Pendant of Dark Pacts"
     party.addTreasureLooted(26)
@@ -274,18 +278,20 @@ def make_a_party():
     party.addTreasureLooted(65)
     party.addTreasureLooted(67)
 
-    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=3, xp=167, gold=103, quest=528, checkmarks=7)
+    hero1 = ch.Character('Clockwerk', 'Tinkerer', 'Andrzej', level=4, xp=179, gold=87, quest=528, checkmarks=7)
     hero1.buyItem('Eagle-Eye Goggles', adjustGold=False)
     hero1.buyItem('Minor Power Potion', adjustGold=False)
     hero1.buyItem('Winged Shoes', adjustGold=False)
+    hero1.buyItem('Stun Powder', adjustGold=False)
     hero1.addPerk(ignore_scen_perk)
     hero1.addPerk(remove_2_minus_1)
     hero1.addPerk(add_1_plus_3)
     hero1.addPerk(remove_2_minus_1)
+    hero1.addPerk(replace_minus_2_with_0)
     party.addMember(hero1)
     hero1.scenarioPreparation()
 
-    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', 'Danny', level=3, quest=512, gold=109, xp=122, checkmarks=5)
+    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', 'Danny', level=3, quest=512, gold=117, xp=125, checkmarks=5)
     hero2.buyItem('Boots of Striding', adjustGold=False)
     hero2.buyItem('Minor Healing Potion', adjustGold=False)
     hero2.buyItem('Leather Armor', adjustGold=False)
@@ -295,18 +301,18 @@ def make_a_party():
     hero2.addPerk(add_1_plus_3)
     party.addMember(hero2)
 
-    hero3 = ch.Character('Evan', 'Spellweaver', 'Evan Teran', level=3, quest=533, gold=45, xp=148, checkmarks=8)
+    hero3 = ch.Character('Evan', 'Spellweaver', 'Evan Teran', level=3, quest=533, gold=20, xp=161, checkmarks=8)
     hero3.buyItem('Cloak of Invisibility', adjustGold=False)
     hero3.buyItem('Minor Power Potion', adjustGold=False)
     hero3.buyItem('Eagle-Eye Goggles', adjustGold=False)
-    hero3.buyItem('Wand of Infernos', adjustGold=False)
+    hero3.buyItem('Piercing Bow', adjustGold=False)
     hero3.addPerk(add_2_plus_1)
     hero3.addPerk(add_2_plus_1)
     hero3.addPerk(add_1_plus_1_wound)
     hero3.addPerk(add_1_plus_2_fire)
     party.addMember(hero3)
 
-    hero4 = ch.Character('Bloodfist Stoneborn', 'Cragheart', 'Matt', level=3, quest=531, gold=39, xp=146, checkmarks=6)
+    hero4 = ch.Character('Bloodfist Stoneborn', 'Cragheart', 'Matt', level=3, quest=531, gold=29, xp=153, checkmarks=6)
     hero4.buyItem('Hide Armor', adjustGold=False)
     hero4.buyItem('Boots of Striding', adjustGold=False)
     hero4.buyItem('Minor Stamina Potion', adjustGold=False)
@@ -317,7 +323,7 @@ def make_a_party():
     hero4.addPerk(replace_minus_1_with_plus_1)
     party.addMember(hero4)
 
-    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=3, quest=526, gold=65, xp=144, checkmarks=6)
+    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', 'Kyle', level=3, quest=526, gold=67, xp=168, checkmarks=6)
     hero5.buyItem('Leather Armor', adjustGold=False)
     hero5.buyItem('Poison Dagger', adjustGold=False)
     hero5.buyItem('Heater Shield', adjustGold=False)
@@ -337,6 +343,9 @@ def make_a_party():
     party.makeSanctuaryDonation() # scen 21 - Kyle
     party.makeSanctuaryDonation() # scen 21 - Andrzej
     party.makeSanctuaryDonation() # scen 21 - Danny
+    party.makeSanctuaryDonation() # scen 13 - Kyle
+    party.makeSanctuaryDonation() # scen 13 - Matt
+    party.makeSanctuaryDonation() # scen 13 - Evan
 
     printJson(party)
     print('\n\n\n')

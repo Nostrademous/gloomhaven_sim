@@ -33,7 +33,7 @@ class CharacterItem():
         self.equipped_items = copy.deepcopy(_item_template)
         self.unequipped_items = list()
 
-    def equipItem(self, itemObj):
+    def equipItem(self, itemObj, maxSmallItems=1):
         if itemObj.slot == "TWO_HANDS":
             assert len(self.equipped_items["HANDS"]) == 0
             self.equipped_items["HANDS"].append(itemObj)
@@ -41,7 +41,7 @@ class CharacterItem():
             assert len(self.equipped_items["HANDS"]) < 2
             self.equipped_items["HANDS"].append(itemObj)
         elif itemObj.slot == "SMALL_ITEM":
-            assert len(self.equipped_items[itemObj.slot]) == 0
+            assert len(self.equipped_items[itemObj.slot]) < maxSmallItems
             self.equipped_items["SMALL_ITEM"].append(itemObj)
         else:
             assert self.equipped_items[itemObj.slot] == None
@@ -261,7 +261,7 @@ class Character(Unit):
             print('[takeDamage :: AssertionError] : %s' % err)
             raise
 
-    def numPotionsAllowed(self):
+    def numSmallItemsAllowed(self):
         return int(0.5 + self.getLevel() / 2.)
 
     def canLevel(self):
@@ -289,7 +289,7 @@ class Character(Unit):
                 if adjustGold:
                     assert self.gold >= item.cost
                     self.gold -= item.cost
-                self.items.equipItem(item)
+                self.items.equipItem(item, self.numSmallItemsAllowed())
             except AssertionError:
                 print("You do not have enough gold to buy %s" % (itemName))
 

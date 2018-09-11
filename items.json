@@ -191,6 +191,34 @@
         "Consumed": 1,
         "ProsperityLevel": 1
     },
+    "20": {
+        "Name": "Minor Mana Potion",
+        "MaxCount": 4,
+        "Cost": 10,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "CreateElement",
+            "Count": 1,
+            "ElementType": "Any",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 2
+    },
+    "21": {
+        "Name": "Stun Powder",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "AttackBuff",
+            "Count": 1,
+            "Buff": "Add_Stun",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 2
+    },
     "45": {
         "Name": "Pendant of Dark Pacts",
         "MaxCount": 2,
