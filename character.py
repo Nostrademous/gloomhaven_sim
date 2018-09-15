@@ -14,7 +14,7 @@ import global_vars as gv
 from utils import *
 from effects import *
 from unit import Unit
-from ability_cards import HeroAbilityCardDeck, DEFAULT
+from ability_cards import HeroAbilityCardDeck, DEFAULT, interpretCardSection
 
 import perks
 import amd
@@ -192,8 +192,37 @@ class Character(Unit):
             top_actions, bot_actions = self.getRoundAbilitySelection()
 
             available_actions = itertools.product(top_actions, bot_actions)
+            ordered_action = { "0": None, "1": None }
             for i,action in enumerate(available_actions):
                 print("%d - %s" % (i, str(action)))
+                topActionDict = interpretCardSection(action[0])
+                botActionDict = interpretCardSection(action[1])
+
+            # TODO - remove this
+            ordered_action["0"] = pickRandom(top_actions)
+            ordered_action["1"] = pickRandom(bot_actions)
+            print("\n\nCHOSEN:\n\n", ordered_action)
+
+            assert ordered_action["0"] and ordered_action["1"]
+            assert len(ordered_action) == 2
+
+            for i,action in enumerate(ordered_action):
+                print("\n\n")
+                print(ordered_action[action])
+                print("\n\n")
+                action = interpretCardSection(ordered_action[action])
+                for actionIndx in action:
+                    specific_action = action[actionIndx]
+                    if specific_action.type == 'Move':
+                        maxMoveDist = specific_action.data['MoveValue']
+                        locTarget = gv.Location(0,0) # TODO - pick location
+                        self.doMove(locTarget)
+                    elif specific_action.type == 'Attack':
+                        print("Whee I melee attack!!!")
+                    elif specific_action.type == 'RangedAttack':
+                        print("Whee I range attack!!!")
+                    elif specific_action.type == 'RangedHeal':
+                        print("healbot from range")
             exit(0)
 
     def endTurn(self):

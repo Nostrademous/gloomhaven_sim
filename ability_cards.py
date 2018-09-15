@@ -76,32 +76,40 @@ def grantsXP(section):
 def interpretAction(action):
     assert action.get('Type') in _action_types
 
-    if isVariable(action):
+    action_info = gv.CardAction(action.get('Type'), isAoEAttack(action), hasModifier(action), hasEffect(action), invokesElement(action), isVariable(action), action)
+
+    if action_info.isVar:
         print("Variable on %s scaled 1:%d" % (action.get('VariableType'), action.get('Scaling')))
-    if isAoEAttack(action):
+    if action_info.isAoE:
         print("AoE Attack: %s, MaxTargets: %d" % (action.get('AoEShape'), maxAoETargets(action)))
-    if hasModifier(action):
+    if action_info.hasMod:
         print("Modifier: %s" % getModifier(action))
-    if hasEffect(action):
+    if action_info.hasEff:
         print("Effect: %s" % getEffect(action))
-    invokedElement = invokesElement(action)
-    if invokedElement:
-        print("Invokes '%s'" % invokedElement)
-   
+
+    if action_info.invEle:
+        print("Invokes '%s'" % action_info.invEle)
+
     for reqField in _action_types[action['Type']]:
         print("%s: %s" % (reqField, action[reqField]))
 
+    return action_info
+
 def interpretCardSection(section):
     actions = section['Actions']
-    if isLost(section):
+    section_info = gv.CardSection(isLost(section), grantsXP(section), isPlacedActive(section))
+    if section_info.lost:
         print("LOST ON USE")
-    if grantsXP(section):
+    if section_info.grantsXP:
         print("GRANTS XP")
-    if isPlacedActive(section):
+    if section_info.active:
         print("STAYS ACTIVE")
+
+    retActionDict = dict()
     for actionIndex in actions:
         action = actions[actionIndex]
-        interpretAction(action)
+        retActionDict[str(actionIndex)] = interpretAction(action)
+    return retActionDict
 
 
 class AbilityCard():
@@ -142,8 +150,8 @@ class AbilityCard():
         return self.__repr__()
 
 DEFAULT = AbilityCard(0, "Default Top", 0, 100)
-DEFAULT.addTop({"Actions": { "1": {"Type": "Attack", "Value": 2} } })
-DEFAULT.addBottom({"Actions": { "1": {"Type": "Move", "Value": 2} } })
+DEFAULT.addTop({"Actions": { "1": {"Type": "Attack", "AttackValue": 2} } })
+DEFAULT.addBottom({"Actions": { "1": {"Type": "Move", "MoveValue": 2} } })
 
 def loadAllHeroCards(heroType, level):
     card_list = list()
