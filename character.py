@@ -92,14 +92,50 @@ class CharacterItem():
         return ret
 
 
+class Owner():
+    def __init__(self, name):
+        self.name       = name
+        self.hero       = None
+        self.retiredCnt = 0
+
+        self.retiredHeroes = list()
+
+    '''
+    def setHero(self, heroObj):
+        assert self.hero == None
+        self.hero       = heroObj
+
+    def getHero(self):
+        return self.hero
+    '''
+
+    def retireHero(self, heroObj):
+        self.retiredCnt += 1
+        self.hero       = None
+        self.retiredHeroes.append(copy.deepcopy(heroObj))
+
+    def getRetiredCount(self):
+        return self.retiredCnt
+
+    def __repr__(self):
+        retStr  = "Owner: %s\n" % (self.name)
+        return retStr
+
+    def getJson(self):
+        retDict = {}
+        retDict['Name'] = self.name
+        retDict['RetiredHeroes'] = self.retiredCnt
+        return retDict
+
+
 class Character(Unit):
     _valid_actions = ['play_cards', 'long_rest']
 
-    def __init__(self, name, type, owner='<UNKNOWN>', level=1, xp=0, gold=30, quest=0, checkmarks=0):
+    def __init__(self, name, heroType, ownerObj, level=1, xp=0, gold=30, quest=0, checkmarks=0):
         #print('Name: %s' % name)
         super().__init__(name, 0)
-        self.type           = type
-        self.owner          = owner
+        self.type           = heroType
+        self.owner          = ownerObj
         self.level          = level
         self.xp             = xp
         self.gold           = gold
@@ -110,9 +146,9 @@ class Character(Unit):
         self.selected_perks = list()
 
         if gv.heroDataJson:
-            self.curr_hp    = int(gv.heroDataJson[type.capitalize()]['Health'][str(level)])
+            self.curr_hp    = int(gv.heroDataJson[self.type.capitalize()]['Health'][str(level)])
             self.max_hp     = int(self.curr_hp)
-            self.deck_size  = int(gv.heroDataJson[type.capitalize()]['DeckSize'])
+            self.deck_size  = int(gv.heroDataJson[self.type.capitalize()]['DeckSize'])
 
         self.retired        = False
         self.exhausted      = False
@@ -322,6 +358,9 @@ class Character(Unit):
             except AssertionError:
                 print("You do not have enough gold to buy %s" % (itemName))
 
+    def findItem(self, itemName):
+        self.buyItem(itemName, adjustGold=False)
+
     def sellItem(self, itemName):
         gold_value = self.items.sellItem(itemName)
         self.gold += gold_value
@@ -334,7 +373,7 @@ class Character(Unit):
         jsonData = {}
         jsonData['name'] = self.name
         jsonData['type'] = self.type
-        jsonData['owner'] = self.owner
+        jsonData['owner'] = self.owner.getJson()
         jsonData['level'] = self.level
         jsonData['xp'] = self.xp
         jsonData['gold'] = self.gold
