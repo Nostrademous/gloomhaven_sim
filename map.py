@@ -344,4 +344,7 @@ if __name__ == "__main__":
     print(reachable)
     reachable = m.getReachablePOIs(gv.Location(0,0), 6)
     for key in reachable:
-        print("%s: %s" % (key, reachable[key]))
+        if key == 'Enemies':
+            print("%s: %s" % (key, [i.getUnit() for i in reachable[key]]))
+        else:
+            print("%s: %s" % (key, reachable[key]))

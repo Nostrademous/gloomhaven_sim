@@ -26,6 +26,7 @@ import json
 import character as ch
 from utils import printJson
 from perks import *
+from global_vars import starting_hero_types
 
 class Party():
     def __init__(self, name):
@@ -33,7 +34,7 @@ class Party():
         self.party_json['PartyName'] = name
         self.owners     = list()
         self.members    = list()
-        self.valid_hero_types   = list(['brute', 'scoundrel', 'cragheart', 'tinkerer', 'spellweaver', 'mindthief'])
+        self.valid_hero_types   = list(starting_hero_types)
         self.retired_heroes     = list()
         self.party_json['Reputation'] = 0
         self.party_json['UnlockedCityEvents'] = list()
@@ -48,6 +49,21 @@ class Party():
         self.party_json['PartyAchievements'] = list()
         self.party_json['GloomhavenProsperity'] = { 'Level': 1, 'Checkmarks': 0, 'Count': 0 }
         self.party_json['SanctuaryDonations'] = 0
+        self.party_json['PartyEnhancements'] = dict()
+        
+    def addEnhancement(self, strHeroType, intAbilityId, section, enhancement):
+        if strHeroType.lower() not in self.party_json['PartyEnhancements']:
+            self.party_json['PartyEnhancements'][strHeroType.lower()] = dict()
+        
+        if str(intAbilityId) not in self.party_json['PartyEnhancements'][strHeroType.lower()]:
+            self.party_json['PartyEnhancements'][strHeroType.lower()][str(intAbilityId)] = dict()
+            self.party_json['PartyEnhancements'][strHeroType.lower()][str(intAbilityId)]["Top"] = list()
+            self.party_json['PartyEnhancements'][strHeroType.lower()][str(intAbilityId)]["Bottom"] = list()
+            
+        if section in ["Top", "Bottom"]:
+            self.party_json['PartyEnhancements'][strHeroType.lower()][str(intAbilityId)][section].append(enhancement)
+        else:
+            raise Exception("[party - addEnhancement]", "Invalid Section: '%s' :: %s %s" % (section, strHeroType, str(intAbilityId)))
 
     def adjustReputation(self, amount):
         self.party_json['Reputation'] = min(max(self.party_json['Reputation'] + amount, -20), 20)
@@ -375,7 +391,7 @@ def make_a_party():
     hero5.addPerk(replace_minus_2_with_0)
     hero5.addPerk(remove_2_minus_1)
     hero5.addPerk(replace_minus_1_with_plus_1)
-    #hero5.addEnhancement(card_102, bottom, 'Bless') # 100gold paid
+    party.addEnhancement(hero5.getType(), 102, "Bottom", 'Bless') # 100gold paid
     party.addMember(hero5)
 
     party.makeSanctuaryDonation() # Matt

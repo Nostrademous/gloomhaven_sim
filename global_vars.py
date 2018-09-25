@@ -5,11 +5,16 @@ import json
 from utils import listFilesExtension
 from collections import namedtuple
 
+# Named Tuples
 CardAction = namedtuple('CardAction', ['type', 'isAoE', 'hasMod', 'hasEff', 'invEle', 'isVar', 'data'])
 CardSection = namedtuple('CardSection', ['lost', 'grantsXP', 'active'])
 SpawnUnit = namedtuple('SpawnUnit', ['unitType', 'row', 'col', 'numPlayerList'])
 Location = namedtuple('Location', ['row', 'col'])
 
+# Useful lists/dictionaries
+starting_hero_types = ['brute', 'scoundrel', 'cragheart', 'tinkerer', 'spellweaver', 'mindthief']
+
+# Useful Functions
 def rotateLocationLeft(loc, num_times=1):
     """Given a hex coordinate (x, y) return the coordinate of hex when rotated 60° around the origin.
     """
