@@ -93,6 +93,7 @@
             "Debuff": "Replace2Xwith0",
             "Trigger": "Attack"
         },
+        "Spent": 0,
         "ProsperityLevel": 1
     },
     "8": {
@@ -263,6 +264,21 @@
             "Count": 1,
             "Buff": "Attack_1",
             "Trigger": "Condition"
+        },
+        "Spent": 0
+    },
+    "113": {
+        "Name": "Skullbane Axe",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "AttackUnitSpecific",
+            "SpecificTo": "UnitType",
+            "UnitType": ["Living Corpse", "Living Spirit", "Living Bones"],
+            "Count": 1,
+            "Buff": "Attack_5",
+            "Trigger": "Player"
         }
     },
     "123": {

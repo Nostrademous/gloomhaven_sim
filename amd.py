@@ -8,7 +8,7 @@ class AttackModifierCard():
     def __init__(self, name, adjValue=0, crit=False, miss=False, reshuffle=False,
                  curse=False, bless=False, rolling=False, effect=None, effectValue=0,
                  invokeElement=None, heal=False, healAmount=0, addTarget=False,
-                 pullValue=0, pushValue=0):
+                 pullValue=0, pushValue=0, refreshItem=False):
         self.name       = name
         self.adjValue   = adjValue
         self.crit       = crit
@@ -31,6 +31,9 @@ class AttackModifierCard():
         # push/pull vards
         self.pushValue  = pushValue
         self.pullValue  = pullValue
+        
+        # item related
+        self.refreshItem = refreshItem
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
@@ -59,6 +62,9 @@ class AttackModifierCard():
     def isPull(self):
         return self.pullValue > 0
 
+    def isRefreshItem(self):
+        return self.refreshItem
+        
     def calcDmg(self, value=1):
         if self.isMiss() or self.isCurse(): return 0
         if self.isCrit() or self.isBlessing(): return 2 * value
@@ -77,6 +83,8 @@ class AttackModifierCard():
             ret += ' PUSH %d' % (self.pushValue)
         if self.isPull():
             ret += ' PULL %d' % (self.pullValue)
+        if self.isRefreshItem():
+            ret += ' REFRESH ITEM'
         if self.bless:
             ret += ' BLESS'
         if self.curse:
@@ -127,12 +135,15 @@ amc_roll_p1         = AttackModifierCard('+1', rolling=True)
 amc_plus_2_fire     = AttackModifierCard('+2', invokeElement='fire')
 amc_plus_2_ice      = AttackModifierCard('+2', invokeElement='ice')
 amc_plus_1_curse    = AttackModifierCard('+1', curse=True)
+amc_plus_1_poison   = AttackModifierCard('+1', effect='poison')
 amc_plus_2_muddle   = AttackModifierCard('+2', effect='muddle')
 amc_0_stun          = AttackModifierCard('+0', effect='stun')
 amc_plus_1_shield1  = AttackModifierCard('+1', effect='shield', effectValue=1)
 amc_roll_push1      = AttackModifierCard('', rolling=True, pushValue=1)
 amc_roll_pull1      = AttackModifierCard('', rolling=True, pullValue=1)
 amc_roll_push2      = AttackModifierCard('', rolling=True, pushValue=2)
+
+amc_0_ri            = AttackModifierCard('+0', refreshItem=True)
 
 _start_deck = list([
     amc_0, amc_0, amc_0, amc_0, amc_0, amc_0, # 6 +0 cards

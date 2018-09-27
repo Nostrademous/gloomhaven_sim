@@ -206,6 +206,9 @@ class Character(Unit):
             self.long_rest = True
             self.round_init = 99
 
+    def retire(self):
+        self.retired = True
+            
     def getRoundAbilityCards(self):
         return self.ability_deck.in_hand_cards
 

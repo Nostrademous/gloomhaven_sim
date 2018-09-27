@@ -65,6 +65,15 @@ class Party():
         else:
             raise Exception("[party - addEnhancement]", "Invalid Section: '%s' :: %s %s" % (section, strHeroType, str(intAbilityId)))
 
+    def getNumEnhancementForHeroType(self, strHeroType):
+        if strHeroType.lower() not in self.party_json['PartyEnhancements']:
+            return 0
+        count = 0
+        for key in self.party_json['PartyEnhancements'][strHeroType.lower()]:
+            count += len(self.party_json['PartyEnhancements'][strHeroType.lower()]["Top"])
+            count += len(self.party_json['PartyEnhancements'][strHeroType.lower()]["Bottom"])
+        return count
+            
     def adjustReputation(self, amount):
         self.party_json['Reputation'] = min(max(self.party_json['Reputation'] + amount, -20), 20)
 
@@ -157,8 +166,19 @@ class Party():
         assert extraType not in self.valid_hero_types
         self.valid_hero_types.append(extraType)
 
+    def unlockHero(self, strHeroType):
+        strHeroType = strHeroType.lower()
+        # make hero available to pick again
+        assert strHeroType not in self.valid_hero_types
+        self.valid_hero_types.append(strHeroType)
+        
     def retireHero(self, heroObj):
-        self.retireHeroType(hero.getType())
+        for member in self.members:
+            if heroObj.getName() is member.getName():
+                print("Retiring %s!" % member.getName())
+                member.retire()
+                break
+        self.retireHeroType(heroObj.getType())
 
     def claimHeroType(self, heroType):
         heroType = heroType.lower()
@@ -329,7 +349,8 @@ def make_a_party():
     owner4 = ch.Owner('Matt')
     owner5 = ch.Owner('Kyle')
 
-    hero1 = ch.Character('Clockwerk', 'Tinkerer', owner1, level=4, xp=225, gold=79, quest=528, checkmarks=10)
+    hero1 = ch.Character('Clockwerk', 'Tinkerer', owner1, level=5, xp=225, gold=4, quest=528, checkmarks=10)
+    #print("Number Enhancements for %s: %d" % (hero1.getName(), party.getNumEnhancementForHeroType(hero1.getType())))
     hero1.buyItem('Eagle-Eye Goggles', adjustGold=False)
     hero1.buyItem('Minor Power Potion', adjustGold=False)
     hero1.buyItem('Winged Shoes', adjustGold=False)
@@ -342,6 +363,7 @@ def make_a_party():
     hero1.addPerk(replace_minus_2_with_0)
     hero1.addPerk(add_1_plus_1_wound)
     party.addMember(hero1)
+    party.addEnhancement(hero1.getType(), 36, "Top", 'Wound on Attack') # 75 gold paid
     hero1.scenarioPreparation()
 
     hero2 = ch.Character('Ruby Sweety Pie', 'Brute', owner2, level=3, quest=512, gold=191, xp=161, checkmarks=5)
@@ -349,7 +371,7 @@ def make_a_party():
     hero2.buyItem('Minor Healing Potion', adjustGold=False)
     hero2.buyItem('Leather Armor', adjustGold=False)
     hero2.buyItem('Iron Helmet', adjustGold=False)
-    #hero2.findItem('Skullbane Axe')
+    hero2.findItem('Skullbane Axe')
     hero2.addPerk(replace_minus_1_with_plus_1)
     hero2.addPerk(remove_2_minus_1)
     hero2.addPerk(add_1_plus_3)
@@ -391,7 +413,7 @@ def make_a_party():
     hero5.addPerk(replace_minus_2_with_0)
     hero5.addPerk(remove_2_minus_1)
     hero5.addPerk(replace_minus_1_with_plus_1)
-    party.addEnhancement(hero5.getType(), 102, "Bottom", 'Bless') # 100gold paid
+    party.addEnhancement(hero5.getType(), 102, "Bottom", 'Bless on Invisibility') # 100gold paid
     party.addMember(hero5)
 
     party.makeSanctuaryDonation() # Matt
@@ -410,8 +432,25 @@ def make_a_party():
     party.makeSanctuaryDonation() # scen 20 - Andrzej
     party.makeSanctuaryDonation() # scen 20 - Kyle
 
-    party.addPlayers([owner1, owner2, owner3, owner4, owner5])
+    #party.addPlayers([owner1, owner2, owner3, owner4, owner5])
 
+    party.retireHero(hero1)
+    party.retireHero(hero2)
+    party.unlockHero("Quartermaster")
+    party.unlockHero("Doomstalker")
+    
+    hero6 = ch.Character('Singularity', 'Doomstalker', owner1, level=3, quest=0, gold=60, xp=95, checkmarks=0)
+    hero6.addPerk(remove_2_minus_1)
+    hero6.addPerk(remove_2_minus_1)
+    hero6.addPerk(add_2_roll_plus_1)
+    party.addMember(hero6)
+    
+    hero7 = ch.Character('Danny', 'Quartermaster', owner2, level=3, quest=0, gold=60, xp=95, checkmarks=0)
+    party.addMember(hero7)
+    
+    ###
+    #  PRINT OUR PARTY
+    ###
     printJson(party)
     print('\n\n\n')
 
