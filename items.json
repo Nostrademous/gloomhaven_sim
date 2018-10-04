@@ -220,6 +220,23 @@
         "Consumed": 1,
         "ProsperityLevel": 2
     },
+    "23": {
+        "Name": "Chainmail",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "Body",
+        "AMDEffect": {
+            "Value": -1,
+            "Count": 3
+        },
+        "Buff": {
+            "Type": "NextFew",
+            "Count": 3,
+            "Buff": "Shield_1",
+            "Trigger": "AttackDamage"
+        },
+        "ProsperityLevel": 3
+    },
     "45": {
         "Name": "Pendant of Dark Pacts",
         "MaxCount": 2,
