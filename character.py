@@ -208,6 +208,7 @@ class Character(Unit):
 
     def retire(self):
         self.retired = True
+        self.owner.retireHero(self)
             
     def getRoundAbilityCards(self):
         return self.ability_deck.in_hand_cards
