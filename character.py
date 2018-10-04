@@ -62,13 +62,21 @@ class CharacterItem():
                 return item.sellCost()
         # if we get here the item wasn't in our unequipped list
         for item in self.equipped_items:
-            if self.equipped_items[item].name == itemName:
-                cost = self.equipped_items[item].sellCost()
-                self.equipped_items[item] = None
-                return cost
+            items_in_slot = self.equipped_items[item]
+            if isinstance(items_in_slot, list):
+                for index, item_instance in enumerate(items_in_slot):
+                    if item_instance and item_instance.name == itemName:
+                        cost = item_instance.sellCost()
+                        del self.equipped_items[item][index]
+                        return cost
+            else:
+                if items_in_slot and items_in_slot.name == itemName:
+                    cost = items_in_slot.sellCost()
+                    self.equipped_items[item] = None
+                    return cost
         raise Exception("CharacterItem::sellItem", "'%s' not found" % (itemName))
         return 0
-
+    
     def __repr__(self):
         ret = ""
         for item in self.equipped_items:
@@ -131,14 +139,21 @@ class Owner():
 class Character(Unit):
     _valid_actions = ['play_cards', 'long_rest']
 
-    def __init__(self, name, heroType, ownerObj, level=1, xp=0, gold=30, quest=0, checkmarks=0):
+    def __init__(self, name, heroType, ownerObj, level=1, xp=0, gold=0, quest=0, checkmarks=0):
         #print('Name: %s' % name)
         super().__init__(name, 0)
         self.type           = heroType
         self.owner          = ownerObj
         self.level          = level
-        self.xp             = xp
-        self.gold           = gold
+        if xp == 0:
+            inc             = [45 + (5*(i-1)) for i in range(1,9)]
+            self.xp         = sum(inc[:self.level-1])
+        else:
+            self.xp         = xp
+        if gold == 0:
+            self.gold       = (level + 1) * 15
+        else:
+            self.gold       = gold
         self.quest          = quest # for tracking retirement conditions
         self.checkmarks     = checkmarks
         self.perks_from_chk = 0
@@ -209,6 +224,7 @@ class Character(Unit):
     def retire(self):
         self.retired = True
         self.owner.retireHero(self)
+        self.name = "[RETIRED] %s" % self.name
             
     def getRoundAbilityCards(self):
         return self.ability_deck.in_hand_cards
@@ -291,33 +307,47 @@ class Character(Unit):
         if perks.ignore_scen_perk_plus_1 in self.selected_perks: return True
         return False
 
-    def addCheckmark(self, cnt=1):
-        self.checkmarks += cnt
+    def canGainPerkFromCheckmarks(self):
         if self.checkmarks >= 3:
-            extra_perks = int(self.checkmarks/3)
             # max extra perks from checkmarks is 6 per char sheet
             if self.perks_from_chk < 6:
                 # I believe below is safe as I don't see a way to
                 # get more than 3 checkmarks in a single scenario
-                self.perks_from_chk += extra_perks
-                self.addPerk(extra_perks)
-                self.checkmarks = self.checkmarks % 3
+                if (int(self.checkmarks/3) - self.perks_from_chk) > 0:
+                    return True
+        return False
+
+    def addCheckmarkPerk(self, perk):
+        self.addPerk(perk, " Checkmark")
+        self.perks_from_chk += 1
+
+    def adjCheckmarks(self, amount):
+        if amount >= 0:
+            self.checkmarks += amount
+            if self.canGainPerkFromCheckmarks():
+                print("%s CAN GAIN A NEW CHECKMARK PERK!!!" % self.getName())
+        elif amount < 0:
+            self.loseCheckmark(amount)
 
     def loseCheckmark(self, cnt=1):
-        self.checkmarks = max(0, self.checkmarks-cnt)
+        if (self.checkmarks % 3) > 0:
+            self.checkmarks -= cnt
 
-    def addPerk(self, perk=None):
+    def addPerk(self, perk=None, strType=' Level'):
         if not perk:
             perk = pickRandom(self.available_perks)
-            print('Perk Randomed: %s' % (perk))
+            print('%s Perk Randomed: %s' % (''.join([self.getName(), strType]), perk))
         else:
-            print('Perk Selected: %s' % (perk))
+            print('%s Perk Selected: %s' % (''.join([self.getName(), strType]), perk))
         try:
             self.available_perks.remove(perk)
             self.selected_perks.append(perk)
         except Exception as err:
             print(err)
             raise err
+
+    def addOwnerPerk(self, perk=None, strType=' Owner Retirement'):
+        self.addPerk(perk, strType)
 
     # take damage assumes the decison to take damage was made by the player
     # in lieu of remove cards from their hand or discard pile
@@ -360,7 +390,10 @@ class Character(Unit):
                     self.gold -= item.cost
                 self.items.equipItem(item, self.numSmallItemsAllowed())
             except AssertionError:
+                raise
                 print("You do not have enough gold to buy %s" % (itemName))
+        else: 
+            raise Exception('character::buyItem', 'Failed to find item "%s"' % (itemName))
 
     def findItem(self, itemName):
         self.buyItem(itemName, adjustGold=False)
@@ -372,6 +405,9 @@ class Character(Unit):
     # TEMPORARY PLACEHOLDER FOR TRACKING CAMPAIGN PROGRESS
     def addItem(self, itemName):
         self.temp_items.append(itemName)
+
+    def printHero(self):
+        print(self.getJson())
 
     def getJson(self):
         jsonData = {}
