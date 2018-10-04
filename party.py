@@ -90,7 +90,7 @@ class Party():
         # code to add prosperity checkmarks from donations
         cnt = self.party_json['SanctuaryDonations']
         if cnt > 9 and (cnt % 5) == 0:
-            self.addProsperityCheckmark()
+            self.addProsperityCheckmark('Sanctuary Donation #%d' % (cnt))
 
     def calcAvgLevel(self):
         sumLevel = 0
@@ -202,7 +202,7 @@ class Party():
             if heroObj.getName() is member.getName():
                 print("\n<><> Retiring '%s'!!!\n" % member.getName())
                 member.retire()
-                self.addProsperityCheckmark()
+                self.addProsperityCheckmark('%s retirement' % heroObj.getName())
                 break
         self.retireHeroType(heroObj.getType())
 
@@ -239,7 +239,7 @@ class Party():
             print('\tRetiredTypes: %s' % str(party.retired_types))
             pass
 
-    def addProsperityCheckmark(self, cnt=1):
+    def addProsperityCheckmark(self, reason='', cnt=1):
         self.party_json['GloomhavenProsperity']['Count'] += cnt
 
         count_per_increment = [4 + i for i in range(0,9)]
@@ -248,7 +248,10 @@ class Party():
         for index, value in enumerate(count_req):
             if curr_cnt < value:
                 break
-        print("Gloomhaven gains Prosperity Checkmark")
+        if reason != '':
+            print("Gloomhaven gains Prosperity Checkmark :: Reason: '%s'" % (reason))
+        else:
+            print("Gloomhaven gains Prosperity Checkmark")
         if index > self.party_json['GloomhavenProsperity']['Level']:
             print("\nGLOOMHAVEN LEVELED UP TO %d!!!!\n" % (index))
         self.party_json['GloomhavenProsperity']['Level'] = index
@@ -433,7 +436,7 @@ def make_a_party():
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
-    party.addProsperityCheckmark() # from Scenario 20
+    party.addProsperityCheckmark('Scenario #20 reward') # from Scenario 20
 
     party.addTreasureLooted(4)
     party.addTreasureLooted(7)
@@ -478,6 +481,7 @@ def make_a_party():
     hero2.addPerk(remove_2_minus_1)
     hero2.addPerk(add_1_plus_3)
     party.addMember(hero2)
+    party.addEnhancement(hero2.getType(), 6, "Bottom", '+1 Move') # 30 gold paid
 
     hero3 = ch.Character('Evan', 'Spellweaver', owner3, level=4, quest=533, gold=39, xp=208, checkmarks=9)
     hero3.buyItem('Cloak of Invisibility', adjustGold=False)
@@ -551,6 +555,9 @@ def make_a_party():
     party.addMember(hero6)
     
     hero7 = ch.Character('Red', 'Quartermaster', owner2, level=3, quest=522)
+    hero7.addOwnerPerk(ignore_scen_perk_add_2_plus_1)
+    hero7.addPerk(remove_2_minus_1)
+    hero7.addPerk(remove_2_minus_1)
     party.addMember(hero7)
 
     party.unlockCityEvent(42) # Brute Retirement
@@ -598,7 +605,7 @@ def make_a_party():
     party.addScenarioCompleted(19)
     party.addPartyAchievement("Stonebreaker's Censer")
     party.addScenarioAvailable(27)
-    party.addProsperityCheckmark() # For Scenario #19 completion
+    party.addProsperityCheckmark('Scenario #19 reward') # For Scenario #19 completion
     party.heroAdjustGold('Bloodfist Stoneborn', 24)
     party.heroAdjustXP('Bloodfist Stoneborn', 20)
     party.heroAdjustCheckmarks('Bloodfist Stoneborn', 1)
@@ -628,5 +635,5 @@ def make_a_party():
 
 if __name__ == "__main__":
     party = make_a_party()
-    #party.loadParty('TheBrotherhood')
-    #printJson(party)
+    party.loadParty('TheBrotherhood')
+    printJson(party)
