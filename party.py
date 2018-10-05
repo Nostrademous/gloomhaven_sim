@@ -27,7 +27,7 @@ import json
 import character as ch
 from utils import printJson
 from perks import *
-from global_vars import starting_hero_types
+from global_vars import starting_hero_types, calculateShopModifier, calculateTrapDamage, calculateHazardDamage, calculateMonsterLevel, calculateGoldConversion, calculateBonusExperience
 
 class Party():
     def __init__(self, name):
@@ -80,6 +80,8 @@ class Party():
         new = min(max(old + amount, -20), 20)
         self.party_json['Reputation'] = new
         print("Party Reputation Changed from %d --> %d" % (old, new))
+        if calculateShopModifier(new) != 0:
+            print("New Shop Cost Modifier: %d" % (calculateShopModifier(new)))
 
     def makeSanctuaryDonation(self, strHeroName=None):
         self.party_json['SanctuaryDonations'] += 1
@@ -629,6 +631,10 @@ def make_a_party():
 
     suggestedScenLevel = party.calcAvgLevel()
     print("Current Normal Difficulty Level: %d, For Parties of 5: %d\n" % (suggestedScenLevel, suggestedScenLevel+2))
+    print("Trap Damage 2-4: %d, 5: %d" % (calculateTrapDamage(suggestedScenLevel), calculateTrapDamage(suggestedScenLevel+2)))
+    print("Hazard Damage 2-4: %d, 5: %d" % (calculateHazardDamage(suggestedScenLevel), calculateHazardDamage(suggestedScenLevel+2)))
+    print("Gold Conversion 2-5: %d" % (calculateGoldConversion(suggestedScenLevel)))
+    print("Bonus XP on Success 2-5: %d" % (calculateBonusExperience(suggestedScenLevel)))
     party.saveParty()
 
     return party

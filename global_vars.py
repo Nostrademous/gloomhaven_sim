@@ -26,7 +26,7 @@ def calculateTrapDamage(scenarioLevel):
     return scenarioLevel + 2
 
 def calculateHazardDamage(scenarioLevel):
-    return int(self.calculateTrapDamage(scenarioLevel)/2)
+    return int(calculateTrapDamage(scenarioLevel)/2)
 
 def calculateMonsterLevel(scenarioLevel):
     return scenarioLevel
