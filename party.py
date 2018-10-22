@@ -52,19 +52,28 @@ class Party():
         self.party_json['SanctuaryDonations'] = 0
         self.party_json['PartyEnhancements'] = dict()
         
-    def addEnhancement(self, strHeroType, intAbilityId, section, enhancement):
-        if strHeroType.lower() not in self.party_json['PartyEnhancements']:
-            self.party_json['PartyEnhancements'][strHeroType.lower()] = dict()
-        
-        if str(intAbilityId) not in self.party_json['PartyEnhancements'][strHeroType.lower()]:
-            self.party_json['PartyEnhancements'][strHeroType.lower()][str(intAbilityId)] = dict()
-            self.party_json['PartyEnhancements'][strHeroType.lower()][str(intAbilityId)]["Top"] = list()
-            self.party_json['PartyEnhancements'][strHeroType.lower()][str(intAbilityId)]["Bottom"] = list()
+    def addEnhancement(self, strHeroName, intAbilityId, section, enhancement, gold=0):
+        heroIndex = self.getHeroIndexByName(strHeroName)
+        if heroIndex >= 0:
+            heroObj = self.members[heroIndex]
+            strHeroType = heroObj.getType().lower()
+
+            if strHeroType not in self.party_json['PartyEnhancements']:
+                self.party_json['PartyEnhancements'][strHeroType] = dict()
             
-        if section in ["Top", "Bottom"]:
-            self.party_json['PartyEnhancements'][strHeroType.lower()][str(intAbilityId)][section].append(enhancement)
-        else:
-            raise Exception("[party - addEnhancement]", "Invalid Section: '%s' :: %s %s" % (section, strHeroType, str(intAbilityId)))
+            if str(intAbilityId) not in self.party_json['PartyEnhancements'][strHeroType]:
+                self.party_json['PartyEnhancements'][strHeroType][str(intAbilityId)] = dict()
+                self.party_json['PartyEnhancements'][strHeroType][str(intAbilityId)]["Top"] = list()
+                self.party_json['PartyEnhancements'][strHeroType][str(intAbilityId)]["Bottom"] = list()
+                
+            if section in ["Top", "Bottom"]:
+                self.party_json['PartyEnhancements'][strHeroType][str(intAbilityId)][section].append(enhancement)
+            else:
+                raise Exception("[party - addEnhancement]", "Invalid Section: '%s' :: %s %s" % (section, strHeroType, str(intAbilityId)))
+
+            if gold > 0:
+                assert heroObj.gold >= amount
+                heroObj.gold -= amount
 
     def getNumEnhancementForHeroType(self, strHeroType):
         if strHeroType.lower() not in self.party_json['PartyEnhancements']:
@@ -285,7 +294,7 @@ class Party():
         heroIndex = self.getHeroIndexByName(strHero)
         if heroIndex >= 0:
             heroObj = self.members[heroIndex]
-            heroObj.gold += amount
+            heroObj.gold = max(heroObj.gold + amount, 0)
             self.party_json['Members'][heroObj.getName()] = heroObj.getJson()
             print("%s gains %d Gold" % (strHero, amount))
         else:
@@ -310,6 +319,15 @@ class Party():
             print("%s sells item [%s] :: gold remaining: %d" % (strHero, strItemName, heroObj.gold))
         else:
             raise Exception('party::heroSellItem', 'Failed to Find Hero: "%s"' % (strHero))
+
+    def heroAddPerk(self, strHero, perk, strPerkReason=' Checkmark'):
+        heroIndex = self.getHeroIndexByName(strHero)
+        if heroIndex >= 0:
+            heroObj = self.members[heroIndex]
+            heroObj.addPerk(perk, strPerkReason)
+            self.party_json['Members'][heroObj.getName()] = heroObj.getJson()
+        else:
+            raise Exception('party::heroAddPerk', 'Failed to Find Hero: "%s"' % (strHero))
 
     def heroLevelUp(self, strHero, perk, card=None):
         heroIndex = self.getHeroIndexByName(strHero)
@@ -382,6 +400,7 @@ def make_a_party():
     party.addPartyAchievement("A Demon's Errand")
 
     party.completeCityEvent(4)
+    party.completeCityEvent(14)
     party.completeCityEvent(15)
     party.completeCityEvent(17)
     party.completeCityEvent(18)
@@ -469,8 +488,8 @@ def make_a_party():
     hero1.addCheckmarkPerk(replace_minus_2_with_0)
     hero1.addPerk(add_1_plus_1_wound)
     party.addMember(hero1)
-    party.addEnhancement(hero1.getType(), 36, "Top", 'Wound on Attack') # 75 gold paid
-    party.addEnhancement(hero1.getType(), 41, "Top", '+1 Range') # 30 gold paid
+    party.addEnhancement('Clockwerk', 36, "Top", 'Wound on Attack') # 75 gold paid
+    party.addEnhancement('Clockwerk', 41, "Top", '+1 Range') # 30 gold paid
     hero1.scenarioPreparation()
 
     hero2 = ch.Character('Ruby Sweety Pie', 'Brute', owner2, level=3, quest=512, gold=191, xp=161, checkmarks=5)
@@ -483,7 +502,7 @@ def make_a_party():
     hero2.addPerk(remove_2_minus_1)
     hero2.addPerk(add_1_plus_3)
     party.addMember(hero2)
-    party.addEnhancement(hero2.getType(), 6, "Bottom", '+1 Move') # 30 gold paid
+    party.addEnhancement('Ruby Sweety Pie', 6, "Bottom", '+1 Move') # 30 gold paid
 
     hero3 = ch.Character('Evan', 'Spellweaver', owner3, level=4, quest=533, gold=39, xp=208, checkmarks=9)
     hero3.buyItem('Cloak of Invisibility', adjustGold=False)
@@ -521,7 +540,7 @@ def make_a_party():
     hero5.addCheckmarkPerk(replace_minus_2_with_0)
     hero5.addPerk(remove_2_minus_1)
     hero5.addPerk(replace_minus_1_with_plus_1)
-    party.addEnhancement(hero5.getType(), 102, "Bottom", 'Bless on Invisibility') # 100gold paid
+    party.addEnhancement('Rabid Cicada', 102, "Bottom", 'Bless on Invisibility') # 100gold paid
     party.addMember(hero5)
 
     party.makeSanctuaryDonation() # Matt
@@ -623,7 +642,51 @@ def make_a_party():
     party.heroAdjustGold('Red', 3)
     party.heroAdjustXP('Red', 20)
     party.heroAdjustCheckmarks('Red', 1)
+
     
+    # Play Session - Oct 15
+    party.heroGainCheckmarkPerk('Evan', add_1_plus_2_ice)
+    party.heroLevelUp('Bloodfist Stoneborn', add_1_plus_2_muddle, "Stone Pummel")
+    party.heroGainCheckmarkPerk('Bloodfist Stoneborn', add_1_plus_2_muddle)
+    party.addEnhancement(hero4.getType(), 127, "Top", '+1 on Push', gold=30) # 30gold paid
+    party.makeSanctuaryDonation('Rabid Cicada') # 16
+    party.makeSanctuaryDonation('Singularity') # 16
+
+    party.completeCityEvent(11)
+    #party.addItemToGloomhaven('Storm Blade')
+    party.heroAdjustGold('Rabid Cicada', -1)
+    party.heroAdjustGold('Bloodfist Stoneborn', -1)
+    party.heroAdjustGold('Evan', -1)
+    party.heroAdjustGold('Singularity', -1)
+    party.heroAdjustGold('Red', -1)
+    party.completeRoadEvent(29)
+
+    party.addTreasureLooted(50, 'Rabid Cicada')
+    party.heroBuyItem('Rabid Cicada', 'Second Skin', adjGold=False)
+
+    # adjustments for scenario completion (xp, gold, checkmarks)
+    party.addScenarioCompleted(6)
+    party.addPartyAchievement("Jekserah's Plans")
+    party.addPartyAchievement("Dark Bounty")
+    party.heroAdjustGold('Bloodfist Stoneborn', 8)
+    party.heroAdjustXP('Bloodfist Stoneborn', 24)
+    party.heroAdjustCheckmarks('Bloodfist Stoneborn', 1)
+    party.heroAdjustGold('Rabid Cicada', 5)
+    party.heroAdjustXP('Rabid Cicada', 11)
+    party.heroAdjustCheckmarks('Rabid Cicada', 1)
+    party.heroAdjustGold('Evan', 20)
+    party.heroAdjustXP('Evan', 12)
+    party.heroAdjustCheckmarks('Evan', 1)
+    party.heroAdjustGold('Singularity', 14)
+    party.heroAdjustXP('Singularity', 22)
+    party.heroAdjustCheckmarks('Singularity', 1)
+    party.heroAdjustGold('Red', 39)
+    party.heroAdjustXP('Red', 20)
+    party.heroAdjustCheckmarks('Red', 1)
+
+    party.heroSellItem('Rabid Cicada', 'Second Skin')
+
+
     ###
     #  PRINT OUR PARTY
     ###
@@ -642,4 +705,4 @@ def make_a_party():
 if __name__ == "__main__":
     party = make_a_party()
     party.loadParty('TheBrotherhood')
-    printJson(party)
+    #printJson(party)

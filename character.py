@@ -44,8 +44,10 @@ class CharacterItem():
             assert len(self.equipped_items[itemObj.slot]) < maxSmallItems
             self.equipped_items["SMALL_ITEM"].append(itemObj)
         else:
-            assert self.equipped_items[itemObj.slot] == None
-            self.equipped_items[itemObj.slot] = itemObj
+            if self.equipped_items[itemObj.slot] == None:
+                self.equipped_items[itemObj.slot] = itemObj
+            else:
+                self.unequipped_items.append(itemObj)
 
     def unequipItem(self, slot):
         if slot in ["HANDS", "SMALL_ITEM"]:
@@ -314,6 +316,7 @@ class Character(Unit):
                 # I believe below is safe as I don't see a way to
                 # get more than 3 checkmarks in a single scenario
                 if (int(self.checkmarks/3) - self.perks_from_chk) > 0:
+                    #print("%d :: %d" % (int(self.checkmarks/3), self.perks_from_chk))
                     return True
         return False
 
