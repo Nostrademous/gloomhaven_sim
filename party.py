@@ -25,7 +25,7 @@
 import math
 import json
 import character as ch
-from utils import printJson
+from utils import printJson, pickRandom
 from perks import *
 from global_vars import starting_hero_types, calculateShopModifier, calculateTrapDamage, calculateHazardDamage, calculateMonsterLevel, calculateGoldConversion, calculateBonusExperience
 
@@ -72,8 +72,8 @@ class Party():
                 raise Exception("[party - addEnhancement]", "Invalid Section: '%s' :: %s %s" % (section, strHeroType, str(intAbilityId)))
 
             if gold > 0:
-                assert heroObj.gold >= amount
-                heroObj.gold -= amount
+                assert heroObj.gold >= gold
+                heroObj.gold -= gold
 
     def getNumEnhancementForHeroType(self, strHeroType):
         if strHeroType.lower() not in self.party_json['PartyEnhancements']:
@@ -178,23 +178,25 @@ class Party():
             raise
 
     def drawRandomCityEvent(self, maxID=30):
-        pool = [i for i in range(1,maxID)]
+        pool = [i for i in range(1,maxID+1)] # +1 to make it inclusive
         for unlocked in self.party_json['UnlockedCityEvents']:
+            #print("Removing City Event: %s" % str(unlocked))
             pool.append(unlocked)
         for done in self.party_json['CompletedCityEvents']:
+            #print("Removing City Event: %s" % str(done))
             pool.remove(done)
         drawn = pickRandom(pool)
-        self.completeCityEvent(drawn)
+        #self.completeCityEvent(drawn)
         return drawn
 
     def drawRandomRoadEvent(self, maxID=30):
-        pool = [i for i in range(1,maxID)]
+        pool = [i for i in range(1,maxID+1)] # +1 to make it inclusive
         for unlocked in self.party_json['UnlockedRoadEvents']:
             pool.append(unlocked)
         for done in self.party_json['CompletedRoadEvents']:
             pool.remove(done)
         drawn = pickRandom(pool)
-        self.completeRoadEvent(drawn)
+        #self.completeRoadEvent(drawn)
         return drawn
 
     def addHeroType(self, extraType):
@@ -409,9 +411,9 @@ def make_a_party():
     party.completeCityEvent(27)
     party.completeCityEvent(28)
     party.completeCityEvent(30)
-    party.completeCityEvent(73)
 
-    #party.unlockCityEvent(73)
+    party.unlockCityEvent(73)
+    party.completeCityEvent(73)
     party.unlockCityEvent(78) # Scenario 21 complete
 
     party.completeRoadEvent(1)
@@ -648,9 +650,9 @@ def make_a_party():
     party.heroGainCheckmarkPerk('Evan', add_1_plus_2_ice)
     party.heroLevelUp('Bloodfist Stoneborn', add_1_plus_2_muddle, "Stone Pummel")
     party.heroGainCheckmarkPerk('Bloodfist Stoneborn', add_1_plus_2_muddle)
-    party.addEnhancement(hero4.getType(), 127, "Top", '+1 on Push', gold=30) # 30gold paid
+    party.addEnhancement('Bloodfist Stoneborn', 127, "Top", '+1 on Push', gold=30) # 30gold paid
     party.makeSanctuaryDonation('Rabid Cicada') # 16
-    party.makeSanctuaryDonation('Singularity') # 16
+    party.makeSanctuaryDonation('Singularity') # 17
 
     party.completeCityEvent(11)
     #party.addItemToGloomhaven('Storm Blade')
@@ -686,6 +688,54 @@ def make_a_party():
 
     party.heroSellItem('Rabid Cicada', 'Second Skin')
 
+    # Oct 22 Session
+    party.heroLevelUp('Rabid Cicada', remove_4_0, "Visage of the Inevitable")
+    party.heroGainCheckmarkPerk('Rabid Cicada', replace_0_with_plus_2)
+    party.heroBuyItem('Rabid Cicada', 'Minor Mana Potion')
+    party.heroBuyItem('Red', 'Hide Armor')
+    party.heroBuyItem('Red', 'Winged Shoes')
+    party.heroBuyItem('Red', 'Minor Stamina Potion')
+    party.makeSanctuaryDonation('Rabid Cicada') # 18
+    party.makeSanctuaryDonation('Singularity') # 19
+
+    party.completeCityEvent(8)
+    party.heroAdjustGold('Bloodfist Stoneborn', -4)
+    party.heroAdjustGold('Rabid Cicada', -4)
+    party.heroAdjustGold('Singularity', -4)
+    party.heroAdjustGold('Red', -3)
+    party.heroAdjustGold('Evan', -5)
+    party.addPartyAchievement("A Map to Treasure")
+    party.addScenarioAvailable(93)
+
+    party.completeRoadEvent(8)
+    
+    party.addTreasureLooted(21, 'Red')
+    party.addScenarioCompleted(22)
+    party.addGlobalAchievement("Artifact Recovered")
+    party.addScenarioAvailable(31)
+    party.addScenarioAvailable(35)
+    party.addScenarioAvailable(36)
+    party.heroAdjustGold('Bloodfist Stoneborn', 15)
+    party.heroAdjustXP('Bloodfist Stoneborn', 25)
+    party.heroAdjustCheckmarks('Bloodfist Stoneborn', 1)
+    party.heroAdjustGold('Rabid Cicada', 9)
+    party.heroAdjustXP('Rabid Cicada', 22)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+    party.heroAdjustGold('Evan', 6)
+    party.heroAdjustXP('Evan', 25)
+    party.heroAdjustCheckmarks('Evan', 1)
+    party.heroAdjustGold('Singularity', 0)
+    party.heroAdjustXP('Singularity', 26)
+    party.heroAdjustCheckmarks('Singularity', 1)
+    party.heroAdjustGold('Red', 12)
+    party.heroAdjustXP('Red', 22)
+    party.heroAdjustCheckmarks('Red', 0)
+
+    # Oct 29 Session
+    cityEvent = party.drawRandomCityEvent()
+    print("Randomed City Event: %d" % cityEvent)
+    roadEvent = party.drawRandomRoadEvent()
+    print("Randomed Road Event: %d" % roadEvent)
 
     ###
     #  PRINT OUR PARTY
