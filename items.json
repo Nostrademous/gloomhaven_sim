@@ -237,6 +237,35 @@
         },
         "ProsperityLevel": 3
     },
+    "27": {
+        "Name": "Major Healing Potion",
+        "MaxCount": 4,
+        "Cost": 30,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "Heal",
+            "Count": 1,
+            "Buff": "5",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 3
+    },
+    "28": {
+        "Name": "Moon Earring",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "RefreshItems",
+            "RefreshedItemType": "ALL",
+            "NumRefreshedItems": 100,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 3
+    },
     "45": {
         "Name": "Pendant of Dark Pacts",
         "MaxCount": 2,
@@ -329,6 +358,34 @@
         },
         "ProsperityLevel": 0
     },
+    "121": {
+        "Name": "Orb of Dawn",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "ChangeElement",
+            "FromElement": "Dark",
+            "ToElement": "Light",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "122": {
+        "Name": "Orb of Twilight",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "ChangeElement",
+            "FromElement": "Light",
+            "ToElement": "Dark",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
     "123": {
         "Name": "Ring of Skulls",
         "MaxCount": 2,
@@ -341,6 +398,36 @@
             "Move": 2,
             "Attack": 2,
             "Range": 0,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
+    "124": {
+        "Name": "Doomed Compass",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "EnemyControl",
+            "ControlType": "Move",
+            "ControlRange": 5,
+            "MoveValue": 2,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
+    "133": {
+        "Name": "Resonant Crystal",
+        "MaxCount": 1,
+        "Cost": 20,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "ObstacleRemoval",
+            "Range": 1,
             "Count": 1,
             "Trigger": "Player"
         },

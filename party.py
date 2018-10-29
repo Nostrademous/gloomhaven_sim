@@ -327,7 +327,7 @@ class Party():
             print("%s buys item [%s] :: gold remaining: %d" % (strHero, strItemName, heroObj.gold))
         else:
             raise Exception('party::heroBuyItem', 'Failed to Find Hero: "%s"' % (strHero))
-            
+
     def heroBuyItem(self, strHero, strItemName, adjGold=True):
         heroIndex = self.getHeroIndexByName(strHero)
         if heroIndex >= 0:
@@ -619,7 +619,7 @@ def make_a_party():
     party.makeSanctuaryDonation() # scen 13 - Andrzej
     party.makeSanctuaryDonation() # scen 20 - Andrzej
     party.makeSanctuaryDonation() # scen 20 - Kyle
-    
+
     party.heroFindItem('Rabid Cicada', 'Ring of Skulls')
 
     #########################################################################################
@@ -793,6 +793,9 @@ def make_a_party():
     party.heroAdjustCheckmarks('Red', 0)
 
     # Oct 29 Session
+    party.heroLevelUp('Bloodfist Stoneborn', add_2_roll_earth, "Cataclysm")
+    party.heroLevelUp('Singularity', add_2_roll_plus_1, "Flight of Flame")
+
     cityEvent = party.drawRandomCityEvent()
     print("Randomed City Event: %d" % cityEvent)
     roadEvent = party.drawRandomRoadEvent()
