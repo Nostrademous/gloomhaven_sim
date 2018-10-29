@@ -253,7 +253,8 @@
             "Type": "Curse",
             "Count": 1
         },
-        "Consumed": 1
+        "Consumed": 1,
+        "ProsperityLevel": 0
     },
     "78": {
         "Name": "Storm Blade",
@@ -267,7 +268,8 @@
             "BuffValue": 2,
             "Count": 100000,
             "Trigger": "Player"
-        }
+        },
+        "ProsperityLevel": 0
     },
     "85": {
         "Name": "Wand of Infernos",
@@ -279,7 +281,8 @@
             "Element": "Fire",
             "Count": 1,
             "Trigger": "Player"
-        }
+        },
+        "ProsperityLevel": 0
     },
     "101": {
         "Name": "Second Skin",
@@ -290,7 +293,8 @@
             "Type": "AMD",
             "CardType": "-1",
             "Count": 2
-        }
+        },
+        "ProsperityLevel": 0
     },
     "107": {
         "Name": "Horned Helm",
@@ -307,7 +311,8 @@
             "Buff": "Attack_1",
             "Trigger": "Condition"
         },
-        "Spent": 0
+        "Spent": 0,
+        "ProsperityLevel": 0
     },
     "113": {
         "Name": "Skullbane Axe",
@@ -321,7 +326,8 @@
             "Count": 1,
             "Buff": "Attack_5",
             "Trigger": "Player"
-        }
+        },
+        "ProsperityLevel": 0
     },
     "123": {
         "Name": "Ring of Skulls",
@@ -338,6 +344,7 @@
             "Count": 1,
             "Trigger": "Player"
         },
-        "Consumed": 1
+        "Consumed": 1,
+        "ProsperityLevel": 0
     }
 }

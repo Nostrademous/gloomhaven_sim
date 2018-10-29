@@ -103,6 +103,20 @@ def loadItemData(dataFile='items.json'):
     with open(dataFile, 'r') as infile:
         itemDataJson = json.load(infile)
 
+def getItemsAtProsperityLevel(level):
+    assert isinstance(itemDataJson, dict)
+    store_list = list()
+    for strIndx in itemDataJson:
+        item = itemDataJson[strIndx]
+        try:
+            if item['ProsperityLevel'] == level:
+                for cnt in range(0, item['MaxCount']):
+                    store_list.append(item)
+        except Exception as e:
+            print('Item Exception: %s\n%s' % (e, item))
+            raise e
+    return store_list
+
 def loadMonsterData(dirPath='monster_data', deckFile='monster_deck.json'):
     global monsterDataJson
     global monsterDeckDataJson
