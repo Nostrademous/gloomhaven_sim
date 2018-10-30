@@ -35,14 +35,20 @@ class CharacterItem():
 
     def equipItem(self, itemObj, maxSmallItems=1):
         if itemObj.slot == "TWO_HANDS":
-            assert len(self.equipped_items["HANDS"]) == 0
-            self.equipped_items["HANDS"].append(itemObj)
+            if len(self.equipped_items["HANDS"]) == 0:
+                self.equipped_items["HANDS"].append(itemObj)
+            else:
+                self.unequipped_items.append(itemObj)
         elif itemObj.slot == "ONE_HAND":
-            assert len(self.equipped_items["HANDS"]) < 2
-            self.equipped_items["HANDS"].append(itemObj)
+            if len(self.equipped_items["HANDS"]) < 2:
+                self.equipped_items["HANDS"].append(itemObj)
+            else:
+                self.unequipped_items.append(itemObj)
         elif itemObj.slot == "SMALL_ITEM":
-            assert len(self.equipped_items[itemObj.slot]) < maxSmallItems
-            self.equipped_items["SMALL_ITEM"].append(itemObj)
+            if len(self.equipped_items[itemObj.slot]) < maxSmallItems:
+                self.equipped_items["SMALL_ITEM"].append(itemObj)
+            else:
+                self.unequipped_items.append(itemObj)
         else:
             if self.equipped_items[itemObj.slot] == None:
                 self.equipped_items[itemObj.slot] = itemObj

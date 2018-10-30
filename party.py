@@ -76,6 +76,8 @@ class Party():
             if gold > 0:
                 assert heroObj.gold >= gold
                 heroObj.gold -= gold
+        else:
+            raise Exception("[party - addEnhancement]", "Failed to find hero: '%s'" % (strHeroName))
 
     def getNumEnhancementForHeroType(self, strHeroType):
         if strHeroType.lower() not in self.party_json['PartyEnhancements']:
@@ -385,6 +387,7 @@ class Party():
 
     def getHeroIndexByName(self, strName):
         for index, heroObj in enumerate(self.members):
+            #print('Comparing: %s to %s' % (heroObj.getName(), strName))
             if heroObj.getName() == strName:
                 return index
         return -1
@@ -597,8 +600,8 @@ def make_a_party():
     hero5.addCheckmarkPerk(replace_minus_2_with_0)
     hero5.addPerk(remove_2_minus_1)
     hero5.addPerk(replace_minus_1_with_plus_1)
-    party.addEnhancement('Rabid Cicada', 102, "Bottom", 'Bless on Invisibility') # 100gold paid
     party.addMember(hero5)
+    party.addEnhancement('Rabid Cicada', 102, "Bottom", 'Bless on Invisibility') # 100gold paid
     party.heroBuyItem('Rabid Cicada', 'Leather Armor', adjGold=False)
     party.heroBuyItem('Rabid Cicada', 'Poison Dagger', adjGold=False)
     party.heroBuyItem('Rabid Cicada', 'Winged Shoes', adjGold=False)
@@ -745,7 +748,7 @@ def make_a_party():
     party.heroAdjustCheckmarks('Singularity', 1)
     party.heroAdjustGold('Red', 39)
     party.heroAdjustXP('Red', 20)
-    party.heroAdjustCheckmarks('Red', 1)
+    party.heroAdjustCheckmarks('Red', 0)
 
     party.heroSellItem('Rabid Cicada', 'Second Skin')
 
@@ -795,7 +798,49 @@ def make_a_party():
     # Oct 29 Session
     party.heroLevelUp('Bloodfist Stoneborn', add_2_roll_earth, "Cataclysm")
     party.heroLevelUp('Singularity', add_2_roll_plus_1, "Flight of Flame")
+    party.heroLevelUp('Red', add_2_roll_plus_1, "Scroll of Lightning")
 
+    party.addEnhancement('Bloodfist Stoneborn', 119, "Bottom", '+1 on Move', gold=30) # 30gold paid
+    party.heroBuyItem('Red', 'Minor Power Potion')
+
+    party.completeCityEvent(16)
+    party.heroAdjustGold('Bloodfist Stoneborn', -10)
+    party.unlockCityEvent(70)
+
+    party.makeSanctuaryDonation('Bloodfist Stoneborn') # 20
+    party.makeSanctuaryDonation('Rabid Cicada') # 21
+
+    party.completeRoadEvent(38)
+    party.addProsperityCheckmark()
+
+    party.addTreasureLooted(54, 'Red')
+    party.heroFindItem('Red', 'Doomed Compass')
+
+    party.addScenarioCompleted(93)
+    party.heroAdjustGold('Bloodfist Stoneborn', 12)
+    party.heroAdjustXP('Bloodfist Stoneborn', 33)
+    party.heroAdjustCheckmarks('Bloodfist Stoneborn', 0)
+    party.heroAdjustGold('Rabid Cicada', 12)
+    party.heroAdjustXP('Rabid Cicada', 24)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+    party.heroAdjustGold('Singularity', 12)
+    party.heroAdjustXP('Singularity', 32)
+    party.heroAdjustCheckmarks('Singularity', 1)
+    party.heroAdjustGold('Red', 18)
+    party.heroAdjustXP('Red', 30)
+    party.heroAdjustCheckmarks('Red', 1)
+
+    # Back at Gloomhaven
+    party.makeSanctuaryDonation('Bloodfist Stoneborn') # 21
+    party.retireHero(hero4)
+    party.addEnhancement('[RETIRED] Bloodfist Stoneborn', 120, "Bottom", 'Strengthen', gold=50) # 50gold paid
+    party.unlockCityEvent(46)
+    party.unlockRoadEvent(46)
+    party.unlockHero("Elementalist")
+    party.unlockCityEvent(40)
+    party.unlockRoadEvent(40)
+    
+    # Next Play Session
     cityEvent = party.drawRandomCityEvent()
     print("Randomed City Event: %d" % cityEvent)
     roadEvent = party.drawRandomRoadEvent()
