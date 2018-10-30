@@ -76,6 +76,8 @@ class Party():
             if gold > 0:
                 assert heroObj.gold >= gold
                 heroObj.gold -= gold
+
+            self.party_json['Members'][heroObj.getName()] = heroObj.getJson()
         else:
             raise Exception("[party - addEnhancement]", "Failed to find hero: '%s'" % (strHeroName))
 
@@ -213,12 +215,12 @@ class Party():
         # make hero available to pick again
         assert strHeroType not in self.valid_hero_types
         self.valid_hero_types.append(strHeroType)
+        print("\n\nNEW CLASS UNLOCKED: %s\n\n" % (strHeroType.upper()))
 
     def retireHero(self, heroObj):
         for member in self.members:
             if heroObj.getName() is member.getName():
                 print("\n<><> Retiring '%s'!!!\n" % member.getName())
-                member.retire()
                 # return all items to Gloomhaven store
                 for item in heroObj.items.unequipped_items:
                     self.heroSellItem(heroObj.getName(), item.name)
@@ -232,6 +234,8 @@ class Party():
                         if item:
                             self.heroSellItem(heroObj.getName(), item.name)
                 self.addProsperityCheckmark('%s retirement' % heroObj.getName())
+                member.retire()
+                self.party_json['Members'][heroObj.getName()] = member.getJson()
                 break
         self.retireHeroType(heroObj.getType())
 
@@ -833,13 +837,13 @@ def make_a_party():
     # Back at Gloomhaven
     party.makeSanctuaryDonation('Bloodfist Stoneborn') # 21
     party.retireHero(hero4)
-    party.addEnhancement('[RETIRED] Bloodfist Stoneborn', 120, "Bottom", 'Strengthen', gold=50) # 50gold paid
+    party.addEnhancement('Bloodfist Stoneborn', 120, "Bottom", 'Strengthen', gold=50) # 50gold paid
     party.unlockCityEvent(46)
     party.unlockRoadEvent(46)
     party.unlockHero("Elementalist")
     party.unlockCityEvent(40)
     party.unlockRoadEvent(40)
-    
+
     # Next Play Session
     cityEvent = party.drawRandomCityEvent()
     print("Randomed City Event: %d" % cityEvent)

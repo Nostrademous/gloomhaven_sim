@@ -232,7 +232,7 @@ class Character(Unit):
     def retire(self):
         self.retired = True
         self.owner.retireHero(self)
-        self.name = "[RETIRED] %s" % self.name
+        #self.name = "[RETIRED] %s" % self.name
             
     def getRoundAbilityCards(self):
         return self.ability_deck.in_hand_cards
@@ -420,7 +420,10 @@ class Character(Unit):
 
     def getJson(self):
         jsonData = {}
-        jsonData['name'] = self.name
+        if self.retired:
+            jsonData['name'] = '[RETIRED] ' + self.name
+        else:
+            jsonData['name'] = self.name
         jsonData['type'] = self.type
         jsonData['owner'] = self.owner.getJson()
         jsonData['level'] = self.level
