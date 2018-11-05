@@ -68,6 +68,7 @@ ignore_item_perk        = Perk(PERK_TYPE_IGNORE_ITEM)
 ignore_scen_perk_plus_1 = Perk(PERK_TYPE_IGNORE_SCEN_P1)
 ignore_scen_perk_add_2_plus_1   = Perk(PERK_TYPE_IGNORE_SCEN_2P1)
 
+remove_2_0              = Perk(PERK_TYPE_REMOVE, 2, amd.amc_0)
 remove_2_minus_1        = Perk(PERK_TYPE_REMOVE, 2, amd.amc_m1)
 remove_4_0              = Perk(PERK_TYPE_REMOVE, 4, amd.amc_0)
 
@@ -78,12 +79,14 @@ replace_2_0_with_2_plus_1       = Perk(PERK_TYPE_REPLACE, 2, amd.amc_0, amd.amc_
 replace_2_plus_1_with_2_plus_2  = Perk(PERK_TYPE_REPLACE, 2, amd.amc_p1, amd.amc_p2)
 
 add_2_plus_1            = Perk(PERK_TYPE_ADD, 2, amd.amc_p1)
+add_2_plus_1_push1      = Perk(PERK_TYPE_ADD, 2, amd.amc_plus_1_push1)
 add_2_roll_plus_1       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_p1)
 add_1_plus_3            = Perk(PERK_TYPE_ADD, 1, amd.amc_p3)
 
 add_1_minus_2           = Perk(PERK_TYPE_ADD, 1, amd.amc_m2)
 add_2_plus_2            = Perk(PERK_TYPE_ADD, 2, amd.amc_p2)
 
+add_1_0_at              = Perk(PERK_TYPE_ADD, 1, amd.amc_0_at)
 add_1_0_stun            = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_p1)
 add_1_roll_at           = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_at)
 add_1_roll_invis        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_invis)
@@ -115,12 +118,19 @@ add_1_plus_1_curse      = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_1_curse)
 add_1_plus_1_poison     = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_1_poison)
 add_1_plus_2_muddle     = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_muddle)
 
+add_1_0_fire            = Perk(PERK_TYPE_ADD, 1, amd.amc_0_fire)
+add_1_0_ice             = Perk(PERK_TYPE_ADD, 1, amd.amc_0_ice)
+add_1_0_air             = Perk(PERK_TYPE_ADD, 1, amd.amc_0_air)
+add_1_0_earth           = Perk(PERK_TYPE_ADD, 1, amd.amc_0_earth)
+add_3_0_fire            = Perk(PERK_TYPE_ADD, 3, amd.amc_0_fire)
+add_3_0_ice             = Perk(PERK_TYPE_ADD, 3, amd.amc_0_ice)
+add_3_0_air             = Perk(PERK_TYPE_ADD, 3, amd.amc_0_air)
+add_3_0_earth           = Perk(PERK_TYPE_ADD, 3, amd.amc_0_earth)
 add_1_plus_2_fire       = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_fire)
 add_1_plus_2_ice        = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_ice)
 
 # class specific perks
 tinkerer_perk_9         = Perk(PERK_TYPE_ADD, 1, amd.amc_p1h2)
-tinkerer_perk_10        = Perk(PERK_TYPE_ADD, 1, amd.amc_0_at)
 brute_p1_shield1        = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_1_shield1)
 
 add_1_0_refresh_item    = Perk(PERK_TYPE_ADD, 1, amd.amc_0_ri)
@@ -205,7 +215,7 @@ tinkerer_perk_deck = list([
     add_1_plus_1_wound, add_1_plus_1_wound,
     add_1_plus_1_immobilize, add_1_plus_1_immobilize,
     tinkerer_perk_9, tinkerer_perk_9,
-    tinkerer_perk_10,
+    add_1_0_at,
     ignore_scen_perk
 ])
 
@@ -235,6 +245,22 @@ quartermaster_perk_deck = list([
     ignore_scen_perk_add_2_plus_1
 ])
 
+elementalist_perk_deck = list([
+    remove_2_minus_1, remove_2_minus_1,
+    replace_minus_1_with_plus_1,
+    replace_0_with_plus_2, replace_0_with_plus_2,
+    add_3_0_fire,
+    add_3_0_ice,
+    add_3_0_air,
+    add_3_0_earth,
+    [remove_2_0, add_1_0_fire, add_1_0_earth],
+    [remove_2_0, add_1_0_ice, add_1_0_air],
+    add_2_plus_1_push1,
+    add_1_plus_1_wound,
+    add_1_0_stun,
+    add_1_0_at
+])
+
 def getPerkSelections(class_type):
     class_type = class_type.lower()
     if class_type == "brute":
@@ -253,6 +279,8 @@ def getPerkSelections(class_type):
         return doomstalker_perk_deck
     elif class_type == "quartermaster":
         return quartermaster_perk_deck
+    elif class_type == "elementalist":
+        return elementalist_perk_deck
     else:
         raise Exception("[getPerkSelection]", "UNKNOWN CLASS TYPE")
 
@@ -287,4 +315,8 @@ if __name__ == "__main__":
         
     print('\nQuartermaster')
     for perk in quartermaster_perk_deck:
+        print(perk)
+    
+    print('\nElementalist')
+    for perk in elementalist_perk_deck:
         print(perk)
