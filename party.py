@@ -293,7 +293,7 @@ class Party():
             new_items = getItemsAtProsperityLevel(index)
             self.party_json['GloomhavenStore'].extend(new_items)
         self.party_json['GloomhavenProsperity']['Level'] = index
-        self.party_json['GloomhavenProsperity']['Checkmarks'] = curr_cnt - count_req[index-1]
+        self.party_json['GloomhavenProsperity']['Checkmarks'] = curr_cnt - count_req[index-2]
 
     def heroAdjustCheckmarks(self, strHero, amount=1):
         heroIndex = self.getHeroIndexByName(strHero)
