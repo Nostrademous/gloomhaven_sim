@@ -277,16 +277,17 @@ class Party():
     def addProsperityCheckmark(self, reason='', cnt=1):
         self.party_json['GloomhavenProsperity']['Count'] += cnt
 
-        count_per_increment = [4 + i for i in range(0,9)]
-        count_req = [sum(count_per_increment[:i]) for i in range(0,9)]
+        count_per_increment = [5,6,7,8,9,10,12,15]
+        count_req = [sum(count_per_increment[:i]) for i in range(1,9)]
         curr_cnt = self.party_json['GloomhavenProsperity']['Count']
         for index, value in enumerate(count_req):
             if curr_cnt < value:
                 break
+        index += 1
         if reason != '':
-            print("Gloomhaven gains Prosperity Checkmark :: Reason: '%s'" % (reason))
+            print("Gloomhaven gains Prosperity Checkmark #%d :: Reason: '%s'" % (curr_cnt, reason))
         else:
-            print("Gloomhaven gains Prosperity Checkmark")
+            print("Gloomhaven gains Prosperity Checkmark #%d" % (curr_cnt))
         if index > self.party_json['GloomhavenProsperity']['Level']:
             print("\nGLOOMHAVEN LEVELED UP TO %d!!!!\n" % (index))
             new_items = getItemsAtProsperityLevel(index)
@@ -517,6 +518,8 @@ def make_a_party():
     party.addScenarioAvailable(76)
     party.addScenarioAvailable(84)
 
+    party.addProsperityCheckmark()
+    party.addProsperityCheckmark()
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
@@ -846,11 +849,11 @@ def make_a_party():
     party.unlockCityEvent(40)
     party.unlockRoadEvent(40)
 
-    hero8 = ch.Character('Matt', 'Elementalist', owner4, level=1, gold=60, xp=95, quest=522)
+    hero8 = ch.Character('Ignus', 'Elementalist', owner4, level=1, gold=60, xp=95, quest=524)
     hero8.addOwnerPerk([remove_2_0, add_1_0_fire, add_1_0_earth])
     party.addMember(hero8)
-    party.heroLevelUp('Matt', remove_2_minus_1, 'Crystallizing Blast')
-    party.heroLevelUp('Matt', remove_2_minus_1, 'Chain Lightning')
+    party.heroLevelUp('Ignus', remove_2_minus_1, 'Crystallizing Blast')
+    party.heroLevelUp('Ignus', remove_2_minus_1, 'Chain Lightning')
 
     party.heroGainCheckmarkPerk('Singularity', replace_2_0_with_2_plus_1)
 
