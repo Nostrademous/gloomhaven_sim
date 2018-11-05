@@ -131,6 +131,8 @@ class Party():
     def addScenarioCompleted(self, value):
         self.party_json['ScenariosCompleted'].append(value)
         print("\nScenarion #%d Completed!" % (value))
+        if value in self.party_json['ScenariosAvailable']:
+            self.party_json['ScenariosAvailable'].remove(value)
 
     def addScenarioAvailable(self, value):
         self.party_json['ScenariosAvailable'].append(value)
@@ -843,6 +845,14 @@ def make_a_party():
     party.unlockHero("Elementalist")
     party.unlockCityEvent(40)
     party.unlockRoadEvent(40)
+
+    hero8 = ch.Character('Matt', 'Elementalist', owner4, level=1, gold=60, xp=95, quest=522)
+    hero8.addOwnerPerk([remove_2_0, add_1_0_fire, add_1_0_earth])
+    party.addMember(hero8)
+    party.heroLevelUp('Matt', remove_2_minus_1, 'Crystallizing Blast')
+    party.heroLevelUp('Matt', remove_2_minus_1, 'Chain Lightning')
+
+    party.heroGainCheckmarkPerk('Singularity', replace_2_0_with_2_plus_1)
 
     # Next Play Session
     cityEvent = party.drawRandomCityEvent()
