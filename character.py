@@ -95,7 +95,7 @@ class CharacterItem():
         return self.__dict__ == other.__dict__
 
     def getJSON(self):
-        ret  = dict()
+        ret  = {'unequipped': []}
         for slot in _item_template:
             if self.equipped_items[slot] == None or self.equipped_items[slot] == []:
                 ret[slot] = 'None'
@@ -105,6 +105,8 @@ class CharacterItem():
                     ret[slot] = [i.name for i in self.equipped_items[slot]]
                 else:
                     ret[slot] = self.equipped_items[slot].name
+        for item in self.unequipped_items:
+            ret['unequipped'].append(item.name)
         return ret
 
 
