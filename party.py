@@ -854,6 +854,10 @@ def make_a_party():
     party.addMember(hero8)
     party.heroLevelUp('Ignus', remove_2_minus_1, 'Crystallizing Blast')
     party.heroLevelUp('Ignus', remove_2_minus_1, 'Chain Lightning')
+    party.heroBuyItem('Ignus', 'Chainmail')
+    party.heroBuyItem('Ignus', 'Heater Shield')
+    party.heroBuyItem('Ignus', 'Iron Helmet')
+    party.heroBuyItem('Ignus', 'Minor Stamina Potion')
 
     party.heroGainCheckmarkPerk('Singularity', replace_2_0_with_2_plus_1)
 
