@@ -857,6 +857,42 @@ def make_a_party():
 
     party.heroGainCheckmarkPerk('Singularity', replace_2_0_with_2_plus_1)
 
+    party.completeCityEvent(10)
+    party.heroAdjustGold('Singularity', -5)
+    party.heroAdjustGold('Evan', -5)
+    party.heroAdjustGold('Red', -5)
+    party.heroAdjustGold('Rabid Cicada', -5)
+
+    party.completeRoadEvent(27)
+
+    party.addTreasureLooted(32, 'Rabid Cicada') # Item Design 76 - Chain Hood
+    party.addItemDesign(76)
+
+    party.addScenarioCompleted(28)
+    party.addScenarioAvailable(29)
+    party.addPartyAchievement('An Invitation')
+    party.heroAdjustGold('Rabid Cicada', 12)
+    party.heroAdjustXP('Rabid Cicada', 18)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+    party.heroAdjustGold('Singularity', 18)
+    party.heroAdjustXP('Singularity', 30)
+    party.heroAdjustCheckmarks('Singularity', 1)
+    party.heroAdjustGold('Red', 12)
+    party.heroAdjustXP('Red', 19)
+    party.heroAdjustCheckmarks('Red', 0)
+    party.heroAdjustGold('Evan', 9)
+    party.heroAdjustXP('Evan', 19)
+    party.heroAdjustCheckmarks('Evan', 1)
+
+    party.heroAdjustXP('Rabid Cicada', 10)
+    #party.heroFindItem('Rabid Cicada', 'Silent Stilletto')
+    party.heroLevelUp('Rabid Cicada', replace_0_with_plus_2, 'Burning Oil')
+    party.heroLevelUp('Red', add_2_roll_plus_1, 'Reinforce Steel')
+    party.heroLevelUp('Singularity', replace_2_0_with_2_plus_1, 'Wild Command')
+    party.heroLevelUp('Evan', replace_minus_1_with_plus_1, 'Living Torch')
+    party.heroGainCheckmarkPerk('Evan', [add_1_roll_light, add_1_roll_dark])
+    party.heroBuyItem('Evan', 'Minor Stamina Potion')
+
     # Next Play Session
     cityEvent = party.drawRandomCityEvent()
     print("Randomed City Event: %d" % cityEvent)

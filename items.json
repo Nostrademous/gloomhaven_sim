@@ -285,6 +285,26 @@
         "Consumed": 1,
         "ProsperityLevel": 0
     },
+    "76": {
+        "Name": "Chain Hood",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "Head",
+        "AMDEffect": {
+            "Value": -1,
+            "Count": 1
+        },
+        "Buff": {
+            "Type": "AdjBuff",
+            "AdjReq": "Enemies",
+            "AdjCnt": 3,
+            "BuffType": "Shield",
+            "BuffValue": 1,
+            "Trigger": "Game"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 0
+    },
     "78": {
         "Name": "Storm Blade",
         "MaxCount": 2,
