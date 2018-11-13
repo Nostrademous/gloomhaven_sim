@@ -9,7 +9,7 @@ PERK_TYPE_REPLACE           = 3
 PERK_TYPE_IGNORE_SCEN       = 4
 PERK_TYPE_IGNORE_ITEM       = 5
 PERK_TYPE_IGNORE_SCEN_P1    = 6
-PERK_TYPE_IGNORE_SCEN_2P1   = 7
+PERK_TYPE_IGNORE_ITEM_2P1   = 7
 
 
 _perk_type = {
@@ -19,7 +19,7 @@ _perk_type = {
     "4": "Ignore negative scenario effects",
     "5": "Ignore negative item effects",
     "6": "Ignore negative scenario effects and add +1",
-    "7": "Ignore negative scenario effects and add 2 +1"
+    "7": "Ignore negative item effects and add 2 +1"
 }
 
 class Perk():
@@ -66,7 +66,7 @@ add_3_curse             = Perk(PERK_TYPE_ADD, 3, amd.amc_curse)
 ignore_scen_perk        = Perk(PERK_TYPE_IGNORE_SCEN)
 ignore_item_perk        = Perk(PERK_TYPE_IGNORE_ITEM)
 ignore_scen_perk_plus_1 = Perk(PERK_TYPE_IGNORE_SCEN_P1)
-ignore_scen_perk_add_2_plus_1   = Perk(PERK_TYPE_IGNORE_SCEN_2P1)
+ignore_item_perk_add_2_plus_1   = Perk(PERK_TYPE_IGNORE_ITEM_2P1)
 
 remove_2_0              = Perk(PERK_TYPE_REMOVE, 2, amd.amc_0)
 remove_2_minus_1        = Perk(PERK_TYPE_REMOVE, 2, amd.amc_m1)
@@ -242,7 +242,7 @@ quartermaster_perk_deck = list([
     add_1_roll_stun,
     add_1_roll_at,
     add_1_0_refresh_item, add_1_0_refresh_item, add_1_0_refresh_item,
-    ignore_scen_perk_add_2_plus_1
+    ignore_item_perk_add_2_plus_1
 ])
 
 elementalist_perk_deck = list([

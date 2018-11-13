@@ -453,5 +453,20 @@
         },
         "Consumed": 1,
         "ProsperityLevel": 0
+    },
+    "137": {
+        "Name": "Silent Stiletto",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "MeleeAttackBuff",
+            "BuffType": "Pierce",
+            "BuffValue": 1,
+            "Count": 100000,
+            "Trigger": "MeleeAttack"
+        },
+        "Consumed": 0,
+        "ProsperityLevel": 0
     }
 }

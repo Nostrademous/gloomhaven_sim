@@ -650,7 +650,7 @@ def make_a_party():
     party.addMember(hero6)
 
     hero7 = ch.Character('Red', 'Quartermaster', owner2, level=3, quest=522)
-    hero7.addOwnerPerk(ignore_scen_perk_add_2_plus_1)
+    hero7.addOwnerPerk(ignore_item_perk_add_2_plus_1)
     hero7.addPerk(remove_2_minus_1)
     hero7.addPerk(remove_2_minus_1)
     party.addMember(hero7)
@@ -857,7 +857,7 @@ def make_a_party():
     party.heroBuyItem('Ignus', 'Chainmail')
     party.heroBuyItem('Ignus', 'Heater Shield')
     party.heroBuyItem('Ignus', 'Iron Helmet')
-    party.heroBuyItem('Ignus', 'Minor Stamina Potion')
+    party.heroBuyItem('Ignus', 'Minor Mana Potion')
 
     party.heroGainCheckmarkPerk('Singularity', replace_2_0_with_2_plus_1)
 
@@ -889,13 +889,53 @@ def make_a_party():
     party.heroAdjustCheckmarks('Evan', 1)
 
     party.heroAdjustXP('Rabid Cicada', 10)
-    #party.heroFindItem('Rabid Cicada', 'Silent Stilletto')
+    party.heroFindItem('Rabid Cicada', 'Silent Stiletto')
     party.heroLevelUp('Rabid Cicada', replace_0_with_plus_2, 'Burning Oil')
     party.heroLevelUp('Red', add_2_roll_plus_1, 'Reinforce Steel')
     party.heroLevelUp('Singularity', replace_2_0_with_2_plus_1, 'Wild Command')
     party.heroLevelUp('Evan', replace_minus_1_with_plus_1, 'Living Torch')
     party.heroGainCheckmarkPerk('Evan', [add_1_roll_light, add_1_roll_dark])
     party.heroBuyItem('Evan', 'Minor Stamina Potion')
+
+    party.makeSanctuaryDonation('Rabid Cicada')
+
+    party.completeCityEvent(6)
+    party.heroAdjustXP('Rabid Cicada', 5)
+    party.heroAdjustXP('Red', 5)
+    party.heroAdjustXP('Singularity', 5)
+    party.heroAdjustXP('Evan', 5)
+    party.heroAdjustXP('Ignus', 5)
+    party.addProsperityCheckmark('City Event 6')
+
+    party.completeRoadEvent(28)
+    party.heroAdjustGold('Red', 20)
+    party.heroSellItem('Red', 'Minor Stamina Potion', adjGold=False)
+
+    party.addScenarioCompleted(27)
+    party.addGlobalAchievement('A Rift Neutralized')
+    party.addProsperityCheckmark('Scenario 27 Completed')
+    party.heroAdjustXP('Rabid Cicada', 17)
+    party.heroAdjustXP('Red', 18)
+    party.heroAdjustXP('Singularity', 19)
+    party.heroAdjustXP('Evan', 19)
+    party.heroAdjustXP('Ignus', 19)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+    party.heroAdjustCheckmarks('Red', 1)
+    party.heroAdjustCheckmarks('Singularity', 2)
+    party.heroAdjustCheckmarks('Evan', 0)
+    party.heroAdjustCheckmarks('Ignus', 1)
+    
+    party.heroSellItem('Rabid Cicada', 'Skullbane Axe')
+    party.heroGainCheckmarkPerk('Singularity', replace_2_0_with_2_plus_1)
+
+    # scenario award - 100g to use for enhancements only
+    party.addEnhancement('Singularity', 394, 'Top', '+1 Attack', gold=0) # 100gold paid
+    party.addEnhancement('Ignus', 456, 'Top', '+1 Attack', gold=0) # 50gold paid
+    party.addEnhancement('Ignus', 457, 'Bottom', '+1 Move', gold=0) # 50gold paid
+    party.addEnhancement('Evan', 61, 'Top', '+1 Attack', gold=0) # 50gold paid
+    party.addEnhancement('Evan', 73, 'Top', '+1 Attack', gold=25) # 75gold paid
+    party.addEnhancement('Rabid Cicada', 90, 'Bottom', '+1 Pull', gold=0) # 30gold paid
+    party.addEnhancement('Rabid Cicada', 90, 'Bottom', '+1 Range', gold=35) # 105gold paid
 
     # Next Play Session
     cityEvent = party.drawRandomCityEvent()
