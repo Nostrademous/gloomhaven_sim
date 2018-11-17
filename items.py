@@ -67,6 +67,16 @@ class Item():
             return True
         return False
 
+    def isHeal(self):
+        if self.getBuffType().upper() == "HEAL":
+            return True
+        return False
+
+    def refreshesItems(self):
+        if self.getBuffType().upper() == "REFRESHITEMS":
+            return True
+        return False
+
     def __repr__(self):
         ret  = "[Item %d] %s\n" % (self.id, self.name)
         ret += "Slot: %s\n" % (self.slot)
@@ -78,8 +88,12 @@ class Item():
                 ret += "    Debuff Enemy: %s\n" % (self.buff["Debuff"])
             else:
                 if self.grantsSummon():
-                    ret += "    Summon: %s {HP: %d, Move: %d, Att: %d, Rng: %d}\n" % (self.buff["Name"],
-                            self.buff["Health"], self.buff["Move"], self.buff["Attack"], self.buff["Range"])
+                    ret += "    Summon: %s {HP: %d, Move: %d, Att: %d, Rng: %d, Extras: %s}\n" % (self.buff["Name"],
+                            self.buff["Health"], self.buff["Move"], self.buff["Attack"], self.buff["Range"], self.buff["Extra"])
+                elif self.isHeal():
+                    ret += "    Heal: %d\n" % (self.buff["HealValue"])
+                elif self.refreshesItems():
+                    ret += "    Refresh up to %d %s Items\n" % (self.buff["NumRefreshedItems"], self.buff["RefreshedItemType"])
                 else:
                     ret += "    Buff: %s\n" % (self.buff["Buff"])
             if "Trigger" in self.buff:

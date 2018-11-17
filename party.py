@@ -932,16 +932,19 @@ def make_a_party():
     party.addEnhancement('Singularity', 394, 'Top', '+1 Attack', gold=0) # 100gold paid
     party.addEnhancement('Ignus', 456, 'Top', '+1 Attack', gold=0) # 50gold paid
     party.addEnhancement('Ignus', 457, 'Bottom', '+1 Move', gold=0) # 50gold paid
-    party.addEnhancement('Evan', 61, 'Top', '+1 Attack', gold=0) # 50gold paid
-    party.addEnhancement('Evan', 73, 'Top', '+1 Attack', gold=25) # 75gold paid
+    party.addEnhancement('Evan', 61, 'Top', '+1 Attack', gold=0) # 100gold paid
     party.addEnhancement('Rabid Cicada', 90, 'Bottom', '+1 Pull', gold=0) # 30gold paid
     party.addEnhancement('Rabid Cicada', 90, 'Bottom', '+1 Range', gold=35) # 105gold paid
+    party.addEnhancement('Red', 209, 'Bottom', 'Bless', gold=0) # 100gold paid
 
     # Next Play Session
     cityEvent = party.drawRandomCityEvent()
     print("Randomed City Event: %d" % cityEvent)
     roadEvent = party.drawRandomRoadEvent()
     print("Randomed Road Event: %d" % roadEvent)
+
+    #party.addEnhancement('Evan', 73, 'Top', '+1 Attack', gold=25) # 75gold paid
+    #party.addEnhancement('Red', 207, 'Top', 'Bless', gold=0) # 50gold paid
 
     ###
     #  PRINT OUR PARTY

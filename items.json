@@ -158,7 +158,7 @@
         "Buff": {
             "Type": "Heal",
             "Count": 1,
-            "Buff": "3",
+            "HealValue": 3,
             "Trigger": "Player"
         },
         "Consumed": 1,
@@ -172,7 +172,8 @@
         "Buff": {
             "Type": "RecoverCards",
             "Count": 1,
-            "Buff": "Discards_2",
+            "Buff": "Discards",
+            "BuffValue": 2,
             "Trigger": "Player"
         },
         "Consumed": 1,
@@ -200,6 +201,7 @@
         "Buff": {
             "Type": "CreateElement",
             "Count": 1,
+            "Buff": "InvokeElement",
             "ElementType": "Any",
             "Trigger": "Player"
         },
@@ -245,7 +247,7 @@
         "Buff": {
             "Type": "Heal",
             "Count": 1,
-            "Buff": "5",
+            "HealValue": 5,
             "Trigger": "Player"
         },
         "Consumed": 1,
@@ -258,13 +260,118 @@
         "Slot": "SMALL_ITEM",
         "Buff": {
             "Type": "RefreshItems",
-            "RefreshedItemType": "ALL",
+            "RefreshedItemType": "Spent",
             "NumRefreshedItems": 100,
             "Count": 1,
             "Trigger": "Player"
         },
         "Consumed": 1,
         "ProsperityLevel": 3
+    },
+    "29": {
+        "Name": "Comfortable Shoes",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "Legs",
+        "Buff": {
+            "Type": "MoveBuff",
+            "Count": 1,
+            "Buff": "SetDefaultMove",
+            "MoveValue": 3,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 4
+    },
+    "30": {
+        "Name": "Studded Leather",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "DefenseDebuffBuff",
+            "Count": 1,
+            "Debuff": "Disadvantage",
+            "Buff": "Shield_1",
+            "Trigger": "Attack"
+        },
+        "ProsperityLevel": 4
+    },
+    "31": {
+        "Name": "Hawk Helm",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "HEAD",
+        "Buff": {
+            "Type": "RangedAttackBuff",
+            "Count": 100000,
+            "Buff": "RangeIncrease",
+            "BuffValue": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 4
+    },
+    "32": {
+        "Name": "Tower Shield",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "DefenseBuff",
+            "Count": 1,
+            "Buff": "Shield_2",
+            "Trigger": "Attack"
+        },
+        "ProsperityLevel": 4
+    },
+    "33": {
+        "Name": "Volatile Bomb",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "RangedAttackBuff",
+            "Contraint": "SingleTarget",
+            "Count": 1,
+            "Buff": "ReplaceAttackTemplate",
+            "Template": "3_Adj",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 4
+    },
+    "34": {
+        "Name": "Major Stamina Potion",
+        "MaxCount": 4,
+        "Cost": 30,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "RecoverCards",
+            "Count": 1,
+            "Buff": "Discards",
+            "BuffValue": 3,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 4
+    },
+    "35": {
+        "Name": "Jade Falcon",
+        "MaxCount": 2,
+        "Cost": 50,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "Summon",
+            "Name": "Summon Jade Falcon",
+            "Health": 2,
+            "Move": 3,
+            "Attack": 2,
+            "Range": 0,
+            "Extra": ["Flying"],
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 4
     },
     "45": {
         "Name": "Pendant of Dark Pacts",
@@ -298,7 +405,7 @@
             "Type": "AdjBuff",
             "AdjReq": "Enemies",
             "AdjCnt": 3,
-            "BuffType": "Shield",
+            "Buff": "Shield",
             "BuffValue": 1,
             "Trigger": "Game"
         },
@@ -313,7 +420,7 @@
         "Buff": {
             "Type": "ConsumeBuff",
             "Element": "Wind",
-            "BuffType": "Attack",
+            "Buff": "Attack",
             "BuffValue": 2,
             "Count": 100000,
             "Trigger": "Player"
@@ -327,6 +434,7 @@
         "Slot": "ONE_HAND",
         "Buff": {
             "Type": "CreateElement",
+            "Buff": "InvokeElement",
             "Element": "Fire",
             "Count": 1,
             "Trigger": "Player"
@@ -340,6 +448,7 @@
         "Slot": "Body",
         "Buff": {
             "Type": "AMD",
+            "Buff": "RemoveCards",
             "CardType": "-1",
             "Count": 2
         },
@@ -461,7 +570,7 @@
         "Slot": "ONE_HAND",
         "Buff": {
             "Type": "MeleeAttackBuff",
-            "BuffType": "Pierce",
+            "Buff": "Pierce",
             "BuffValue": 1,
             "Count": 100000,
             "Trigger": "MeleeAttack"
