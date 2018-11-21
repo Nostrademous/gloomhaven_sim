@@ -207,6 +207,11 @@ class Party():
         #self.completeRoadEvent(drawn)
         return drawn
 
+    def drawRandomScenario(self):
+        print("Random Scen List: %s\n" % self.party_json['ScenariosAvailable'])
+        drawn = pickRandom(self.party_json['ScenariosAvailable'])
+        return drawn
+
     def addHeroType(self, extraType):
         extraType = extraType.lower()
         assert extraType not in self.valid_hero_types
@@ -927,6 +932,7 @@ def make_a_party():
     
     party.heroSellItem('Rabid Cicada', 'Skullbane Axe')
     party.heroGainCheckmarkPerk('Singularity', replace_2_0_with_2_plus_1)
+    party.heroGainCheckmarkPerk('Red', add_1_0_refresh_item)
 
     # scenario award - 100g to use for enhancements only
     party.addEnhancement('Singularity', 394, 'Top', '+1 Attack', gold=0) # 100gold paid
@@ -937,7 +943,47 @@ def make_a_party():
     party.addEnhancement('Rabid Cicada', 90, 'Bottom', '+1 Range', gold=35) # 105gold paid
     party.addEnhancement('Red', 209, 'Bottom', 'Bless', gold=0) # 100gold paid
 
+    # Nov 19
+    party.heroBuyItem('Red', 'Minor Stamina Potion')
+    party.heroBuyItem('Red', 'Eagle-Eye Goggles')
+    party.completeCityEvent(23)
+    party.adjustReputation(1) # from City Event
+
+    party.completeRoadEvent(43)
+    party.heroAdjustGold('Singularity', 2)
+    party.heroAdjustGold('Evan', 2)
+    party.heroAdjustGold('Red', 2)
+    party.heroAdjustGold('Rabid Cicada', 2)
+    party.heroAdjustGold('Ignus', 2)
+
+    party.addTreasureLooted(33, 'Singularity') # Item 19 - Weighted Net
+    party.heroFindItem('Singularity', 'Weighted Net')
+
+    party.addScenarioCompleted(68)
+    party.heroFindItem('Evan', 'Major Healing Potion')
+    party.heroFindItem('Ignus', 'Major Healing Potion')
+    party.heroAdjustXP('Rabid Cicada', 17)
+    party.heroAdjustXP('Red', 21)
+    party.heroAdjustXP('Singularity', 23)
+    party.heroAdjustXP('Evan', 19)
+    party.heroAdjustXP('Ignus', 14)
+    party.heroAdjustGold('Rabid Cicada', 3)
+    party.heroAdjustGold('Red', 9)
+    party.heroAdjustGold('Singularity', 15)
+    party.heroAdjustGold('Evan', 18)
+    party.heroAdjustGold('Ignus', 0)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+    party.heroAdjustCheckmarks('Red', 1)
+    party.heroAdjustCheckmarks('Singularity', 1)
+    party.heroAdjustCheckmarks('Evan', 1)
+    party.heroAdjustCheckmarks('Ignus', 2)
+    
+
     # Next Play Session
+
+    randScenario = party.drawRandomScenario()
+    print("Randomed Scenario Event: %d" % randScenario)
+
     cityEvent = party.drawRandomCityEvent()
     print("Randomed City Event: %d" % cityEvent)
     roadEvent = party.drawRandomRoadEvent()

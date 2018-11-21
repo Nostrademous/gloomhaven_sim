@@ -193,6 +193,19 @@
         "Consumed": 1,
         "ProsperityLevel": 1
     },
+    "19": {
+        "Name": "Weighted Net",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "RangedAttackBuff",
+            "Count": 1,
+            "Buff": "Add_Immobilize",
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 2
+    },
     "20": {
         "Name": "Minor Mana Potion",
         "MaxCount": 4,
