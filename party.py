@@ -977,7 +977,9 @@ def make_a_party():
     party.heroAdjustCheckmarks('Singularity', 1)
     party.heroAdjustCheckmarks('Evan', 1)
     party.heroAdjustCheckmarks('Ignus', 2)
-    
+
+    party.heroGainCheckmarkPerk('Ignus', [remove_2_0, add_1_0_ice, add_1_0_air])
+    party.heroLevelUp('Singularity', add_1_roll_at, "Camouflage")
 
     # Next Play Session
 
