@@ -981,8 +981,41 @@ def make_a_party():
     party.heroGainCheckmarkPerk('Ignus', [remove_2_0, add_1_0_ice, add_1_0_air])
     party.heroLevelUp('Singularity', add_1_roll_at, "Camouflage")
 
-    # Next Play Session
+    # Nov 26, 2018
+    party.completeCityEvent(43)
+    party.unlockCityEvent(61)
+    party.heroAdjustGold('Rabid Cicada', -1)
+    party.heroAdjustGold('Red', -1)
+    party.heroAdjustGold('Singularity', -1)
+    party.heroAdjustGold('Evan', -1)
+    party.heroAdjustGold('Ignus', -1)
 
+    party.makeSanctuaryDonation('Red')
+    party.makeSanctuaryDonation('Singularity')
+
+    party.heroBuyItem('Singularity', 'Hawk Helm')
+
+    party.completeRoadEvent(40)
+    party.addTreasureLooted(75, 'Red')
+
+    party.addScenarioCompleted(76)
+    party.heroAdjustXP('Rabid Cicada', 23)
+    party.heroAdjustXP('Red', 20)
+    party.heroAdjustXP('Singularity', 26)
+    party.heroAdjustXP('Evan', 23)
+    party.heroAdjustXP('Ignus', 17)
+    party.heroAdjustGold('Rabid Cicada', 24)
+    party.heroAdjustGold('Red', 3)
+    party.heroAdjustGold('Singularity', 9)
+    party.heroAdjustGold('Evan', 3)
+    party.heroAdjustGold('Ignus', 3)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+    party.heroAdjustCheckmarks('Red', 1)
+    party.heroAdjustCheckmarks('Singularity', 1)
+    party.heroAdjustCheckmarks('Evan', 1)
+    party.heroAdjustCheckmarks('Ignus', 0)
+
+    # Next Play Session
     randScenario = party.drawRandomScenario()
     print("Randomed Scenario Event: %d" % randScenario)
 
