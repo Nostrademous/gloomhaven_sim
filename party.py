@@ -346,7 +346,7 @@ class Party():
         heroIndex = self.getHeroIndexByName(strHero)
         if heroIndex >= 0:
             heroObj = self.members[heroIndex]
-            heroObj.buyItem(strItemName, adjustGold=adjGold)
+            heroObj.buyItem(strItemName, adjustGold=adjGold, rep=self.party_json['Reputation'])
             self.party_json['Members'][heroObj.getName()] = heroObj.getJson()
             itemObj, itemIndx = findItemByName(strItemName)
             assert itemObj
@@ -381,7 +381,7 @@ class Party():
         heroIndex = self.getHeroIndexByName(strHero)
         if heroIndex >= 0:
             heroObj = self.members[heroIndex]
-            heroObj.level += 1
+            heroObj.levelUp()
             print("<><> %s Levels Up to %d" % (strHero, heroObj.getLevel()))
             heroObj.addPerk(perk)
             self.party_json['Members'][heroObj.getName()] = heroObj.getJson()

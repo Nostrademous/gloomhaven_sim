@@ -392,13 +392,19 @@ class Character(Unit):
     def getLevel(self):
         return self.level
 
-    def buyItem(self, itemName, adjustGold=True):
+    def levelUp(self):
+        self.level     += 1
+        self.curr_hp    = int(gv.heroDataJson[self.type.capitalize()]['Health'][str(self.level)])
+        self.max_hp     = int(self.curr_hp)
+
+    def buyItem(self, itemName, adjustGold=True, rep=0):
         item = items.createItem(itemName)
         if item:
             try:
                 if adjustGold:
-                    assert self.gold >= item.cost
-                    self.gold -= item.cost
+                    cost = item.cost + gv.calculateShopModifier(rep)
+                    assert self.gold >= cost
+                    self.gold -= cost
                 self.items.equipItem(item, self.numSmallItemsAllowed())
             except AssertionError:
                 raise
