@@ -282,7 +282,11 @@ class Party():
     def addProsperityCheckmark(self, reason='', cnt=1):
         self.party_json['GloomhavenProsperity']['Count'] += cnt
 
+        '''This is Version 1 counts
         count_per_increment = [5,6,7,8,9,10,12,15]
+        '''
+        # version 2 counts
+        count_per_increment = [4,5,6,7,8,9,11,14]
         count_req = [sum(count_per_increment[:i]) for i in range(1,9)]
         curr_cnt = self.party_json['GloomhavenProsperity']['Count']
         for index, value in enumerate(count_req):
@@ -523,8 +527,6 @@ def make_a_party():
     party.addScenarioAvailable(76)
     party.addScenarioAvailable(84)
 
-    party.addProsperityCheckmark()
-    party.addProsperityCheckmark()
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
     party.addProsperityCheckmark()
@@ -1014,6 +1016,43 @@ def make_a_party():
     party.heroAdjustCheckmarks('Singularity', 1)
     party.heroAdjustCheckmarks('Evan', 1)
     party.heroAdjustCheckmarks('Ignus', 0)
+
+    party.heroLevelUp('Red', add_1_0_refresh_item, 'Catastrophic Bomb')
+    party.heroLevelUp('Ignus', add_3_0_air, 'Primal Duality')
+    party.heroLevelUp('Rabid Cicada', add_1_roll_invis, 'Stick to the Shadows')
+    party.heroLevelUp('Evan', add_1_plus_1_curse, 'Stone Fists')
+
+    # Dec 3, 2018
+    party.heroSellItem('Red', 'Horned Helm')
+    party.heroSellItem('Rabid Cicada', 'Minor Stamina Potion')
+    party.heroBuyItem('Red', 'Piercing Bow')
+    party.heroBuyItem('Rabid Cicada', 'Major Stamina Potion')
+
+    party.addScenarioAvailable(72)
+
+    party.completeCityEvent(42)
+    party.adjustReputation(1)
+    party.addProsperityCheckmark('City Event 42')
+
+    party.completeRoadEvent(46)
+    party.addTreasureLooted(12, 'Rabid Cicada')
+    #party.heroFindItem('Rabid Cicada', 'Magma Waders')
+    party.addScenarioCompleted(63)
+    party.heroAdjustXP('Rabid Cicada', 19)
+    party.heroAdjustXP('Red', 17)
+    party.heroAdjustXP('Singularity', 24)
+    party.heroAdjustXP('Evan', 17)
+    party.heroAdjustXP('Ignus', 16)
+    party.heroAdjustGold('Rabid Cicada', 39)
+    party.heroAdjustGold('Red', 33)
+    party.heroAdjustGold('Singularity', 15)
+    party.heroAdjustGold('Evan', 24)
+    party.heroAdjustGold('Ignus', 27)
+    party.heroAdjustCheckmarks('Rabid Cicada', 2)
+    party.heroAdjustCheckmarks('Red', 1)
+    party.heroAdjustCheckmarks('Singularity', 2)
+    party.heroAdjustCheckmarks('Evan', 1)
+    party.heroAdjustCheckmarks('Ignus', 1)
 
     # Next Play Session
     randScenario = party.drawRandomScenario()
