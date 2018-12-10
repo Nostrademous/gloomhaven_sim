@@ -1036,7 +1036,7 @@ def make_a_party():
 
     party.completeRoadEvent(46)
     party.addTreasureLooted(12, 'Rabid Cicada')
-    #party.heroFindItem('Rabid Cicada', 'Magma Waders')
+    party.heroFindItem('Rabid Cicada', 'Magma Waders')
     party.addScenarioCompleted(63)
     party.heroAdjustXP('Rabid Cicada', 19)
     party.heroAdjustXP('Red', 17)

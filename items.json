@@ -454,6 +454,20 @@
         },
         "ProsperityLevel": 0
     },
+    "99": {
+        "Name": "Magma Waders",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "LEGS",
+        "Buff": {
+            "Type": "IgnoreHazardousTerrain",
+            "Buff": "HealSelf",
+            "BuffValue": 2,
+            "Count": 1000000,
+            "Trigger": "Terrain"
+        },
+        "ProsperityLevel": 0
+    },
     "101": {
         "Name": "Second Skin",
         "MaxCount": 1,
