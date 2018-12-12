@@ -339,10 +339,14 @@ class Character(Unit):
                 print("%s CAN GAIN A NEW CHECKMARK PERK!!!" % self.getName())
         elif amount < 0:
             self.loseCheckmark(amount)
+        print('Checkmarks to next perk: %d' % (3 - self.checkmarks % 3))
 
     def loseCheckmark(self, cnt=1):
         if (self.checkmarks % 3) > 0:
-            self.checkmarks -= cnt
+            self.checkmarks += cnt
+            print("%s checkmarks :: %d -> %d" % (self.getName(), self.checkmarks - cnt, self.checkmarks))
+        else:
+            print("%s cannot lose a checkmark - yeay!" % self.getName())
 
     def addPerk(self, perk=None, strType=' Level'):
         if not perk:
