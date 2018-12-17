@@ -43,6 +43,8 @@ class Party():
         self.party_json['CompletedCityEvents'] = list()
         self.party_json['UnlockedRoadEvents'] = list()
         self.party_json['CompletedRoadEvents'] = list()
+        self.party_json['ActiveQuests'] = list()
+        self.party_json['CompletedQuests'] = list()
         self.party_json['ScenariosCompleted'] = list()
         self.party_json['ScenariosBlocked'] = list()
         self.party_json['ScenariosAvailable'] = list()
@@ -76,6 +78,7 @@ class Party():
             if gold > 0:
                 assert heroObj.gold >= gold
                 heroObj.gold -= gold
+                print("%s Bought Enhancement :: gold remaining: %d" % (strHeroName, heroObj.gold))
 
             self.party_json['Members'][heroObj.getName()] = heroObj.getJson()
         else:
@@ -119,6 +122,16 @@ class Party():
                 cnt += 1
         avgLevel = sumLevel / cnt
         return math.ceil(avgLevel/2.0)
+
+    def addActiveQuest(self, value):
+        assert value not in self.party_json['ActiveQuests']
+        assert value not in self.party_json['CompletedQuests']
+        self.party_json['ActiveQuests'].append(value)
+
+    def completeQuest(self, value):
+        assert value in self.party_json['ActiveQuests']
+        self.party_json['ActiveQuests'].remove(value)
+        self.party_json['CompletedQuests'].append(value)
 
     def addGlobalAchievement(self, text):
         self.party_json['GlobalAchievements'].append(text)
@@ -212,14 +225,9 @@ class Party():
         drawn = pickRandom(self.party_json['ScenariosAvailable'])
         return drawn
 
-    def addHeroType(self, extraType):
-        extraType = extraType.lower()
-        assert extraType not in self.valid_hero_types
-        self.valid_hero_types.append(extraType)
-
     def unlockHero(self, strHeroType):
         strHeroType = strHeroType.lower()
-        # make hero available to pick again
+        # make hero available to pick (again)
         assert strHeroType not in self.valid_hero_types
         self.valid_hero_types.append(strHeroType)
         print("\n\nNEW CLASS UNLOCKED: %s\n\n" % (strHeroType.upper()))
@@ -240,6 +248,8 @@ class Party():
                         item = heroObj.items.equipped_items[slot]
                         if item:
                             self.heroSellItem(heroObj.getName(), item.name)
+                # mark personal quest as completed
+                self.completeQuest(heroObj.quest)
                 self.addProsperityCheckmark('%s retirement' % heroObj.getName())
                 member.retire()
                 self.party_json['Members'][heroObj.getName()] = member.getJson()
@@ -270,14 +280,16 @@ class Party():
             for k,v in enumerate(self.members):
                 self.party_json['Members'][v.getName()] = v.getJson()
 
+            self.addActiveQuest(heroObj.quest)
             self.claimHeroType(heroObj.getType())
             print("Added '%s - %s' to the party!" % (heroObj.getName(), heroObj.getType()))
         except:
             print("[addMember - Assertion Failed]")
             print("\tAttempted adding '%s'" % (heroObj.getType()))
-            print('\tValidTypes: %s' % str(party.valid_hero_types))
-            print('\tRetiredTypes: %s' % str(party.retired_types))
-            pass
+            print('\tValidTypes: %s' % str(self.valid_hero_types))
+            print('\tActiveQuests: %s' % str(self.party_json['ActiveQuests']))
+            print('\tCompletedQuests: %s' % str(self.party_json['CompletedQuests']))
+            raise
 
     def addProsperityCheckmark(self, reason='', cnt=1):
         self.party_json['GloomhavenProsperity']['Count'] += cnt
@@ -1091,6 +1103,25 @@ def make_a_party():
     party.heroAdjustCheckmarks('Evan', 1)
     party.heroAdjustCheckmarks('Ignus', 2)
 
+    # Dec 17, 2018
+    party.retireHero(hero3)
+    party.addEnhancement('Evan', 73, 'Top', '+1 Attack', gold=125) # 125gold paid
+
+    party.unlockHero("Plagueherald")
+    party.unlockCityEvent(44) # Spellweaver Retirement
+    party.unlockRoadEvent(44) # Spellweaver Retirement
+    party.unlockCityEvent(35) # Plagueherald Class Choice
+    party.unlockRoadEvent(35) # Plagueherald Class Choice
+
+    # TODO - PICK NEW QUEST
+    hero9 = ch.Character('Boca', 'Plagueherald', owner3, level=1, gold=75, xp=150, quest=524)
+    #hero9.addOwnerPerk([remove_2_0, add_1_0_fire, add_1_0_earth])
+    party.addMember(hero9)
+    #party.heroLevelUp('Boca', remove_2_minus_1, 'Crystallizing Blast')
+    #party.heroLevelUp('Boca', remove_2_minus_1, 'Crystallizing Blast')
+    #party.heroLevelUp('Boca', remove_2_minus_1, 'Chain Lightning')
+    #party.heroBuyItem('Boca', 'Chainmail')
+
     # Next Play Session
     randScenario = party.drawRandomScenario()
     print("Randomed Scenario Event: %d" % randScenario)
@@ -1100,7 +1131,6 @@ def make_a_party():
     roadEvent = party.drawRandomRoadEvent()
     print("Randomed Road Event: %d" % roadEvent)
 
-    #party.addEnhancement('Evan', 73, 'Top', '+1 Attack', gold=25) # 75gold paid
     #party.addEnhancement('Red', 207, 'Top', 'Bless', gold=0) # 50gold paid
 
     ###

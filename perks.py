@@ -96,6 +96,8 @@ add_1_roll_muddle       = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_muddle)
 add_2_roll_muddle       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_muddle)
 add_3_roll_muddle       = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_muddle)
 add_2_roll_poison       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_poison)
+add_3_roll_poison       = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_poison)
+add_2_roll_curse        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_curse)
 add_1_plus_1_immobilize = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_immobilize)
 add_1_plus_1_wound      = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_wound)
 add_2_roll_pierce3      = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_pierce_3)
@@ -126,6 +128,7 @@ add_3_0_fire            = Perk(PERK_TYPE_ADD, 3, amd.amc_0_fire)
 add_3_0_ice             = Perk(PERK_TYPE_ADD, 3, amd.amc_0_ice)
 add_3_0_air             = Perk(PERK_TYPE_ADD, 3, amd.amc_0_air)
 add_3_0_earth           = Perk(PERK_TYPE_ADD, 3, amd.amc_0_earth)
+add_1_plus_1_air        = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_1_air)
 add_1_plus_2_fire       = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_fire)
 add_1_plus_2_ice        = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_ice)
 
@@ -261,6 +264,19 @@ elementalist_perk_deck = list([
     add_1_0_at
 ])
 
+plagueherald_perk_deck = list([
+    replace_minus_2_with_0,
+    replace_minus_1_with_plus_1, replace_minus_1_with_plus_1,
+    replace_0_with_plus_2, replace_0_with_plus_2,
+    add_2_plus_1,
+    add_1_plus_1_air, add_1_plus_1_air, add_1_plus_1_air,
+    add_3_roll_poison,
+    add_2_roll_curse,
+    add_2_roll_immobilize,
+    add_1_roll_stun, add_1_roll_stun,
+    ignore_scen_perk_plus_1
+])
+
 def getPerkSelections(class_type):
     class_type = class_type.lower()
     if class_type == "brute":
@@ -281,6 +297,8 @@ def getPerkSelections(class_type):
         return quartermaster_perk_deck
     elif class_type == "elementalist":
         return elementalist_perk_deck
+    elif class_type == "plagueherald":
+        return plagueherald_perk_deck
     else:
         raise Exception("[getPerkSelection]", "UNKNOWN CLASS TYPE")
 
@@ -319,4 +337,8 @@ if __name__ == "__main__":
     
     print('\nElementalist')
     for perk in elementalist_perk_deck:
+        print(perk)
+    
+    print('\nPlagueherald')
+    for perk in plagueherald_perk_deck:
         print(perk)
