@@ -143,13 +143,15 @@ class Party():
 
     def addScenarioCompleted(self, value):
         self.party_json['ScenariosCompleted'].append(value)
-        print("\nScenarion #%d Completed!" % (value))
+        print("\nScenario #%d Completed!" % (value))
         if value in self.party_json['ScenariosAvailable']:
             self.party_json['ScenariosAvailable'].remove(value)
 
     def addScenarioAvailable(self, value):
-        self.party_json['ScenariosAvailable'].append(value)
-        print("New Scenarion Available: %d" % (value))
+        if value not in self.party_json['ScenariosCompleted'] and \
+           value not in self.party_json['ScenariosBlocked']:
+            self.party_json['ScenariosAvailable'].append(value)
+            print("New Scenario Available: %d" % (value))
 
     def addScenarioBlocked(self, value):
         self.party_json['ScenariosBlocked'].append(value)
@@ -1104,8 +1106,10 @@ def make_a_party():
     party.heroAdjustCheckmarks('Ignus', 2)
 
     # Dec 17, 2018
+    party.heroBuyItem('Rabid Cicada', 'Volatile Bomb')
     party.retireHero(hero3)
     party.addEnhancement('Evan', 73, 'Top', '+1 Attack', gold=125) # 125gold paid
+    party.makeSanctuaryDonation('Evan')
 
     party.unlockHero("Plagueherald")
     party.unlockCityEvent(44) # Spellweaver Retirement
@@ -1113,15 +1117,75 @@ def make_a_party():
     party.unlockCityEvent(35) # Plagueherald Class Choice
     party.unlockRoadEvent(35) # Plagueherald Class Choice
 
-    # TODO - PICK NEW QUEST
-    hero9 = ch.Character('Boca', 'Plagueherald', owner3, level=1, gold=75, xp=150, quest=524)
-    #hero9.addOwnerPerk([remove_2_0, add_1_0_fire, add_1_0_earth])
+    hero9 = ch.Character('Playgirl', 'Plagueherald', owner3, level=1, gold=75, xp=150, quest=520)
+    hero9.addOwnerPerk(add_3_roll_poison)
     party.addMember(hero9)
-    #party.heroLevelUp('Boca', remove_2_minus_1, 'Crystallizing Blast')
-    #party.heroLevelUp('Boca', remove_2_minus_1, 'Crystallizing Blast')
-    #party.heroLevelUp('Boca', remove_2_minus_1, 'Chain Lightning')
-    #party.heroBuyItem('Boca', 'Chainmail')
+    party.heroLevelUp('Playgirl', ignore_scen_perk_plus_1, 'Under The Skin')
+    party.heroLevelUp('Playgirl', add_2_plus_1, 'Fetid Flurry')
+    party.heroLevelUp('Playgirl', replace_minus_1_with_plus_1, 'Nigthmarish Affliction')
+    party.heroBuyItem('Playgirl', 'Eagle-Eye Goggles')
+    party.heroBuyItem('Playgirl', 'Heater Shield')
+    party.heroBuyItem('Playgirl', 'Minor Stamina Potion')
+    party.heroBuyItem('Playgirl', 'Minor Power Potion')
 
+    party.makeSanctuaryDonation('Red')
+    party.makeSanctuaryDonation('Singularity')
+    party.makeSanctuaryDonation('Rabid Cicada')
+    party.completeCityEvent(35)
+    party.addProsperityCheckmark('City Event #35')
+
+    party.completeRoadEvent(14)
+
+    party.addTreasureLooted(1, 'Playgirl')
+    party.addItemDesign(82)
+
+    party.addScenarioCompleted(16)
+    party.addScenarioAvailable(24)
+    party.addScenarioAvailable(25)
+
+    party.heroAdjustXP('Rabid Cicada', 19)
+    party.heroAdjustXP('Red', 17)
+    party.heroAdjustXP('Playgirl', 16)
+    party.heroAdjustXP('Singularity', 20)
+    party.heroAdjustGold('Rabid Cicada', 15)
+    party.heroAdjustGold('Red', 3)
+    party.heroAdjustGold('Playgirl', 9)
+    party.heroAdjustGold('Singularity', 3)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+    party.heroAdjustCheckmarks('Red', 2)
+    party.heroAdjustCheckmarks('Playgirl', 0)
+    party.heroAdjustCheckmarks('Singularity', 1)
+
+    # Play Session - Dec 26, 2018
+    party.heroLevelUp('Singularity', add_1_plus_1_wound, 'Crashing Wave')
+    party.completeCityEvent(1)
+    party.adjustReputation(1)
+    party.makeSanctuaryDonation('Singularity')
+    party.completeRoadEvent(12)
+    party.adjustReputation(1)
+
+    party.addScenarioCompleted(7)
+    party.addScenarioAvailable(20)
+
+    party.heroAdjustXP('Rabid Cicada', 17)
+    party.heroAdjustXP('Ignus', 21)
+    party.heroAdjustXP('Playgirl', 19)
+    party.heroAdjustXP('Singularity', 27)
+    party.heroAdjustGold('Rabid Cicada', 12)
+    party.heroAdjustGold('Ignus', 44)
+    party.heroAdjustGold('Playgirl', 8)
+    party.heroAdjustGold('Singularity', 20)
+    party.heroAdjustCheckmarks('Rabid Cicada', 1)
+    party.heroAdjustCheckmarks('Ignus', 1)
+    party.heroAdjustCheckmarks('Playgirl', 0)
+    party.heroAdjustCheckmarks('Singularity', 1)
+
+    # Play Session - Jan ?, 2019
+    party.heroGainCheckmarkPerk('Ignus', add_3_0_earth)
+    #party.heroGainCheckmarkPerk('Rabid Cicada', add_3_0_earth)
+    #party.heroGainCheckmarkPerk('Singularity', add_3_0_earth)
+    #party.heroLevelUp('Rabid Cicada', perk, card)
+    
     # Next Play Session
     randScenario = party.drawRandomScenario()
     print("Randomed Scenario Event: %d" % randScenario)

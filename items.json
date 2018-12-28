@@ -425,6 +425,21 @@
         "Spent": 0,
         "ProsperityLevel": 0
     },
+    "77": {
+        "Name": "Frigid Blade",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "ConsumeBuff",
+            "Element": "Ice",
+            "Buff": "Attack",
+            "BuffValue": 2,
+            "Count": 100000,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
     "78": {
         "Name": "Storm Blade",
         "MaxCount": 2,
@@ -432,10 +447,98 @@
         "Slot": "ONE_HAND",
         "Buff": {
             "Type": "ConsumeBuff",
-            "Element": "Wind",
+            "Element": "Air",
             "Buff": "Attack",
             "BuffValue": 2,
             "Count": 100000,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "79": {
+        "Name": "Inferno Blade",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "ConsumeBuff",
+            "Element": "Fire",
+            "Buff": "Attack",
+            "BuffValue": 2,
+            "Count": 100000,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "80": {
+        "Name": "Tremor Blade",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "ConsumeBuff",
+            "Element": "Earth",
+            "Buff": "Attack",
+            "BuffValue": 2,
+            "Count": 100000,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "81": {
+        "Name": "Brilliant Blade",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "ConsumeBuff",
+            "Element": "Light",
+            "Buff": "Attack",
+            "BuffValue": 2,
+            "Count": 100000,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "82": {
+        "Name": "Night Blade",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "ConsumeBuff",
+            "Element": "Dark",
+            "Buff": "MeleeAttack",
+            "BuffValue": 2,
+            "Count": 100000,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "83": {
+        "Name": "Wand of Frost",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "CreateElement",
+            "Buff": "InvokeElement",
+            "Element": "Ice",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "84": {
+        "Name": "Wand of Storms",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "CreateElement",
+            "Buff": "InvokeElement",
+            "Element": "Air",
+            "Count": 1,
             "Trigger": "Player"
         },
         "ProsperityLevel": 0
@@ -449,6 +552,48 @@
             "Type": "CreateElement",
             "Buff": "InvokeElement",
             "Element": "Fire",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "86": {
+        "Name": "Wand of Tremors",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "CreateElement",
+            "Buff": "InvokeElement",
+            "Element": "Earth",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "87": {
+        "Name": "Wand of Brilliance",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "CreateElement",
+            "Buff": "InvokeElement",
+            "Element": "Light",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "88": {
+        "Name": "Wand of Darkness",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "CreateElement",
+            "Buff": "InvokeElement",
+            "Element": "Dark",
             "Count": 1,
             "Trigger": "Player"
         },
