@@ -140,5 +140,19 @@
         "DeckSize": 11,
         "UnlockEvents": 35,
         "RetireEvents": 52
+    },
+    "Nightshroud": {
+        "Health": {
+            "1": 8,
+            "2": 9,
+            "3": 11,
+            "4": 12,
+            "5": 14,
+            "6": 15,
+            "7": 17,
+            "8": 18,
+            "9": 20
+        },
+        "DeckSize": 9
     }
 }

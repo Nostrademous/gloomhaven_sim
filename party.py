@@ -1182,9 +1182,9 @@ def make_a_party():
 
     # Play Session - Jan ?, 2019
     party.heroGainCheckmarkPerk('Ignus', add_3_0_earth)
-    #party.heroGainCheckmarkPerk('Rabid Cicada', add_3_0_earth)
-    #party.heroGainCheckmarkPerk('Singularity', add_3_0_earth)
-    #party.heroLevelUp('Rabid Cicada', perk, card)
+    party.heroLevelUp('Rabid Cicada', add_2_roll_muddle, 'Stiletto Storm')
+    party.heroGainCheckmarkPerk('Rabid Cicada', add_2_roll_poison)
+    party.heroGainCheckmarkPerk('Singularity', add_1_0_stun)
     
     # Next Play Session
     randScenario = party.drawRandomScenario()

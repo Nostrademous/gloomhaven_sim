@@ -149,6 +149,11 @@ amc_plus_1_push1    = AttackModifierCard('+1', pushValue=1)
 amc_roll_push1      = AttackModifierCard('', rolling=True, pushValue=1)
 amc_roll_pull1      = AttackModifierCard('', rolling=True, pullValue=1)
 amc_roll_push2      = AttackModifierCard('', rolling=True, pushValue=2)
+amc_roll_heal1      = AttackModifierCard('', rolling=True, heal=True, healAmount=1)
+
+amc_minus_1_dark    = AttackModifierCard('-1', invokeElement='dark')
+amc_plus_1_dark     = AttackModifierCard('+1', invokeElement='dark')
+amc_p1_invis        = AttackModifierCard('+1', effect='invisible')
 
 amc_0_ri            = AttackModifierCard('+0', refreshItem=True)
 

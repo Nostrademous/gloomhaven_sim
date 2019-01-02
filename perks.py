@@ -10,6 +10,7 @@ PERK_TYPE_IGNORE_SCEN       = 4
 PERK_TYPE_IGNORE_ITEM       = 5
 PERK_TYPE_IGNORE_SCEN_P1    = 6
 PERK_TYPE_IGNORE_ITEM_2P1   = 7
+PERK_TYPE_IGNORE_SCEN_2P1   = 8
 
 
 _perk_type = {
@@ -19,7 +20,8 @@ _perk_type = {
     "4": "Ignore negative scenario effects",
     "5": "Ignore negative item effects",
     "6": "Ignore negative scenario effects and add +1",
-    "7": "Ignore negative item effects and add 2 +1"
+    "7": "Ignore negative item effects and add 2 +1",
+    "8": "Ignore negative scenario effects and add 2 +1",
 }
 
 class Perk():
@@ -67,6 +69,7 @@ ignore_scen_perk        = Perk(PERK_TYPE_IGNORE_SCEN)
 ignore_item_perk        = Perk(PERK_TYPE_IGNORE_ITEM)
 ignore_scen_perk_plus_1 = Perk(PERK_TYPE_IGNORE_SCEN_P1)
 ignore_item_perk_add_2_plus_1   = Perk(PERK_TYPE_IGNORE_ITEM_2P1)
+ignore_scen_perk_2_plus_1 = Perk(PERK_TYPE_IGNORE_SCEN_2P1)
 
 remove_2_0              = Perk(PERK_TYPE_REMOVE, 2, amd.amc_0)
 remove_2_minus_1        = Perk(PERK_TYPE_REMOVE, 2, amd.amc_m1)
@@ -90,6 +93,7 @@ add_1_0_at              = Perk(PERK_TYPE_ADD, 1, amd.amc_0_at)
 add_1_0_stun            = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_p1)
 add_1_roll_at           = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_at)
 add_1_roll_invis        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_invis)
+add_1_plus_1_invis      = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_invis)
 add_1_roll_stun         = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_stun)
 add_1_roll_disarm       = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_disarm)
 add_1_roll_muddle       = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_muddle)
@@ -106,6 +110,8 @@ add_2_roll_immobilize   = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_immobilize)
 add_3_roll_push1        = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_push1)
 add_2_roll_push2        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_push2)
 add_3_roll_pull1        = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_pull1)
+
+add_2_roll_heal1        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_heal1)
 
 # elemental based
 add_1_roll_air          = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_air)
@@ -135,6 +141,8 @@ add_1_plus_2_ice        = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_2_ice)
 # class specific perks
 tinkerer_perk_9         = Perk(PERK_TYPE_ADD, 1, amd.amc_p1h2)
 brute_p1_shield1        = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_1_shield1)
+add_1_minus_1_dark      = Perk(PERK_TYPE_ADD, 1, amd.amc_minus_1_dark)
+replace_minus_1_dark_with_plus_1_dark = Perk(PERK_TYPE_REPLACE, 1, amd.amc_minus_1_dark, amd.amc_plus_1_dark)
 
 add_1_0_refresh_item    = Perk(PERK_TYPE_ADD, 1, amd.amc_0_ri)
 
@@ -277,6 +285,19 @@ plagueherald_perk_deck = list([
     ignore_scen_perk_plus_1
 ])
 
+nightshroud_perk_deck = list([
+    remove_2_minus_1, remove_2_minus_1,
+    remove_4_0,
+    add_1_minus_1_dark, add_1_minus_1_dark,
+    replace_minus_1_dark_with_plus_1_dark, replace_minus_1_dark_with_plus_1_dark,
+    add_1_plus_1_invis, add_1_plus_1_invis,
+    add_3_roll_muddle, add_3_roll_muddle,
+    add_2_roll_heal1,
+    add_2_roll_curse,
+    add_1_roll_at,
+    ignore_scen_perk_2_plus_1
+])
+
 def getPerkSelections(class_type):
     class_type = class_type.lower()
     if class_type == "brute":
@@ -299,6 +320,8 @@ def getPerkSelections(class_type):
         return elementalist_perk_deck
     elif class_type == "plagueherald":
         return plagueherald_perk_deck
+    elif class_type == "nightshroud":
+        return nightshroud_perk_deck 
     else:
         raise Exception("[getPerkSelection]", "UNKNOWN CLASS TYPE")
 
@@ -341,4 +364,8 @@ if __name__ == "__main__":
     
     print('\nPlagueherald')
     for perk in plagueherald_perk_deck:
+        print(perk)
+    
+    print('\nNightshroud')
+    for perk in nightshroud_perk_deck:
         print(perk)
