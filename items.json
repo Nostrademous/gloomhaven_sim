@@ -275,6 +275,7 @@
             "Type": "RefreshItems",
             "RefreshedItemType": "Spent",
             "NumRefreshedItems": 100,
+            "Target": "Self",
             "Count": 1,
             "Trigger": "Player"
         },
@@ -293,6 +294,7 @@
             "MoveValue": 3,
             "Trigger": "Player"
         },
+        "Spent": 0,
         "ProsperityLevel": 4
     },
     "30": {
@@ -386,6 +388,124 @@
         "Consumed": 1,
         "ProsperityLevel": 4
     },
+    "36": {
+        "Name": "Boots of Dashing",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "Legs",
+        "Buff": {
+            "Type": "Movement",
+            "Count": 1,
+            "Buff": "+3",
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 5
+    },
+    "37": {
+        "Name": "Robes of Evocation",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "ConsumeBuff",
+            "Element": "Any",
+            "Buff": "Attack",
+            "BuffValue": 1,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 5
+    },
+    "38": {
+        "Name": "Heavy Basinet",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "Head",
+        "AMDEffect": {
+            "Value": -1,
+            "Count": 2
+        },
+        "Buff": {
+            "Type": "EffectImmunity",
+            "Buff": ["STUN", "MUDDLE"],
+            "Count": 1000000,
+            "Trigger": "Always"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 5
+    },
+    "39": {
+        "Name": "Hooked Chain",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "RangedAttack",
+            "Buff": "Extra",
+            "ExtraType": "PULL",
+            "ExtraValue": 2,
+            "Count": 1000000,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 5
+    },
+    "40": {
+        "Name": "Versatile Dagger",
+        "MaxCount": 2,
+        "Cost": 25,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "AttackBuff",
+            "Count": 1,
+            "Buff": "SetDefaultAttack",
+            "MoveValue": 3,
+            "Trigger": "Player"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 5
+    },
+    "41": {
+        "Name": "Major Power Potion",
+        "MaxCount": 4,
+        "Cost": 40,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "AttackBuff",
+            "Count": 1,
+            "Buff": "Attack_2",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 5
+    },
+    "42": {
+        "Name": "Ring of Haste",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "EndOfTurnAction",
+            "Buff": "BottomAction",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 5
+    },
+    "43": {
+        "Name": "Boots of Quickness",
+        "MaxCount": 2,
+        "Cost": 75,
+        "Slot": "Legs",
+        "Buff": {
+            "Type": "InitiativeMod",
+            "ModValue": 20,
+            "Buff": "StartOfRound",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 6
+    },
     "45": {
         "Name": "Pendant of Dark Pacts",
         "MaxCount": 2,
@@ -395,6 +515,7 @@
             "Type": "RefreshItems",
             "RefreshedItemType": "SMALL_ITEM",
             "NumRefreshedItems": 2,
+            "Target": "Self",
             "Count": 1,
             "Trigger": "Player"
         },
@@ -403,7 +524,7 @@
             "Count": 1
         },
         "Consumed": 1,
-        "ProsperityLevel": 0
+        "ProsperityLevel": 6
     },
     "76": {
         "Name": "Chain Hood",
@@ -420,6 +541,7 @@
             "AdjCnt": 3,
             "Buff": "Shield",
             "BuffValue": 1,
+            "Count": 1000000,
             "Trigger": "Game"
         },
         "Spent": 0,
@@ -699,6 +821,7 @@
             "Move": 2,
             "Attack": 2,
             "Range": 0,
+            "Extra": [],
             "Count": 1,
             "Trigger": "Player"
         },
@@ -714,7 +837,7 @@
             "Type": "EnemyControl",
             "ControlType": "Move",
             "ControlRange": 5,
-            "MoveValue": 2,
+            "Buff": 2,
             "Count": 1,
             "Trigger": "Player"
         },
@@ -748,6 +871,22 @@
             "Trigger": "MeleeAttack"
         },
         "Consumed": 0,
+        "ProsperityLevel": 0
+    },
+    "141": {
+        "Name": "Utility Belt",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "RefreshItems",
+            "RefreshedItemType": "Consumed",
+            "NumRefreshedItems": 1,
+            "Target": "Allies",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 2,
         "ProsperityLevel": 0
     }
 }

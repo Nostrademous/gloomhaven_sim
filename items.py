@@ -77,6 +77,16 @@ class Item():
             return True
         return False
 
+    def changesElements(self):
+        if self.getBuffType().upper() == "CHANGEELEMENT":
+            return True
+        return False
+
+    def obstacleRemoval(self):
+        if self.getBuffType().upper() == "OBSTACLEREMOVAL":
+            return True
+        return False
+
     def __repr__(self):
         ret  = "[Item %d] %s\n" % (self.id, self.name)
         ret += "Slot: %s\n" % (self.slot)
@@ -93,13 +103,19 @@ class Item():
                 elif self.isHeal():
                     ret += "    Heal: %d\n" % (self.buff["HealValue"])
                 elif self.refreshesItems():
-                    ret += "    Refresh up to %d %s Items\n" % (self.buff["NumRefreshedItems"], self.buff["RefreshedItemType"])
+                    ret += "    Refresh up to %d %s Items for %s\n" % (self.buff["NumRefreshedItems"], self.buff["RefreshedItemType"], self.buff["Target"])
+                elif self.changesElements():
+                    ret += "    Changes Element from %s to %s\n" % (self.buff["FromElement"], self.buff["ToElement"])
+                elif self.obstacleRemoval():
+                    ret += "    Removes %d Obstacle in Range %d\n" % (self.buff["Count"], self.buff["Range"])
                 else:
                     ret += "    Buff: %s\n" % (self.buff["Buff"])
             if "Trigger" in self.buff:
                 ret += "    Trigger: %s\n" % (self.buff["Trigger"])
-        if self.consumed:
+        if self.consumed == 1:
             ret += "%d uses before consumed\n" % self.maxUses
+        elif self.consumed == 2:
+            ret += "%d uses before PERMENANTLY consumed\m" % self.maxUses
         else:
             ret += "%d uses before tapped\n" % self.maxUses
         if self.affectsAMD():
