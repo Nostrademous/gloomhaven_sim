@@ -89,7 +89,7 @@
         "Slot": "Head",
         "Buff": {
             "Type": "Debuff",
-            "Count": -1,
+            "Count": 1000000,
             "Debuff": "Replace2Xwith0",
             "Trigger": "Attack"
         },
@@ -721,6 +721,20 @@
         },
         "ProsperityLevel": 0
     },
+    "96": {
+        "Name": "Rocket Boots",
+        "MaxCount": 2,
+        "Cost": 80,
+        "Slot": "LEGS",
+        "Buff": {
+            "Type": "MoveBuff",
+            "Buff": "AddJump",
+            "BuffValue": 3,
+            "Count": 1000000,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
     "99": {
         "Name": "Magma Waders",
         "MaxCount": 1,
@@ -887,6 +901,20 @@
             "Trigger": "Player"
         },
         "Consumed": 2,
+        "ProsperityLevel": 0
+    },
+    "147": {
+        "Name": "Cloak of the Hunter",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "Debuff",
+            "Debuff": "Muddle",
+            "Count": 2,
+            "Trigger": "Doom"
+        },
+        "Spent": 0,
         "ProsperityLevel": 0
     }
 }

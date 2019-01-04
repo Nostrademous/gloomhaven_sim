@@ -51,6 +51,7 @@ class Party():
         self.party_json['TreasuresLooted'] = list()
         self.party_json['GlobalAchievements'] = list()
         self.party_json['PartyAchievements'] = list()
+        self.party_json['AncientTechnology'] = 0
         self.party_json['GloomhavenProsperity'] = { 'Level': 1, 'Checkmarks': 0, 'Count': 0 }
         self.party_json['SanctuaryDonations'] = 0
         self.party_json['PartyEnhancements'] = dict()
@@ -134,8 +135,14 @@ class Party():
         self.party_json['CompletedQuests'].append(value)
 
     def addGlobalAchievement(self, text):
-        self.party_json['GlobalAchievements'].append(text)
         print("\nGlobal Achievement: '%s' obtained!!!" % (text))
+        if text.upper() == 'ANCIENT TECHNOLOGY':
+            self.party_json['AncientTechnology'] += 1
+            if self.party_json['AncientTechnology'] >= 5:
+                print("\n\nOpen Envelope A!!!!!\n\n")
+            else:
+                print("\n%d more needed before Envelope event\n" % (5-self.party_json['AncientTechnology']))
+        self.party_json['GlobalAchievements'].append(text)
 
     def addPartyAchievement(self, text):
         self.party_json['PartyAchievements'].append(text)
@@ -405,6 +412,8 @@ class Party():
             heroObj = self.members[heroIndex]
             heroObj.levelUp()
             print("<><> %s Levels Up to %d" % (strHero, heroObj.getLevel()))
+            if card:
+                print("%s new Ability Card Selection: '%s'" % (strHero, card))
             heroObj.addPerk(perk)
             self.party_json['Members'][heroObj.getName()] = heroObj.getJson()
         else:
@@ -1180,12 +1189,75 @@ def make_a_party():
     party.heroAdjustCheckmarks('Playgirl', 0)
     party.heroAdjustCheckmarks('Singularity', 1)
 
+    party.addScenarioBlocked(35)
+    party.addScenarioBlocked(36)
+
+    # Solo Scenario - Quartermaster
+    party.heroAdjustXP('Red', 15)
+    party.heroAdjustGold('Red', 12)
+    party.heroFindItem('Red', 'Utility Belt')
+
     # Play Session - Jan ?, 2019
     party.heroGainCheckmarkPerk('Ignus', add_3_0_earth)
     party.heroLevelUp('Rabid Cicada', add_2_roll_muddle, 'Stiletto Storm')
     party.heroGainCheckmarkPerk('Rabid Cicada', add_2_roll_poison)
     party.heroGainCheckmarkPerk('Singularity', add_1_0_stun)
+
+    party.unlockCityEvent(80) # Town Records - Oozing Grove
     
+    party.retireHero(hero7)
+    party.makeSanctuaryDonation('Red')
+    party.addEnhancement('Red', 214, 'Bottom', '+1 Shield', gold=100)
+    party.addEnhancement('Red', 210, 'Top', '+1 Move', gold=30)
+
+    party.unlockHero("Nightshroud")
+    party.unlockCityEvent(49) # Quartermaster Retirement
+    party.unlockRoadEvent(49) # Quartermaster Retirement
+    party.unlockCityEvent(34) # Nightshroud Class Choice
+    party.unlockRoadEvent(34) # Nightshroud Class Choice
+
+    hero10 = ch.Character('Hayha', 'Nightshroud', owner2, level=1, gold=90, xp=210, quest=518)
+    hero10.addOwnerPerk(ignore_scen_perk_2_plus_1)
+    hero10.addOwnerPerk(remove_2_minus_1)
+    party.addMember(hero10)
+    party.heroLevelUp('Hayha', add_1_minus_1_dark, 'Prepare for the Kill')
+    party.heroLevelUp('Hayha', add_1_minus_1_dark, 'Terror Blade')
+    party.heroLevelUp('Hayha', replace_minus_1_dark_with_plus_1_dark, 'Grim Sustenance')
+    party.heroLevelUp('Hayha', replace_minus_1_dark_with_plus_1_dark, 'Black Arrow')
+    party.addEnhancement("Hayha", 269, 'Bottom', '+1 Move', gold=30)
+    party.addEnhancement("Hayha", 273, 'Bottom', '+1 Move', gold=55)
+
+    # Jan 2, 2019
+    party.heroBuyItem('Singularity', 'Ring of Haste')
+
+    party.completeCityEvent(80)
+    party.adjustReputation(-2)
+
+    party.completeRoadEvent(10)
+    party.unlockCityEvent(71)
+
+    party.addTreasureLooted(16, 'Singularity')
+    party.addTreasureLooted(36, 'Hayha')
+    party.addItemDesign(96) # Rocket Boots
+    party.addScenarioCompleted(66)
+    party.addGlobalAchievement('Ancient Technology')
+    
+    party.heroAdjustXP('Rabid Cicada', 21)
+    party.heroAdjustXP('Hayha', 21)
+    party.heroAdjustXP('Singularity', 30)
+    party.heroAdjustGold('Rabid Cicada', 4)
+    party.heroAdjustGold('Hayha', 32)
+    party.heroAdjustGold('Singularity', 26)
+    party.heroAdjustCheckmarks('Rabid Cicada', 1)
+    party.heroAdjustCheckmarks('Hayha', 0)
+    party.heroAdjustCheckmarks('Singularity', 0)
+    
+    # Solo Scenario - Doomstalker
+    party.heroAdjustXP('Singularity', 17)
+    party.heroAdjustGold('Singularity', 16)
+    party.heroFindItem('Singularity', 'Cloak of the Hunter')
+    party.heroSellItem('Singularity', 'Cloak of the Hunter')
+
     # Next Play Session
     randScenario = party.drawRandomScenario()
     print("Randomed Scenario Event: %d" % randScenario)

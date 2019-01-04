@@ -109,7 +109,9 @@
             "8": 24,
             "9": 26
         },
-        "DeckSize": 9
+        "DeckSize": 9,
+        "UnlockEvents": 32,
+        "RetireEvents": 49 
     },
     "Elementalist": {
         "Health": {
@@ -153,6 +155,8 @@
             "8": 18,
             "9": 20
         },
-        "DeckSize": 9
+        "DeckSize": 9,
+        "UnlockEvents": 34,
+        "RetireEvents": 51
     }
 }
