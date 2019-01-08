@@ -749,6 +749,18 @@
         },
         "ProsperityLevel": 0
     },
+    "100": {
+        "Name": "Robes of Summoning",
+        "MaxCount": 1,
+        "Cost": 40,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "SummonHeal",
+            "Buff": "2",
+            "Count": 1
+        },
+        "ProsperityLevel": 0
+    },
     "101": {
         "Name": "Second Skin",
         "MaxCount": 1,
@@ -760,6 +772,7 @@
             "CardType": "-1",
             "Count": 2
         },
+        "Spent": 0,
         "ProsperityLevel": 0
     },
     "107": {
@@ -852,6 +865,20 @@
             "ControlType": "Move",
             "ControlRange": 5,
             "Buff": 2,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
+    "127": {
+        "Name": "Giant Remote Spider",
+        "MaxCount": 1,
+        "Cost": 60,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "LootAction",
+            "Buff": 1,
             "Count": 1,
             "Trigger": "Player"
         },

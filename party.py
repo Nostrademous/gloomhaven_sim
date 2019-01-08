@@ -162,6 +162,8 @@ class Party():
 
     def addScenarioBlocked(self, value):
         self.party_json['ScenariosBlocked'].append(value)
+        if value in self.party_json['ScenariosAvailable']:
+            self.party_json['ScenariosAvailable'].remove(value)
         print("Scenario Blocked: %d" % (value))
 
     def addTreasureLooted(self, value, strHero=''):
@@ -346,8 +348,11 @@ class Party():
             heroObj.xp += amount
             self.party_json['Members'][heroObj.getName()] = heroObj.getJson()
             print("%s gains %d XP" % (strHero, amount))
-            if heroObj.canLevel():
+            bCanLevel, shortXP = heroObj.canLevel()
+            if bCanLevel:
                 print("\n<><> %s CAN LEVEL UP to %d\n" % (strHero, heroObj.level+1))
+            else:
+                print("%s needs %d more XP to Level\n" % (strHero, shortXP))
         else:
             raise Exception('party::heroAdjustXP', 'Failed to Find Hero: "%s"' % (strHero))
 
@@ -1257,6 +1262,44 @@ def make_a_party():
     party.heroAdjustGold('Singularity', 16)
     party.heroFindItem('Singularity', 'Cloak of the Hunter')
     party.heroSellItem('Singularity', 'Cloak of the Hunter')
+
+    # Jan 7 Session
+    party.heroLevelUp('Singularity', ignore_scen_perk, 'Darkened Skies')
+    party.heroSellItem('Singularity', 'Minor Power Potion')
+    party.heroSellItem('Singularity', 'Minor Stamina Potion')
+    party.heroBuyItem('Singularity', 'Major Power Potion')
+    party.heroBuyItem('Singularity', 'Major Stamina Potion')
+    party.heroBuyItem('Ignus', 'Tower Shield')
+
+    party.completeCityEvent(61)
+    party.heroFindItem('Hayha', 'Giant Remote Spider')
+    party.heroBuyItem('Hayha', 'Minor Stamina Potion')
+    party.heroBuyItem('Hayha', 'Boots of Striding')
+    party.makeSanctuaryDonation('Singularity')
+
+    party.addTreasureLooted(69, 'Singularity')
+    party.heroFindItem('Singularity', 'Robes of Summoning')
+
+    party.addScenarioCompleted(31)
+    party.addGlobalAchievement('Artifact: Cleansed')
+    party.addScenarioAvailable(37)
+    party.addScenarioAvailable(38)
+    party.addScenarioAvailable(39)
+    party.addScenarioAvailable(43)
+    
+    party.heroSellItem('Singularity', 'Robes of Summoning')
+    party.heroAdjustXP('Ignus', 19)
+    party.heroAdjustXP('Hayha', 25)
+    party.heroAdjustXP('Singularity', 27)
+    party.heroAdjustXP('Playgirl', 16)
+    party.heroAdjustGold('Ignus', 16)
+    party.heroAdjustGold('Hayha', 20)
+    party.heroAdjustGold('Singularity', 12)
+    party.heroAdjustGold('Playgirl', 8)
+    party.heroAdjustCheckmarks('Ignus', 0)
+    party.heroAdjustCheckmarks('Hayha', 1)
+    party.heroAdjustCheckmarks('Singularity', 0)
+    party.heroAdjustCheckmarks('Playgirl', 1)
 
     # Next Play Session
     randScenario = party.drawRandomScenario()

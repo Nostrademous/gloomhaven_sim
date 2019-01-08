@@ -380,12 +380,13 @@ class Character(Unit):
 
     def canLevel(self):
         if self.level == 9:
-            return False
+            return False, 0
 
         inc = [45 + (5*(i-1)) for i in range(1,9)]
-        if self.xp >= sum(inc[:self.level]):
-            return True
-        return False
+        needed_xp = sum(inc[:self.level])
+        if self.xp >= needed_xp:
+            return True, self.xp - needed_xp
+        return False, needed_xp - self.xp
 
     def getName(self):
         return self.name
