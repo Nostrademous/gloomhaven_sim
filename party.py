@@ -248,13 +248,17 @@ class Party():
             if heroObj.getName() is member.getName():
                 print("\n<><> Retiring '%s'!!!\n" % member.getName())
                 # return all items to Gloomhaven store
-                for item in heroObj.items.unequipped_items:
-                    self.heroSellItem(heroObj.getName(), item.name)
+                unequip_sell_list = [entry.name for entry in heroObj.items.unequipped_items]
+                for item in unequip_sell_list:
+                    print('Selling Unequipped Item: ', item)
+                    self.heroSellItem(heroObj.getName(), item)
                 for slot in heroObj.items.equipped_items:
+                    print('Selling Equipped Item Slot: ', slot)
                     if isinstance(heroObj.items.equipped_items[slot], list):
                         if len(heroObj.items.equipped_items[slot]) > 0:
-                            for entry in heroObj.items.equipped_items[slot]:
-                                self.heroSellItem(heroObj.getName(), entry.name)
+                            sell_list = [entry.name for entry in heroObj.items.equipped_items[slot]]
+                            for entry in sell_list:
+                                self.heroSellItem(heroObj.getName(), entry)
                     else:
                         item = heroObj.items.equipped_items[slot]
                         if item:
@@ -1301,6 +1305,51 @@ def make_a_party():
     party.heroAdjustCheckmarks('Singularity', 0)
     party.heroAdjustCheckmarks('Playgirl', 1)
 
+    party.heroLevelUp('Ignus', add_3_0_ice, 'Obsidian Shards')
+
+    # Jan 14, 2019 - Session
+    party.heroBuyItem('Hayha', 'Minor Mana Potion')
+    party.heroBuyItem('Ignus', 'Moon Earring')
+
+    party.completeCityEvent(71)
+    party.heroAdjustCheckmarks('Ignus', -1)
+    party.heroAdjustCheckmarks('Hayha', -1)
+    party.heroAdjustCheckmarks('Singularity', -1)
+    party.heroAdjustCheckmarks('Playgirl', -1)
+    party.heroAdjustCheckmarks('Rabid Cicada', -1)
+
+    party.completeRoadEvent(49)
+    party.addScenarioAvailable(80)
+    party.heroAdjustGold('Ignus', 5)
+    party.heroAdjustGold('Hayha', 5)
+    party.heroAdjustGold('Singularity', 5)
+    party.heroAdjustGold('Playgirl', 5)
+    party.heroAdjustGold('Rabid Cicada', 5)
+
+    party.addTreasureLooted(35, 'Hayha')
+    party.heroFindItem('Hayha', 'Drakescale Boots')
+
+    party.addScenarioCompleted(43)
+    party.addGlobalAchievement('Water Breathing')
+
+    party.heroAdjustXP('Ignus', 18)
+    party.heroAdjustXP('Hayha', 19)
+    party.heroAdjustXP('Singularity', 25)
+    party.heroAdjustXP('Playgirl', 18)
+    party.heroAdjustXP('Rabid Cicada', 25)
+    party.heroAdjustGold('Ignus', 0)
+    party.heroAdjustGold('Hayha', 21)
+    party.heroAdjustGold('Singularity', 3)
+    party.heroAdjustGold('Playgirl', 9)
+    party.heroAdjustGold('Rabid Cicada', 33)
+    party.heroAdjustCheckmarks('Ignus', 1)
+    party.heroAdjustCheckmarks('Hayha', 0)
+    party.heroAdjustCheckmarks('Singularity', 1)
+    party.heroAdjustCheckmarks('Playgirl', 0)
+    party.heroAdjustCheckmarks('Rabid Cicada', 1)
+
+    # UNSURE - do we unlock scenario 26????
+
     # Next Play Session
     randScenario = party.drawRandomScenario()
     print("Randomed Scenario Event: %d" % randScenario)
@@ -1310,7 +1359,6 @@ def make_a_party():
     roadEvent = party.drawRandomRoadEvent()
     print("Randomed Road Event: %d" % roadEvent)
 
-    #party.addEnhancement('Red', 207, 'Top', 'Bless', gold=0) # 50gold paid
 
     ###
     #  PRINT OUR PARTY

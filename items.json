@@ -735,6 +735,19 @@
         },
         "ProsperityLevel": 0
     },
+    "98": {
+        "Name": "Drakescale Boots",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "LEGS",
+        "Buff": {
+            "Type": "IgnoreTerrain",
+            "Buff": "HazardousAndDifficult",
+            "Count": 1000000,
+            "Trigger": "Terrain"
+        },
+        "ProsperityLevel": 0
+    },
     "99": {
         "Name": "Magma Waders",
         "MaxCount": 1,
