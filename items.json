@@ -526,6 +526,19 @@
         "Consumed": 1,
         "ProsperityLevel": 6
     },
+    "53": {
+        "Name": "Black Knife",
+        "MaxCount": 2,
+        "Cost": 25,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "MeleeAttack",
+            "Buff": "AddCurse",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 7
+    },
     "76": {
         "Name": "Chain Hood",
         "MaxCount": 2,

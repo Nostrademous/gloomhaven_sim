@@ -1348,6 +1348,35 @@ def make_a_party():
     party.heroAdjustCheckmarks('Playgirl', 0)
     party.heroAdjustCheckmarks('Rabid Cicada', 1)
 
+
+    # Jan 21, 2019 - Session
+    party.heroSellItem('Rabid Cicada', 'Winged Shoes')
+    party.heroBuyItem('Rabid Cicada', 'Rocket Boots')
+    party.heroBuyItem('Playgirl', 'Piercing Bow')
+    party.heroSellItem('Hayha', 'Boots of Striding')
+    party.heroSellItem('Hayha', 'Drakescale Boots')
+    party.heroBuyItem('Hayha', 'Rocket Boots')
+    party.makeSanctuaryDonation('Rabid Cicada')
+
+    party.completeCityEvent(70)
+    party.adjustReputation(-1)
+    party.completeRoadEvent(35)
+
+    party.addTreasureLooted(41, 'Hayha')
+    party.heroFindItem('Hayha', 'Black Knife')
+    party.addScenarioCompleted(29)
+    party.addGlobalAchievement('The Edge of Darkness')
+
+    party.heroAdjustXP('Hayha', 33)
+    party.heroAdjustXP('Playgirl', 35)
+    party.heroAdjustXP('Rabid Cicada', 35)
+    party.heroAdjustGold('Hayha', 21)
+    party.heroAdjustGold('Playgirl', 3)
+    party.heroAdjustGold('Rabid Cicada', 30)
+    party.heroAdjustCheckmarks('Hayha', 1)
+    party.heroAdjustCheckmarks('Playgirl', 0)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+
     # UNSURE - do we unlock scenario 26????
 
     # Next Play Session
