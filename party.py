@@ -1377,6 +1377,47 @@ def make_a_party():
     party.heroAdjustCheckmarks('Playgirl', 0)
     party.heroAdjustCheckmarks('Rabid Cicada', 0)
 
+    party.heroLevelUp('Rabid Cicada', add_2_roll_plus_1, 'Watch It Burn')
+    party.heroLevelUp('Hayha', remove_2_minus_1, 'Swallowed By Fear')
+    party.heroLevelUp('Playgirl', add_2_roll_curse, '')
+
+    party.heroSellItem('Ignus', 'Major Healing Potion')
+    party.heroBuyItem('Hayha', 'Cloak of Invisibility')
+
+    # Play Session 28
+    party.completeCityEvent(24)
+    party.heroAdjustXP('Hayha', 10)
+    party.heroAdjustXP('Playgirl', 10)
+    party.heroAdjustXP('Rabid Cicada', 10)
+    party.heroAdjustXP('Singularity', 10)
+    party.heroAdjustXP('Ignus', 10)
+
+    party.completeRoadEvent(26)
+
+    party.addTreasureLooted(58, 'Singularity')
+    party.heroFindItem('Singularity', 'Drakescale Helm')
+
+    party.addScenarioCompleted(25)
+    party.addScenarioAvailable(33)
+    party.addScenarioAvailable(34)
+    party.addPartyAchievement("The Drake's Command")
+    party.heroAdjustXP('Hayha', 21)
+    party.heroAdjustXP('Playgirl', 18)
+    party.heroAdjustXP('Rabid Cicada', 18)
+    party.heroAdjustXP('Singularity', 21)
+    party.heroAdjustXP('Ignus', 18)
+    party.heroAdjustGold('Hayha', 24)
+    party.heroAdjustGold('Playgirl', 8)
+    party.heroAdjustGold('Rabid Cicada', 16)
+    party.heroAdjustGold('Singularity', 20)
+    party.heroAdjustGold('Ignus', 8)
+    party.heroAdjustCheckmarks('Hayha', 0)
+    party.heroAdjustCheckmarks('Playgirl', 0)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+    party.heroAdjustCheckmarks('Singularity', 1)
+    party.heroAdjustCheckmarks('Ignus', 1)
+    party.heroSellItem('Singularity', 'Drakescale Helm')
+
     # UNSURE - do we unlock scenario 26????
 
     # Next Play Session

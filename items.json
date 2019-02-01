@@ -819,6 +819,24 @@
         "Spent": 0,
         "ProsperityLevel": 0
     },
+    "108": {
+        "Name": "Drakescale Helm",
+        "MaxCount": 1,
+        "Cost": 35,
+        "Slot": "Head",
+        "Buff": {
+            "Type": "ConditionEffectBuff",
+            "Condition": {
+                "Type": "GainEffect",
+                "Value": "Strengthen"
+            },
+            "Count": 1,
+            "Buff": "ChangeMuddleToStrengthen",
+            "Trigger": "Game"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 0
+    },
     "113": {
         "Name": "Skullbane Axe",
         "MaxCount": 1,
