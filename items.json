@@ -539,6 +539,24 @@
         },
         "ProsperityLevel": 7
     },
+    "74": {
+        "Name": "Swordedge Armor",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "Body",
+        "AMDEffect": {
+            "Value": -1,
+            "Count": 4
+        },
+        "Buff": {
+            "Type": "ShieldAndRetaliate",
+            "Buff": "ShieldAndRetaliate",
+            "BuffValue": 1,
+            "Count": 3,
+            "Trigger": "Damage"
+        },
+        "ProsperityLevel": 0
+    },
     "76": {
         "Name": "Chain Hood",
         "MaxCount": 2,

@@ -955,7 +955,7 @@ def make_a_party():
     party.heroSellItem('Red', 'Minor Stamina Potion', adjGold=False)
 
     party.addScenarioCompleted(27)
-    party.addGlobalAchievement('A Rift Neutralized')
+    party.addGlobalAchievement('The Rift Neutralized')
     party.addProsperityCheckmark('Scenario 27 Completed')
     party.heroAdjustXP('Rabid Cicada', 17)
     party.heroAdjustXP('Red', 18)
@@ -1379,7 +1379,7 @@ def make_a_party():
 
     party.heroLevelUp('Rabid Cicada', add_2_roll_plus_1, 'Watch It Burn')
     party.heroLevelUp('Hayha', remove_2_minus_1, 'Swallowed By Fear')
-    party.heroLevelUp('Playgirl', add_2_roll_curse, '')
+    party.heroLevelUp('Playgirl', add_2_roll_curse, 'Accelerated End')
 
     party.heroSellItem('Ignus', 'Major Healing Potion')
     party.heroBuyItem('Hayha', 'Cloak of Invisibility')
@@ -1418,6 +1418,41 @@ def make_a_party():
     party.heroAdjustCheckmarks('Ignus', 1)
     party.heroSellItem('Singularity', 'Drakescale Helm')
 
+    # PLay Sesskon Feb 28
+    party.heroLevelUp('Singularity', add_1_plus_2_muddle, 'Lead to Slaughter')
+    party.heroLevelUp('Playgirl', replace_minus_1_with_plus_1, 'Black Tides')
+    party.heroBuyItem('Ignus', 'Winged Shoes')
+
+    party.completeCityEvent(49)
+    party.addProsperityCheckmark('City Event #49')
+
+    party.completeRoadEvent(32)
+    party.adjustReputation(-1)
+
+    party.addTreasureLooted(63, 'Singularity')
+    party.addItemDesign(74)
+
+    party.addScenarioCompleted(18)
+    party.addScenarioAvailable(14)
+    party.addScenarioAvailable(23)
+    party.addScenarioAvailable(26)
+    party.addScenarioAvailable(43)
+    party.heroAdjustXP('Hayha', 20)
+    party.heroAdjustXP('Playgirl', 15)
+    party.heroAdjustXP('Rabid Cicada', 20)
+    party.heroAdjustXP('Singularity', 30)
+    party.heroAdjustXP('Ignus', 20)
+    party.heroAdjustGold('Hayha', 72)
+    party.heroAdjustGold('Playgirl', 0)
+    party.heroAdjustGold('Rabid Cicada', 4)
+    party.heroAdjustGold('Singularity', 4)
+    party.heroAdjustGold('Ignus', 28)
+    party.heroAdjustCheckmarks('Hayha', 1)
+    party.heroAdjustCheckmarks('Playgirl', 2)
+    party.heroAdjustCheckmarks('Rabid Cicada', 1)
+    party.heroAdjustCheckmarks('Singularity', 1)
+    party.heroAdjustCheckmarks('Ignus', 1)
+    
     # UNSURE - do we unlock scenario 26????
 
     # Next Play Session
