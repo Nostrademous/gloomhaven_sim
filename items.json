@@ -870,6 +870,20 @@
         },
         "ProsperityLevel": 0
     },
+    "116": {
+        "Name": "Fueled Falchion",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "SingleTargetMelee",
+            "Count": 1,
+            "Buff": "TargetAndAdjecentEnemiesSufferOneDamage",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
     "121": {
         "Name": "Orb of Dawn",
         "MaxCount": 1,

@@ -1418,7 +1418,7 @@ def make_a_party():
     party.heroAdjustCheckmarks('Ignus', 1)
     party.heroSellItem('Singularity', 'Drakescale Helm')
 
-    # PLay Sesskon Feb 28
+    # PLay Session Feb 5
     party.heroLevelUp('Singularity', add_1_plus_2_muddle, 'Lead to Slaughter')
     party.heroLevelUp('Playgirl', replace_minus_1_with_plus_1, 'Black Tides')
     party.heroBuyItem('Ignus', 'Winged Shoes')
@@ -1452,7 +1452,38 @@ def make_a_party():
     party.heroAdjustCheckmarks('Rabid Cicada', 1)
     party.heroAdjustCheckmarks('Singularity', 1)
     party.heroAdjustCheckmarks('Ignus', 1)
+
+    # Catch Up from Missed Play Sessions
+    party.heroLevelUp("Ignus", add_3_0_fire, 'Eye of the Hurricane')
+    party.heroGainCheckmarkPerk("Ignus", add_1_0_at)
+    party.heroLevelUp("Hayha", add_2_roll_curse, 'Eyes of Night')
+    party.addEnhancement('Hayha', 264, "Top", 'Light', gold=100) # 
+    party.heroSellItem("Ignus", "Chainmail")
+    party.heroBuyItem("Ignus", "Swordedge Armor")
+    party.heroBuyItem("Rabid Cicada", "Jade Falcon")
     
+    party.completeCityEvent(29)
+    party.addProsperityCheckmark('City Event #29')
+    party.completeRoadEvent(3)
+    
+    party.addTreasureLooted(72, 'Rabid Cicada')
+    party.addItemDesign(116)
+
+    party.addScenarioCompleted(23)
+    party.heroAdjustXP('Hayha', 25)
+    party.heroAdjustXP('Playgirl', 15)
+    party.heroAdjustXP('Rabid Cicada', 0)
+    party.heroAdjustXP('Ignus', 19)
+    party.heroAdjustGold('Hayha', 20)
+    party.heroAdjustGold('Playgirl', 8)
+    party.heroAdjustGold('Rabid Cicada', 28)
+    party.heroAdjustGold('Ignus', 12)
+    party.heroAdjustCheckmarks('Hayha', 1)
+    party.heroAdjustCheckmarks('Playgirl', 1)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+    party.heroAdjustCheckmarks('Ignus', 0)
+
+
     # UNSURE - do we unlock scenario 26????
 
     # Next Play Session

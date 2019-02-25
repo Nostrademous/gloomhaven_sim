@@ -158,5 +158,21 @@
         "DeckSize": 9,
         "UnlockEvents": 34,
         "RetireEvents": 51
+    },
+    "BeastTyrant": {
+        "Health": {
+            "1": 6,
+            "2": 7,
+            "3": 8,
+            "4": 9,
+            "5": 10,
+            "6": 11,
+            "7": 12,
+            "8": 13,
+            "9": 14
+        },
+        "DeckSize": 10,
+        "UnlockEvents": 34,
+        "RetireEvents": 51
     }
 }

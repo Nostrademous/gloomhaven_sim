@@ -298,6 +298,17 @@ nightshroud_perk_deck = list([
     ignore_scen_perk_2_plus_1
 ])
 
+beasttyrant_perk_deck = list([
+    remove_2_minus_1,
+    replace_minus_1_with_plus_1, replace_minus_1_with_plus_1, replace_minus_1_with_plus_1,
+    replace_0_with_plus_2, replace_0_with_plus_2,
+    add_1_plus_1_wound, add_1_plus_1_wound,
+    add_1_plus_1_immobilize, add_1_plus_1_immobilize,
+    add_2_roll_heal1, add_2_roll_heal1, add_2_roll_heal1,
+    add_2_roll_earth,
+    ignore_scen_perk
+])
+
 def getPerkSelections(class_type):
     class_type = class_type.lower()
     if class_type == "brute":
@@ -322,6 +333,8 @@ def getPerkSelections(class_type):
         return plagueherald_perk_deck
     elif class_type == "nightshroud":
         return nightshroud_perk_deck 
+    elif class_type == "beasttyrant":
+        return beasttyrant_perk_deck
     else:
         raise Exception("[getPerkSelection]", "UNKNOWN CLASS TYPE")
 
@@ -368,4 +381,8 @@ if __name__ == "__main__":
     
     print('\nNightshroud')
     for perk in nightshroud_perk_deck:
+        print(perk)
+
+    print('\nBeast Tyrant')
+    for perk in beasttyrant_perk_deck:
         print(perk)
