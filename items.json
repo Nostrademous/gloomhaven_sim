@@ -766,6 +766,22 @@
         },
         "ProsperityLevel": 0
     },
+    "97": {
+        "Name": "Endurance Footwraps",
+        "MaxCount": 1,
+        "Cost": 40,
+        "Slot": "LEGS",
+        "Buff": {
+            "Type": "MoveHeal",
+            "Buff": "Heal",
+            "BuffValue": 1,
+            "ReqMoveDistance": 4,
+            "Count": 1000000,
+            "Trigger": "Game"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 0
+    },
     "98": {
         "Name": "Drakescale Boots",
         "MaxCount": 1,

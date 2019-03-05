@@ -1483,6 +1483,89 @@ def make_a_party():
     party.heroAdjustCheckmarks('Rabid Cicada', 0)
     party.heroAdjustCheckmarks('Ignus', 0)
 
+    party.retireHero(hero8)
+    party.unlockCityEvent(57)
+    party.unlockRoadEvent(57)
+    party.unlockHero("BeastTyrant")
+    party.unlockCityEvent(41)
+    party.unlockRoadEvent(41)
+    party.addEnhancement("Ignus", 464, 'Bottom', 'Strengthen', gold=125)
+
+    party.heroGainCheckmarkPerk("Hayha", add_1_plus_1_invis)
+    party.heroGainCheckmarkPerk("Playgirl", add_1_plus_1_air)
+    party.heroGainCheckmarkPerk("Singularity", add_1_plus_1_immobilize)
+
+    hero11 = ch.Character('RatManBearPig', 'BeastTyrant', owner4, level=1, gold=90, xp=210, quest=527)
+    hero11.addOwnerPerk(remove_2_minus_1)
+    hero11.addOwnerPerk(replace_minus_1_with_plus_1)
+    party.addMember(hero11)
+    party.heroLevelUp('RatManBearPig', replace_minus_1_with_plus_1, 'Energizing Strike')
+    party.heroLevelUp('RatManBearPig', replace_minus_1_with_plus_1, 'Unstoppable Beast')
+    party.heroLevelUp('RatManBearPig', add_1_plus_1_wound, 'Ancient Ward')
+    party.heroLevelUp('RatManBearPig', add_1_plus_1_wound, 'Punch Through')
+    party.heroBuyItem('RatManBearPig', 'Major Stamina Potion')
+    party.heroBuyItem('RatManBearPig', 'Winged Shoes')
+    party.heroBuyItem('RatManBearPig', 'Hawk Helm')
+
+    party.makeSanctuaryDonation('RatManBearPig')
+    party.makeSanctuaryDonation('Playgirl')
+    party.makeSanctuaryDonation('Singularity')
+
+    party.completeCityEvent(9)
+    party.addProsperityCheckmark('City Event #9')
+    party.completeRoadEvent(65)
+    party.adjustReputation(2)
+    party.addGlobalAchievement('Ancient Technology')
+
+    # Failed Scenario #38
+    party.addTreasureLooted(29, 'Singularity')
+    party.heroFindItem('Singularity', 'Endurance Footwraps') # Item #97
+
+    party.heroAdjustXP('Hayha', 12)
+    party.heroAdjustXP('Playgirl', 4)
+    party.heroAdjustXP('Rabid Cicada', 0)
+    party.heroAdjustXP('RatManBearPig', 9)
+    party.heroAdjustXP('Singularity', 0)
+    party.heroAdjustGold('Hayha', 12)
+    party.heroAdjustGold('Playgirl', 4)
+    party.heroAdjustGold('Rabid Cicada', 24)
+    party.heroAdjustGold('RatManBearPig', 4)
+    party.heroAdjustGold('Singularity', 8)
+    party.heroAdjustCheckmarks('Hayha', 0)
+    party.heroAdjustCheckmarks('Playgirl', 0)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+    party.heroAdjustCheckmarks('RatManBearPig', 0)
+    party.heroAdjustCheckmarks('Singularity', 0)
+
+    party.heroSellItem('Singularity', 'Endurance Footwraps')
+
+    # Mar 4, 2019 Session
+    party.completeCityEvent(22)
+    party.adjustReputation(2)
+    party.completeRoadEvent(5)
+    party.adjustReputation(1)
+
+    party.addTreasureLooted(49, 'Singularity')
+    party.addScenarioAvailable(17)
+
+    party.addScenarioCompleted(37)
+    party.addPartyAchievement('Through the Trench')
+    party.addScenarioAvailable(47)
+
+    party.heroAdjustXP('Hayha', 23)
+    party.heroAdjustXP('Playgirl', 12)
+    party.heroAdjustXP('RatManBearPig', 26)
+    party.heroAdjustXP('Singularity', 0)
+    party.heroAdjustGold('Hayha', 32)
+    party.heroAdjustGold('Playgirl', 12)
+    party.heroAdjustGold('RatManBearPig', 4)
+    party.heroAdjustGold('Singularity', 12)
+    party.heroAdjustCheckmarks('Hayha', 0)
+    party.heroAdjustCheckmarks('Playgirl', 0)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
+    party.heroAdjustCheckmarks('Singularity', 1)
+
+
 
     # UNSURE - do we unlock scenario 26????
 
