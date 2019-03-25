@@ -1517,27 +1517,32 @@ def make_a_party():
     party.adjustReputation(2)
     party.addGlobalAchievement('Ancient Technology')
 
-    # Failed Scenario #38
+    # Scenario #38
     party.addTreasureLooted(29, 'Singularity')
     party.heroFindItem('Singularity', 'Endurance Footwraps') # Item #97
 
-    party.heroAdjustXP('Hayha', 12)
-    party.heroAdjustXP('Playgirl', 4)
+    party.heroAdjustXP('Hayha', 24)
+    party.heroAdjustXP('Playgirl', 16)
     party.heroAdjustXP('Rabid Cicada', 0)
-    party.heroAdjustXP('RatManBearPig', 9)
+    party.heroAdjustXP('RatManBearPig', 21)
     party.heroAdjustXP('Singularity', 0)
     party.heroAdjustGold('Hayha', 12)
     party.heroAdjustGold('Playgirl', 4)
     party.heroAdjustGold('Rabid Cicada', 24)
     party.heroAdjustGold('RatManBearPig', 4)
     party.heroAdjustGold('Singularity', 8)
-    party.heroAdjustCheckmarks('Hayha', 0)
+    party.heroAdjustCheckmarks('Hayha', 1)
     party.heroAdjustCheckmarks('Playgirl', 0)
     party.heroAdjustCheckmarks('Rabid Cicada', 0)
-    party.heroAdjustCheckmarks('RatManBearPig', 0)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
     party.heroAdjustCheckmarks('Singularity', 0)
 
     party.heroSellItem('Singularity', 'Endurance Footwraps')
+    party.addScenarioCompleted(38)
+    party.addPartyAchievement("Redthorn's Aid")
+    party.addScenarioAvailable(44)
+    party.addScenarioAvailable(48)
+    party.adjustReputation(1)
 
     # Mar 4, 2019 Session
     party.completeCityEvent(22)
@@ -1566,6 +1571,57 @@ def make_a_party():
     party.heroAdjustCheckmarks('Singularity', 1)
 
 
+    # Scenario 57
+    party.heroLevelUp('Hayha', add_1_plus_1_invis, 'Gloom Darts')
+    
+    party.completeCityEvent(57)
+    party.heroAdjustGold('Hayha', -2)
+    party.heroAdjustGold('Playgirl', -2)
+    party.heroAdjustGold('Rabid Cicada', -2)
+    party.heroAdjustGold('RatManBearPig', -2)
+    party.heroAdjustGold('Singularity', -2)
+    party.addItemDesign(118)
+    party.heroSellItem('Hayha', 'Black Knife')
+    party.heroSellItem('Hayha', 'Minor Stamina Potion')
+    party.heroBuyItem('Hayha', 'Staff of Elements')
+    party.heroBuyItem('Hayha', 'Major Stamina Potion')
+    
+    party.completeRoadEvent(15)
+    party.addTreasureLooted(22, 'RatManBearPig')
+    party.addItemDesign(93)
+    party.addTreasureLooted(2, 'Playgirl')
+    party.heroFindItem("Playgirl", "Splintmail")
+    
+    party.addScenarioCompleted(57)
+    party.adjustReputation(1)
+    party.addScenarioAvailable(58)
+    party.heroAdjustXP('Hayha', 22)
+    party.heroAdjustXP('Playgirl', 15)
+    party.heroAdjustXP('RatManBearPig', 23)
+    party.heroAdjustXP('Singularity', 0)
+    party.heroAdjustXP('Rabid Cicada', 0)
+    party.heroAdjustGold('Hayha', 32)
+    party.heroAdjustGold('Playgirl', 4)
+    party.heroAdjustGold('RatManBearPig', 0)
+    party.heroAdjustGold('Singularity', 4)
+    party.heroAdjustGold('Rabid Cicada', 8)
+    party.heroAdjustCheckmarks('Hayha', 1)
+    party.heroAdjustCheckmarks('Playgirl', 0)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
+    party.heroAdjustCheckmarks('Singularity', 0)
+    party.heroAdjustCheckmarks('Rabid Cicada', 0)
+
+    party.heroLevelUp('RatManBearPig', ignore_scen_perk, 'Blood Hunger')
+    party.heroGainCheckmarkPerk('RatManBearPig', add_2_roll_heal1)
+
+    # Matt Solo Attempts
+    party.heroAdjustXP('RatManBearPig', 30)
+    party.heroAdjustGold('RatManBearPig', 6)
+    party.heroSellItem('RatManBearPig', 'Winged Shoes')
+    party.heroBuyItem('RatManBearPig', 'Boots of Speed')
+    party.heroAdjustXP('RatManBearPig', 31)
+    party.heroAdjustGold('RatManBearPig', 6)
+    party.heroFindItem('RatManBearPig', 'Staff of Command')
 
     # UNSURE - do we unlock scenario 26????
 

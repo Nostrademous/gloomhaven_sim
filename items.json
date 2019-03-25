@@ -193,6 +193,19 @@
         "Consumed": 1,
         "ProsperityLevel": 1
     },
+    "15": {
+        "Name": "Boots of Speed",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "Legs",
+        "Buff": {
+            "Type": "InitiativeChange",
+            "Count": 1,
+            "Buff": "+ or - 10",
+            "Trigger": "BeginningOfRound_Player"
+        },
+        "ProsperityLevel": 2
+    },
     "19": {
         "Name": "Weighted Net",
         "MaxCount": 2,
@@ -506,6 +519,23 @@
         },
         "ProsperityLevel": 6
     },
+    "44": {
+        "Name": "Splintmail",
+        "MaxCount": 2,
+        "Cost": 35,
+        "Slot": "Body",
+        "AMDEffect": {
+            "Value": -1,
+            "Count": 4
+        },
+        "Buff": {
+            "Type": "NextFew",
+            "Count": 4,
+            "Buff": "Shield_1",
+            "Trigger": "AttackDamage"
+        },
+        "ProsperityLevel": 6
+    },
     "45": {
         "Name": "Pendant of Dark Pacts",
         "MaxCount": 2,
@@ -752,6 +782,21 @@
         },
         "ProsperityLevel": 0
     },
+    "93": {
+        "Name": "Scroll of Power",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "AlliedAttackEnhancement",
+            "Buff": "AlliedEntireAttackAction",
+            "BuffValue": 1,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
     "96": {
         "Name": "Rocket Boots",
         "MaxCount": 2,
@@ -900,6 +945,20 @@
         "Consumed": 1,
         "ProsperityLevel": 0
     },
+    "118": {
+        "Name": "Staff of Elements",
+        "MaxCount": 2,
+        "Cost": 50,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "CreateElement",
+            "Count": 1,
+            "Buff": "CreateAnyElement",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
     "121": {
         "Name": "Orb of Dawn",
         "MaxCount": 1,
@@ -1034,6 +1093,19 @@
             "Trigger": "Doom"
         },
         "Spent": 0,
+        "ProsperityLevel": 0
+    },
+    "150": {
+        "Name": "Staff of Command",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "AdditionalCard",
+            "Buff": "PlaySameSide",
+            "Count": 1,
+            "Trigger": "Player"
+        },
         "ProsperityLevel": 0
     }
 }
