@@ -52,7 +52,7 @@ def calculateShopModifier(reputation):
         return 1
     elif reputation >= 7 and reputation <= 10:
         return -2
-    elif reputation >= -10 and reputatin <= -7:
+    elif reputation >= -10 and reputation <= -7:
         return 2
     elif reputation >= 11 and reputation <= 14:
         return -3

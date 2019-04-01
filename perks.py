@@ -25,13 +25,16 @@ _perk_type = {
 }
 
 class Perk():
-    def __init__(self, perkType, numCards=0, cardType1=None, cardType2=None):
+    def __init__(self, perkType, numCards=0, cardType1=None, cardType2=None, numCards2=0):
         assert str(perkType) in _perk_type.keys()
 
         self.perkType   = perkType
         self.numCards   = numCards
+        self.numCards2  = numCards2
         self.cardType1  = cardType1
         self.cardType2  = cardType2
+        if numCards2 == 0:
+            self.numCards2 = numCards
 
     def getJson(self):
         return str(self)
@@ -55,8 +58,8 @@ class Perk():
         if self.cardType1:
             ret += " %s" % (self.cardType1)
         if self.cardType2:
-            ret += " with %d %s" % (self.numCards, self.cardType2)
-        if self.numCards > 0:
+            ret += " with %d %s" % (self.numCards2, self.cardType2)
+        if self.numCards2 > 0:
             ret += " cards"
         return ret
 
@@ -73,6 +76,7 @@ ignore_scen_perk_2_plus_1 = Perk(PERK_TYPE_IGNORE_SCEN_2P1)
 
 remove_2_0              = Perk(PERK_TYPE_REMOVE, 2, amd.amc_0)
 remove_2_minus_1        = Perk(PERK_TYPE_REMOVE, 2, amd.amc_m1)
+remove_1_minus_2        = Perk(PERK_TYPE_REMOVE, 1, amd.amc_m2)
 remove_4_0              = Perk(PERK_TYPE_REMOVE, 4, amd.amc_0)
 
 replace_minus_2_with_0          = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m2, amd.amc_0)
@@ -80,10 +84,13 @@ replace_minus_1_with_plus_1     = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m1, amd.amc
 replace_0_with_plus_2           = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p2)
 replace_2_0_with_2_plus_1       = Perk(PERK_TYPE_REPLACE, 2, amd.amc_0, amd.amc_p1)
 replace_2_plus_1_with_2_plus_2  = Perk(PERK_TYPE_REPLACE, 2, amd.amc_p1, amd.amc_p2)
+replace_2_plus_1_with_1_plus_4  = Perk(PERK_TYPE_REPLACE, 2, amd.amc_p1, amd.amc_p4, 1)
 
 add_2_plus_1            = Perk(PERK_TYPE_ADD, 2, amd.amc_p1)
 add_2_plus_1_push1      = Perk(PERK_TYPE_ADD, 2, amd.amc_plus_1_push1)
 add_2_roll_plus_1       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_p1)
+add_3_roll_plus_1       = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_p1)
+add_1_plus_2            = Perk(PERK_TYPE_ADD, 1, amd.amc_p2)
 add_1_plus_3            = Perk(PERK_TYPE_ADD, 1, amd.amc_p3)
 
 add_1_minus_2           = Perk(PERK_TYPE_ADD, 1, amd.amc_m2)
@@ -101,11 +108,20 @@ add_2_roll_muddle       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_muddle)
 add_3_roll_muddle       = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_muddle)
 add_2_roll_poison       = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_poison)
 add_3_roll_poison       = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_poison)
+add_2_roll_wound        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_wound)
 add_2_roll_curse        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_curse)
 add_1_plus_1_immobilize = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_immobilize)
 add_1_plus_1_wound      = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_wound)
 add_2_roll_pierce3      = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_pierce_3)
 add_2_roll_immobilize   = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_immobilize)
+
+replace_0_with_plus_1_immobilize = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p1_immobilize)
+replace_0_with_plus_1_disarm    = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p1_disarm)
+replace_0_with_plus_2_wound     = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p2_wound)
+replace_0_with_plus_2_poison    = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_2_poison)
+replace_0_with_plus_2_curse     = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_2_curse)
+replace_0_with_plus_3_muddle    = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_3_muddle)
+replace_1_minus_1_with_1_stun   = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m1, amd.amc_0_stun)
 
 add_3_roll_push1        = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_push1)
 add_2_roll_push2        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_push2)
@@ -114,6 +130,7 @@ add_3_roll_pull1        = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_pull1)
 add_2_roll_heal1        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_heal1)
 
 # elemental based
+add_1_roll_fire         = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_fire)
 add_1_roll_air          = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_air)
 add_2_roll_air          = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_air)
 add_1_roll_dark         = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_dark)
@@ -309,6 +326,34 @@ beasttyrant_perk_deck = list([
     ignore_scen_perk
 ])
 
+summoner_perk_deck = list([
+    remove_2_minus_1,
+    replace_minus_2_with_0,
+    replace_minus_1_with_plus_1, replace_minus_1_with_plus_1, replace_minus_1_with_plus_1,
+    add_1_plus_2, add_1_plus_2,
+    add_2_roll_wound, add_2_roll_wound,
+    add_2_roll_poison, add_2_roll_poison,
+    add_2_roll_heal1, add_2_roll_heal1, add_2_roll_heal1,
+    [add_1_roll_fire, add_1_roll_air],
+    [add_1_roll_dark, add_1_roll_earth],
+    ignore_scen_perk_2_plus_1
+])
+
+soothsinger_perk_deck = list([
+    remove_2_minus_1, remove_2_minus_1,
+    remove_1_minus_2,
+    replace_2_plus_1_with_1_plus_4, replace_2_plus_1_with_1_plus_4,
+    replace_0_with_plus_1_immobilize,
+    replace_0_with_plus_1_disarm,
+    replace_0_with_plus_2_wound,
+    replace_0_with_plus_2_poison,
+    replace_0_with_plus_2_curse,
+    replace_0_with_plus_3_muddle,
+    replace_1_minus_1_with_1_stun,
+    add_3_roll_plus_1,
+    add_2_roll_curse, add_2_roll_curse
+])
+
 def getPerkSelections(class_type):
     class_type = class_type.lower()
     if class_type == "brute":
@@ -335,6 +380,10 @@ def getPerkSelections(class_type):
         return nightshroud_perk_deck 
     elif class_type == "beasttyrant":
         return beasttyrant_perk_deck
+    elif class_type == "summoner":
+        return summoner_perk_deck
+    elif class_type == "soothsinger":
+        return soothsinger_perk_deck
     else:
         raise Exception("[getPerkSelection]", "UNKNOWN CLASS TYPE")
 
@@ -385,4 +434,12 @@ if __name__ == "__main__":
 
     print('\nBeast Tyrant')
     for perk in beasttyrant_perk_deck:
+        print(perk)
+
+    print('\nSummoner')
+    for perk in summoner_perk_deck:
+        print(perk)
+
+    print('\nSoothsinger')
+    for perk in soothsinger_perk_deck:
         print(perk)

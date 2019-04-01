@@ -1623,6 +1623,60 @@ def make_a_party():
     party.heroAdjustGold('RatManBearPig', 6)
     party.heroFindItem('RatManBearPig', 'Staff of Command')
 
+    # Play Session - March 25, 2019
+    party.makeSanctuaryDonation('Singularity')
+    party.retireHero(hero6)
+    party.unlockCityEvent(55)
+    party.unlockRoadEvent(55)
+    party.unlockHero("Summoner")
+    party.addEnhancement("Singularity", 387, 'Bottom', '+1 Move', gold=30)
+    party.addEnhancement("Singularity", 396, 'Bottom', '+1 Move', gold=105) # 30 (for +1 Move) + 75 (level 4)
+    party.addEnhancement("Singularity", 390, 'Bottom', '+1 Move', gold=30)
+
+    # QUEST ###????!!!!
+    party.heroSellItem('Playgirl', 'Minor Stamina Potion')
+    party.heroBuyItem('Playgirl', 'Major Stamina Potion')
+    hero12 = ch.Character('Snickers', 'Mindthief', owner1, level=1, gold=90, xp=210, quest=532)
+    hero12.addOwnerPerk(remove_2_minus_1)
+    hero12.addOwnerPerk(remove_2_minus_1)
+    party.addMember(hero12)
+    party.heroLevelUp('Snickers', replace_minus_2_with_0, 'Hostile Takeover')
+    party.heroLevelUp('Snickers', ignore_scen_perk, 'Brian Leech')
+    party.heroLevelUp('Snickers', add_2_roll_plus_1, 'Pilfer')
+    party.heroLevelUp('Snickers', remove_4_0, 'Mass Hysteria')
+    party.heroBuyItem('Snickers', 'Minor Stamina Potion')
+    party.heroBuyItem('Snickers', 'Winged Shoes')
+    party.heroBuyItem('Snickers', 'Cloak of Invisibility')
+    party.heroBuyItem('Snickers', 'Stun Powder')
+    party.heroBuyItem('Snickers', 'Eagle-Eye Goggles')
+
+    party.makeSanctuaryDonation('Hayha')
+    party.completeCityEvent(3)
+    party.heroAdjustGold('Hayha', -10)
+    party.addGlobalAchievement('Ancient Technology')
+    #party.heroFindItem('Hayha', 'Curious Gear') # 123
+    party.completeRoadEvent(57)
+    party.addScenarioCompleted(58)
+    party.adjustReputation(2)
+    party.heroAdjustXP('Hayha', 20)
+    party.heroAdjustXP('Playgirl', 16)
+    party.heroAdjustXP('RatManBearPig', 20)
+    party.heroAdjustXP('Snickers', 19)
+    party.heroAdjustXP('Rabid Cicada', 0)
+    party.heroAdjustGold('Hayha', 28)
+    party.heroAdjustGold('Playgirl', 4)
+    party.heroAdjustGold('RatManBearPig', 8)
+    party.heroAdjustGold('Snickers', 20)
+    party.heroAdjustGold('Rabid Cicada', 0)
+    party.heroAdjustCheckmarks('Hayha', 1)
+    party.heroAdjustCheckmarks('Playgirl', 1)
+    party.heroAdjustCheckmarks('RatManBearPig', 0)
+    party.heroAdjustCheckmarks('Snickers', 2)
+    party.heroAdjustCheckmarks('Rabid Cicada', 1)
+
+    party.retireHero(hero5)
+
+    party.heroLevelUp('RatManBearPig', add_2_roll_heal1, 'Tyrannical Force')
     # UNSURE - do we unlock scenario 26????
 
     # Next Play Session
