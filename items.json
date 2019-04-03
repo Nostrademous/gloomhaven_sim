@@ -782,6 +782,21 @@
         },
         "ProsperityLevel": 0
     },
+    "91": {
+        "Name": "Steel Ring",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "DamageMitigation",
+            "Buff": "GainShield",
+            "BuffValue": 4,
+            "Count": 1,
+            "Trigger": "Damage"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
     "93": {
         "Name": "Scroll of Power",
         "MaxCount": 2,
@@ -1015,6 +1030,20 @@
             "Type": "EnemyControl",
             "ControlType": "Move",
             "ControlRange": 5,
+            "Buff": 2,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
+    "125": {
+        "Name": "Curious Gear",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "TrapDisarm",
             "Buff": 2,
             "Count": 1,
             "Trigger": "Player"

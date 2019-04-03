@@ -1645,7 +1645,7 @@ def make_a_party():
     party.heroLevelUp('Snickers', add_2_roll_plus_1, 'Pilfer')
     party.heroLevelUp('Snickers', remove_4_0, 'Mass Hysteria')
     party.heroBuyItem('Snickers', 'Minor Stamina Potion')
-    party.heroBuyItem('Snickers', 'Winged Shoes')
+    party.heroBuyItem('Snickers', 'Boots of Striding')
     party.heroBuyItem('Snickers', 'Cloak of Invisibility')
     party.heroBuyItem('Snickers', 'Stun Powder')
     party.heroBuyItem('Snickers', 'Eagle-Eye Goggles')
@@ -1654,7 +1654,7 @@ def make_a_party():
     party.completeCityEvent(3)
     party.heroAdjustGold('Hayha', -10)
     party.addGlobalAchievement('Ancient Technology')
-    #party.heroFindItem('Hayha', 'Curious Gear') # 123
+    party.heroFindItem('RatManBearPig', 'Curious Gear') # 123
     party.completeRoadEvent(57)
     party.addScenarioCompleted(58)
     party.adjustReputation(2)
@@ -1675,8 +1675,52 @@ def make_a_party():
     party.heroAdjustCheckmarks('Rabid Cicada', 1)
 
     party.retireHero(hero5)
+    party.makeSanctuaryDonation('Rabid Cicada')
+    party.makeSanctuaryDonation('Snickers')
+    
+    hero13 = ch.Character('Ragnarok', 'summoner', owner5, level=1, gold=105, xp=275, quest=514)
+    hero13.addOwnerPerk(remove_2_minus_1)
+    party.addMember(hero13)
+    party.heroLevelUp('Ragnarok', replace_minus_2_with_0, 'Grasping The Void')
+    party.heroLevelUp('Ragnarok', replace_minus_1_with_plus_1, 'Earthen Steed')
+    party.heroLevelUp('Ragnarok', replace_minus_1_with_plus_1, 'Divided Mind')
+    party.heroLevelUp('Ragnarok', replace_minus_1_with_plus_1, 'Strength In Numbers')
+    party.heroLevelUp('Ragnarok', ignore_scen_perk_2_plus_1, 'Endless Spikes')
+    party.heroBuyItem('Ragnarok', 'Major Stamina Potion')
+    party.heroBuyItem('Ragnarok', 'Boots of Quickness')
+    party.unlockCityEvent(33)
+    party.unlockRoadEvent(33)
 
     party.heroLevelUp('RatManBearPig', add_2_roll_heal1, 'Tyrannical Force')
+    
+    party.completeCityEvent(33)
+    party.adjustReputation(2)
+    
+    party.completeRoadEvent(21)
+    
+    party.addTreasureLooted(73, 'Hayha')
+    party.addItemDesign(91) # Steel Ring
+
+    party.addScenarioCompleted(39)
+    party.addPartyAchievement('Across the Divide')
+    party.addScenarioAvailable(15)
+    party.addScenarioAvailable(46)
+
+    party.heroAdjustXP('Hayha', 37)
+    party.heroAdjustXP('RatManBearPig', 38)
+    party.heroAdjustXP('Snickers', 34)
+    party.heroAdjustXP('Ragnarok', 37)
+    party.heroAdjustGold('Hayha', 12)
+    party.heroAdjustGold('RatManBearPig', 4)
+    party.heroAdjustGold('Snickers', 28)
+    party.heroAdjustGold('Ragnarok', 20)
+    party.heroAdjustCheckmarks('Hayha', 1)
+    party.heroAdjustCheckmarks('RatManBearPig', 0)
+    party.heroAdjustCheckmarks('Snickers', 1)
+    party.heroAdjustCheckmarks('Ragnarok', 1)
+    
+    # Next Session
+    
     # UNSURE - do we unlock scenario 26????
 
     # Next Play Session

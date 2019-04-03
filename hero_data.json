@@ -11,7 +11,8 @@
             "8": 24,
             "9": 26
         },
-        "DeckSize": 10
+        "DeckSize": 10,
+        "RetireEvents": 42 
     },
     "Scoundrel": {
         "Health": {
@@ -25,7 +26,8 @@
             "8": 18,
             "9": 20
         },
-        "DeckSize": 9
+        "DeckSize": 9,
+        "RetireEvents": 45
     },
     "Cragheart": {
         "Health": {
@@ -39,7 +41,8 @@
             "8": 24,
             "9": 26
         },
-        "DeckSize": 11
+        "DeckSize": 11,
+        "RetireEvents": 46
     },
     "Mindthief": {
         "Health": {
@@ -53,7 +56,8 @@
             "8": 13,
             "9": 14
         },
-        "DeckSize": 10
+        "DeckSize": 10,
+        "RetireEvents": 47
     },
     "Spellweaver": {
         "Health": {
@@ -67,7 +71,8 @@
             "8": 13,
             "9": 14
         },
-        "DeckSize": 8
+        "DeckSize": 8,
+        "RetireEvents": 44
     },
     "Tinkerer": {
         "Health": {
@@ -81,7 +86,8 @@
             "8": 18,
             "9": 20
         },
-        "DeckSize": 12
+        "DeckSize": 12,
+        "RetireEvents": 43
     },
     "Doomstalker": {
         "Health": {
@@ -95,7 +101,9 @@
             "8": 18,
             "9": 20
         },
-        "DeckSize": 12
+        "DeckSize": 12,
+        "UnlockEvents": 38,
+        "RetireEvents": 55
     },
     "Quartermaster": {
         "Health": {
