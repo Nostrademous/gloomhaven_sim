@@ -206,6 +206,20 @@
         },
         "ProsperityLevel": 2
     },
+    "17": {
+        "Name": "Empowering Talisman",
+        "MaxCount": 2,
+        "Cost": 45,
+        "Slot": "HEAD",
+        "Buff": {
+            "Type": "RefreshConsumedItem",
+            "Count": 1,
+            "Buff": "Consumed",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 2
+    },
     "19": {
         "Name": "Weighted Net",
         "MaxCount": 2,
@@ -383,7 +397,7 @@
         "ProsperityLevel": 4
     },
     "35": {
-        "Name": "Jade Falcon",
+        "Name": "Falcon Figurine",
         "MaxCount": 2,
         "Cost": 50,
         "Slot": "SMALL_ITEM",

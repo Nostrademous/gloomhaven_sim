@@ -217,6 +217,7 @@ class Party():
         for done in self.party_json['CompletedCityEvents']:
             #print("Removing City Event: %s" % str(done))
             pool.remove(done)
+        self.party_json['UnlockedCityEvents'] = pool
         drawn = pickRandom(pool)
         #self.completeCityEvent(drawn)
         return drawn
@@ -226,7 +227,9 @@ class Party():
         for unlocked in self.party_json['UnlockedRoadEvents']:
             pool.append(unlocked)
         for done in self.party_json['CompletedRoadEvents']:
-            pool.remove(done)
+            if done != 999:
+                pool.remove(done)
+        self.party_json['UnlockedRoadEvents'] = pool
         drawn = pickRandom(pool)
         #self.completeRoadEvent(drawn)
         return drawn
@@ -1460,7 +1463,7 @@ def make_a_party():
     party.addEnhancement('Hayha', 264, "Top", 'Light', gold=100) # 
     party.heroSellItem("Ignus", "Chainmail")
     party.heroBuyItem("Ignus", "Swordedge Armor")
-    party.heroBuyItem("Rabid Cicada", "Jade Falcon")
+    party.heroBuyItem("Rabid Cicada", "Falcon Figurine")
     
     party.completeCityEvent(29)
     party.addProsperityCheckmark('City Event #29')
@@ -1718,10 +1721,107 @@ def make_a_party():
     party.heroAdjustCheckmarks('RatManBearPig', 0)
     party.heroAdjustCheckmarks('Snickers', 1)
     party.heroAdjustCheckmarks('Ragnarok', 1)
+
+    # Session Apr 8
+    party.heroLevelUp('Hayha', add_1_roll_at, 'Angel of Death')
+    party.heroGainCheckmarkPerk('Hayha', remove_4_0)
+    party.heroGainCheckmarkPerk('Snickers', add_2_roll_plus_1)
+
+    party.completeCityEvent(32)
+    party.adjustReputation(1)
     
+    # Accidental redo of 32
+    party.completeRoadEvent(999)
+    party.heroAdjustGold('Hayha', -5)
+    party.heroAdjustGold('Playgirl', -5)
+    party.heroAdjustGold('Ragnarok', -5)
+    party.adjustReputation(1)
+    
+    party.addTreasureLooted(71, 'Hayha')
+    party.addScenarioAvailable(65)
+
+    party.addScenarioCompleted(17)
+
+    party.heroAdjustXP('Hayha', 0)
+    party.heroAdjustXP('Playgirl', 17)
+    party.heroAdjustXP('Ragnarok', 17)
+    party.heroAdjustGold('Hayha', 82)
+    party.heroAdjustGold('Playgirl', 40)
+    party.heroAdjustGold('Ragnarok', 37)
+    party.heroAdjustCheckmarks('Hayha', 1)
+    party.heroAdjustCheckmarks('Playgirl', 1)
+    party.heroAdjustCheckmarks('Ragnarok', 1)
+
+    # Play Session - Apr 15
+    party.heroLevelUp('Playgirl', replace_0_with_plus_2, 'Baneful Hex')
+    party.heroSellItem('RatManBearPig', 'Curious Gear')
+    party.heroBuyItem('RatManBearPig', 'Ring of Haste')
+    party.heroBuyItem('Ragnarok', 'Falcon Figurine')
+    party.heroBuyItem('RatManBearPig', 'Moon Earring')
+
+    party.completeCityEvent(38)
+    party.addProsperityCheckmark('City Event #38')
+
+    party.completeRoadEvent(13)
+
+    party.addScenarioCompleted(15)
+
+    party.heroAdjustXP('Snickers', 50)
+    party.heroAdjustXP('Playgirl', 38)
+    party.heroAdjustXP('Ragnarok', 46)
+    party.heroAdjustXP('RatManBearPig', 52)
+    party.heroAdjustGold('Snickers', 16)
+    party.heroAdjustGold('Playgirl', 8)
+    party.heroAdjustGold('Ragnarok', 16)
+    party.heroAdjustGold('RatManBearPig', 8)
+    party.heroAdjustCheckmarks('Snickers', 0)
+    party.heroAdjustCheckmarks('Playgirl', 0)
+    party.heroAdjustCheckmarks('Ragnarok', 0)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
+
     # Next Session
+    party.heroLevelUp('RatManBearPig', add_2_roll_heal1, 'Last Out')
+    party.heroLevelUp('Playgirl', replace_0_with_plus_2, 'Spreading Scourge')
+    party.heroLevelUp('Ragnarok', add_1_plus_2, 'Negative Energy')
+    party.heroLevelUp('Snickers', replace_2_plus_1_with_2_plus_2, 'Corrupting Embrace')
+    party.heroBuyItem('Hayha', 'Empowering Talisman')
+
+    party.completeCityEvent(46)
+    party.heroAdjustGold('Hayha', -5)
+    party.heroAdjustGold('Playgirl', -5)
+    party.heroAdjustGold('Ragnarok', -5)
+    party.heroAdjustGold('Snickers', -5)
+    party.heroAdjustGold('RatManBearPig', -5)
+    party.adjustReputation(1)
+    party.makeSanctuaryDonation('Hayha')
+
+    party.completeRoadEvent(44)
+    party.addScenarioAvailable(90)
+
+    party.addTreasureLooted(66, 'Hayha')
+    party.heroFindItem('Ragnarok', 'Volatile Bomb')
     
-    # UNSURE - do we unlock scenario 26????
+    party.addScenarioCompleted(26)
+    party.addPartyAchievement('Following Clues')
+    party.addScenarioAvailable(22)
+    party.adjustReputation(1)
+    party.addProsperityCheckmark('Scenario 26', cnt=2)
+
+    party.heroAdjustXP('Snickers', 27)
+    party.heroAdjustXP('Playgirl', 19)
+    party.heroAdjustXP('Ragnarok', 27)
+    party.heroAdjustXP('RatManBearPig', 26)
+    party.heroAdjustXP('Hayha', 0)
+    party.heroAdjustGold('Snickers', 22)
+    party.heroAdjustGold('Playgirl', 18)
+    party.heroAdjustGold('Ragnarok', 22)
+    party.heroAdjustGold('RatManBearPig', 22)
+    party.heroAdjustGold('Hayha', 30)
+    party.heroAdjustCheckmarks('Snickers', 0)
+    party.heroAdjustCheckmarks('Playgirl', 0)
+    party.heroAdjustCheckmarks('Ragnarok', 0)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
+    party.heroAdjustCheckmarks('Hayha', 1)
 
     # Next Play Session
     randScenario = party.drawRandomScenario()
