@@ -826,6 +826,22 @@
         "Consumed": 1,
         "ProsperityLevel": 0
     },
+    "94": {
+        "Name": "Scroll of Healing",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "RangedHeal",
+            "Buff": "Heal",
+            "BuffValue": 3,
+            "Range": 5,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
     "96": {
         "Name": "Rocket Boots",
         "MaxCount": 2,
@@ -943,6 +959,20 @@
             "Trigger": "Game"
         },
         "Spent": 0,
+        "ProsperityLevel": 0
+    },
+    "112": {
+        "Name": "Ancient Drill",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "MeleeAttack",
+            "Count": 1,
+            "Buff": "Plus2Pierce2",
+            "Trigger": "Attack"
+        },
+        "Consumed": 1,
         "ProsperityLevel": 0
     },
     "113": {
@@ -1073,6 +1103,21 @@
         "Buff": {
             "Type": "LootAction",
             "Buff": 1,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
+    "128": {
+        "Name": "Black Censer",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "DebuffAllEnemies",
+            "Buff": "Muddle",
+            "Range": 2,
             "Count": 1,
             "Trigger": "Player"
         },

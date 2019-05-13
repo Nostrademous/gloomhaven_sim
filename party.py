@@ -1824,6 +1824,107 @@ def make_a_party():
     party.heroAdjustCheckmarks('Hayha', 1)
 
     # Next Play Session
+    party.completeCityEvent(13)
+    party.heroAdjustGold('Hayha', -3)
+    party.heroAdjustGold('Snickers', -3)
+    party.heroAdjustGold('RatManBearPig', -3)
+    party.makeSanctuaryDonation('Hayha')
+    party.makeSanctuaryDonation('Snickers')
+
+    party.completeRoadEvent(22)
+    party.unlockCityEvent(74)
+
+    party.addScenarioCompleted(65)
+    party.addGlobalAchievement('Ancient Technology')
+    party.addItemDesign(112)
+    party.heroAdjustXP('Snickers', 19)
+    party.heroAdjustXP('RatManBearPig', 28)
+    party.heroAdjustXP('Hayha', 0)
+    party.heroAdjustGold('Snickers', 28)
+    party.heroAdjustGold('RatManBearPig', 28)
+    party.heroAdjustGold('Hayha', 12)
+    party.heroAdjustCheckmarks('Snickers', 0)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
+    party.heroAdjustCheckmarks('Hayha', 0)
+
+
+    party.heroLevelUp('RatManBearPig', replace_0_with_plus_2, 'Jaws of Death')
+    party.heroGainCheckmarkPerk('RatManBearPig', replace_0_with_plus_2)
+
+    party.retireHero(hero10)
+    party.unlockCityEvent(51)
+    party.unlockRoadEvent(51)
+    party.retireHero(hero12)
+    party.unlockCityEvent(47)
+    party.unlockRoadEvent(47)
+    party.unlockHero('Soothsinger')
+
+    party.addEnhancement('Hayha', 273, 'Bottom', 'Create Any Element', gold=250)
+    party.addEnhancement('Snickers', 153, 'Top', '+1 Move', gold=30)
+    party.addEnhancement('Snickers', 154, 'Bottom', 'Poison', gold=75)
+    party.addEnhancement('Snickers', 149, 'Bottom', '+1 Move', gold=30)
+    
+    hero14 = ch.Character('Drop', 'soothsinger', owner1, level=1, gold=105, xp=275, quest=999)
+    hero14.addOwnerPerk(remove_2_minus_1)
+    hero14.addOwnerPerk(remove_2_minus_1)
+    hero14.addOwnerPerk(remove_1_minus_2)
+    party.addMember(hero14)
+    party.heroLevelUp('Drop', replace_2_plus_1_with_1_plus_4, 'Change Tempo')
+    party.heroLevelUp('Drop', replace_2_plus_1_with_1_plus_4, 'Echoing Aria')
+    party.heroLevelUp('Drop', replace_0_with_plus_3_muddle, 'Disorienting Dirge')
+    party.heroLevelUp('Drop', replace_0_with_plus_2_poison, 'Mobilizing Measure')
+    party.heroLevelUp('Drop', replace_0_with_plus_2_wound, 'Provoke Terror')
+    party.heroBuyItem('Drop', 'Cloak of Invisibility')
+    party.heroBuyItem('Drop', 'Boots of Striding')
+    party.heroBuyItem('Drop', 'Giant Remote Spider')
+    party.heroBuyItem('Drop', 'Minor Stamina Potion')
+    party.unlockCityEvent(37)
+    party.unlockRoadEvent(37)
+
+    hero15 = ch.Character('Bucky', 'elementalist', owner2, level=1, gold=105, xp=275, quest=998)
+    hero15.addOwnerPerk(remove_2_minus_1)
+    hero15.addOwnerPerk(remove_2_minus_1)
+    hero15.addOwnerPerk([remove_2_0, add_1_0_fire, add_1_0_earth])
+    party.addMember(hero15)
+    party.heroLevelUp('Bucky', [remove_2_0, add_1_0_ice, add_1_0_air], 'Crystallizing Blast')
+    party.heroLevelUp('Bucky', add_3_0_fire, 'Boiling Arc')
+    party.heroLevelUp('Bucky', add_3_0_earth, 'Gravel Vortex')
+    party.heroLevelUp('Bucky', add_3_0_ice, 'Obsidian Shards')
+    party.heroLevelUp('Bucky', add_3_0_air, 'Simulacrum')
+    party.heroBuyItem('Bucky', 'Rocket Boots')
+    party.heroBuyItem('Bucky', 'Minor Stamina Potion')
+
+    # Play Session May 6
+    party.heroBuyItem('RatManBearPig', 'Robes of Summoning')
+    party.completeCityEvent(12)
+    party.heroAdjustGold('Bucky', 10)
+    party.heroAdjustGold('Ragnarok', 10)
+    party.heroAdjustGold('RatManBearPig', 10)
+    party.heroAdjustCheckmarks('Bucky', -1)
+    party.heroAdjustCheckmarks('Ragnarok', -1)
+    party.heroAdjustCheckmarks('RatManBearPig', -1)
+    party.adjustReputation(1)
+
+    party.completeRoadEvent(51)
+    # TODO <-- ???
+    
+    #party.addTreasureLooted()
+    party.addItemDesign(94)
+
+    party.addScenarioCompleted(90)
+    party.heroAdjustXP('Bucky', 17)
+    party.heroAdjustXP('RatManBearPig', 0)
+    party.heroAdjustXP('Ragnarok', 21)
+    party.heroAdjustGold('Bucky', 4)
+    party.heroAdjustGold('RatManBearPig', 20)
+    party.heroAdjustGold('Ragnarok', 8)
+    party.heroAdjustCheckmarks('Bucky', 0)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
+    party.heroAdjustCheckmarks('Ragnarok', 1)
+    party.heroFindItem('RatManBearPig', 'Black Censer')
+
+
+    # Next Play Session
     randScenario = party.drawRandomScenario()
     print("Randomed Scenario Event: %d" % randScenario)
 
