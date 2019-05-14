@@ -570,6 +570,22 @@
         "Consumed": 1,
         "ProsperityLevel": 6
     },
+    "49": {
+        "Name": "Sun Earring",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "RefreshItems_Heal3",
+            "RefreshedItemType": "SMALL_ITEM",
+            "NumRefreshedItems": 100,
+            "Target": "Self",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 6
+    },
     "53": {
         "Name": "Black Knife",
         "MaxCount": 2,
@@ -1118,6 +1134,20 @@
             "Type": "DebuffAllEnemies",
             "Buff": "Muddle",
             "Range": 2,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
+    "129": {
+        "Name": "Black Card",
+        "MaxCount": 1,
+        "Cost": 75,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "EnemyDebuff",
+            "Buff": "+1 To All Attacks Targeting Enemy",
             "Count": 1,
             "Trigger": "Player"
         },

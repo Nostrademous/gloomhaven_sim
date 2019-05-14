@@ -1864,7 +1864,7 @@ def make_a_party():
     party.addEnhancement('Snickers', 154, 'Bottom', 'Poison', gold=75)
     party.addEnhancement('Snickers', 149, 'Bottom', '+1 Move', gold=30)
     
-    hero14 = ch.Character('Drop', 'soothsinger', owner1, level=1, gold=105, xp=275, quest=999)
+    hero14 = ch.Character('Drop', 'soothsinger', owner1, level=1, gold=105, xp=275, quest=519)
     hero14.addOwnerPerk(remove_2_minus_1)
     hero14.addOwnerPerk(remove_2_minus_1)
     hero14.addOwnerPerk(remove_1_minus_2)
@@ -1881,7 +1881,7 @@ def make_a_party():
     party.unlockCityEvent(37)
     party.unlockRoadEvent(37)
 
-    hero15 = ch.Character('Bucky', 'elementalist', owner2, level=1, gold=105, xp=275, quest=998)
+    hero15 = ch.Character('Bucky', 'elementalist', owner2, level=1, gold=105, xp=275, quest=513)
     hero15.addOwnerPerk(remove_2_minus_1)
     hero15.addOwnerPerk(remove_2_minus_1)
     hero15.addOwnerPerk([remove_2_0, add_1_0_fire, add_1_0_earth])
@@ -1906,9 +1906,9 @@ def make_a_party():
     party.adjustReputation(1)
 
     party.completeRoadEvent(51)
-    # TODO <-- ???
+    party.heroFindItem('Bucky', 'Black Card')
     
-    #party.addTreasureLooted()
+    party.addTreasureLooted(19)
     party.addItemDesign(94)
 
     party.addScenarioCompleted(90)
@@ -1922,7 +1922,54 @@ def make_a_party():
     party.heroAdjustCheckmarks('RatManBearPig', 1)
     party.heroAdjustCheckmarks('Ragnarok', 1)
     party.heroFindItem('RatManBearPig', 'Black Censer')
+    party.heroSellItem('Bucky', 'Black Card')
 
+    # May 13 Play Session
+    party.heroBuyItem('Bucky', 'Minor Mana Potion')
+    party.heroBuyItem('Bucky', 'Moon Earring')
+    party.heroBuyItem('Bucky', 'Staff of Elements')
+    party.heroSellItem('RatManBearPig', 'Black Censer')
+    party.heroBuyItem('RatManBearPig', 'Sun Earring')
+    party.heroLevelUp('Ragnarok', [add_1_roll_dark, add_1_roll_earth], 'Otherworldly Rage')
+    party.heroBuyItem('Ragnarok', 'Ring of Skulls')
+    party.makeSanctuaryDonation('RatManBearPig')
+    
+    party.completeCityEvent(47)
+    party.adjustReputation(-1)
+    party.addScenarioAvailable(87)
+    party.addPartyAchievement("The Poison's Source")
+
+    party.completeRoadEvent(24)
+    party.addScenarioAvailable(82)
+    party.heroAdjustGold('Bucky', 2)
+    party.heroAdjustGold('RatManBearPig', 2)
+    party.heroAdjustGold('Ragnarok', 2)
+    party.heroAdjustGold('Drop', 2)
+    party.heroAdjustGold('Playgirl', 2)
+
+    party.addTreasureLooted(70)
+    party.addScenarioAvailable(69)
+
+    party.addScenarioCompleted(24)
+    party.addScenarioAvailable(30)
+    party.addScenarioAvailable(32)
+    party.addPartyAchievement("The Voice's Command")
+
+    party.heroAdjustXP('Bucky', 18)
+    party.heroAdjustXP('RatManBearPig', 0)
+    party.heroAdjustXP('Ragnarok', 23)
+    party.heroAdjustXP('Drop', 25)
+    party.heroAdjustXP('Playgirl', 18)
+    party.heroAdjustGold('Bucky', 4)
+    party.heroAdjustGold('RatManBearPig', 0)
+    party.heroAdjustGold('Ragnarok', 8)
+    party.heroAdjustGold('Drop', 8)
+    party.heroAdjustGold('Playgirl', 4)
+    party.heroAdjustCheckmarks('Bucky', 0)
+    party.heroAdjustCheckmarks('RatManBearPig', 0)
+    party.heroAdjustCheckmarks('Ragnarok', 0)
+    party.heroAdjustCheckmarks('Drop', 1)
+    party.heroAdjustCheckmarks('Playgirl', 0)
 
     # Next Play Session
     randScenario = party.drawRandomScenario()
