@@ -426,6 +426,7 @@ class Party():
             print("<><> %s Levels Up to %d" % (strHero, heroObj.getLevel()))
             if card:
                 print("%s new Ability Card Selection: '%s'" % (strHero, card))
+                heroObj.addCardSelection(card)
             heroObj.addPerk(perk)
             self.party_json['Members'][heroObj.getName()] = heroObj.getJson()
         else:

@@ -169,6 +169,7 @@ class Character(Unit):
         self.perks_from_chk = 0
         self.available_perks= copy.deepcopy(perks.getPerkSelections(self.type))
         self.selected_perks = list()
+        self.selected_cards = list()
 
         if gv.heroDataJson:
             self.curr_hp    = int(gv.heroDataJson[self.type.capitalize()]['Health'][str(level)])
@@ -315,6 +316,7 @@ class Character(Unit):
     def hasNegativeScenarioEffectImmunity(self):
         if perks.ignore_scen_perk in self.selected_perks: return True
         if perks.ignore_scen_perk_plus_1 in self.selected_perks: return True
+        if perks.ignore_scen_perk_2_plus_1 in self.selected_perks: return True
         return False
 
     def canGainPerkFromCheckmarks(self):
@@ -347,6 +349,10 @@ class Character(Unit):
             print("%s checkmarks :: %d -> %d" % (self.getName(), self.checkmarks - cnt, self.checkmarks))
         else:
             print("%s cannot lose a checkmark - yeay!" % self.getName())
+
+    def addCardSelection(self, strCard):
+        assert strCard not in self.selected_cards
+        self.selected_cards.append(strCard)
 
     def addPerk(self, perk=None, strType=' Level'):
         if not perk:
@@ -453,6 +459,7 @@ class Character(Unit):
         jsonData['retired'] = self.retired
         jsonData['items'] = self.items.getJSON()
         jsonData['item_strings'] = self.temp_items
+        jsonData['cards'] = self.selected_cards
         jsonData['perks'] = [str(p) for p in self.selected_perks]
         return jsonData
 
