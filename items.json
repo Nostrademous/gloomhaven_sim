@@ -941,6 +941,32 @@
         "Spent": 0,
         "ProsperityLevel": 0
     },
+    "102": {
+        "Name": "Sacrificial Robes",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "BuffWithDamage",
+            "Buff": "Suffer3Damage_GainPlus1AttackToEntireAction",
+            "Count": 2,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "105": {
+        "Name": "Flea-Bitten Shawl",
+        "MaxCount": 1,
+        "Cost": 10,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "InitiativeBuff",
+            "Buff": "MaxInitiativeForTargeting",
+            "Count": 100000
+        },
+        "Spent": 0,
+        "ProsperityLevel": 0
+    },
     "107": {
         "Name": "Horned Helm",
         "MaxCount": 2,
@@ -977,6 +1003,21 @@
         "Spent": 0,
         "ProsperityLevel": 0
     },
+    "110": {
+        "Name": "Helm of the Mountain",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "HEAD",
+        "Buff": {
+            "Type": "AttackerDebuffConditional",
+            "Count": 1000000,
+            "Condition": "EarthIsStrong",
+            "Debuff": "ImmobilizeAttacker",
+            "Trigger": "Game"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 0
+    },
     "112": {
         "Name": "Ancient Drill",
         "MaxCount": 2,
@@ -1004,6 +1045,24 @@
             "Buff": "Attack_5",
             "Trigger": "Player"
         },
+        "ProsperityLevel": 0
+    },
+    "115": {
+        "Name": "Mountain Hammer",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "Summon",
+            "Name": "Summon Warrior Spirit",
+            "Health": 4,
+            "Move": 1,
+            "Attack": 3,
+            "Range": 0,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
         "ProsperityLevel": 0
     },
     "116": {

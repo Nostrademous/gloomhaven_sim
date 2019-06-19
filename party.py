@@ -523,6 +523,7 @@ def make_a_party():
     party.completeCityEvent(27)
     party.completeCityEvent(28)
     party.completeCityEvent(30)
+    party.addItemDesign(105)
 
     party.unlockCityEvent(73)
     party.completeCityEvent(73)
@@ -2024,6 +2025,151 @@ def make_a_party():
     party.heroAdjustCheckmarks('Drop', 1)
     party.heroAdjustCheckmarks('Playgirl', 1)
 
+
+    # Play Session - May 27
+    party.completeCityEvent(5)
+    party.heroAdjustCheckmarks('Trog-dor', -1)
+    party.heroAdjustCheckmarks('RatManBearPig', -1)
+    party.heroAdjustCheckmarks('Ragnarok', -1)
+    party.heroAdjustCheckmarks('Bucky', -1)
+    party.heroAdjustCheckmarks('Playgirl', -1)
+    party.adjustReputation(1)
+    party.addProsperityCheckmark('City Event 5')
+    
+
+    party.completeRoadEvent(20)
+    # Experience gain accounted for in final total
+
+    party.addScenarioCompleted(33)
+    party.heroAdjustXP('Trog-dor', 31)
+    party.heroAdjustXP('RatManBearPig', 0)
+    party.heroAdjustXP('Ragnarok', 32)
+    party.heroAdjustXP('Bucky', 25)
+    party.heroAdjustXP('Playgirl', 19)
+    party.heroAdjustGold('Trog-dor', 23)
+    party.heroAdjustGold('RatManBearPig', 0)
+    party.heroAdjustGold('Ragnarok', 43)
+    party.heroAdjustGold('Bucky', 35)
+    party.heroAdjustGold('Playgirl', 19)
+    party.heroAdjustCheckmarks('Trog-dor', 0)
+    party.heroAdjustCheckmarks('RatManBearPig', 2)
+    party.heroAdjustCheckmarks('Ragnarok', 0)
+    party.heroAdjustCheckmarks('Bucky', 0)
+    party.heroAdjustCheckmarks('Playgirl', 1)
+ 
+    party.heroBuyItem('Bucky', 'Hawk Helm')
+    party.heroGainCheckmarkPerk('RatManBearPig', add_1_plus_1_immobilize)
+
+
+    # Play Session - June 3
+    party.heroLevelUp('Ragnarok', add_1_plus_2, 'Horned Majesty')
+    party.completeCityEvent(44)
+    party.heroAdjustGold('Trog-dor', 2)
+    party.heroAdjustGold('RatManBearPig', 2)
+    party.heroAdjustGold('Ragnarok', 2)
+    party.heroAdjustGold('Drop', 2)
+    party.heroAdjustGold('Bucky', 2)
+    party.adjustReputation(1)
+
+    party.unlockCityEvent(76)
+    party.unlockRoadEvent(67)
+
+    party.completeRoadEvent(37)
+
+    party.heroFindItem('Drop', 'Helm of the Mountain')
+    party.heroFindItem('Drop', 'Mountain Hammer')
+
+    party.addScenarioCompleted(82)
+    party.adjustReputation(-1)
+    party.addProsperityCheckmark('Scen 82', -2)
+    party.heroAdjustXP('Trog-dor', 19)
+    party.heroAdjustXP('RatManBearPig', 0)
+    party.heroAdjustXP('Ragnarok', 0)
+    party.heroAdjustXP('Bucky', 21)
+    party.heroAdjustXP('Drop', 27)
+    party.heroAdjustGold('Trog-dor', 8)
+    party.heroAdjustGold('RatManBearPig', 8)
+    party.heroAdjustGold('Ragnarok', 28)
+    party.heroAdjustGold('Bucky', 4)
+    party.heroAdjustGold('Drop', 52)
+    party.heroAdjustCheckmarks('Trog-dor', 2)
+    party.heroAdjustCheckmarks('RatManBearPig', 0)
+    party.heroAdjustCheckmarks('Ragnarok', 1)
+    party.heroAdjustCheckmarks('Bucky', 1)
+    party.heroAdjustCheckmarks('Drop', 1)
+
+    party.heroSellItem('Drop', 'Helm of the Mountain')
+    party.heroSellItem('Drop', 'Mountain Hammer')
+
+    # June 10 - Session
+    party.heroLevelUp('Bucky', replace_minus_1_with_plus_1, 'Vengeance')
+    party.heroLevelUp('Drop', replace_1_minus_1_with_1_stun, 'Nightmare Serenade')
+    party.heroGainCheckmarkPerk('Drop', add_2_roll_curse)
+    party.heroGainCheckmarkPerk('Playgirl', add_1_roll_stun)
+    party.heroBuyItem('Ragnarok', 'Stun Powder')
+    party.heroBuyItem('Ragnarok', 'Mountain Hammer')
+    party.heroBuyItem('Ragnarok', 'Heater Shield')
+    party.heroBuyItem('Bucky', 'Flea-Bitten Shawl')
+    party.heroBuyItem('Bucky', 'Minor Power Potion')
+
+    party.completeCityEvent(40)
+    party.adjustReputation(1)
+    party.heroFindItem('Drop', 'Sacrificial Robes')
+    party.heroSellItem('Drop', 'Sacrificial Robes')
+    
+    party.completeRoadEvent(30)
+
+    party.addScenarioCompleted(44)
+    party.heroAdjustXP('Playgirl', 16)
+    party.heroAdjustXP('RatManBearPig', 0)
+    party.heroAdjustXP('Ragnarok', 0)
+    party.heroAdjustXP('Bucky', 22)
+    party.heroAdjustXP('Drop', 34)
+    party.heroAdjustGold('Playgirl', 8)
+    party.heroAdjustGold('RatManBearPig', 8)
+    party.heroAdjustGold('Ragnarok', 28)
+    party.heroAdjustGold('Bucky', 12)
+    party.heroAdjustGold('Drop', 24)
+    party.heroAdjustCheckmarks('Playgirl', 1)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
+    party.heroAdjustCheckmarks('Ragnarok', 1)
+    party.heroAdjustCheckmarks('Bucky', 1)
+    party.heroAdjustCheckmarks('Drop', 2)
+
+    # June 17 - Session
+    party.addScenarioAvailable(73) # from reading Town Records
+    party.heroGainCheckmarkPerk('Ragnarok', [add_1_roll_fire, add_1_roll_air])
+    party.heroSellItem('Ragnarok', 'Mountain Hammer')
+    party.heroSellItem('Ragnarok', 'Heater Shield')
+    party.heroBuyItem('Ragnarok', 'Tower Shield')
+    party.heroBuyItem('Ragnarok', 'Scroll of Healing')
+    party.heroBuyItem('Drop', 'Minor Healing Potion')
+    party.heroSellItem('Bucky', 'Minor Power Potion')
+    party.heroBuyItem('Bucky', 'Sun Earring')
+
+    party.completeCityEvent(76)
+    party.addScenarioAvailable(74)
+    party.addPartyAchievement('High Sea Escort')
+
+    party.completeRoadEvent(47)
+
+    party.addTreasureLooted(57, 'Drop')
+    party.heroAdjustGold('Drop', 15)
+    party.addTreasureLooted(18, 'Bucky')
+    party.heroAdjustGold('Bucky', 15)
+    party.addScenarioCompleted(47)
+    party.addScenarioAvailable(51)
+    party.addGlobalAchievement('End of Corruption')
+    party.heroAdjustXP('Ragnarok', 0)
+    party.heroAdjustXP('Bucky', 20)
+    party.heroAdjustXP('Drop', 24)
+    party.heroAdjustGold('Ragnarok', 0)
+    party.heroAdjustGold('Bucky', 0)
+    party.heroAdjustGold('Drop', 12)
+    party.heroAdjustCheckmarks('Ragnarok', 1)
+    party.heroAdjustCheckmarks('Bucky', 2)
+    party.heroAdjustCheckmarks('Drop', 2)
+    party.heroSellItem('Drop', 'Minor Healing Potion')
 
     # Next Play Session
     randScenario = party.drawRandomScenario()
