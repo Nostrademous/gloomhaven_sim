@@ -206,6 +206,19 @@
         },
         "ProsperityLevel": 2
     },
+    "16": {
+        "Name": "Cloak of Pockets",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "BODY",
+        "Buff": {
+            "Type": "ItemIncrease",
+            "Count": 100000000,
+            "Buff": 2,
+            "Trigger": "Game"
+        },
+        "ProsperityLevel": 2
+    },
     "17": {
         "Name": "Empowering Talisman",
         "MaxCount": 2,
@@ -570,6 +583,21 @@
         "Consumed": 1,
         "ProsperityLevel": 6
     },
+    "48": {
+        "Name": "Major Mana Potion",
+        "MaxCount": 4,
+        "Cost": 30,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "CreateElement",
+            "Count": 2,
+            "Buff": "InvokeElement",
+            "ElementType": "Any",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 6
+    },
     "49": {
         "Name": "Sun Earring",
         "MaxCount": 2,
@@ -597,6 +625,20 @@
             "Count": 1,
             "Trigger": "Player"
         },
+        "ProsperityLevel": 7
+    },
+    "56": {
+        "Name": "Ring of Brutality",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "EndOfTurnAction",
+            "Buff": "TopAction",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
         "ProsperityLevel": 7
     },
     "74": {
@@ -952,6 +994,20 @@
             "Count": 2,
             "Trigger": "Player"
         },
+        "ProsperityLevel": 0
+    },
+    "104": {
+        "Name": "Steam Armor",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "ShieldOnDamage",
+            "Buff": "Shield_1",
+            "Count": 5,
+            "Trigger": "Damage"
+        },
+        "Consumed": 1,
         "ProsperityLevel": 0
     },
     "105": {

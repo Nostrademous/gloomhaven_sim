@@ -2171,6 +2171,102 @@ def make_a_party():
     party.heroAdjustCheckmarks('Drop', 2)
     party.heroSellItem('Drop', 'Minor Healing Potion')
 
+    # Jun 24, 2019
+    party.heroLevelUp('Drop', add_3_roll_plus_1, 'Tranquil Trill')
+    party.heroLevelUp('Playgirl', add_1_plus_1_air, 'Mass Extinction')
+    party.heroGainCheckmarkPerk('Drop', add_2_roll_curse)
+    party.heroGainCheckmarkPerk('Bucky', replace_0_with_plus_2)
+
+    party.completeCityEvent(74)
+    party.adjustReputation(1)
+    party.completeRoadEvent(41)
+    
+    party.addTreasureLooted(20, 'Bucky')
+    party.addItemDesign(80)
+
+    party.addScenarioCompleted(74)
+    party.addProsperityCheckmark('Scenario 74 Completion', 2)
+
+    party.heroAdjustXP('Ragnarok', 0)
+    party.heroAdjustXP('Bucky', 19)
+    party.heroAdjustXP('Drop', 24)
+    party.heroAdjustXP('RatManBearPig', 0)
+    party.heroAdjustXP('Playgirl', 0)
+    party.heroAdjustGold('Ragnarok', 34)
+    party.heroAdjustGold('Bucky', 26)
+    party.heroAdjustGold('Drop', 10)
+    party.heroAdjustGold('RatManBearPig', 14)
+    party.heroAdjustGold('Playgirl', 34)
+    party.heroAdjustCheckmarks('Ragnarok', 0)
+    party.heroAdjustCheckmarks('Bucky', 0)
+    party.heroAdjustCheckmarks('Drop', 2)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
+    party.heroAdjustCheckmarks('Playgirl', 1)
+
+    party.heroGainCheckmarkPerk('Drop', replace_0_with_plus_1_disarm)
+
+    # Play Session - July 1
+    party.heroLevelUp('Trog-dor', ignore_scen_perk, 'Meteor')
+    party.heroBuyItem('Trog-dor', 'Tremor Blade')
+
+    party.completeCityEvent(37)
+    party.addProsperityCheckmark('City Event #37', 1)
+    party.completeRoadEvent(33)
+    
+    party.addScenarioCompleted(30)
+    party.addPartyAchievement('The Scepter and the Voice')
+
+    party.heroAdjustXP('Bucky', 17)
+    party.heroAdjustXP('Trog-dor', 20)
+    party.heroAdjustXP('RatManBearPig', 0)
+    party.heroAdjustXP('Playgirl', 0)
+    party.heroAdjustGold('Bucky', 42)
+    party.heroAdjustGold('Trog-dor', 26)
+    party.heroAdjustGold('RatManBearPig', 22)
+    party.heroAdjustGold('Playgirl', 10)
+    party.heroAdjustCheckmarks('Bucky', 1)
+    party.heroAdjustCheckmarks('Trog-dor', 1)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
+    party.heroAdjustCheckmarks('Playgirl', 2)
+
+    party.heroGainCheckmarkPerk('Trog-dor', add_1_plus_2_muddle)
+
+    # Play Session - Jul 8, 2019
+    party.heroLevelUp('Bucky', replace_0_with_plus_2, 'Pragmatic Reinforcement')
+    party.heroSellItem('Bucky', 'Minor Mana Potion')
+    party.heroBuyItem('Bucky', 'Cloak of Pockets')
+    party.heroBuyItem('Bucky', 'Major Mana Potion')
+    party.heroBuyItem('Bucky', 'Major Power Potion')
+
+    party.makeSanctuaryDonation('RatManBearPig')
+    
+    party.completeCityEvent(55)
+    party.addProsperityCheckmark('City Event #55')
+    party.heroBuyItem('RatManBearPig', 'Ring of Brutality')
+
+    party.completeRoadEvent(67)
+    party.addProsperityCheckmark('City Event #67')
+    
+    party.addTreasureLooted(47, 'Bucky')
+    party.heroFindItem('Bucky', 'Steam Armor')
+
+    party.addScenarioCompleted(40)
+    party.heroAdjustXP('Bucky', 25)
+    party.heroAdjustXP('Drop', 35)
+    party.heroAdjustXP('RatManBearPig', 0)
+    party.heroAdjustXP('Ragnarok', 0)
+    party.heroAdjustGold('Bucky', 16)
+    party.heroAdjustGold('Drop', 44)
+    party.heroAdjustGold('RatManBearPig', 4)
+    party.heroAdjustGold('Ragnarok', 28)
+    party.heroAdjustCheckmarks('Bucky', 0)
+    party.heroAdjustCheckmarks('Drop', 1)
+    party.heroAdjustCheckmarks('RatManBearPig', 1)
+    party.heroAdjustCheckmarks('Ragnarok', 0)
+
+    party.addGlobalAchievement('Ancient Technology')
+    party.addScenarioAvailable(41)
+
     # Next Play Session
     randScenario = party.drawRandomScenario()
     print("Randomed Scenario Event: %d" % randScenario)
