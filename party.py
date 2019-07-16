@@ -2087,7 +2087,7 @@ def make_a_party():
     party.heroAdjustXP('Ragnarok', 0)
     party.heroAdjustXP('Bucky', 21)
     party.heroAdjustXP('Drop', 27)
-    party.heroAdjustGold('Trog-dor', 8)
+    party.heroAdjustGold('Trog-dor', 12)
     party.heroAdjustGold('RatManBearPig', 8)
     party.heroAdjustGold('Ragnarok', 28)
     party.heroAdjustGold('Bucky', 4)
@@ -2266,6 +2266,34 @@ def make_a_party():
 
     party.addGlobalAchievement('Ancient Technology')
     party.addScenarioAvailable(41)
+
+    # July 15, 2019 Play Session
+    party.heroSellItem('Bucky', 'Flea-Bitten Shawl')
+    party.heroSellItem('Bucky', 'Steam Armor')
+
+    party.completeCityEvent(41)
+
+    party.completeRoadEvent(2)
+    
+    party.addScenarioCompleted(73)
+    party.adjustReputation(1)
+
+    party.heroAdjustXP('Bucky', 25)
+    party.heroAdjustXP('Drop', 32)
+    party.heroAdjustXP('Trog-dor', 23)
+    party.heroAdjustXP('Ragnarok', 0)
+    party.heroAdjustXP('Playgirl', 0)
+    party.heroAdjustGold('Bucky', 16)
+    party.heroAdjustGold('Drop', 28)
+    party.heroAdjustGold('Trog-dor', 0)
+    party.heroAdjustGold('Ragnarok', 8)
+    party.heroAdjustGold('Playgirl', 4)
+    party.heroAdjustCheckmarks('Bucky', 0)
+    party.heroAdjustCheckmarks('Drop', 1)
+    party.heroAdjustCheckmarks('Trog-dor', 1)
+    party.heroAdjustCheckmarks('Ragnarok', 2)
+    party.heroAdjustCheckmarks('Playgirl', 1)
+
 
     # Next Play Session
     randScenario = party.drawRandomScenario()
