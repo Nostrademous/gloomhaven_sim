@@ -2295,6 +2295,38 @@ def make_a_party():
     party.heroAdjustCheckmarks('Playgirl', 1)
 
 
+    # July 22, 2019 Play Session
+    party.heroLevelUp('Drop', replace_0_with_plus_2_curse, 'Captivating Performance')
+    party.retireHero(hero13)
+    hero17 = ch.Character('Lleu Llaw Gyffes', 'scoundrel', owner5, level=1, gold=120, xp=345, quest=999)
+    hero17.addOwnerPerk(ignore_scen_perk)
+    hero17.addOwnerPerk(remove_2_minus_1)
+    hero17.addOwnerPerk(replace_minus_2_with_0)
+    party.addMember(hero17)
+    party.heroLevelUp('Lleu Llaw Gyffes', remove_2_minus_1, 'Open Wound')
+    party.heroLevelUp('Lleu Llaw Gyffes', replace_minus_1_with_plus_1, 'Hidden Daggers')
+    party.heroLevelUp('Lleu Llaw Gyffes', remove_4_0, 'Flurry of Blades')
+    party.heroLevelUp('Lleu Llaw Gyffes', replace_0_with_plus_2, 'Visage of the Inevitable')
+    party.heroLevelUp('Lleu Llaw Gyffes', replace_0_with_plus_2, 'Buring Oil')
+    party.heroLevelUp('Lleu Llaw Gyffes', add_1_roll_invis, 'Stick to the Shadows')
+    party.heroBuyItem('Lleu Llaw Gyffes', 'Heater Shield')
+    party.heroBuyItem('Lleu Llaw Gyffes', 'Rocket Boots')
+    party.heroBuyItem('Lleu Llaw Gyffes', 'Major Stamina Potion')
+    party.heroBuyItem('Lleu Llaw Gyffes', 'Minor Power Potion')
+
+    #party.completeCityEvent()
+    #party.compelteRoadEvent()
+    #party.addTreasureLooted('', 0)
+    #party.addScenarioCompleted()
+    #party.addProsperityCheckmark('', 0)
+    #party.heroAdjustXP('', 0)
+    #party.heroAdjustGold('', 0)
+    #party.heroAdjustCheckmarks('', 0)
+    #party.addGlobalAchievement('')
+    #party.addPartyAchievement('')
+    #party.addScenarioAvailable(0)
+    #party.adjustReputation(0)
+
     # Next Play Session
     randScenario = party.drawRandomScenario()
     print("Randomed Scenario Event: %d" % randScenario)
