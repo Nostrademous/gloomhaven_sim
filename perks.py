@@ -128,6 +128,7 @@ add_2_roll_push2        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_push2)
 add_3_roll_pull1        = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_pull1)
 
 add_2_roll_heal1        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_heal1)
+add_2_roll_shield1      = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_shield1)
 
 # elemental based
 add_1_roll_fire         = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_fire)
@@ -138,6 +139,7 @@ add_1_roll_earth        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_earth)
 add_2_roll_earth        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_earth)
 add_2_roll_fire         = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_fire)
 add_1_roll_light        = Perk(PERK_TYPE_ADD, 1, amd.amc_roll_light)
+add_2_roll_light        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_light)
 
 add_1_plus_1_curse      = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_1_curse)
 add_1_plus_1_poison     = Perk(PERK_TYPE_ADD, 1, amd.amc_plus_1_poison)
@@ -354,6 +356,20 @@ soothsinger_perk_deck = list([
     add_2_roll_curse, add_2_roll_curse
 ])
 
+sunkeeper_perk_deck = list([
+    remove_2_minus_1, remove_2_minus_1,
+    remove_4_0,
+    replace_minus_2_with_0,
+    replace_0_with_plus_2,
+    add_2_roll_plus_1, add_2_roll_plus_1,
+    add_2_roll_heal1, add_2_roll_heal1,
+    add_1_roll_stun,
+    add_2_roll_light, add_2_roll_light,
+    add_2_roll_shield1,
+    ignore_item_perk_add_2_plus_1,
+    ignore_scen_perk
+])
+
 def getPerkSelections(class_type):
     class_type = class_type.lower()
     if class_type == "brute":
@@ -384,6 +400,8 @@ def getPerkSelections(class_type):
         return summoner_perk_deck
     elif class_type == "soothsinger":
         return soothsinger_perk_deck
+    elif class_type == "sunkeeper":
+        return sunkeeper_perk_deck
     else:
         raise Exception("[getPerkSelection]", "UNKNOWN CLASS TYPE")
 
@@ -442,4 +460,8 @@ if __name__ == "__main__":
 
     print('\nSoothsinger')
     for perk in soothsinger_perk_deck:
+        print(perk)
+    
+    print('\nSunkeeper')
+    for perk in sunkeeper_perk_deck:
         print(perk)

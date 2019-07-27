@@ -216,5 +216,21 @@
         "DeckSize": 9,
         "UnlockEvents": 37,
         "RetireEvents": 54
+    },
+    "Sunkeeper": {
+        "Health": {
+            "1": 10,
+            "2": 12,
+            "3": 14,
+            "4": 16,
+            "5": 18,
+            "6": 20,
+            "7": 22,
+            "8": 24,
+            "9": 26
+        },
+        "DeckSize": 11,
+        "UnlockEvents": 31,
+        "RetireEvents": 48 
     }
 }
