@@ -583,6 +583,19 @@
         "Consumed": 1,
         "ProsperityLevel": 6
     },
+    "46": {
+        "Name": "Spiked Shield",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "OnDamage",
+            "Count": 1,
+            "Buff": "Shield1_Retaliate2",
+            "Trigger": "AttackDamage"
+        },
+        "ProsperityLevel": 6
+    },
     "48": {
         "Name": "Major Mana Potion",
         "MaxCount": 4,
