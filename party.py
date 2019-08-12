@@ -2405,7 +2405,43 @@ def make_a_party():
     #party.addPartyAchievement('')
     #party.addScenarioAvailable(0)
     #party.adjustReputation(0)
+
+
+    # Play Session - August 5, 2019
+    party.heroBuyItem('Nova', 'Swordedge Armor')
     
+    party.completeCityEvent(51)
+
+    party.completeRoadEvent(58)
+
+    #party.addTreasureLooted('', 0)
+    party.addScenarioCompleted(32)
+    party.addScenarioAvailable(33)
+    party.addScenarioAvailable(40)
+    #party.addProsperityCheckmark('', 0)
+    party.heroAdjustXP('JarJar', 25)
+    party.heroAdjustGold('JarJar', 28)
+    party.heroAdjustCheckmarks('JarJar', 1)
+    #party.heroAdjustXP('Bucky', 0)
+    #party.heroAdjustGold('Bucky', 0)
+    #party.heroAdjustCheckmarks('Bucky', 0)
+    party.heroAdjustXP('Nova', 22)
+    party.heroAdjustGold('Nova', 20)
+    party.heroAdjustCheckmarks('Nova', 0)
+    party.heroAdjustXP('Playgirl', 0)
+    party.heroAdjustGold('Playgirl', 20)
+    party.heroAdjustCheckmarks('Playgirl', 1)
+    party.heroAdjustXP('Drop', 0)
+    party.heroAdjustGold('Drop', 20)
+    party.heroAdjustCheckmarks('Drop', 1)
+    party.heroAdjustXP('Trog-dor', 26)
+    party.heroAdjustGold('Trog-dor', 0)
+    party.heroAdjustCheckmarks('Trog-dor', 1)
+    #party.addGlobalAchievement('')
+    #party.addPartyAchievement('')
+    #party.addScenarioAvailable(0)
+    #party.adjustReputation(0)
+    party.heroLevelUp('Trog-dor', add_1_plus_2_muddle, 'Rocky End')
 
     # Next Play Session
     randScenario = party.drawRandomScenario()
