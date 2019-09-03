@@ -233,6 +233,20 @@
         "Consumed": 1,
         "ProsperityLevel": 2
     },
+    "18": {
+        "Name": "Battle-Axe",
+        "MaxCount": 2,
+        "Cost": 20,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "EnhanceSingleTargetMeleeAttack",
+            "Count": 1,
+            "Buff": "2_AdjHexes",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 2
+    },
     "19": {
         "Name": "Weighted Net",
         "MaxCount": 2,
@@ -627,6 +641,24 @@
         "Consumed": 1,
         "ProsperityLevel": 6
     },
+    "50": {
+        "Name": "Steel Sabatons",
+        "MaxCount": 2,
+        "Cost": 60,
+        "Slot": "Legs",
+        "AMDEffect": {
+            "Value": -1,
+            "Count": 2
+        },
+        "Buff": {
+            "Type": "GainShield1_MoveLessThan1",
+            "Target": "Self",
+            "Count": 1,
+            "Trigger": "Game"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 7
+    },
     "53": {
         "Name": "Black Knife",
         "MaxCount": 2,
@@ -653,6 +685,20 @@
         },
         "Consumed": 1,
         "ProsperityLevel": 7
+    },
+    "73": {
+        "Name": "Blinking Cape",
+        "MaxCount": 2,
+        "Cost": 50,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "Move_Jump",
+            "Buff": "Move4",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
     },
     "74": {
         "Name": "Swordedge Armor",
@@ -878,6 +924,20 @@
             "BuffValue": 4,
             "Count": 1,
             "Trigger": "Damage"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
+    "92": {
+        "Name": "Dampening Ring",
+        "MaxCount": 2,
+        "Cost": 25,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "ElementRemoval",
+            "Buff": "BeforeEnemyConsumesElementRemoveIt",
+            "Count": 1,
+            "Trigger": "Player"
         },
         "Consumed": 1,
         "ProsperityLevel": 0
@@ -1162,6 +1222,18 @@
         "Consumed": 1,
         "ProsperityLevel": 0
     },
+    "119": {
+        "Name": "Skull of Hatred",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "CurseAllAdjacent",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
     "121": {
         "Name": "Orb of Dawn",
         "MaxCount": 1,
@@ -1325,6 +1397,20 @@
             "Trigger": "Player"
         },
         "Consumed": 2,
+        "ProsperityLevel": 0
+    },
+    "145": {
+        "Name": "Mask of Death",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "Head",
+        "Buff": {
+            "Type": "MeleeAttack",
+            "Count": 100000,
+            "Buff": "Attack_2",
+            "Trigger": "MeleeAttackHealth1"
+        },
+        "Spent": 0,
         "ProsperityLevel": 0
     },
     "147": {
