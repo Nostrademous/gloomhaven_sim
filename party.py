@@ -2642,7 +2642,7 @@ def make_a_party():
     #party.addEnhancement('Drop', 364, 'Bottom', 'Disarm', gold=375)
 
     party.heroLevelUp('Nova', replace_minus_2_with_0, 'Divine Intervention')
-    #party.heroLevelUp('JarJar', replace_minus_2_with_0, 'Watch It Burn')
+    party.heroLevelUp('JarJar', add_2_roll_plus_1, 'Watch It Burn')
     party.retireHero(hero14)
     party.addEnhancement('Drop', 361, 'Bottom', 'Jump', gold=75)
     party.unlockCityEvent(54)
@@ -2666,7 +2666,67 @@ def make_a_party():
     party.heroBuyItem('GH', 'Winged Shoes')
     party.heroBuyItem('GH', 'Major Stamina Potion')
     party.heroBuyItem('GH', 'Minor Power Potion')
-    #party.heroFindItem('GH', 'Mask of Death')
+
+    # GH Solo Scenario
+    party.heroAdjustXP('GH', 15)
+    party.heroAdjustGold('GH', 12)
+    party.heroFindItem('GH', 'Mask of Death')
+
+    # Play Session - Sept 16
+    party.retireHero(hero9)
+    party.unlockCityEvent(52)
+    party.unlockRoadEvent(52)
+    hero21 = ch.Character('Bonesaw', 'Sawbones', owner1, level=1, gold=120, xp=345, quest=997)
+    hero21.addOwnerPerk(add_2_roll_wound)
+    hero21.addOwnerPerk(add_2_roll_wound)
+    party.addMember(hero21)
+    party.heroLevelUp('Bonesaw', remove_2_minus_1, 'Hamstring')
+    party.heroLevelUp('Bonesaw', remove_2_minus_1, 'Regenerative Tissue')
+    party.heroLevelUp('Bonesaw', remove_4_0, 'Blood Transfusion')
+    party.heroLevelUp('Bonesaw', add_1_roll_plus_2, 'Amputate')
+    party.heroLevelUp('Bonesaw', add_1_roll_plus_2, 'Prescription')
+    party.heroLevelUp('Bonesaw', add_1_roll_heal3, 'Master Physician')
+    party.heroBuyItem('Bonesaw', 'Cloak of Invisibility')
+    party.heroBuyItem('Bonesaw', 'Major Healing Potion')
+    party.heroBuyItem('Bonesaw', 'Major Stamina Potion')
+    party.heroBuyItem('Bonesaw', 'Eagle-Eye Goggles')
+    party.heroBuyItem('Bonesaw', 'Minor Power Potion')
+
+    party.completeCityEvent(54)
+    party.heroAdjustGold('Bucky', 4)
+    party.heroAdjustGold('JarJar', 4)
+    party.heroAdjustGold('Bonesaw', 4)
+    party.heroAdjustGold('GH', 4)
+    party.heroAdjustGold('Nova', 4)
+    party.heroBuyItem('Nova', 'Steel Ring')
+
+    party.completeRoadEvent(36)
+
+    party.addScenarioAvailable(34)
+    party.addGlobalAchievement('The Drake Slain')
+    #party.lossGlobalAchievement("The Drake's Command")
+    party.adjustReputation(2)
+    party.addProsperityCheckmark('Scenario 34', 1)
+
+    party.heroAdjustGold('Bucky', 36)
+    party.heroAdjustGold('GH', 20)
+    party.heroAdjustGold('Bonesaw', 20)
+    party.heroAdjustGold('JarJar', 32)
+    party.heroAdjustGold('Nova', 24)
+    party.heroAdjustXP('JarJar', 0)
+    party.heroAdjustXP('Bucky', 0)
+    party.heroAdjustXP('Nova', 0)
+    party.heroAdjustXP('GH', 20)
+    party.heroAdjustXP('Bonesaw', 8)
+    party.heroAdjustCheckmarks('JarJar', 0)
+    party.heroAdjustCheckmarks('Bucky', 1)
+    party.heroAdjustCheckmarks('Nova', 0)
+    party.heroAdjustCheckmarks('GH', 2)
+    party.heroAdjustCheckmarks('Bonesaw', 0)
+
+    party.unlockCityEvent(75)
+    party.unlockRoadEvent(66)
+    party.addScenarioAvailable(77) # from town record
 
     # Next Play Session
     randScenario = party.drawRandomScenario()
