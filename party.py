@@ -2671,12 +2671,13 @@ def make_a_party():
     party.heroAdjustXP('GH', 15)
     party.heroAdjustGold('GH', 12)
     party.heroFindItem('GH', 'Mask of Death')
+    party.heroFindItem('Nova', 'Sun Shield')
 
     # Play Session - Sept 16
     party.retireHero(hero9)
     party.unlockCityEvent(52)
     party.unlockRoadEvent(52)
-    hero21 = ch.Character('Bonesaw', 'Sawbones', owner1, level=1, gold=120, xp=345, quest=997)
+    hero21 = ch.Character('Bonesaw', 'Sawbones', owner3, level=1, gold=120, xp=345, quest=997)
     hero21.addOwnerPerk(add_2_roll_wound)
     hero21.addOwnerPerk(add_2_roll_wound)
     party.addMember(hero21)

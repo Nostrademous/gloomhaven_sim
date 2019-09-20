@@ -1383,6 +1383,21 @@
         "Consumed": 0,
         "ProsperityLevel": 0
     },
+    "140": {
+        "Name": "Sun Shield",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "ConsumeLight_BuffShield",
+            "Buff": "Shield",
+            "BuffValue": 3,
+            "Count": 100000,
+            "Trigger": "Damage"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 0
+    },
     "141": {
         "Name": "Utility Belt",
         "MaxCount": 1,
