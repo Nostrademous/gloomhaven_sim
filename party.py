@@ -1998,10 +1998,10 @@ def make_a_party():
     party.heroLevelUp('Trog-dor', replace_minus_1_with_plus_1, 'Rock Slide')
     party.heroLevelUp('Trog-dor', [add_1_minus_2, add_2_plus_2], 'Stone Pummel')
     party.heroLevelUp('Trog-dor', add_2_roll_earth, 'Cataclysm')
-    party.heroBuyItem('Trog-dor', 'Major Stamina Potion')
-    party.heroBuyItem('Trog-dor', 'Tower Shield')
-    party.heroBuyItem('Trog-dor', 'Horned Helm')
-    party.heroBuyItem('Trog-dor', 'Boots of Striding')
+    #party.heroBuyItem('Trog-dor', 'Major Stamina Potion')
+    #party.heroBuyItem('Trog-dor', 'Tower Shield')
+    #party.heroBuyItem('Trog-dor', 'Horned Helm')
+    #party.heroBuyItem('Trog-dor', 'Boots of Striding')
 
     party.makeSanctuaryDonation('RatManBearPig')
     party.completeCityEvent(78)
@@ -2703,6 +2703,7 @@ def make_a_party():
 
     party.completeRoadEvent(36)
 
+    party.addScenarioCompleted(41)
     party.addScenarioAvailable(34)
     party.addGlobalAchievement('The Drake Slain')
     #party.lossGlobalAchievement("The Drake's Command")
@@ -2728,6 +2729,101 @@ def make_a_party():
     party.unlockCityEvent(75)
     party.unlockRoadEvent(66)
     party.addScenarioAvailable(77) # from town record
+
+    # Play Session - 23rd 
+    party.heroBuyItem('JarJar', 'Hawk Helm')
+    party.heroBuyItem('JarJar', 'Sacrificial Robes')
+    party.heroBuyItem('JarJar', 'Sun Earring')
+    party.heroBuyItem('JarJar', 'Major Power Potion')
+
+    party.heroSellItem('Nova', 'Skull of Hatred')
+    party.heroBuyItem('Nova', 'Spiked Shield')
+    
+    party.completeCityEvent(50)
+    party.heroAdjustGold('Bucky', 10)
+    party.heroAdjustGold('Bonesaw', 10)
+    party.heroAdjustGold('JarJar', 10)
+    party.heroAdjustGold('Nova', 10)
+
+    party.heroBuyItem('Bucky', 'Minor Mana Potion')
+    party.heroBuyItem('Nova', 'Ring of Haste')
+
+    party.completeRoadEvent(66)
+    party.heroAdjustGold('Bucky', 25)
+    party.heroAdjustGold('Bonesaw', 25)
+    party.heroAdjustGold('JarJar', 25)
+    party.heroAdjustGold('Nova', 25)
+    
+    party.addTreasureLooted(48, 'JarJar')
+    party.heroAdjustGold('JarJar', 30)
+    #party.addItemDesign(92)
+    
+    party.addScenarioCompleted(48)
+    party.addGlobalAchievement('End of Corruption')
+
+    party.heroAdjustGold('Bucky', 0)
+    #party.heroAdjustGold('GH', 20)
+    party.heroAdjustGold('Bonesaw', 0)
+    party.heroAdjustGold('JarJar', 24)
+    party.heroAdjustGold('Nova', 24)
+    party.heroAdjustXP('JarJar', 0)
+    party.heroAdjustXP('Bucky', 0)
+    party.heroAdjustXP('Nova', 0)
+    #party.heroAdjustXP('GH', 34)
+    party.heroAdjustXP('Bonesaw', 25)
+    party.heroAdjustCheckmarks('JarJar', 1)
+    party.heroAdjustCheckmarks('Bucky', 1)
+    party.heroAdjustCheckmarks('Nova', 0)
+    #party.heroAdjustCheckmarks('GH', 2)
+    party.heroAdjustCheckmarks('Bonesaw', 2)
+    
+    party.addScenarioAvailable(59) # retirement quest for Bucky 
+
+
+    # Next Session - Sept 30, 2019
+    party.heroGainCheckmarkPerk('JarJar', add_2_roll_muddle)
+    party.heroGainCheckmarkPerk('Bucky', add_2_plus_1_push1)
+    party.heroSellItem('Nova', 'Minor Stamina Potion')
+    party.heroBuyItem('Nova', 'Major Stamina Potion')
+
+    party.completeCityEvent(75) # super-imposed bad universal karma
+    party.completeCityEvent(68)
+    party.heroAdjustGold('JarJar', -6)
+    party.heroAdjustGold('Nova', -3)
+    party.heroAdjustGold('GH', -3)
+    party.heroAdjustGold('Bucky', -3)
+    party.addScenarioAvailable(88)
+    party.addPartyAchievement('Water Staff')
+
+    party.completeRoadEvent(54)
+    party.adjustReputation(1)
+    
+    #party.addTreasureLooted(48, 'JarJar')
+    #party.heroAdjustGold('JarJar', 30)
+    #party.addItemDesign(92)
+    
+    party.addScenarioCompleted(59)
+
+    party.heroAdjustGold('Bucky', 16)
+    party.heroAdjustGold('GH', 4)
+    party.heroAdjustGold('JarJar', 56)
+    party.heroAdjustGold('Nova', 20)
+    #party.heroAdjustGold('Bonesaw', 0)
+    party.heroAdjustXP('JarJar', 0)
+    party.heroAdjustXP('Bucky', 0)
+    party.heroAdjustXP('Nova', 0)
+    party.heroAdjustXP('GH', 39)
+    #party.heroAdjustXP('Bonesaw', 25)
+    party.heroAdjustCheckmarks('JarJar', 0)
+    party.heroAdjustCheckmarks('Bucky', 0)
+    party.heroAdjustCheckmarks('Nova', 1)
+    party.heroAdjustCheckmarks('GH', 1)
+    #party.heroAdjustCheckmarks('Bonesaw', 2)
+    party.addScenarioAvailable(60)
+    
+    party.heroGainCheckmarkPerk('Nova', add_2_roll_plus_1)
+    party.heroGainCheckmarkPerk('GH', add_1_plus_2_fire)
+    party.heroLevelUp('GH', add_2_roll_wound, 'Bone Breaker')
 
     # Next Play Session
     randScenario = party.drawRandomScenario()
