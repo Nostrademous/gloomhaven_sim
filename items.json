@@ -686,6 +686,120 @@
         "Consumed": 1,
         "ProsperityLevel": 7
     },
+    "57": {
+        "Name": "Serene Sandals",
+        "MaxCount": 2,
+        "Cost": 75,
+        "Slot": "Legs",
+        "Buff": {
+            "Type": "MoveBuff",
+            "Count": 1,
+            "Buff": "SetDefaultMove",
+            "MoveValue": 4,
+            "Trigger": "Player"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 8
+    },
+    "58": {
+        "Name": "Cloak of Phasing",
+        "MaxCount": 2,
+        "Cost": 75,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "GainFlying",
+            "Buff": "Conditional_InvisibleIfOnObstacleCannotAttack",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 8
+    },
+    "59": {
+        "Name": "Telescopic Lens",
+        "MaxCount": 2,
+        "Cost": 50,
+        "Slot": "HEAD",
+        "Buff": {
+            "Type": "RangedAttackBuff",
+            "Count": 100000,
+            "Buff": "RangeIncrease",
+            "BuffValue": 2,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 8
+    },
+    "60": {
+        "Name": "Unstable Explosives",
+        "MaxCount": 2,
+        "Cost": 45,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "RangedAttackBuff",
+            "Contraint": "SingleTarget",
+            "Count": 1,
+            "Buff": "ReplaceAttackTemplate",
+            "Template": "4_Adj",
+            "Buff2": "AllAlliesInTemplateSuffer3Damage",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 8
+    },
+    "61": {
+        "Name": "Wall Shield",
+        "MaxCount": 2,
+        "Cost": 60,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "DefenseBuff",
+            "Count": 1,
+            "Buff": "Shield_4",
+            "Trigger": "Attack"
+        },
+        "ProsperityLevel": 8
+    },
+    "62": {
+        "Name": "Doom Powder",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "AttackBuff",
+            "Count": 1,
+            "Buff": "Add_StunPoisonCurse",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 8
+    },
+    "63": {
+        "Name": "Lucky Eye",
+        "MaxCount": 2,
+        "Cost": 60,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "AttackBuff",
+            "Count": 1,
+            "Buff": "StrengthSelfAndAdjAllies",
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 8
+    },
+    "64": {
+        "Name": "Boots of Sprinting",
+        "MaxCount": 2,
+        "Cost": 75,
+        "Slot": "Legs",
+        "Buff": {
+            "Type": "Movement",
+            "Count": 1,
+            "Buff": "+4",
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 9
+    },
     "73": {
         "Name": "Blinking Cape",
         "MaxCount": 2,
@@ -1067,6 +1181,20 @@
             "Count": 2,
             "Trigger": "Player"
         },
+        "ProsperityLevel": 0
+    },
+    "103": {
+        "Name": "Drakescale Armor",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "AilmentImmunity",
+            "Buff": "Poison_Wound",
+            "Count": 100000,
+            "Trigger": "Ailment"
+        },
+        "Spent": 0,
         "ProsperityLevel": 0
     },
     "104": {
