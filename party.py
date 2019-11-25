@@ -2666,6 +2666,7 @@ def make_a_party():
     party.heroBuyItem('GH', 'Winged Shoes')
     party.heroBuyItem('GH', 'Major Stamina Potion')
     party.heroBuyItem('GH', 'Minor Power Potion')
+    party.heroBuyItem('JarJar', 'Giant Remote Spider')
 
     # GH Solo Scenario
     party.heroAdjustXP('GH', 15)
@@ -2703,8 +2704,7 @@ def make_a_party():
 
     party.completeRoadEvent(36)
 
-    party.addScenarioCompleted(41)
-    party.addScenarioAvailable(34)
+    party.addScenarioCompleted(34)
     party.addGlobalAchievement('The Drake Slain')
     #party.lossGlobalAchievement("The Drake's Command")
     party.adjustReputation(2)
@@ -2733,7 +2733,6 @@ def make_a_party():
     # Play Session - 23rd 
     party.heroBuyItem('JarJar', 'Hawk Helm')
     party.heroBuyItem('JarJar', 'Sacrificial Robes')
-    party.heroBuyItem('JarJar', 'Sun Earring')
     party.heroBuyItem('JarJar', 'Major Power Potion')
 
     party.heroSellItem('Nova', 'Skull of Hatred')
@@ -2754,7 +2753,7 @@ def make_a_party():
     party.heroAdjustGold('JarJar', 25)
     party.heroAdjustGold('Nova', 25)
     
-    party.addTreasureLooted(48, 'JarJar')
+    party.addTreasureLooted(64, 'JarJar')
     party.heroAdjustGold('JarJar', 30)
     #party.addItemDesign(92)
     
@@ -2782,6 +2781,7 @@ def make_a_party():
 
     # Next Session - Sept 30, 2019
     party.heroGainCheckmarkPerk('JarJar', add_2_roll_muddle)
+    party.heroBuyItem('JarJar', 'Sun Earring')
     party.heroGainCheckmarkPerk('Bucky', add_2_plus_1_push1)
     party.heroSellItem('Nova', 'Minor Stamina Potion')
     party.heroBuyItem('Nova', 'Major Stamina Potion')
@@ -2884,12 +2884,123 @@ def make_a_party():
     party.heroLevelUp('Mer Sea', add_1_roll_at, 'Impending End')
     party.heroLevelUp('Mer Sea', ignore_scen_perk, 'Rising Momentum')
     party.heroBuyItem('Mer Sea', 'Telescopic Lens')
-    party.heroBuyItem('Mer Sea', 'Minor Power Potion')
     party.heroBuyItem('Mer Sea', 'Minor Stamina Potion')
-    party.heroBuyItem('Mer Sea', 'Minor Mana Potion')
     party.heroBuyItem('Mer Sea', 'Moon Earring')
     party.heroBuyItem('Mer Sea', 'Robes of Evocation')
-    #party.heroBuyItem('Mer Sea', 'Wand of Infernos')
+    party.heroBuyItem('Mer Sea', 'Wand of Infernos')
+    party.heroSellItem('JarJar', 'Volatile Bomb')
+    party.heroBuyItem('JarJar', 'Unstable Explosives')
+    party.heroSellItem('JarJar', 'Sacrificial Robes')
+    party.heroBuyItem('JarJar', 'Cloak of Phasing')
+    party.heroSellItem('JarJar', 'Minor Power Potion')
+
+    # Play Session Oct 28
+    party.makeSanctuaryDonation('JarJar')
+    party.completeCityEvent(39)
+    party.unlockCityEvent(65)
+
+    #party.completeRoadEvent(1)
+
+    party.addScenarioCompleted(77)
+    party.heroAdjustGold('Mer Sea', 16)
+    party.heroAdjustGold('GH', 8)
+    party.heroAdjustGold('JarJar', 36)
+    #party.heroAdjustGold('Nova', 8)
+    party.heroAdjustGold('Bonesaw', 16)
+    party.heroAdjustXP('JarJar', 0)
+    party.heroAdjustXP('Mer Sea', 30)
+    #party.heroAdjustXP('Nova', 0)
+    party.heroAdjustXP('GH', 26)
+    party.heroAdjustXP('Bonesaw', 28)
+    party.heroAdjustCheckmarks('JarJar', 1)
+    party.heroAdjustCheckmarks('Bonesaw', 0)
+    party.heroAdjustCheckmarks('Mer Sea', 0)
+    #party.heroAdjustCheckmarks('Nova', 0)
+    party.heroAdjustCheckmarks('GH', 1)
+
+    # Play Session Nov 4, 2019
+    party.heroLevelUp('GH', add_2_roll_wound, 'Immortality')
+    party.heroLevelUp('Bonesaw', replace_0_with_plus_2, "Gentleman's Anger")
+    party.heroGainCheckmarkPerk('Bonesaw', add_1_roll_heal3)
+    party.heroSellItem('JarJar', 'Hawk Helm')
+    party.heroBuyItem('JarJar', 'Telescopic Lens')
+    party.heroBuyItem('JarJar', 'Doomed Compass')
+    party.heroBuyItem('Nova', 'Sun Earring')
+
+    party.completeCityEvent(36)
+    party.adjustReputation(-2)
+    party.heroAdjustXP('Bonesaw', 5)
+    party.makeSanctuaryDonation('JarJar')
+
+    #party.unlockCityEvent(65)
+
+    #party.completeRoadEvent(8)
+    party.addTreasureLooted(48, 'JarJar')
+    party.heroAdjustGold('JarJar', 30)
+
+    party.addScenarioCompleted(46)
+    party.addGlobalAchievement('End of Corruption')
+    #party.heroAdjustGold('Mer Sea', 16)
+    party.heroAdjustGold('GH', 0)
+    party.heroAdjustGold('JarJar', 12)
+    party.heroAdjustGold('Nova', 4)
+    party.heroAdjustGold('Bonesaw', 4)
+    party.heroAdjustXP('JarJar', 0)
+    #party.heroAdjustXP('Mer Sea', 30)
+    party.heroAdjustXP('Nova', 0)
+    party.heroAdjustXP('GH', 0)
+    party.heroAdjustXP('Bonesaw', 18)
+    party.heroAdjustCheckmarks('JarJar', 1)
+    party.heroAdjustCheckmarks('Bonesaw', 1)
+    #party.heroAdjustCheckmarks('Mer Sea', 0)
+    party.heroAdjustCheckmarks('Nova', 1)
+    party.heroAdjustCheckmarks('GH', 0)
+
+
+    # Play Session Nov 11, 2019
+    party.completeCityEvent(65)
+    party.adjustReputation(3)
+    party.addProsperityCheckmark(1)
+    party.makeSanctuaryDonation('JarJar')
+    party.makeSanctuaryDonation('Bonesaw')
+    party.makeSanctuaryDonation('GH')
+    party.makeSanctuaryDonation('Mer Sea')
+
+    #party.unlockCityEvent(65)
+
+    #party.completeRoadEvent(68)
+    party.adjustReputation(2)
+    party.addTreasureLooted(56, 'JarJar')
+    #party.heroFindItem('JarJar', 'Star Earring')
+    #party.heroAdjustGold('JarJar', 30)
+
+    party.addScenarioCompleted(51)
+    party.unlockCityEvent(81)
+    party.unlockRoadEvent(69)
+    party.addGlobalAchievement("End of Gloom")
+    party.addProsperityCheckmark('Scenario 51', cnt=5)
+    party.adjustReputation(5)
+    party.heroSellItem('JarJar', 'Giant Remote Spider')
+
+    party.heroAdjustGold('Mer Sea', 5)
+    #party.heroAdjustGold('GH', 0)
+    #party.heroAdjustGold('JarJar', 12)
+    #party.heroAdjustGold('Nova', 4)
+    #party.heroAdjustGold('Bonesaw', 4)
+    party.heroAdjustXP('JarJar', 0)
+    party.heroAdjustXP('Mer Sea', 19)
+    party.heroAdjustXP('Nova', 0)
+    party.heroAdjustXP('GH', 0)
+    party.heroAdjustXP('Bonesaw', 22)
+    party.heroAdjustCheckmarks('JarJar', 0)
+    party.heroAdjustCheckmarks('Bonesaw', 0)
+    party.heroAdjustCheckmarks('Mer Sea', 0)
+    party.heroAdjustCheckmarks('Nova', 1)
+    party.heroAdjustCheckmarks('GH', 0)
+
+    # Solo Doomstalker Scenarios
+    party.heroAdjustXP('Mer Sea', 44)
+    party.heroAdjustGold('Mer Sea', 24)
 
     # Next Play Session
     randScenario = party.drawRandomScenario()
