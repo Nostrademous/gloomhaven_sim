@@ -3001,6 +3001,88 @@ def make_a_party():
     # Solo Doomstalker Scenarios
     party.heroAdjustXP('Mer Sea', 44)
     party.heroAdjustGold('Mer Sea', 24)
+    party.heroLevelUp('Mer Sea', add_1_0_stun, 'Predator and Prey')
+    party.heroBuyItem('Mer Sea', 'Ring of Haste')
+    party.heroBuyItem('Mer Sea', 'Minor Power Potion')
+
+    # Play Session Nov 25, 2019
+    party.completeCityEvent(81)
+    party.adjustReputation(2)
+    #party.addProsperityCheckmark(1)
+    #party.makeSanctuaryDonation('JarJar')
+
+    party.unlockCityEvent(69)
+    party.addProsperityCheckmark(1)
+    party.heroAdjustCheckmarks('JarJar', -1)
+    party.heroAdjustCheckmarks('Bonesaw', -1)
+    party.heroAdjustCheckmarks('Mer Sea', -1)
+    party.heroAdjustCheckmarks('Nova', -1)
+    party.heroAdjustCheckmarks('GH', -1)
+
+    #party.completeRoadEvent(68)
+    #party.adjustReputation(2)
+    party.addTreasureLooted(14, 'GH')
+    # Adjust XP by 10
+    #party.heroFindItem('JarJar', 'Star Earring')
+    #party.heroAdjustGold('JarJar', 30)
+
+    party.addScenarioCompleted(67)
+    party.addGlobalAchievement("Ancient Technology")
+    party.heroFindItem('Nova', "Power Core")
+
+    party.heroAdjustGold('Mer Sea', 20)
+    party.heroAdjustGold('GH', 4)
+    party.heroAdjustGold('JarJar', 4)
+    party.heroAdjustGold('Nova', 8)
+    party.heroAdjustGold('Bonesaw', 0)
+    party.heroAdjustXP('JarJar', 0)
+    party.heroAdjustXP('Mer Sea', 0)
+    party.heroAdjustXP('Nova', 0)
+    party.heroAdjustXP('GH', 0)
+    party.heroAdjustXP('Bonesaw', 22)
+    party.heroAdjustCheckmarks('JarJar', 0)
+    party.heroAdjustCheckmarks('Bonesaw', 1)
+    party.heroAdjustCheckmarks('Mer Sea', 0)
+    party.heroAdjustCheckmarks('Nova', 1)
+    party.heroAdjustCheckmarks('GH', 0)
+
+
+    # Play Session Dec 9, 2019
+    party.completeCityEvent(69)
+    party.adjustReputation(1)
+    #party.makeSanctuaryDonation('JarJar')
+
+    party.completeRoadEvent(69)
+    party.heroAdjustCheckmarks('JarJar', -1)
+    party.heroAdjustCheckmarks('Mer Sea', -1)
+    party.heroAdjustCheckmarks('Nova', -1)
+    party.heroAdjustCheckmarks('GH', -1)
+    party.addProsperityCheckmark(1)
+    #party.adjustReputation(2)
+    #party.addTreasureLooted(14, 'GH')
+    # Adjust XP by 10
+    party.heroFindItem('JarJar', 'Star Earring')
+    #party.heroAdjustGold('JarJar', 30)
+
+    party.addScenarioCompleted(83)
+    #party.addGlobalAchievement("Ancient Technology")
+    #party.heroFindItem('Nova', "Power Core")
+
+    party.heroAdjustGold('Mer Sea', 50)
+    party.heroAdjustGold('GH', 20)
+    party.heroAdjustGold('JarJar', 10)
+    party.heroAdjustGold('Nova', 20)
+    #party.heroAdjustGold('Bonesaw', 0)
+    #party.heroAdjustXP('JarJar', 0)
+    #party.heroAdjustXP('Mer Sea', 0)
+    #party.heroAdjustXP('Nova', 0)
+    #party.heroAdjustXP('GH', 0)
+    #party.heroAdjustXP('Bonesaw', 22)
+    #party.heroAdjustCheckmarks('JarJar', 0)
+    #party.heroAdjustCheckmarks('Bonesaw', 1)
+    #party.heroAdjustCheckmarks('Mer Sea', 0)
+    #party.heroAdjustCheckmarks('Nova', 1)
+    #party.heroAdjustCheckmarks('GH', 0)
 
     # Next Play Session
     randScenario = party.drawRandomScenario()

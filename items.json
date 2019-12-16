@@ -632,6 +632,7 @@
         "Slot": "SMALL_ITEM",
         "Buff": {
             "Type": "RefreshItems_Heal3",
+            "Buff": 100,
             "RefreshedItemType": "SMALL_ITEM",
             "NumRefreshedItems": 100,
             "Target": "Self",
@@ -652,6 +653,7 @@
         },
         "Buff": {
             "Type": "GainShield1_MoveLessThan1",
+            "Buff": 1,
             "Target": "Self",
             "Count": 1,
             "Trigger": "Game"
@@ -798,6 +800,24 @@
             "Buff": "+4",
             "Trigger": "Player"
         },
+        "ProsperityLevel": 9
+    },
+    "69": {
+        "Name": "Star Earring",
+        "MaxCount": 1,
+        "Cost": 70,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "ResfreshSpentRecoverDiscardedHeal",
+            "Buff": 0,
+            "HealValue": 3,
+            "RecoverValue": 2,
+            "RefreshedItemType": "ALL",
+            "NumRefreshedItems": 100,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
         "ProsperityLevel": 9
     },
     "73": {
@@ -1267,6 +1287,7 @@
         "Slot": "HEAD",
         "Buff": {
             "Type": "AttackerDebuffConditional",
+            "Buff": 0,
             "Count": 1000000,
             "Condition": "EarthIsStrong",
             "Debuff": "ImmobilizeAttacker",
@@ -1316,6 +1337,7 @@
             "Move": 1,
             "Attack": 3,
             "Range": 0,
+            "Extra": [],
             "Count": 1,
             "Trigger": "Player"
         },
@@ -1357,6 +1379,7 @@
         "Slot": "ONE_HAND",
         "Buff": {
             "Type": "CurseAllAdjacent",
+            "Buff": 100,
             "Count": 1,
             "Trigger": "Player"
         },
@@ -1476,6 +1499,25 @@
         "Buff": {
             "Type": "EnemyDebuff",
             "Buff": "+1 To All Attacks Targeting Enemy",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
+    "132": {
+        "Name": "Power Core",
+        "MaxCount": 1,
+        "Cost": 75,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "Summon",
+            "Name": "Summon Steel Construct",
+            "Health": 5,
+            "Move": 2,
+            "Attack": 3,
+            "Range": 0,
+            "Extra": [],
             "Count": 1,
             "Trigger": "Player"
         },
