@@ -3084,6 +3084,51 @@ def make_a_party():
     #party.heroAdjustCheckmarks('Nova', 1)
     #party.heroAdjustCheckmarks('GH', 0)
 
+
+    # Play Session Dec 16, 2019
+    #party.completeCityEvent(69)
+    #party.adjustReputation(1)
+    #party.makeSanctuaryDonation('JarJar')
+
+    #party.completeRoadEvent(69)
+    #party.heroAdjustCheckmarks('JarJar', -1)
+    #party.heroAdjustCheckmarks('Mer Sea', -1)
+    #party.heroAdjustCheckmarks('Nova', -1)
+    #party.heroAdjustCheckmarks('GH', -1)
+    #party.addProsperityCheckmark(1)
+    #party.adjustReputation(2)
+    #party.addTreasureLooted(14, 'GH')
+    # Adjust XP by 10
+    #party.heroFindItem('JarJar', 'Star Earring')
+    #party.heroAdjustGold('JarJar', 30)
+
+    party.addScenarioCompleted(91)
+    #party.addGlobalAchievement("Ancient Technology")
+    #party.heroFindItem('Nova', "Power Core")
+
+    #party.heroBuyItem('Trog-dor', 'Splintmail')
+    party.heroAdjustGold('Trog-dor', 3)
+    party.heroAdjustGold('Mer Sea', 27)
+    #party.heroAdjustGold('GH', 20)
+    party.heroAdjustGold('JarJar', 43)
+    #party.heroAdjustGold('Nova', 20)
+    party.heroAdjustGold('Bonesaw', 3)
+    party.heroAdjustXP('Trog-dor', 16)
+    #party.heroAdjustXP('JarJar', 0)
+    #party.heroAdjustXP('Mer Sea', 0)
+    #party.heroAdjustXP('Nova', 0)
+    #party.heroAdjustXP('GH', 0)
+    #party.heroAdjustXP('Bonesaw', 22)
+    party.heroAdjustCheckmarks('Trog-dor', 3)
+    party.heroAdjustCheckmarks('JarJar', 2)
+    party.heroAdjustCheckmarks('Bonesaw', 2)
+    party.heroAdjustCheckmarks('Mer Sea', 2)
+    #party.heroAdjustCheckmarks('Nova', 1)
+    #party.heroAdjustCheckmarks('GH', 0)
+
+    party.heroBuyItem('Mer Sea', 'Unstable Explosives')
+    party.heroBuyItem('Mer Sea', 'Ring of Brutality')
+
     # Next Play Session
     randScenario = party.drawRandomScenario()
     print("Randomed Scenario Event: %d" % randScenario)
