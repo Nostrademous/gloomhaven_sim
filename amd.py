@@ -8,7 +8,8 @@ class AttackModifierCard():
     def __init__(self, name, adjValue=0, crit=False, miss=False, reshuffle=False,
                  curse=False, bless=False, rolling=False, effect=None, effectValue=0,
                  invokeElement=None, heal=False, healAmount=0, addTarget=False,
-                 pullValue=0, pushValue=0, refreshItem=False):
+                 pullValue=0, pushValue=0, refreshItem=False, regen=False,
+                 affectAllyCard=False):
         self.name       = name
         self.adjValue   = adjValue
         self.crit       = crit
@@ -25,6 +26,7 @@ class AttackModifierCard():
         # heal cards
         self.heal       = heal
         self.healAmount = healAmount
+        self.regen      = regen
         # extra target cards
         self.addTarget  = addTarget
 
@@ -34,6 +36,9 @@ class AttackModifierCard():
         
         # item related
         self.refreshItem = refreshItem
+
+        # affect ally cards
+        self.affectAllyCard = affectAllyCard
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
@@ -64,7 +69,10 @@ class AttackModifierCard():
 
     def isRefreshItem(self):
         return self.refreshItem
-        
+
+    def isAffectAllyCard(self):
+        return self.affectAllyCard
+
     def calcDmg(self, value=1):
         if self.isMiss() or self.isCurse(): return 0
         if self.isCrit() or self.isBlessing(): return 2 * value
@@ -97,8 +105,12 @@ class AttackModifierCard():
                 ret += '_%d' % (self.effectValue)
         if self.heal:
             ret += ' Heal %d' % (self.healAmount)
+        if self.regen:
+            ret += ' REGENERATE'
         if self.addTarget:
             ret += ' Add Target'
+        if self.isAffectAllyCard():
+            ret += ' (Affect any Ally card)'
         return ret
 
 amc_0   = AttackModifierCard('+0', 0)
@@ -152,8 +164,10 @@ amc_plus_1_poison   = AttackModifierCard('+1', effect='poison')
 amc_plus_2_poison   = AttackModifierCard('+2', effect='poison')
 amc_plus_2_muddle   = AttackModifierCard('+2', effect='muddle')
 amc_plus_3_muddle   = AttackModifierCard('+3', effect='muddle')
+amc_plus_3_shield1  = AttackModifierCard('+3', effect='shield', effectValue=1)
 amc_0_stun          = AttackModifierCard('+0', effect='stun')
 amc_plus_1_shield1  = AttackModifierCard('+1', effect='shield', effectValue=1)
+amc_plus_1_shield1_ally = AttackModifierCard('+1', effect='shield', effectValue=1, affectAllyCard=True)
 amc_plus_1_push1    = AttackModifierCard('+1', pushValue=1)
 amc_roll_push1      = AttackModifierCard('', rolling=True, pushValue=1)
 amc_roll_pull1      = AttackModifierCard('', rolling=True, pullValue=1)
@@ -164,7 +178,11 @@ amc_roll_shield1    = AttackModifierCard('', rolling=True, effect='shield', effe
 
 amc_minus_1_dark    = AttackModifierCard('-1', invokeElement='dark')
 amc_plus_1_dark     = AttackModifierCard('+1', invokeElement='dark')
+amc_plus_2_dark     = AttackModifierCard('+2', invokeElement='dark')
+amc_plus_2_light    = AttackModifierCard('+2', invokeElement='light')
 amc_p1_invis        = AttackModifierCard('+1', effect='invisible')
+amc_p1_heal2_ally   = AttackModifierCard('+1', heal=True, healAmount=2, affectAllyCard=True)
+amc_p2_regen        = AttackModifierCard('+2', regen=True)
 
 amc_0_ri            = AttackModifierCard('+0', refreshItem=True)
 

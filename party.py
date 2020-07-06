@@ -3173,6 +3173,13 @@ def make_a_party():
     #party.heroBuyItem('Mer Sea', 'Unstable Explosives')
     #party.heroBuyItem('Mer Sea', 'Ring of Brutality')
 
+    ##############################################################
+    ##############################################################
+    ## FORGOTTEN CIRCLES
+    ##############################################################
+    ##############################################################
+    party.unlockHero("Diviner")
+
     # Next Play Session
     randScenario = party.drawRandomScenario()
     print("Randomed Scenario Event: %d" % randScenario)
