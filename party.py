@@ -325,7 +325,7 @@ class Party():
         '''
         # version 2 counts
         count_per_increment = [4,5,6,7,8,9,11,14]
-        count_req = [sum(count_per_increment[:i]) for i in range(1,9)]
+        count_req = [sum(count_per_increment[:i]) for i in range(1,10)]
         curr_cnt = self.party_json['GloomhavenProsperity']['Count']
         for index, value in enumerate(count_req):
             if curr_cnt < value:
@@ -603,15 +603,15 @@ def make_a_party():
 
     party.addItemDesign(107) # Horned Helm
 
-    owner1 = ch.Owner('Andrzej')
-    owner2 = ch.Owner('Danny')
-    owner3 = ch.Owner('Evan')
-    owner4 = ch.Owner('Matt')
-    owner5 = ch.Owner('Kyle')
-    owner6 = ch.Owner('Michael')
-    owner7 = ch.Owner('Stu')
+    owner_ag = ch.Owner('Andrzej')
+    owner_dp = ch.Owner('Danny')
+    owner_et = ch.Owner('Evan')
+    owner_mc = ch.Owner('Matt')
+    owner_ks = ch.Owner('Kyle')
+    owner_michael = ch.Owner('Michael')
+    owner_sm = ch.Owner('Stu')
 
-    hero1 = ch.Character('Clockwerk', 'Tinkerer', owner1, level=5, xp=225, gold=24, quest=528, checkmarks=10)
+    hero1 = ch.Character('Clockwerk', 'Tinkerer', owner_ag, level=5, xp=225, gold=24, quest=528, checkmarks=10)
     #print("Number Enhancements for %s: %d" % (hero1.getName(), party.getNumEnhancementForHeroType(hero1.getType())))
     hero1.addCheckmarkPerk(ignore_scen_perk)
     hero1.addPerk(remove_2_minus_1)
@@ -624,7 +624,7 @@ def make_a_party():
     party.addEnhancement('Clockwerk', 41, "Top", '+1 Range') # 30 gold paid
     hero1.scenarioPreparation()
 
-    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', owner2, level=3, quest=512, gold=191, xp=161, checkmarks=5)
+    hero2 = ch.Character('Ruby Sweety Pie', 'Brute', owner_dp, level=3, quest=512, gold=191, xp=161, checkmarks=5)
     hero2.buyItem('Boots of Striding', adjustGold=False)
     hero2.buyItem('Minor Healing Potion', adjustGold=False)
     hero2.buyItem('Leather Armor', adjustGold=False)
@@ -636,7 +636,7 @@ def make_a_party():
     party.addMember(hero2)
     party.addEnhancement('Ruby Sweety Pie', 6, "Bottom", '+1 Move') # 30 gold paid
 
-    hero3 = ch.Character('Evan', 'Spellweaver', owner3, level=4, quest=533, gold=39, xp=208, checkmarks=9)
+    hero3 = ch.Character('Evan', 'Spellweaver', owner_et, level=4, quest=533, gold=39, xp=208, checkmarks=9)
     hero3.addCheckmarkPerk(add_2_plus_1)
     hero3.addPerk(add_2_plus_1)
     hero3.addCheckmarkPerk(add_1_plus_1_wound)
@@ -648,7 +648,7 @@ def make_a_party():
     party.heroBuyItem('Evan', 'Eagle-Eye Goggles', adjGold=False)
     party.heroBuyItem('Evan', 'Piercing Bow', adjGold=False)
 
-    hero4 = ch.Character('Bloodfist Stoneborn', 'Cragheart', owner4, level=4, quest=531, gold=32, xp=203, checkmarks=8)
+    hero4 = ch.Character('Bloodfist Stoneborn', 'Cragheart', owner_mc, level=4, quest=531, gold=32, xp=203, checkmarks=8)
     hero4.addCheckmarkPerk(ignore_item_perk)
     hero4.addPerk(replace_minus_1_with_plus_1)
     hero4.addCheckmarkPerk(replace_minus_1_with_plus_1)
@@ -661,7 +661,7 @@ def make_a_party():
     party.heroBuyItem('Bloodfist Stoneborn', 'Horned Helm', adjGold=False)
     party.heroBuyItem('Bloodfist Stoneborn', 'Heater Shield', adjGold=False)
 
-    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', owner5, level=4, quest=526, gold=40, xp=186, checkmarks=7)
+    hero5 = ch.Character('Rabid Cicada', 'Scoundrel', owner_ks, level=4, quest=526, gold=40, xp=186, checkmarks=7)
     hero5.addCheckmarkPerk(ignore_scen_perk)
     hero5.addPerk(remove_2_minus_1)
     hero5.addCheckmarkPerk(replace_minus_2_with_0)
@@ -701,13 +701,13 @@ def make_a_party():
     party.unlockHero("Quartermaster")
     party.unlockHero("Doomstalker")
 
-    hero6 = ch.Character('Singularity', 'Doomstalker', owner1, level=3, quest=530)
+    hero6 = ch.Character('Singularity', 'Doomstalker', owner_ag, level=3, quest=530)
     hero6.addOwnerPerk(remove_2_minus_1)
     hero6.addPerk(remove_2_minus_1)
     hero6.addPerk(add_2_roll_plus_1)
     party.addMember(hero6)
 
-    hero7 = ch.Character('Red', 'Quartermaster', owner2, level=3, quest=522)
+    hero7 = ch.Character('Red', 'Quartermaster', owner_dp, level=3, quest=522)
     hero7.addOwnerPerk(ignore_item_perk_add_2_plus_1)
     hero7.addPerk(remove_2_minus_1)
     hero7.addPerk(remove_2_minus_1)
@@ -907,7 +907,7 @@ def make_a_party():
     party.unlockCityEvent(40)
     party.unlockRoadEvent(40)
 
-    hero8 = ch.Character('Ignus', 'Elementalist', owner4, level=1, gold=60, xp=95, quest=524)
+    hero8 = ch.Character('Ignus', 'Elementalist', owner_mc, level=1, gold=60, xp=95, quest=524)
     hero8.addOwnerPerk([remove_2_0, add_1_0_fire, add_1_0_earth])
     party.addMember(hero8)
     party.heroLevelUp('Ignus', remove_2_minus_1, 'Crystallizing Blast')
@@ -1150,7 +1150,7 @@ def make_a_party():
     party.unlockCityEvent(35) # Plagueherald Class Choice
     party.unlockRoadEvent(35) # Plagueherald Class Choice
 
-    hero9 = ch.Character('Playgirl', 'Plagueherald', owner3, level=1, gold=75, xp=150, quest=520)
+    hero9 = ch.Character('Playgirl', 'Plagueherald', owner_et, level=1, gold=75, xp=150, quest=520)
     hero9.addOwnerPerk(add_3_roll_poison)
     party.addMember(hero9)
     party.heroLevelUp('Playgirl', ignore_scen_perk_plus_1, 'Under The Skin')
@@ -1240,7 +1240,7 @@ def make_a_party():
     party.unlockCityEvent(34) # Nightshroud Class Choice
     party.unlockRoadEvent(34) # Nightshroud Class Choice
 
-    hero10 = ch.Character('Hayha', 'Nightshroud', owner2, level=1, gold=90, xp=210, quest=518)
+    hero10 = ch.Character('Hayha', 'Nightshroud', owner_dp, level=1, gold=90, xp=210, quest=518)
     hero10.addOwnerPerk(ignore_scen_perk_2_plus_1)
     hero10.addOwnerPerk(remove_2_minus_1)
     party.addMember(hero10)
@@ -1510,7 +1510,7 @@ def make_a_party():
     party.heroGainCheckmarkPerk("Playgirl", add_1_plus_1_air)
     party.heroGainCheckmarkPerk("Singularity", add_1_plus_1_immobilize)
 
-    hero11 = ch.Character('RatManBearPig', 'BeastTyrant', owner4, level=1, gold=90, xp=210, quest=527)
+    hero11 = ch.Character('RatManBearPig', 'BeastTyrant', owner_mc, level=1, gold=90, xp=210, quest=527)
     hero11.addOwnerPerk(remove_2_minus_1)
     hero11.addOwnerPerk(replace_minus_1_with_plus_1)
     party.addMember(hero11)
@@ -1651,7 +1651,7 @@ def make_a_party():
     # QUEST ###????!!!!
     party.heroSellItem('Playgirl', 'Minor Stamina Potion')
     party.heroBuyItem('Playgirl', 'Major Stamina Potion')
-    hero12 = ch.Character('Snickers', 'Mindthief', owner1, level=1, gold=90, xp=210, quest=532)
+    hero12 = ch.Character('Snickers', 'Mindthief', owner_ag, level=1, gold=90, xp=210, quest=532)
     hero12.addOwnerPerk(remove_2_minus_1)
     hero12.addOwnerPerk(remove_2_minus_1)
     party.addMember(hero12)
@@ -1693,7 +1693,7 @@ def make_a_party():
     party.makeSanctuaryDonation('Rabid Cicada')
     party.makeSanctuaryDonation('Snickers')
     
-    hero13 = ch.Character('Ragnarok', 'summoner', owner5, level=1, gold=105, xp=275, quest=514)
+    hero13 = ch.Character('Ragnarok', 'summoner', owner_ks, level=1, gold=105, xp=275, quest=514)
     hero13.addOwnerPerk(remove_2_minus_1)
     party.addMember(hero13)
     party.heroLevelUp('Ragnarok', replace_minus_2_with_0, 'Grasping The Void')
@@ -1876,7 +1876,7 @@ def make_a_party():
     party.addEnhancement('Snickers', 154, 'Bottom', 'Poison', gold=75)
     party.addEnhancement('Snickers', 149, 'Bottom', '+1 Move', gold=30)
     
-    hero14 = ch.Character('Drop', 'soothsinger', owner1, level=1, gold=105, xp=275, quest=519)
+    hero14 = ch.Character('Drop', 'soothsinger', owner_ag, level=1, gold=105, xp=275, quest=519)
     hero14.addOwnerPerk(remove_2_minus_1)
     hero14.addOwnerPerk(remove_2_minus_1)
     hero14.addOwnerPerk(remove_1_minus_2)
@@ -1893,7 +1893,7 @@ def make_a_party():
     party.unlockCityEvent(37)
     party.unlockRoadEvent(37)
 
-    hero15 = ch.Character('Bucky', 'elementalist', owner2, level=1, gold=105, xp=275, quest=513)
+    hero15 = ch.Character('Bucky', 'elementalist', owner_dp, level=1, gold=105, xp=275, quest=513)
     hero15.addOwnerPerk(remove_2_minus_1)
     hero15.addOwnerPerk(remove_2_minus_1)
     hero15.addOwnerPerk([remove_2_0, add_1_0_fire, add_1_0_earth])
@@ -1991,7 +1991,7 @@ def make_a_party():
     party.heroBuyItem('Playgirl', 'Major Healing Potion')
     party.heroBuyItem('Ragnarok', 'Studded Leather')
     
-    hero16 = ch.Character('Trog-dor', 'cragheart', owner6, level=1, gold=105, xp=275, quest=521)
+    hero16 = ch.Character('Trog-dor', 'cragheart', owner_michael, level=1, gold=105, xp=275, quest=521)
     party.addMember(hero16)
     party.heroLevelUp('Trog-dor', replace_minus_1_with_plus_1, 'Explosive Punch')
     party.heroLevelUp('Trog-dor', replace_minus_1_with_plus_1, 'Clear the Way')
@@ -2313,7 +2313,7 @@ def make_a_party():
     party.unlockCityEvent(50)
     party.unlockRoadEvent(50)
 
-    hero17 = ch.Character('JarJar', 'scoundrel', owner5, level=1, gold=120, xp=345, quest=529)
+    hero17 = ch.Character('JarJar', 'scoundrel', owner_ks, level=1, gold=120, xp=345, quest=529)
     hero17.addOwnerPerk(ignore_scen_perk)
     hero17.addOwnerPerk(remove_2_minus_1)
     hero17.addOwnerPerk(replace_minus_2_with_0)
@@ -2361,7 +2361,7 @@ def make_a_party():
     party.unlockCityEvent(58)
     party.unlockRoadEvent(58)
 
-    hero18 = ch.Character('Nova', 'sunkeeper', owner4, level=1, gold=120, xp=345, quest=515)
+    hero18 = ch.Character('Nova', 'sunkeeper', owner_mc, level=1, gold=120, xp=345, quest=515)
     hero18.addOwnerPerk(remove_2_minus_1)
     hero18.addOwnerPerk(remove_2_minus_1)
     hero18.addOwnerPerk(remove_4_0)
@@ -2496,7 +2496,7 @@ def make_a_party():
     party.heroLevelUp('Nova', add_2_roll_heal1, 'Cleansing Force')
 
     # Scenario - Aug 21 (Beach) with Stu
-    hero19 = ch.Character('Cristal', 'spellweaver', owner7, level=1, gold=120, xp=345, quest=999)
+    hero19 = ch.Character('Cristal', 'spellweaver', owner_sm, level=1, gold=120, xp=345, quest=999)
     party.addMember(hero19)
     party.heroLevelUp('Cristal', remove_4_0, 'Icy Blast')
     party.heroLevelUp('Cristal', replace_minus_1_with_plus_1, 'Cold Fire')
@@ -2648,7 +2648,7 @@ def make_a_party():
     party.unlockCityEvent(54)
     party.unlockRoadEvent(54)
     
-    hero20 = ch.Character('GH', 'berserker', owner1, level=1, gold=120, xp=345, quest=998)
+    hero20 = ch.Character('GH', 'berserker', owner_ag, level=1, gold=120, xp=345, quest=998)
     hero20.addOwnerPerk(remove_2_minus_1)
     hero20.addOwnerPerk(remove_4_0)
     hero20.addOwnerPerk(replace_minus_1_with_plus_1)
@@ -2678,7 +2678,7 @@ def make_a_party():
     party.retireHero(hero9)
     party.unlockCityEvent(52)
     party.unlockRoadEvent(52)
-    hero21 = ch.Character('Bonesaw', 'Sawbones', owner3, level=1, gold=120, xp=345, quest=997)
+    hero21 = ch.Character('Bonesaw', 'Sawbones', owner_et, level=1, gold=120, xp=345, quest=997)
     hero21.addOwnerPerk(add_2_roll_wound)
     hero21.addOwnerPerk(add_2_roll_wound)
     party.addMember(hero21)
@@ -2870,7 +2870,7 @@ def make_a_party():
     party.addScenarioAvailable(67)
     party.addItemDesign(87)
 
-    hero22 = ch.Character('Mer Sea', 'Doomstalker', owner2, level=1, gold=135, xp=420, quest=996)
+    hero22 = ch.Character('Mer Sea', 'Doomstalker', owner_dp, level=1, gold=135, xp=420, quest=996)
     hero22.addOwnerPerk(remove_2_minus_1)
     hero22.addOwnerPerk(remove_2_minus_1)
     hero22.addOwnerPerk(replace_2_0_with_2_plus_1)
@@ -3222,6 +3222,69 @@ def make_a_party():
 
     #party.heroBuyItem('Mer Sea', 'Unstable Explosives')
     #party.heroBuyItem('Mer Sea', 'Ring of Brutality')
+
+    ##############################################################
+    ##############################################################
+    ## FORGOTTEN CIRCLES
+    ##############################################################
+    ##############################################################
+    party.unlockHero("Diviner")
+    party.retireHero(hero20)
+    party.addEnhancement('GH', 336, "Bottom", 'Jump', gold=125)
+    party.makeSanctuaryDonation('GH')
+
+    hero23 = ch.Character('Loopy', 'diviner', owner_ag, level=1, gold=120, xp=345, quest=995)
+    hero23.addOwnerPerk(ignore_scen_perk_2_plus_1)
+    hero23.addOwnerPerk(replace_0_with_plus_1_shield1_ally)
+    hero23.addOwnerPerk(replace_1_minus_1_with_1_plus_1_heal2_ally)
+    hero23.addOwnerPerk(add_2_roll_heal1)
+    hero23.addOwnerPerk(add_2_roll_curse)
+    party.addMember(hero23)
+    party.heroLevelUp('Loopy', replace_0_with_plus_2_regen, 'Revitalizing Fount')
+    party.heroLevelUp('Loopy', remove_1_minus_2, 'Envision the Course')
+    party.heroLevelUp('Loopy', remove_2_minus_1, 'Preordain the Path')
+    party.heroLevelUp('Loopy', remove_2_minus_1, 'Seal Their Fate')
+    party.heroLevelUp('Loopy', replace_0_with_plus_2_dark, 'Enfeebling Hex')
+    party.heroLevelUp('Loopy', replace_0_with_plus_2_light, 'Curative Flux')
+    party.heroBuyItem('Loopy', 'Cloak of Phasing')
+    party.heroBuyItem('Loopy', 'Boots of Speed')
+    party.heroBuyItem('Loopy', 'Major Stamina Potion')
+
+    party.retireHero(hero22) # Danny - retires Doomstalker
+    party.makeSanctuaryDonation('Mer Sea')
+    party.retireHero(hero21) # Evan - retires Sawbones
+    party.makeSanctuaryDonation('Bonesaw')
+
+    hero24 = ch.Character('Ashes', 'plagueherald', owner_dp, level=1, gold=120, xp=345, quest=994)
+    hero24.addOwnerPerk(add_2_plus_1)
+    hero24.addOwnerPerk(add_1_roll_stun)
+    hero24.addOwnerPerk(add_1_roll_stun)
+    hero24.addOwnerPerk(add_2_roll_curse)
+    hero24.addOwnerPerk(add_3_roll_poison)
+    party.addMember(hero24)
+    party.heroLevelUp('Ashes', ignore_scen_perk_plus_1, 'Under the Skin')
+    party.heroLevelUp('Ashes', replace_minus_2_with_0, 'Fetid Fury')
+    party.heroLevelUp('Ashes', replace_minus_1_with_plus_1, 'Nightmarish Affliction')
+    party.heroLevelUp('Ashes', replace_minus_1_with_plus_1, 'Accelerated End')
+    party.heroLevelUp('Ashes', replace_0_with_plus_2, 'Black Tides')
+    party.heroLevelUp('Ashes', replace_0_with_plus_2, 'Baneful Hex')
+    party.heroBuyItem('Ashes', 'Star Earring')
+    party.heroBuyItem('Ashes', 'Giant Remote Spider')
+
+    #hero25 = ch.Character('Ashes', 'plagueherald', owner_et, level=1, gold=120, xp=345, quest=993)
+    #hero25.addOwnerPerk(ignore_scen_perk_2_plus_1)
+    #hero25.addOwnerPerk(replace_0_with_plus_1_shield1_ally)
+    #hero25.addOwnerPerk(replace_1_minus_1_with_1_plus_1_heal2_ally)
+    #hero25.addOwnerPerk(add_2_roll_heal1)
+    #hero25.addOwnerPerk(add_2_roll_curse)
+    #party.addMember(hero25)
+    #party.heroLevelUp('Ashes', replace_0_with_plus_2_regen, 'Revitalizing Fount')
+    #party.heroLevelUp('Ashes', remove_1_minus_2, 'Envision the Course')
+    #party.heroLevelUp('Ashes', remove_2_minus_1, 'Preordain the Path')
+    #party.heroLevelUp('Ashes', remove_2_minus_1, 'Seal Their Fate')
+    #party.heroLevelUp('Ashes', replace_0_with_plus_2_dark, 'Enfeebling Hex')
+    #party.heroLevelUp('Ashes', replace_0_with_plus_2_light, 'Curative Flux')
+    #party.heroBuyItem('Ashes', 'Star Earrings')
 
     # Next Play Session
     try:

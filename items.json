@@ -698,7 +698,7 @@
             "Count": 1,
             "Buff": "SetDefaultMove",
             "MoveValue": 4,
-            "Trigger": "Player"
+            "Trigger": "Game"
         },
         "Spent": 0,
         "ProsperityLevel": 8
@@ -712,7 +712,7 @@
             "Type": "GainFlying",
             "Buff": "Conditional_InvisibleIfOnObstacleCannotAttack",
             "Count": 1,
-            "Trigger": "Player"
+            "Trigger": "Game"
         },
         "Spent": 0,
         "ProsperityLevel": 8
@@ -802,6 +802,67 @@
         },
         "ProsperityLevel": 9
     },
+    "65": {
+        "Name": "Platemail",
+        "MaxCount": 2,
+        "Cost": 50,
+        "Slot": "Body",
+        "Buff": {
+            "Type": "ShieldOnDamage",
+            "Buff": "Shield_1",
+            "Count": 5,
+            "Trigger": "Damage"
+        },
+        "AMDEffect": {
+            "Value": -1,
+            "Count": 5
+        },
+        "ProsperityLevel": 9
+    },
+    "66": {
+        "Name": "Mask of Terror",
+        "MaxCount": 2,
+        "Cost": 50,
+        "Slot": "HEAD",
+        "Buff": {
+            "Type": "MeleeAttack",
+            "Count": 100000,
+            "Buff": "Push1",
+            "Trigger": "Game"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 9
+    },
+    "67": {
+        "Name": "Balanced Blade",
+        "MaxCount": 2,
+        "Cost": 60,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "AttackBuff",
+            "Count": 100000,
+            "Buff": "SetDefaultAttack",
+            "AttackValue": 4,
+            "Trigger": "Game"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 9
+    },
+    "68": {
+        "Name": "Halberd",
+        "MaxCount": 2,
+        "Cost": 60,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "SingleTargetMelee",
+            "Count": 1,
+            "Buff": "ExtendRange",
+            "HexDistanceReach": 2,
+            "Trigger": "Player"
+        },
+        "Spent": 0,
+        "ProsperityLevel": 9
+    },
     "69": {
         "Name": "Star Earring",
         "MaxCount": 1,
@@ -814,6 +875,20 @@
             "RecoverValue": 2,
             "RefreshedItemType": "ALL",
             "NumRefreshedItems": 100,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 9
+    },
+    "70": {
+        "Name": "Second Chance Ring",
+        "MaxCount": 2,
+        "Cost": 75,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "EndOfTurnAction",
+            "Buff": "AnotherTurnAtHigherIniviative",
             "Count": 1,
             "Trigger": "Player"
         },

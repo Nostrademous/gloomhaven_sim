@@ -79,13 +79,26 @@ remove_2_minus_1        = Perk(PERK_TYPE_REMOVE, 2, amd.amc_m1)
 remove_1_minus_2        = Perk(PERK_TYPE_REMOVE, 1, amd.amc_m2)
 remove_4_0              = Perk(PERK_TYPE_REMOVE, 4, amd.amc_0)
 
-replace_minus_2_with_0          = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m2, amd.amc_0)
-replace_minus_1_with_plus_1     = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m1, amd.amc_p1)
-replace_0_with_plus_2           = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p2)
-replace_0_with_roll_plus_2      = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_roll_p2)
-replace_2_0_with_2_plus_1       = Perk(PERK_TYPE_REPLACE, 2, amd.amc_0, amd.amc_p1)
-replace_2_plus_1_with_2_plus_2  = Perk(PERK_TYPE_REPLACE, 2, amd.amc_p1, amd.amc_p2)
-replace_2_plus_1_with_1_plus_4  = Perk(PERK_TYPE_REPLACE, 2, amd.amc_p1, amd.amc_p4, 1)
+replace_minus_2_with_0                      = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m2, amd.amc_0)
+replace_minus_1_with_plus_1                 = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m1, amd.amc_p1)
+replace_0_with_plus_2                       = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p2)
+replace_0_with_roll_plus_2                  = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_roll_p2)
+replace_0_with_plus_1_shield1_ally          = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_1_shield1_ally)
+replace_2_0_with_2_plus_1                   = Perk(PERK_TYPE_REPLACE, 2, amd.amc_0, amd.amc_p1)
+replace_2_plus_1_with_2_plus_2              = Perk(PERK_TYPE_REPLACE, 2, amd.amc_p1, amd.amc_p2)
+replace_2_plus_1_with_1_plus_4              = Perk(PERK_TYPE_REPLACE, 2, amd.amc_p1, amd.amc_p4, 1)
+replace_2_plus_1_with_1_plus_3_shield1      = Perk(PERK_TYPE_REPLACE, 2, amd.amc_p1, amd.amc_plus_3_shield1, 1)
+replace_0_with_plus_1_immobilize            = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p1_immobilize)
+replace_0_with_plus_1_disarm                = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p1_disarm)
+replace_0_with_plus_2_wound                 = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p2_wound)
+replace_0_with_plus_2_poison                = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_2_poison)
+replace_0_with_plus_2_curse                 = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_2_curse)
+replace_0_with_plus_3_muddle                = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_3_muddle)
+replace_0_with_plus_2_dark                  = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_2_dark)
+replace_0_with_plus_2_light                 = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_2_light)
+replace_0_with_plus_2_regen                 = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p2_regen)
+replace_1_minus_1_with_1_stun               = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m1, amd.amc_0_stun)
+replace_1_minus_1_with_1_plus_1_heal2_ally  = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m1, amd.amc_p1_heal2_ally)
 
 add_2_plus_1            = Perk(PERK_TYPE_ADD, 2, amd.amc_p1)
 add_2_plus_1_push1      = Perk(PERK_TYPE_ADD, 2, amd.amc_plus_1_push1)
@@ -117,14 +130,6 @@ add_1_plus_1_immobilize = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_immobilize)
 add_1_plus_1_wound      = Perk(PERK_TYPE_ADD, 1, amd.amc_p1_wound)
 add_2_roll_pierce3      = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_pierce_3)
 add_2_roll_immobilize   = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_immobilize)
-
-replace_0_with_plus_1_immobilize = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p1_immobilize)
-replace_0_with_plus_1_disarm    = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p1_disarm)
-replace_0_with_plus_2_wound     = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_p2_wound)
-replace_0_with_plus_2_poison    = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_2_poison)
-replace_0_with_plus_2_curse     = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_2_curse)
-replace_0_with_plus_3_muddle    = Perk(PERK_TYPE_REPLACE, 1, amd.amc_0, amd.amc_plus_3_muddle)
-replace_1_minus_1_with_1_stun   = Perk(PERK_TYPE_REPLACE, 1, amd.amc_m1, amd.amc_0_stun)
 
 add_3_roll_push1        = Perk(PERK_TYPE_ADD, 3, amd.amc_roll_push1)
 add_2_roll_push2        = Perk(PERK_TYPE_ADD, 2, amd.amc_roll_push2)
@@ -399,6 +404,21 @@ sawbones_perk_deck = list([
     add_1_0_refresh_item
 ])
 
+diviner_perk_deck = list([
+    remove_2_minus_1, remove_2_minus_1,
+    remove_1_minus_2,
+    replace_2_plus_1_with_1_plus_3_shield1, replace_2_plus_1_with_1_plus_3_shield1,
+    replace_0_with_plus_1_shield1_ally,
+    replace_0_with_plus_2_dark,
+    replace_0_with_plus_2_light,
+    replace_0_with_plus_3_muddle,
+    replace_0_with_plus_2_curse,
+    replace_0_with_plus_2_regen,
+    replace_1_minus_1_with_1_plus_1_heal2_ally,
+    add_2_roll_heal1,
+    add_2_roll_curse,
+    ignore_scen_perk_2_plus_1
+])
 
 def getPerkSelections(class_type):
     class_type = class_type.lower()
@@ -436,6 +456,8 @@ def getPerkSelections(class_type):
         return berserker_perk_deck
     elif class_type == "sawbones":
         return sawbones_perk_deck
+    elif class_type == "diviner":
+        return diviner_perk_deck
     else:
         raise Exception("[getPerkSelection]", "UNKNOWN CLASS TYPE")
 
@@ -506,4 +528,8 @@ if __name__ == "__main__":
 
     print('\nSawbones')
     for perk in sawbones_perk_deck:
+        print(perk)
+    
+    print('\nDiviner')
+    for perk in diviner_perk_deck:
         print(perk)
