@@ -3173,9 +3173,63 @@ def make_a_party():
     #party.heroBuyItem('Mer Sea', 'Unstable Explosives')
     #party.heroBuyItem('Mer Sea', 'Ring of Brutality')
 
+    # Jan 13, 2020 - Session
+    party.heroGainCheckmarkPerk('JarJar', add_2_roll_poison)
+    #party.heroSellItem('Nova', 'Staff of Summoning')
+    party.heroAdjustGold('Nova', 30)
+    #party.completeCityEvent(81)
+    party.adjustReputation(2)
+    party.makeSanctuaryDonation('JarJar')
+    party.makeSanctuaryDonation('Mer Sea')
+    party.makeSanctuaryDonation('GH')
+
+    #party.completeRoadEvent(3)
+    #party.heroAdjustCheckmarks('JarJar', -1)
+    #party.heroAdjustCheckmarks('Mer Sea', -1)
+    #party.heroAdjustCheckmarks('Nova', -1)
+    #party.heroAdjustCheckmarks('GH', -1)
+    #party.addProsperityCheckmark(1)
+    #party.adjustReputation(2)
+    #party.addTreasureLooted(14, 'GH')
+    # Adjust XP by 10
+    #party.heroFindItem('JarJar', 'Star Earring')
+    #party.heroAdjustGold('JarJar', 30)
+
+    party.addScenarioCompleted(41)
+    party.addProsperityCheckmark(2)
+    #party.addGlobalAchievement("Ancient Technology")
+    #party.heroFindItem('Nova', "Power Core")
+
+    #party.heroBuyItem('Trog-dor', 'Splintmail')
+    #party.heroAdjustGold('Trog-dor', 3)
+    party.heroAdjustGold('Mer Sea', 54)
+    party.heroAdjustGold('GH', 62)
+    party.heroAdjustGold('JarJar', 86)
+    party.heroAdjustGold('Nova', 66)
+    #party.heroAdjustGold('Bonesaw', 24)
+    #party.heroAdjustXP('Trog-dor', 16)
+    #party.heroAdjustXP('JarJar', 0)
+    #party.heroAdjustXP('Mer Sea', 0)
+    #party.heroAdjustXP('Nova', 0)
+    #party.heroAdjustXP('GH', 0)
+    #party.heroAdjustXP('Bonesaw', 22)
+    #party.heroAdjustCheckmarks('Trog-dor', 3)
+    party.heroAdjustCheckmarks('JarJar', 3)
+    #party.heroAdjustCheckmarks('Bonesaw', 1)
+    party.heroAdjustCheckmarks('Mer Sea', 2)
+    party.heroAdjustCheckmarks('Nova', 2)
+    party.heroAdjustCheckmarks('GH', 2)
+
+    #party.heroBuyItem('Mer Sea', 'Unstable Explosives')
+    #party.heroBuyItem('Mer Sea', 'Ring of Brutality')
+
     # Next Play Session
-    randScenario = party.drawRandomScenario()
-    print("Randomed Scenario Event: %d" % randScenario)
+    try:
+        randScenario = party.drawRandomScenario()
+        print("Randomed Scenario Event: %d" % randScenario)
+    except:
+        print("No More Scenarios Left")
+        pass
 
     cityEvent = party.drawRandomCityEvent()
     print("Randomed City Event: %d" % cityEvent)
