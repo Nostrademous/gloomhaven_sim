@@ -277,6 +277,8 @@
             "8": 13,
             "9": 14
         },
-        "DeckSize": 9
+        "DeckSize": 9,
+        "UnlockEvents": 82,
+        "RetireEvents": 83
     }
 }

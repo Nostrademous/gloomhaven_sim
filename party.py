@@ -43,6 +43,8 @@ class Party():
         self.party_json['CompletedCityEvents'] = list()
         self.party_json['UnlockedRoadEvents'] = list()
         self.party_json['CompletedRoadEvents'] = list()
+        self.party_json['UnlockedRiftEvents'] = list()
+        self.party_json['CompletedRiftEvents'] = list()
         self.party_json['ActiveQuests'] = list()
         self.party_json['CompletedQuests'] = list()
         self.party_json['ScenariosCompleted'] = list()
@@ -175,6 +177,15 @@ class Party():
             print("[addTreasureLooted :: AssertionError] %s" % (err))
             raise
 
+    def completeRiftEvent(self, value):
+        try:
+            assert value not in self.party_json['CompletedRiftEvents']
+            self.party_json['CompletedRiftEvents'].append(value)
+            print("\nCompleted Rift Event: %d" % (value))
+        except AssertionError as err:
+            print('[completeRiftEvent:: AssertionError] %s' % (err))
+            raise
+
     def completeRoadEvent(self, value):
         try:
             assert value not in self.party_json['CompletedRoadEvents']
@@ -201,6 +212,14 @@ class Party():
             print('[unlockCityEvent :: AssertionError] %s' % (err))
             raise
 
+    def unlockRiftEvent(self, value):
+        try:
+            assert value not in self.party_json['UnlockedRiftEvents']
+            self.party_json['UnlockedRiftEvents'].append(value)
+        except AssertionError as err:
+            print('[unlockRiftEvent :: AssertionError] %s' % (err))
+            raise
+
     def unlockRoadEvent(self, value):
         try:
             assert value not in self.party_json['UnlockedRoadEvents']
@@ -224,6 +243,22 @@ class Party():
             return drawn
         else:
             print("No More City Events Available")
+            return 999
+
+    def drawRandomRiftEvent(self, maxID=30):
+        pool = [i for i in range(1,maxID+1)] # +1 to make it inclusive
+        for unlocked in self.party_json['UnlockedRiftEvents']:
+            pool.append(unlocked)
+        for done in self.party_json['CompletedRiftEvents']:
+            if done != 999:
+                pool.remove(done)
+        self.party_json['UnlockedRiftEvents'] = pool
+        print("Rift Events Available: %s" % self.party_json['UnlockedRiftEvents'])
+        if len(pool) > 0:
+            drawn = pickRandom(pool)
+            return drawn
+        else:
+            print("No More Rift Events Available!!!")
             return 999
 
     def drawRandomRoadEvent(self, maxID=30):
@@ -2676,6 +2711,9 @@ def make_a_party():
 
     # Play Session - Sept 16
     party.retireHero(hero9)
+    party.addEnhancement('Playgirl', 303, 'Top', '+1 Attack', gold=75)
+    party.addEnhancement('Playgirl', 303, 'Top', '+1 Attack', gold=150)
+    party.addEnhancement('Playgirl', 292, 'Bottom', '+1 Attack', gold=50)
     party.unlockCityEvent(52)
     party.unlockRoadEvent(52)
     hero21 = ch.Character('Bonesaw', 'Sawbones', owner_et, level=1, gold=120, xp=345, quest=997)
@@ -3228,6 +3266,10 @@ def make_a_party():
     ## FORGOTTEN CIRCLES
     ##############################################################
     ##############################################################
+    party.heroSellItem('Nova', "Power Core")
+    party.unlockRoadEvent(82)
+    party.unlockCityEvent(82)
+    party.addScenarioAvailable(96)
     party.unlockHero("Diviner")
     party.retireHero(hero20)
     party.addEnhancement('GH', 336, "Bottom", 'Jump', gold=125)
@@ -3254,6 +3296,7 @@ def make_a_party():
     party.makeSanctuaryDonation('Mer Sea')
     party.retireHero(hero21) # Evan - retires Sawbones
     party.makeSanctuaryDonation('Bonesaw')
+    party.retireHero(hero16) # Michael
 
     hero24 = ch.Character('Ashes', 'plagueherald', owner_dp, level=1, gold=120, xp=345, quest=994)
     hero24.addOwnerPerk(add_2_plus_1)
@@ -3271,20 +3314,76 @@ def make_a_party():
     party.heroBuyItem('Ashes', 'Star Earring')
     party.heroBuyItem('Ashes', 'Giant Remote Spider')
 
-    #hero25 = ch.Character('Ashes', 'plagueherald', owner_et, level=1, gold=120, xp=345, quest=993)
-    #hero25.addOwnerPerk(ignore_scen_perk_2_plus_1)
-    #hero25.addOwnerPerk(replace_0_with_plus_1_shield1_ally)
-    #hero25.addOwnerPerk(replace_1_minus_1_with_1_plus_1_heal2_ally)
-    #hero25.addOwnerPerk(add_2_roll_heal1)
-    #hero25.addOwnerPerk(add_2_roll_curse)
-    #party.addMember(hero25)
-    #party.heroLevelUp('Ashes', replace_0_with_plus_2_regen, 'Revitalizing Fount')
-    #party.heroLevelUp('Ashes', remove_1_minus_2, 'Envision the Course')
-    #party.heroLevelUp('Ashes', remove_2_minus_1, 'Preordain the Path')
-    #party.heroLevelUp('Ashes', remove_2_minus_1, 'Seal Their Fate')
-    #party.heroLevelUp('Ashes', replace_0_with_plus_2_dark, 'Enfeebling Hex')
-    #party.heroLevelUp('Ashes', replace_0_with_plus_2_light, 'Curative Flux')
-    #party.heroBuyItem('Ashes', 'Star Earrings')
+    hero25 = ch.Character('Rocky', 'cragheart', owner_et, level=1, gold=120, xp=345, quest=993)
+    hero25.addOwnerPerk(ignore_scen_perk)
+    hero25.addOwnerPerk(add_2_roll_push2)
+    hero25.addOwnerPerk(remove_4_0)
+    party.addMember(hero25)
+    party.heroLevelUp('Rocky', replace_minus_1_with_plus_1, 'Explosive Punch')
+    party.heroLevelUp('Rocky', replace_minus_1_with_plus_1, 'Clear the Way')
+    party.heroLevelUp('Rocky', replace_minus_1_with_plus_1, 'Rock Slide')
+    party.heroLevelUp('Rocky', add_2_roll_earth, 'Petrify')
+    party.heroLevelUp('Rocky', add_2_roll_earth, 'Dig Pit')
+    party.heroLevelUp('Rocky', add_1_plus_1_immobilize, 'Meteor')
+    party.heroBuyItem('Rocky', 'Tower Shield')
+    party.heroBuyItem('Rocky', 'Horned Helm')
+    party.heroBuyItem('Rocky', 'Boots of Striding')
+    party.heroBuyItem('Rocky', 'Minor Stamina Potion')
+    party.heroBuyItem('Rocky', 'Tremor Blade')
+    party.heroBuyItem('Rocky', 'Cloak of Invisibility')
+    
+    # July 9, 2020 - Session
+    #party.heroGainCheckmarkPerk('JarJar', add_2_roll_poison)
+    #party.heroSellItem('Nova', 'Staff of Summoning')
+    #party.heroAdjustGold('Nova', 30)
+    party.completeCityEvent(82)
+    party.makeSanctuaryDonation('JarJar')
+
+    party.completeRoadEvent(82)
+    # Rift Event
+    party.unlockRiftEvent(1)
+    party.completeRiftEvent(1)
+    party.heroAdjustCheckmarks('JarJar', -1)
+    party.heroAdjustCheckmarks('Ashes', -1)
+    party.heroAdjustCheckmarks('Nova', -1)
+    party.heroAdjustCheckmarks('Rocky', -1)
+    party.heroAdjustCheckmarks('Loopy', -1)
+    party.addEnhancement('JarJar', 97, 'Bottom', '+1 Move', gold=0)
+    #party.addProsperityCheckmark(1)
+    #party.adjustReputation(2)
+    party.addTreasureLooted(91, 'Ashes')
+    party.addPartyAchievement("Opportunist")
+    party.heroAdjustGold('Ashes', 30)
+    party.unlockCityEvent(84)
+    # Adjust XP by 10
+    #party.heroFindItem('JarJar', 'Star Earring')
+
+    party.addScenarioCompleted(96)
+    #party.addProsperityCheckmark(2)
+    party.addGlobalAchievement("Through the Portal")
+    #party.addPartyAchievement("Ancient Technology")
+    #party.heroFindItem('Nova', "Power Core")
+    party.addScenarioAvailable(97)
+    maxRiftID = 10
+
+    party.heroAdjustGold('Ashes', 0)
+    party.heroAdjustGold('Loopy', 0)
+    party.heroAdjustGold('JarJar', 32)
+    party.heroAdjustGold('Nova', 0)
+    party.heroAdjustGold('Rocky', 0)
+    party.heroAdjustXP('Ashes',33)
+    party.heroAdjustXP('Loopy', 35)
+    party.heroAdjustXP('JarJar', 0)
+    party.heroAdjustXP('Nova', 0)
+    party.heroAdjustXP('Rocky', 30)
+    party.heroAdjustCheckmarks('Ashes', 0)
+    party.heroAdjustCheckmarks('Loopy', 1)
+    party.heroAdjustCheckmarks('JarJar', 1)
+    party.heroAdjustCheckmarks('Nova', 0)
+    party.heroAdjustCheckmarks('Rocky', 0)
+
+    #party.heroBuyItem('Mer Sea', 'Unstable Explosives')
+    #party.heroBuyItem('Mer Sea', 'Ring of Brutality')
 
     # Next Play Session
     try:
@@ -3298,7 +3397,8 @@ def make_a_party():
     print("Randomed City Event: %d" % cityEvent)
     roadEvent = party.drawRandomRoadEvent()
     print("Randomed Road Event: %d" % roadEvent)
-
+    riftEvent = party.drawRandomRiftEvent(maxRiftID)
+    print("Randomed Rift Event: %d" % riftEvent)
 
     ###
     #  PRINT OUR PARTY
