@@ -661,6 +661,19 @@
         "Spent": 0,
         "ProsperityLevel": 7
     },
+    "52": {
+        "Name": "Protective Charm",
+        "MaxCount": 2,
+        "Cost": 60,
+        "Slot": "HEAD",
+        "Buff": {
+            "Type": "ImmunePoisonWound",
+            "Buff": "ImmunePoisonWound",
+            "Count": 1,
+            "Trigger": "Game"
+        },
+        "ProsperityLevel": 7
+    },
     "53": {
         "Name": "Black Knife",
         "MaxCount": 2,
@@ -672,6 +685,20 @@
             "Count": 1,
             "Trigger": "Player"
         },
+        "ProsperityLevel": 7
+    },
+    "55": {
+        "Name": "Super Healing Potion",
+        "MaxCount": 4,
+        "Cost": 50,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "Heal",
+            "Count": 1,
+            "HealValue": 7,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
         "ProsperityLevel": 7
     },
     "56": {
@@ -1121,6 +1148,20 @@
             "Trigger": "Player"
         },
         "ProsperityLevel": 0
+    },
+    "90": {
+        "Name": "Major Cure Potion",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "RemoveAllNegativeConditions",
+            "Buff": "RemoveStun",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 1
     },
     "91": {
         "Name": "Steel Ring",
@@ -1580,6 +1621,21 @@
         "Consumed": 1,
         "ProsperityLevel": 0
     },
+    "130": {
+        "Name": "Helix Ring",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "ConsumeElements_Heal",
+            "Elements": ["Light", "Dark"],
+            "HealValue": 25,
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
     "132": {
         "Name": "Power Core",
         "MaxCount": 1,
@@ -1659,6 +1715,19 @@
         "Consumed": 2,
         "ProsperityLevel": 0
     },
+    "144": {
+        "Name": "Pendant of the Plague",
+        "MaxCount": 1,
+        "Cost": 50,
+        "Slot": "Head",
+        "Buff": {
+            "Type": "Debuff",
+            "Count": 1,
+            "Buff": "Poison_And_Curse",
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
     "145": {
         "Name": "Mask of Death",
         "MaxCount": 1,
@@ -1698,6 +1767,113 @@
             "Count": 1,
             "Trigger": "Player"
         },
+        "ProsperityLevel": 0
+    },
+    "153": {
+        "Name": "Minor Antidote",
+        "MaxCount": 2,
+        "Cost": 25,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "PreventPoison",
+            "Buff": "3",
+            "Count": 3,
+            "Trigger": "Game"
+        },
+        "ProsperityLevel": 0
+    },
+    "154": {
+        "Name": "Major Antidote",
+        "MaxCount": 2,
+        "Cost": 50,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "PreventPoison",
+            "Buff": "5",
+            "Count": 5,
+            "Trigger": "Game"
+        },
+        "ProsperityLevel": 0
+    },
+    "156": {
+        "Name": "Elemental Claymore",
+        "MaxCount": 2,
+        "Cost": 50,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "MeleeAttack",
+            "Buff": "Attack_2",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "157": {
+        "Name": "Ancient Bow",
+        "MaxCount": 2,
+        "Cost": 40,
+        "Slot": "TWO_HANDS",
+        "Buff": {
+            "Type": "RangedAttackCurseWound",
+            "Buff": "Attack_2",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "Consumed": 1,
+        "ProsperityLevel": 0
+    },
+    "158": {
+        "Name": "Rejuvenation Greaves",
+        "MaxCount": 2,
+        "Cost": 35,
+        "Slot": "LEGS",
+        "Buff": {
+            "Type": "Movement_Regenerate",
+            "Count": 1,
+            "Buff": "+2",
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "159": {
+        "Name": "Scroll of Haste",
+        "MaxCount": 2,
+        "Cost": 30,
+        "Slot": "SMALL_ITEM",
+        "Buff": {
+            "Type": "AllyMove",
+            "Buff": "2",
+            "Count": 1,
+            "Trigger": "Player"
+        },
+        "ProsperityLevel": 0
+    },
+    "160": {
+        "Name": "Cutpurse Dagger",
+        "MaxCount": 1,
+        "Cost": 45,
+        "Slot": "ONE_HAND",
+        "Buff": {
+            "Type": "MoneyOnKill",
+            "Buff": "Gold",
+            "Count": 1,
+            "Trigger": "Game"
+        },
+        "Consumed": 0,
+        "ProsperityLevel": 0
+    },
+    "167": {
+        "Name": "Crystal Tiara",
+        "MaxCount": 1,
+        "Cost": 75,
+        "Slot": "HEAD",
+        "Buff": {
+            "Type": "StrengthOnRest",
+            "Buff": "Strengthen",
+            "Count": 1,
+            "Trigger": "Game"
+        },
+        "Consumed": 0,
         "ProsperityLevel": 0
     }
 }
